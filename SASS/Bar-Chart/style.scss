@@ -14,8 +14,8 @@ $diamond-blue: rgba(0, 159, 255, .6);
 $sea-green: rgba(10, 165, 153, .6);
 $pale-green: rgba(167, 240, 213, .6);
 
-@each $food in $top-foods {
-  $i: index($top-foods);
+@each $food, $tons-produced in $top-foods {
+  $i: index($top-foods, ($food $tons-produced));
   
   rect:nth-child(#{$i+1}) {
     height: #{$tons-produced/3}px;
@@ -25,9 +25,14 @@ $pale-green: rgba(167, 240, 213, .6);
       &:after {
         content: $tons-produced + "m";
       }
+      @if ($i % 3 == 0 ) {
+        background-color: fade-out($sea-green, $i*5/100);
+      } @else if($i % 3 == 1) {
+        background-color: fade-out($pale-green, $i*5/100);   
+      } @else {
+        background-color: fade-out($diamond-blue, $i*5/100);
+      }
   }
-  
-  
 
 }
   
@@ -59,8 +64,8 @@ rect {
   &:before {
     display: inline-block;
     -webkit-transform: rotate(90deg);
-    transform-origin: left top 0;
-    float: left;
+    transform-origin: left top;
+
   }
   &:after {
     position: absolute;
