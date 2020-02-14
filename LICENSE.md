@@ -1,0 +1,1 @@
+The content in this project is purely personal and taken from the Codeacademy tutorial for strictly studying purposes. All the rights are with Codeacademy and will therefore follow the rules laid down by them. I have made minor modifications and do not own any rights to any part of the content. 
