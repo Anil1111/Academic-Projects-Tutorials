@@ -1,0 +1,2 @@
+Alt+Shift+F = Format CSS/SCSS code in VSCode
+Ctrl+F2 = Select Multilines in VSCode
