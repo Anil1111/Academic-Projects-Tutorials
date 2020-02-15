@@ -1,5 +1,16 @@
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
+// $enable-responsive-font-sizes: true;
+
 h1 {
   color: red;
 }
+
+figure {
+  width: 300px;
+  height: 300px;
+}
+
+// .title {
+//   @include font-size(2rem);
+// }
