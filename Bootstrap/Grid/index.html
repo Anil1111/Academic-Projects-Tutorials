@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GRID</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+  <main class="container-fluid">
+
+    <header class="row mb-3">
+      <h1 class="col text-center text-danger">
+        The Grid System
+      </h1>
+    </header>
+
+    <section class="text-center mb-3">
+      <header class="row mb-3">
+        <h2 class="col text-muted">Sample Grid</h2>
+      </header>
+
+      <div class="grid row bg-light justify-content-center">
+        <!-- <div class="col-sm-3"></div> -->
+        <div class="col-sm-6">
+          <!-- Beginning Grid code-->
+          <div class="row">
+            <div class="col-sm-4 bg-light">AUTO</div>
+            <div class="col-sm-8 bg-danger">AUTO</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 bg-light">AUTO</div>
+            <div class="col-sm-8 bg-danger">AUTO</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 bg-primary">AUTO</div>
+            <div class="col-sm-6 bg-light">AUTO</div>
+            <div class="col-sm-2 bg-light">AUTO</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 bg-primary">AUTO</div>
+            <div class="col-sm-6 bg-light">AUTO</div>
+            <div class="col-sm-2 bg-info">AUTO</div>
+          </div>
+        </div>
+        <!-- <div class="col-sm-3"></div> -->
+      </div>
+
+    </section>
+
+    <section class="text-center">
+      <header class="row mb-3">
+        <h2 class="col text-muted">Sample Grid with alternate mechanism</h2>
+      </header>
+
+      <div class="grid row bg-light justify-content-center">
+        <div class="col-sm-6">
+          <!-- Beginning Grid code-->
+          <div class="row">
+            <div class="col-sm-4 bg-light px-0">
+              <div class="col">AUTO</div>
+              <div class="col">AUTO</div>
+            </div>
+            <div class="col-sm-8 bg-danger">AUTO</div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4 bg-primary">AUTO</div>
+            <div class="col-sm-6 bg-light">AUTO</div>
+            <div class="col-sm-2">
+              <div class="col bg-light">AUTO</div>
+              <div class="col bg-info">AUTO</div>
+            </div>
+          </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <script src="../node_modules/jquery/dist/jquery.min.js">
+    AUTO
+  </script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js">
+    AUTO
+  </script>
+</body>
+
+</html>

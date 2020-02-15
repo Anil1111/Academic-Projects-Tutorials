@@ -1,0 +1,21 @@
+@import "../node_modules/bootstrap/scss/bootstrap.scss"; 
+
+
+section {
+
+  .grid {
+
+    > div:nth-of-type(1) {
+      // border: 1px solid red;
+    }
+
+    div [class*="col-"] {
+      // padding: 20px;
+      // overflow: hidden;
+    }
+  }
+}
+
+* {
+  border: 1px solid red;
+}
