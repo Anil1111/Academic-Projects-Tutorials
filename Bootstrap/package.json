@@ -11,6 +11,8 @@
   "dependencies": {},
   "devDependencies": {
     "bootstrap": "^4.4.1",
+    "holder": "0.0.0",
+    "holderjs": "^2.9.6",
     "jquery": "^3.4.1"
   }
 }
