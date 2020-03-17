@@ -28,10 +28,40 @@
 ---------------------------------------------------------------------------------------
 
 ###################
-## 
+## NPM Libraries Used
 ###################
+1. Bootstrap: npm install -g bootstrap
+2. SASS: npm install -g sass
+3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
+4. jquery
 
 
+---------------------------------------------------------------------------------------
+
+###################
+## Softwares Used
+###################
+1. VSCode - Text Editor
+2. GIT - Version control
+3. NodeJS
+4. Inkspace - SVG Creator
 
 
+---------------------------------------------------------------------------------------
+
+###################
+## GIT Commands Used
+###################
+git init #To initialize a GIT repo
+git config --global user.name = "<name>"
+git config --global user.email = "<email>"
+git status #To check the status of the working tree
+git add . #To stage the files; ready for commit
+git commit -m "message" #To commit
+git rm <filename> #removing filename
+touch <filename> #creates new file
+.gitignore #create this file to add the exception list of all the files you do not wish to commit
+git push #To push or pull changes to remote repo
+git checkout <branchName> #Checking out the current branch; default: master
+git branch <branchname> #creating a new branch 
 ---------------------------------------------------------------------------------------

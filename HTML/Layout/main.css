@@ -1,0 +1,40 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Baloo Chettan 2', cursive;
+}
+
+header {
+  height: 100px;
+  width: 100%;
+  background-color: grey;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+h1, h2 {
+  padding: 20px;
+}
+
+aside {
+  max-width: 29%;
+  background-color: azure;
+}
+
+section {
+  max-width: 68%;
+}
+
+footer {
+  height: 100px;
+  width: 100%;
+  background-color: grey;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
