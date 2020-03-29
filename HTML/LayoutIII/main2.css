@@ -1,0 +1,98 @@
+* {
+  margin: 0px;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+}
+
+nav {
+  background-color: black;
+  display: flex;
+  flex-flow: row;
+}
+
+nav a {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  padding: 15px;
+}
+
+nav a:last-of-type {
+
+}
+
+nav a:visited {
+  color: green;
+}
+
+nav a:hover {
+  background-color: grey;
+  color: black;
+}
+
+main {
+  background-color: lightgrey;
+  display: flex;
+  flex-flow: row;
+}
+
+#main-section {
+  width: 70%;
+}
+
+#main-aside {
+  width: 30%;
+}
+
+article {
+  margin: 10px;
+  background-color:  white;
+}
+
+.card {
+  padding: 10px;
+}
+
+h2, h5, p {
+  padding: 5px;
+}
+
+.fakeimg {
+  background-color: grey;
+  opacity: 0.5;
+  padding: 10px;
+  background: url(../../SASS/Architecture/Images/iceland.jpg) no-repeat;
+  background-size: cover;
+}
+
+footer {
+  background-color: lightslategrey;
+  text-align: center;
+  opacity: 0.5;
+  padding: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  nav a {
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #main-section,
+  #main-aside {
+    width: 100%;
+  }
+
+  main {
+    display: flex;
+    flex-flow: column;
+  }
+}

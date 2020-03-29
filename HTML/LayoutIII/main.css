@@ -1,0 +1,99 @@
+* {
+  margin: 0px;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+}
+
+nav {
+  background-color: black;
+}
+
+nav a {
+  text-decoration: none;
+  text-align: center;
+  color: white;
+  float: left;
+  padding: 15px;
+}
+
+nav a:last-of-type {
+  float: right;
+}
+
+nav a:visited {
+  color: green;
+}
+
+nav a:hover {
+  background-color: grey;
+  color: black;
+}
+
+nav::after,
+main::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+main {
+  background-color: lightgrey;
+}
+
+#main-section {
+  float: left;
+  width: 70%;
+}
+
+#main-aside {
+  float: left;
+  width: 30%;
+}
+
+article {
+  margin: 10px;
+  background-color:  white;
+}
+
+.card {
+  padding: 10px;
+}
+
+h2, h5, p {
+  padding: 5px;
+}
+
+.fakeimg {
+  background-color: grey;
+  opacity: 0.5;
+  padding: 10px;
+}
+
+footer {
+  background-color: lightslategrey;
+  text-align: center;
+  opacity: 0.5;
+  padding: 20px;
+}
+
+@media screen and (max-width: 576px) {
+  nav a {
+    float: none !important;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #main-section,
+  #main-aside {
+    float: none;
+    width: 100%;
+  }
+}

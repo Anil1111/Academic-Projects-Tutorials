@@ -1,0 +1,113 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Ubuntu', sans-serif;
+}
+
+header {
+  height: 100%;
+  background-color: lightgrey;
+}
+
+nav {
+  background-color: black;
+  color: white;
+}
+
+#main-nav ul {
+  list-style: none;
+}
+
+#main-nav a {
+  text-decoration: none;
+}
+
+#main-nav a {
+  padding: 10px;
+  float: left;
+}
+
+
+#main-nav li:last-child {
+  float: right;
+}
+
+#main-nav a:link {
+  color: white;
+}
+
+#main-nav a:hover,
+#main-nav li:first-of-type a {
+  background-color: lightgreen;
+  color: black;
+}
+
+ul::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+main {
+  padding: 10px;
+}
+
+p {
+  padding: 5px;
+} 
+
+.bold {
+  font-weight: bold;
+}
+
+section {
+  padding: 20px;
+}
+
+#counter {
+  counter-reset: test;
+}
+
+#counter h4::before {
+  counter-increment: test;
+  content: "Section " counter(test) " :";
+}
+
+@media screen and (max-width: 576px) {
+  #main-nav a {
+    float: none;
+    display: block;
+  }  
+
+  #main-nav li:last-child {
+    float: none;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  body {
+    display: flex;
+    flex-flow: row;
+  }
+
+  #header {
+    width: 30%;
+  }
+
+  #main {
+    width: 70%;
+  }
+
+  #main-nav a {
+    float: none;
+    display: block;
+  } 
+  
+  #main-nav li:last-child {
+    float: none;
+  }
+}

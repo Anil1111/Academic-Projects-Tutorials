@@ -8,33 +8,29 @@ html {
   font-family: 'Baloo Chettan 2', cursive;
 }
 
-header {
+header, footer {
   height: 100px;
   width: 100%;
   background-color: grey;
   text-align: center;
   font-weight: bold;
   color: white;
+}
+
+#main-section {
+  display: flex;
+  flex-flow: row;
 }
 
 h1, h2 {
-  padding: 20px;
+  padding: 30px;
 }
 
 aside {
-  max-width: 29%;
-  background-color: azure;
+  width: 30%;
+  background-color: lightgray;
 }
 
-section {
-  max-width: 68%;
-}
-
-footer {
-  height: 100px;
-  width: 100%;
-  background-color: grey;
-  text-align: center;
-  font-weight: bold;
-  color: white;
+section#content {
+  max-width: 70%;
 }
