@@ -69,7 +69,8 @@ h2, h5, p {
   opacity: 0.5;
   padding: 10px;
   background: url(../../SASS/Architecture/Images/iceland.jpg) no-repeat;
-  background-size: cover;
+  /* Use contain to more appropriately render the image */
+  background-size: cover; 
 }
 
 footer {

@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+:root {
+  --div-yellow-clr: yellow;
+}
+
 body {
   font-family: 'Ubuntu', sans-serif;
 }
@@ -60,6 +64,48 @@ p {
   padding: 5px;
 } 
 
+h1 {
+  text-shadow: 2px 3px 4px red;
+}
+
+@keyframes changeBorder {
+  from {border: 5px solid green;}
+  to { border: 5px solid red;}
+}
+
+@keyframes changeBackground {
+  0%   {background:red;}
+  25%  {background:yellow;}
+  50%  {background:blue;}
+  75%  {background:green;}
+  100% {background:red;}
+}
+
+div.transition {
+  margin: auto;
+  width: 100px;
+  height: 100px;
+  /* variable obtained from root */
+  background: var(--div-yellow-clr);
+  /* transition-name transition-duration transition-iming-function transition-delay */
+  transition: width 2s linear 0.1s;
+  border: 5px solid green;
+  /* animation-name animation-duration animation-timing-function animation-delay animation-iteration-count animation-direction */
+  animation: changeBorder 2s ease 1s infinite normal;
+  animation: changeBackground 1s infinite;
+}
+
+div.transition:hover {
+  width: 300px;
+}
+
+img {
+  width: 100px;
+  height: 200px;
+  border: 2px solid black;
+  object-fit: contain;
+}
+
 .bold {
   font-weight: bold;
 }
@@ -69,11 +115,14 @@ section {
 }
 
 #counter {
+  /* initialising counter variable */
   counter-reset: test;
 }
 
 #counter h4::before {
+  /* incrementing the counter variable */
   counter-increment: test;
+  /* pritning the counter variable */
   content: "Section " counter(test) " :";
 }
 
