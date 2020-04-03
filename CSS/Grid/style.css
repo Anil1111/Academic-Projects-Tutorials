@@ -1,0 +1,218 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  background-color: #ffffff;
+  color: #db6363;
+  text-align: center;
+}
+
+.grid {
+  display: grid;
+  grid-template:  0.5fr 8fr 0.5fr 5fr 1fr 0.5fr / repeat(6, 1fr);
+  grid-column-gap: 20px;
+}
+
+header {
+  grid-area: 1/ 1/ span 1/ span 6;
+  padding-top: 10px;
+
+}
+
+.banner {
+  grid-area: 2/ 1/ span 1/ span 6;
+  background-color: #db6363;
+  color: #ffffff;
+  font-family: Poppins;
+  font-size: 84px;
+  font-weight: 300;
+  letter-spacing: 3.7px;
+
+}
+
+img {
+  max-width: 100%;
+}
+
+.about {
+  grid-area: 3/ 1/ span 1/ span 6;
+  background-color: #f0f0f0;
+  padding-bottom: 20px;
+
+}
+
+.text {
+  width: 50%;
+  height: 100%;
+  margin: auto;
+  padding: auto;
+  color: #2f2d2d;
+  font-family: Poppins;
+  font-size: 18px;
+  font-weight: 500;
+  text-align: left;
+  letter-spacing: 0.5px;
+  padding-top: 30px;
+}
+
+.box {
+  background-color: #2f2f2f;
+  color: #ffffff;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  padding: 20px 0px;
+}
+
+.address {
+  grid-area: 4/ 1/ span 1/ span 2;
+}
+
+.hours {
+  grid-area: 4/ 3/ span 1/ span 2;
+}
+
+.call-us {
+  grid-area: 4/ 5/ span 1/ span 2;
+}
+
+.marker {
+  width: 51px;
+  height: 82px;
+}
+
+.clock {
+  width: 75px;
+  height: 75px;
+}
+
+.phone {
+  width: 98px;
+  height: 79px;
+}
+
+.testimonial {
+  margin: auto;
+  padding: auto;
+  background-color: #f0f0f0;
+  color: #db6363;
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 300;
+  letter-spacing: 3.7px;
+  font-style: italic;
+}
+
+.one {
+  grid-area: 5/ 1/ span 1/ span 3;
+}
+
+.two {
+  grid-area: 5/ 4/ span 1/ span 3;
+}
+
+footer {
+  grid-area: 6/ 1/ span 1/ span 6;
+  background-color: #db6363;
+  color: #ffffff;
+  font-family: Poppins;
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.4px;
+
+}
+
+
+@media(max-width: 600px){
+
+  .grid {
+    display: grid;
+    grid-template:  0.25fr 2fr 0.5fr repeat(3, 1fr) repeat(2, 0.5fr) 0.25fr / 1fr;
+  }
+
+  header {
+    grid-area: 1/ 1/ span 1/ span 1;
+  }
+
+  .banner {
+    grid-area: 2/ 1/ span 1/ span 1;
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 2.75;
+    letter-spacing: 1.9px;
+
+  }
+
+  .dog {
+    width: 195px;
+    height: 237px;
+    padding-left: 50px;
+  }
+
+  .about {
+    grid-area: 3/ 1/ span 1/ span 1;
+  }
+
+  .text {
+    width: 75%;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .box {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .address {
+    grid-area: 4/ 1/ span 1/ span 1;
+  }
+
+  .hours {
+    grid-area: 5/ 1/ span 1/ span 1;
+  }
+
+  .call-us {
+    grid-area: 6/ 1/ span 1/ span 1;
+  }
+
+  .marker {
+    width: 25.5px;
+    height: 40.4px;
+  }
+
+  .clock {
+    width: 37.6px;
+    height: 37.5px;
+  }
+
+  .phone {
+    width: 49px;
+    height: 39.5px;
+  }
+
+  .testimonial {
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+  }
+
+  .one {
+    grid-area: 7/ 1/ span 1/ span 1;
+  }
+
+  .two {
+    grid-area: 8/ 1/ span 1/ span 1;
+  }
+
+  footer {
+    grid-area: 9/ 1/ span 1/ span 1;
+  }
+
+}

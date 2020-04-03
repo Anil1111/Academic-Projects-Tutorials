@@ -98,7 +98,7 @@ div.transition {
 div.transition:hover {
   width: 300px;
 }
-
+s
 img {
   width: 100px;
   height: 200px;
@@ -108,7 +108,7 @@ img {
 
 .bold {
   font-weight: bold;
-}
+}       
 
 section {
   padding: 20px;
