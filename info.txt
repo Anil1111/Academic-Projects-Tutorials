@@ -65,3 +65,11 @@ git push #To push or pull changes to remote repo
 git checkout <branchName> #Checking out the current branch; default: master
 git branch <branchname> #creating a new branch 
 ---------------------------------------------------------------------------------------
+
+###################
+## VSCode settings
+###################
+
+1. Set git-bash as default terminal: Press Ctrl+Shift+P and enter terminal.integrated.shell.windows in search bar, there add the path to the git-bash: C:\Program Files\Git\bin\bashe.exe.
+
+---------------------------------------------------------------------------------------
