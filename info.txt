@@ -8,8 +8,6 @@
 4. Ctrl + Shift + P = Open up the command pallet in VSCode
 5. Alt + Shift + F = Use formatter to format the page (User settings can be found in settings.JSON)
 6. Alt + Click on HTML tag to collapse all content in Chrome Developer tools                            **Chrome Dev Tools
-
-
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -23,8 +21,6 @@
 4. Open in browser - TechER - Opening default browser from VSCode
 5. Live Sass Compiler - Ritwick Dey - Watching Sass files and automatic transpiling of SCSS to CSS
 6. Live Server - Ritwick Dey - Starting up web pages in browser 
-
-
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -34,8 +30,6 @@
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
 4. jquery 
-
-
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -45,8 +39,6 @@
 2. GIT - Version control
 3. NodeJS
 4. Inkspace - SVG Creator
-
-
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -58,6 +50,9 @@ git config --global user.email = "<email>"
 git status #To check the status of the working tree
 git add . #To stage the files; ready for commit
 git commit -m "message" #To commit
+git remote -v #to view the URL of remote file
+git remote add origin <<url>> #UsedTogether
+git push -u origin master     #UsedTogether and enter username and password
 git rm <filename> #removing filename
 touch <filename> #creates new file
 .gitignore #create this file to add the exception list of all the files you do not wish to commit
@@ -65,7 +60,21 @@ git push <<origin>> #To push or pull changes to remote repo
 git pull <<origin>>
 git checkout <branchName> #Checking out the current branch; default: master
 git branch <branchname> #creating a new branch 
+git diff <<filename>> #to view changes made to a file #use q to exit the less file or set   git config --global core.pager ca
+git log #to view log files
+git show head
+git checkout head <<filename>> #to retrieve the last commited version of the filename
+git reset <<last6charsOfLastCommit>> #to retrieve all the last commit files
+git reset head <<filename>> #to remove the file from staging
 ---------------------------------------------------------------------------------------
+
+###################
+## VSCode settings
+###################
+
+1. Set git-bash as default terminal: Press Ctrl+Shift+P and enter terminal.integrated.shell.windows in search bar, there add the path to the git-bash: C:\Program Files\Git\bin\bashe.exe
+---------------------------------------------------------------------------------------
+
 ###################
 ## Template Engines
 ###################
@@ -76,9 +85,10 @@ git branch <branchname> #creating a new branch
 ---------------------------------------------------------------------------------------
 
 ###################
-## VSCode settings
+## Terminal Commands
 ###################
-
-1. Set git-bash as default terminal: Press Ctrl+Shift+P and enter terminal.integrated.shell.windows in search bar, there add the path to the git-bash: C:\Program Files\Git\bin\bashe.exe.
+ls #to list all subdirectories
+pwd #present working directory
+mkdir 
 
 ---------------------------------------------------------------------------------------
