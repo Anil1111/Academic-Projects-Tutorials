@@ -1,3 +1,4 @@
+// variable containing a list os lists
 $top-foods: (
   ("Sugar Cane" 1898),
   ("Corn" 1017),
@@ -10,14 +11,24 @@ $top-foods: (
   ("Cassava" 263),
   ("Sugar Beets" 247)
 );
+
 $diamond-blue: rgba(0, 159, 255, .6);
 $sea-green: rgba(10, 165, 153, .6);
 $pale-green: rgba(167, 240, 213, .6);
 
+// other loop type
+// @for $i from $begin through $end {}
 @each $food, $tons-produced in $top-foods {
+  // The index functions takes two arguments: index($list, $element
   $i: index($top-foods, ($food $tons-produced));
-  
+
+  // string interpolation required else will print in css as $i
   rect:nth-child(#{$i+1}) {
+
+//     Here are the specific instances / counts as division:
+// If the value, or any part of it, is stored in a variable or returned by a function. - $variable/6; //division
+// If the value is surrounded by parentheses, unless those parentheses are outside a list and the value is inside. - (600px)/9; //division
+// If the value is used as part of another arithmetic expression. - 20-10 px/ 2; //division
     height: #{$tons-produced/3}px;
       &:before {
         content: $food;
@@ -28,9 +39,11 @@ $pale-green: rgba(167, 240, 213, .6);
       @if ($i % 3 == 0 ) {
         background-color: fade-out($sea-green, $i*5/100);
       } @else if($i % 3 == 1) {
-        background-color: fade-out($pale-green, $i*5/100);   
+        background-color: fade-out($pale-green, $i*5/200);   
       } @else {
-        background-color: fade-out($diamond-blue, $i*5/100);
+        background-color: fade-out($diamond-blue, $i*5/300);
+        // fade-in($color, $amount);
+        // adjust-hue($color, $degrees)
       }
   }
 

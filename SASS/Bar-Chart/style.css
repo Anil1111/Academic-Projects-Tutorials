@@ -1,6 +1,6 @@
 rect:nth-child(2) {
   height: 632.66667px;
-  background-color: rgba(167, 240, 213, 0.55);
+  background-color: rgba(167, 240, 213, 0.575);
 }
 
 rect:nth-child(2):before {
@@ -13,7 +13,7 @@ rect:nth-child(2):after {
 
 rect:nth-child(3) {
   height: 339px;
-  background-color: rgba(0, 159, 255, 0.5);
+  background-color: rgba(0, 159, 255, 0.566667);
 }
 
 rect:nth-child(3):before {
@@ -39,7 +39,7 @@ rect:nth-child(4):after {
 
 rect:nth-child(5) {
   height: 237px;
-  background-color: rgba(167, 240, 213, 0.4);
+  background-color: rgba(167, 240, 213, 0.5);
 }
 
 rect:nth-child(5):before {
@@ -52,7 +52,7 @@ rect:nth-child(5):after {
 
 rect:nth-child(6) {
   height: 211.66667px;
-  background-color: rgba(0, 159, 255, 0.35);
+  background-color: rgba(0, 159, 255, 0.516667);
 }
 
 rect:nth-child(6):before {
@@ -78,7 +78,7 @@ rect:nth-child(7):after {
 
 rect:nth-child(8) {
   height: 93px;
-  background-color: rgba(167, 240, 213, 0.25);
+  background-color: rgba(167, 240, 213, 0.425);
 }
 
 rect:nth-child(8):before {
@@ -91,7 +91,7 @@ rect:nth-child(8):after {
 
 rect:nth-child(9) {
   height: 92.66667px;
-  background-color: rgba(0, 159, 255, 0.2);
+  background-color: rgba(0, 159, 255, 0.466667);
 }
 
 rect:nth-child(9):before {
@@ -117,7 +117,7 @@ rect:nth-child(10):after {
 
 rect:nth-child(11) {
   height: 82.33333px;
-  background-color: rgba(167, 240, 213, 0.1);
+  background-color: rgba(167, 240, 213, 0.35);
 }
 
 rect:nth-child(11):before {

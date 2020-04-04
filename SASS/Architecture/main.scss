@@ -1,4 +1,5 @@
-@import url(https://fonts.googleapis.com/css?family=Pacifico); //CSS import
+@import url(https://fonts.googleapis.com/css?family=Pacifico); //CSS import and the below are only imported and not compiled and omit the "_" before their names to signify the SASS
+// Placeholders to be used when the function has no orguments
 @import "SASS/helpers/placeholders";
 @import "SASS/helpers/mixins";
 @import "SASS/helpers/variables";
@@ -12,11 +13,13 @@ h1 {
   @extend %center;
 }
 
+
 .banner {
   font-family: 'Pacifico', cursive;
   height: 400px;
   background-image: url($lemonade-banner);
   background-size: cover;
+ //syntaxt to disjoint css properties
   border: {
     top: $border;
     bottom: $border;
