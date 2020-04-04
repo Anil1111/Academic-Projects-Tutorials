@@ -33,6 +33,19 @@
 ---------------------------------------------------------------------------------------
 
 ###################
+## Bootstrap requirements
+###################
+CSS (CDN): <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+SASS (import to scss file) : @import "../node_modules/bootstrap/scss/bootstrap.scss"; 
+JS (CDN):
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+JS (add to script tag in html): 
+  <script src="../node_modules/jquery/dist/jquery.min.js"></script>
+  <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script> <!-- #the bundle contains popperJS+JS -->
+---------------------------------------------------------------------------------------
+###################
 ## Softwares Used
 ###################
 1. VSCode - Text Editor
@@ -47,6 +60,7 @@
 git init #To initialize a GIT repo
 git config --global user.name = "<name>"
 git config --global user.email = "<email>"
+git clone remote_location clone_name #cloning a git repository from a remote location
 git status #To check the status of the working tree
 git add . #To stage the files; ready for commit
 git commit -m "message" #To commit
@@ -56,16 +70,28 @@ git push -u origin master     #UsedTogether and enter username and password
 git rm <filename> #removing filename
 touch <filename> #creates new file
 .gitignore #create this file to add the exception list of all the files you do not wish to commit
-git push <<origin>> #To push or pull changes to remote repo
+git push origin <<master>> #To push changes tfrom master / branchName to remote repo
 git pull <<origin>>
 git checkout <branchName> #Checking out the current branch; default: master
 git branch <branchname> #creating a new branch 
+git branch / git show-branch #to view the existing branch
+git branch -d <<brnachName>> #to delete the branchName
+git merge <<branchName>> #to merge the branch to master
 git diff <<filename>> #to view changes made to a file #use q to exit the less file or set   git config --global core.pager ca
+                      #would appear blank if no differnce found
 git log #to view log files
-git show head
-git checkout head <<filename>> #to retrieve the last commited version of the filename
+git checkout head <<filename>> #to retrieve the last commited version of the filename; HEAD refers to the last commit
+git checkout -- <<filename>> #to retrieve the last commited version of the filename -SAME as above
 git reset <<last6charsOfLastCommit>> #to retrieve all the last commit files
 git reset head <<filename>> #to remove the file from staging
+git fetch & git merge origin/master #to fetch and later merge the latest updates into the master branch
+
+The workflow for Git collaborations typically follows this order:
+  Fetch and merge changes from the remote
+  Create a branch to work on a new project feature
+  Develop the feature on your branch and commit your work
+  Fetch and merge from the remote again (in case new commits were made while you were working)
+  Push your branch up to the remote for review and Merge the accepted branh chages into master
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -87,8 +113,23 @@ git reset head <<filename>> #to remove the file from staging
 ###################
 ## Terminal Commands
 ###################
-ls #to list all subdirectories
+ls / ls -alt #to list all subdirectories
+-a - lists all contents, including hidden files and directories
+-l - lists all contents of a directory in long format #Columns: access noOfChildLinks ownerName groupName size timestamp
+-t - order files and directories by the time they were last modified.
 pwd #present working directory
-mkdir 
+mkdir, touch, cd 
+cat <<filename>> #to view the contents of the file in BASH - Bourne Again shell
+cp sourceFile destFile #copy contents of sourceFile to destFile
+cp sourceFile1 sourceFile2 destDir/ #copy multiple files into the destDir/
+cp * destDir/    
+cp *name.txt destDir/ #* wildcard to select all files in the working directory to be copied & copy *name.txt
+mv sourceFile1 destDir/  #copy sourceFile into destDir/
+mv fileName1 fileName2 #renames fileName1 to fileName2
+rm filename / rm -r dirName #to remove files or list of files recursively
+echo "hello" > fileName #copy the "hello" into fileName; > takes the standard output of the command on the left, redirects it to right file; > overwrites all the contents of fileName
+echo "hello" >> fileName / cat fileName1 >> fileName2 #appends "hello" into the exisiting content of fileName; contents of fileName1 are added
+cat < fileName #< takes the standard input from the file on the right and inputs it into the program on the left
+
 
 ---------------------------------------------------------------------------------------
