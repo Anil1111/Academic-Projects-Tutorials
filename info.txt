@@ -74,3 +74,11 @@ git branch <branchname> #creating a new branch
 3. Chrome and Opera - Blink
 4. Firefox - Gecko
 ---------------------------------------------------------------------------------------
+
+###################
+## VSCode settings
+###################
+
+1. Set git-bash as default terminal: Press Ctrl+Shift+P and enter terminal.integrated.shell.windows in search bar, there add the path to the git-bash: C:\Program Files\Git\bin\bashe.exe.
+
+---------------------------------------------------------------------------------------
