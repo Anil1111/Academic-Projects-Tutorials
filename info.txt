@@ -3,7 +3,7 @@
 ###################
 
 1. Alt+Shift+F = Format CSS/SCSS code in VSCode
-2. Ctrl+F2 / Alt + Select lines Randomly = Select Multilines in VSCode
+2. Ctrl+F2 / Press Alt + Select lines Randomly = Select Multilines in VSCode
 3. Alt + Q = Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
 4. Ctrl + Shift + P = Open up the command pallet in VSCode
 5. Alt + Shift + F = Use formatter to format the page (User settings can be found in settings.JSON)
