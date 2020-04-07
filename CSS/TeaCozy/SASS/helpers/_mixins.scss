@@ -1,0 +1,10 @@
+@mixin set-flexbox($flex: flex, $justify-content: center, $flex-wrap: wrap) {
+  display: $flex;
+  justify-content: $justify-content;
+  flex-wrap: $flex-wrap;  
+}
+
+@mixin set-hw-dimension($height, $width) {
+  height: $height;
+  width: $width;
+}

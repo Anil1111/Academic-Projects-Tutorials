@@ -5,46 +5,50 @@
 * {
   margin: 0px;
   padding: 0px;
-  // border: 2px solid red;
+  // border: 1px solid red;
 }
 
 html {
-  font-family: Helvetica;
-  font-size: $font-base-size;
+  font: {
+    family: $base-font-family;
+    size: $base-font-size;
+  }
   color: $base-color;
-  background-color: $main-background-color;
+  background-color: $base-background-color;
   opacity: 0.9;
   text-align: center;
   counter-reset: figNumber; 
 }
 
 #main-header {
-  display: flex;
-  justify-content: space-between;
-  max-height: 3.13rem;
-  border-bottom: $header-border-bottom;
-  background-color: $main-background-color;
+  @include set-flexbox(flex, center, wrap);
+  @include set-hw-dimension(3.13rem, 100%);
   align-items: center;
-  position: sticky;
-  top: 0;
+  border-bottom: $header-border-bottom;
+  background-color: $base-background-color;
+  position: fixed;
+  z-index: 1;
+
 
   .logo {
-    margin-left: 0.45rem;
+    padding-left: 0.45rem;
 
     img {
-      max-height: 2.2rem;
+      height: 2.2rem;
       object-fit: cover;
     }
   }
 
   nav {
-
+    text-align: right;
+    flex-grow: 1;
+    
     ul {
       list-style: none;
 
       li {
-        display: inline;
-        padding: 0rem 0.25rem;
+        display: inline-block;
+        padding: 0.9rem 0.45rem;
 
         a {
           text-decoration: underline;
@@ -59,52 +63,45 @@ html {
 #main-content {
   display: flex;
   flex-flow: column;
+  opacity: 0.9;
+  width: 54.5rem;
+  margin: auto;
 }
 
-.mission {
+#mission {
   height: 31.8rem;
-  width: 54.5rem;
-  margin: 0rem auto;
   background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-4/img-mission-background.jpg");
   background-position: center;
   background-size: cover;
-  display: flex;
-  align-items: center;
-  margin-bottom: 2rem;
+  @include set-flexbox(flex, center, wrap);
+  padding-top: 3.1rem;
 
   .mission-description {
-    background-color: $main-background-color;
+    background-color: $base-background-color;
     padding: $padding-avg;
     width: 100%;
+    margin: auto;
   }
 }
 
-.tea-of-the-month {
-  margin-top: 2rem;
-  padding: $padding-avg;
-
-  h4 {
-    margin: 1rem;
-  }
+#tea-of-the-month {
+  padding-top: 3.1rem;
+  height: 31.8rem;
+  margin: auto;
 
   .gallery {
-    display: flex;
-    flex-direction: column;
 
     .row {
       display: flex;
-      flex-direction: row;
       justify-content: center;
       flex-wrap: wrap;
 
       .box {
-        margin: 0.75rem;
+        padding: 0.2rem;
 
         img {
-          max-height: 9rem;
-          max-width: 13.6rem;
-          margin-bottom: 0.45rem;
-
+          height: 9rem;
+          margin: 0.45rem;
         }
 
         figcaption::after {
@@ -117,68 +114,54 @@ html {
   }
 }
 
-.locations {
+#locations {
+  padding-top: 3.18rem;
+  height: 22.7rem;
   background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-4/img-locations-background.jpg");
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  height: 22.7rem;
-  width: 54.5rem;
-  margin: 0rem auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 
   header {
     margin-bottom: 0.68rem;
   }
 
   .card-group {
-    display: flex;
+    @include set-flexbox(flex, center, wrap);
+    margin: auto;
+    width: 50rem;
 
     .card {
-      width: 12.6rem; 
       padding: $padding-avg;
-      background-color: $main-background-color;
-  
-  
+      background-color: $base-background-color;
+      flex-basis: 12.6rem;
+      opacity: 1;
+      padding: 0.45rem;
+
+    
       address {
         line-height: 5rem;
       }
     }
 
     :not(:last-child) {
-      margin-right: 1.8rem;
+      margin-right: 1rem;
     }
   }
 }
 
+#contact {
+  height: 9rem;
+
+  .contact-child {
+    padding: 0.5rem;
+  }
+}
 
 #main-footer {
-  display: flex;
-  flex-flow: nowrap column;
-  justify-content: center;
-
-  .footer-description {
-    height: 9rem;
-    padding: 0.3rem;
-
-    p {
-      padding: 0.5rem;   
-    }
-  }
-
-  .copyright {
-    display: flex;
-    justify-content: flex-start;
-
-    p {
-      margin-left: 0.9rem;
-    }
-
-  }
-
+  padding-left: 0.9rem;
+  text-align: left;
 }
+
+
 
 

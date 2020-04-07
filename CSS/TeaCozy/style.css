@@ -17,28 +17,37 @@ html {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  max-height: 3.13rem;
-  border-bottom: 1px solid seashell;
-  background-color: black;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  height: 3.13rem;
+  width: 100%;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  position: -webkit-sticky;
-  position: sticky;
-  top: 0;
+  border-bottom: 1px solid seashell;
+  background-color: black;
+  position: fixed;
+  z-index: 1;
 }
 
 #main-header .logo {
-  margin-left: 0.45rem;
+  padding-left: 0.45rem;
 }
 
 #main-header .logo img {
-  max-height: 2.2rem;
+  height: 2.2rem;
   -o-object-fit: cover;
      object-fit: cover;
+}
+
+#main-header nav {
+  text-align: right;
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
 #main-header nav ul {
@@ -46,8 +55,8 @@ html {
 }
 
 #main-header nav ul li {
-  display: inline;
-  padding: 0rem 0.25rem;
+  display: inline-block;
+  padding: 0.9rem 0.45rem;
 }
 
 #main-header nav ul li a {
@@ -63,57 +72,44 @@ html {
   -webkit-box-direction: normal;
       -ms-flex-flow: column;
           flex-flow: column;
+  opacity: 0.9;
+  width: 54.5rem;
+  margin: auto;
 }
 
-.mission {
+#mission {
   height: 31.8rem;
-  width: 54.5rem;
-  margin: 0rem auto;
   background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-4/img-mission-background.jpg");
   background-position: center;
   background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 2rem;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  padding-top: 3.1rem;
 }
 
-.mission .mission-description {
+#mission .mission-description {
   background-color: black;
   padding: 1rem;
   width: 100%;
+  margin: auto;
 }
 
-.tea-of-the-month {
-  margin-top: 2rem;
-  padding: 1rem;
+#tea-of-the-month {
+  padding-top: 3.1rem;
+  height: 31.8rem;
+  margin: auto;
 }
 
-.tea-of-the-month h4 {
-  margin: 1rem;
-}
-
-.tea-of-the-month .gallery {
+#tea-of-the-month .gallery .row {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-}
-
-.tea-of-the-month .gallery .row {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: horizontal;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -121,100 +117,72 @@ html {
       flex-wrap: wrap;
 }
 
-.tea-of-the-month .gallery .row .box {
-  margin: 0.75rem;
+#tea-of-the-month .gallery .row .box {
+  padding: 0.2rem;
 }
 
-.tea-of-the-month .gallery .row .box img {
-  max-height: 9rem;
-  max-width: 13.6rem;
-  margin-bottom: 0.45rem;
+#tea-of-the-month .gallery .row .box img {
+  height: 9rem;
+  margin: 0.45rem;
 }
 
-.tea-of-the-month .gallery .row .box figcaption::after {
+#tea-of-the-month .gallery .row .box figcaption::after {
   counter-increment: figNumber;
   content: counter(figNumber);
 }
 
-.locations {
+#locations {
+  padding-top: 3.18rem;
+  height: 22.7rem;
   background-image: url("https://s3.amazonaws.com/codecademy-content/courses/freelance-1/unit-4/img-locations-background.jpg");
   background-repeat: no-repeat;
-  background-position: center;
   background-size: cover;
-  height: 22.7rem;
-  width: 54.5rem;
-  margin: 0rem auto;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
 }
 
-.locations header {
+#locations header {
   margin-bottom: 0.68rem;
 }
 
-.locations .card-group {
+#locations .card-group {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-}
-
-.locations .card-group .card {
-  width: 12.6rem;
-  padding: 1rem;
-  background-color: black;
-}
-
-.locations .card-group .card address {
-  line-height: 5rem;
-}
-
-.locations .card-group :not(:last-child) {
-  margin-right: 1.8rem;
-}
-
-#main-footer {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-flow: nowrap column;
-          flex-flow: nowrap column;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: auto;
+  width: 50rem;
 }
 
-#main-footer .footer-description {
+#locations .card-group .card {
+  padding: 1rem;
+  background-color: black;
+  -ms-flex-preferred-size: 12.6rem;
+      flex-basis: 12.6rem;
+  opacity: 1;
+  padding: 0.45rem;
+}
+
+#locations .card-group .card address {
+  line-height: 5rem;
+}
+
+#locations .card-group :not(:last-child) {
+  margin-right: 1rem;
+}
+
+#contact {
   height: 9rem;
-  padding: 0.3rem;
 }
 
-#main-footer .footer-description p {
+#contact .contact-child {
   padding: 0.5rem;
 }
 
-#main-footer .copyright {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: start;
-      -ms-flex-pack: start;
-          justify-content: flex-start;
-}
-
-#main-footer .copyright p {
-  margin-left: 0.9rem;
+#main-footer {
+  padding-left: 0.9rem;
+  text-align: left;
 }
 /*# sourceMappingURL=style.css.map */
