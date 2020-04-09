@@ -8,6 +8,7 @@
 4. Ctrl + Shift + P = Open up the command pallet in VSCode
 5. Alt + Shift + F = Use formatter to format the page (User settings can be found in settings.JSON)
 6. Alt + Click on HTML tag to collapse all content in Chrome Developer tools                            **Chrome Dev Tools
+7. Ctrl +Alt + N = To run the JS code using inbuilt node and output in console; using the Code runner extension
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -21,6 +22,8 @@
 4. Open in browser - TechER - Opening default browser from VSCode
 5. Live Sass Compiler - Ritwick Dey - Watching Sass files and automatic transpiling of SCSS to CSS
 6. Live Server - Ritwick Dey - Starting up web pages in browser 
+7. Code Runner - Jun Han - Running JS code live
+
 ---------------------------------------------------------------------------------------
 
 ###################
