@@ -1,3 +1,5 @@
+// /There are only seven fundamental data types in JavaScript, and six of those are the primitive data types: string, number, boolean, null, undefined, and symbol. And objects
+
 // Common methods
 let dateToday = new Date();
 let thisYear = dateToday.getFullYear();
@@ -82,8 +84,29 @@ while (counterTwo < 4) {
 
 // do...while will run at least once whether or not the condition evaluates to true
 let countString = '';
-let i = 0;
+let z = 0;
 do {
-  countString = countString + i;
+  countString = countString + z;
+  z++;
+} while (z < 5);
+
+//Whale program
+const input = 'a whale of a deal!';
+const vowels = ['a','e','i','o','u'];
+const resultArray = [];
+
+let i = 0;
+let j = 0;
+
+while(i < input.length) {
+  j = 0;
+  while(j < vowels.length) {
+     if (input[i] === vowels[j]) {
+       resultArray.push(input[i]);
+       (input[i] === 'e' || input[i] === 'u') ?  resultArray.push(input[i]) : '';
+     };
+    j++;     
+  }
   i++;
-} while (i < 5);
+};
+// console.log(resultArray.join('').toUpperCase());
