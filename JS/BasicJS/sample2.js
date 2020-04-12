@@ -115,3 +115,27 @@ const words3 = ['unique', 'uncanny', 'pique', 'oxymoron', 'guise'];
   // Pass in isEven as the callback function
   printMsg(isEven, 4); 
   // Prints: The number 4 is an even number: True.
+
+
+  //Sort
+  //The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+  const months = ['March', 'Jan', 'Feb', 'Dec', 'April', 'May'];
+months.sort();
+// console.log(months);
+// expected output: Array ["Dec", "Feb", "Jan", "March"]
+
+const array1 = [100, 30, 44, 21, 100000, 2000];
+array1.sort();
+// console.log(array1);
+// expected output: Array [1, 100000, 21, 30, 4]
+
+//arr.sort([compareFunction])
+// /Specifies a function that defines the sort order. If omitted, the array elements are converted to strings, then sorted according to each character's Unicode code point value.
+//If compareFunction(a, b) returns less than 0, sort a to an index lower than b (i.e. a comes first).
+// If compareFunction(a, b) returns 0, leave a and b unchanged with respect to each other, but sorted with respect to all different elements. Note: the ECMAscript standard does not guarantee this behavior, thus, not all browsers (e.g. Mozilla versions dating back to at least 2003) respect this.
+// If compareFunction(a, b) returns greater than 0, sort b to an index lower than a (i.e. b comes first).
+const sortYears = arr => arr.sort((x, y) => y - x); //descending order
+const sortYears = arr => arr.sort(); //ascending order
+
+const years = [1970, 1999, 1951, 1982, 1963, 2011, 2018, 1922]
+console.log(sortYears(years));

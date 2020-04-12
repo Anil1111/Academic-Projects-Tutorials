@@ -167,3 +167,4 @@ console.log(robotEntries);
 // The Object.assign() method copies all enumerable own properties from one or more source objects to a target object.
 const newRobot = Object.assign({laserBlaster: true, voiceRecognition: true}, robot);
 console.log(newRobot);
+

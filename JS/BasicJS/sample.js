@@ -110,3 +110,6 @@ while(i < input.length) {
   i++;
 };
 // console.log(resultArray.join('').toUpperCase());
+
+let str = 'hello';
+str = str + ' '.repeat(5); //Output - 'hello     '
