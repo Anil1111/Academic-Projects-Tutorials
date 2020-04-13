@@ -1,0 +1,56 @@
+body {
+  background-color: #010165;
+  margin: 0px;
+  text-align: center;
+  font-family: 'Work Sans';
+}
+
+#main-header {
+  background-color: #00ffff;
+  text-transform: uppercase; 
+}
+
+.title-row {
+  margin-top: 42px;
+  margin-bottom: 21px;
+  display: flex;
+  justify-content: center;
+}
+
+.instructions-title {
+  color: #00ffff;
+  font-size: 18px;
+
+}
+
+.instructions-row {
+  color: white;
+  margin: 0 auto;
+  width: 400px;
+}
+
+.instructions-number {
+  padding-right: 25px;
+  font-size: 36px;
+}
+
+.instructions-text {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.door-frame {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.start-row {
+  margin: auto;
+  background-color: #eb6536;
+  width: 120px;
+  height: 43px;
+  padding-top: 18px;
+  font-size: 18px;
+  color: #010165;
+  cursor: pointer;
+}

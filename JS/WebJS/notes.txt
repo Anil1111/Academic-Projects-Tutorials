@@ -65,6 +65,55 @@ first.innerHTML = 'I am the child!';
 first.parentNode.innerHTML = 'I am the parent and my inner HTML has been replaced!';
 
 
+-------------------------------------------------
+EVENT HANDLER function
+let eventTarget = document.getElementById('targetElement');
+
+eventTarget.onclick = function() {
+  // Then we created the event handler property which consists of the event target followed by the event name (the prefix on- and the event type.) In this example, we’re using the click event which fires when the user presses and releases a mouse button on a DOM element.
+}
+
+It’s best practice to create named event handler functions, instead of anonymous functions. Your code will remain organized and reusable this way
+let eventHandlerFunction = function() {
+  // this block of code will run
+}
+eventTarget.onclick = eventHandlerFunction;
+
+The .addEventListener() method is another common syntax for registering event handlers. An event listener waits for a specific event to occur and calls a named event handler function to respond to it
+eventTarget.addEventListener('click', eventHandlerFunction);
+
+eventTarget.removeEventListener('click', eventHandlerFunction);
+
+EVENT Object
+the .target property to access the element that triggered the event.
+the .type property to access the name of the event.
+the .timeStamp property to access the number of milliseconds that passed since the document loaded and the event was triggered.
+let sharePhoto = function(event) {
+  event.target.style.display = 'none';  ** Everthing should be in ''
+  text.innerHTML = 'You share the puppy in ' 
+  + event.timeStamp + ' ms.';
+}
+share.onclick = sharePhoto;
+mysteryButton.onwheel = colorChange; #execute on sliding mouse wheel
+
+
+EVENT Types:
+For instance, the load event fires after website files completely load in the browser.
+The mousedown event is fired when the user presses a mouse button down
+The mouseup event is fired when the user releases the mouse button
+The mouseover event is fired when the mouse enters the content of an element.
+The mouseout event is fired when the mouse leaves an element.
+
+itemOne.onmouseover & onkeydown
+itemTwo.onmouseup & onkeyup
+itemThree.onmouseout & onkeypressed
+itemFour.onmousedown
+
+
+----------------------------------------------------
+HANDLEBARS.js
+A library is a collection of code that is already written that makes development easier. In the case of Handlebars, you are provided a templating engine which allows you to generate reusable HTML with JavaScript. Another benefit is that Handlebars keeps a clear separation of when you’re writing HTML or JavaScript.
+
 
 
 

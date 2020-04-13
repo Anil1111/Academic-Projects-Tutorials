@@ -27,8 +27,9 @@
 ---------------------------------------------------------------------------------------
 
 ###################
-## NPM Libraries Used
+## NPM Libraries Used 
 ###################
+** Use --save-dev to download and install into local repository
 1. Bootstrap: npm install -g bootstrap
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images

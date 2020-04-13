@@ -1,0 +1,22 @@
+{
+  "name": "frontend_examples",
+  "version": "1.0.0",
+  "description": "Frontend Codes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/richierich25/Frontend-Projects.git"
+  },
+  "author": "Richard",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/richierich25/Frontend-Projects/issues"
+  },
+  "homepage": "https://github.com/richierich25/Frontend-Projects#readme",
+  "devDependencies": {
+    "handlebars": "^4.7.6"
+  }
+}
