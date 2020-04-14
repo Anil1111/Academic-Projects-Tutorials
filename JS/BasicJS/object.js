@@ -23,7 +23,7 @@ let spaceship2 = {
 };
 spaceship2['Active Duty'];   // Returns true
 spaceship2['Fuel Type'];   // Returns  'Turbo Fuel'
-spaceship2['numCrew'];   // Returns 5
+spaceship2['numCrew'];   // Returns 5 *** ALL KEYS SHOULD BE IN ''
 
 //Objects
 // /Objects are mutable meaning we can update them after we create them!

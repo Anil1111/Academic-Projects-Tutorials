@@ -1,0 +1,179 @@
+CLASSES
+Although you may see similarities between class and object syntax, there is one important method that sets them apart. It’s called the constructor method. JavaScript calls the constructor() method every time it creates a new instance of a class.
+class Dog {
+  constructor(name) {
+    this.name = name;
+    this.behavior = 0;
+  }
+}
+
+Dog is the name of our class. By convention, we capitalize and CamelCase class names.
+JavaScript will invoke the constructor() method every time we create a new instance of our Dog class.
+Inside of the constructor() method, we use the this keyword. In the context of a class, this refers to an instance of that class. In the Dog class, we use this to set the value of the Dog instance’s name property to the name argument
+
+instance
+An instance is an object that contains the property names and methods of a class, but with unique property values
+const halley = new Dog('Halley'); // Create new Dog instance
+console.log(halley.name);
+
+methods
+//we also prepended our property names with underscores (_name and _behavior), which indicate these properties should not be accessed directly. 
+class Animal {
+  constructor(name) {
+    this._name = name;
+    this._behavior = 0;
+  }
+
+  get name() {
+    return this._name;
+  }
+
+  get behavior() {
+    return this._behavior;
+  }
+
+  incrementBehavior() {
+    this._behavior++;
+  }
+} 
+
+INHERITANCE
+When multiple classes share properties or methods, they become candidates for inheritance
+With inheritance, you can create a parent class (also known as a superclass) with properties and methods that multiple child classes (also known as subclasses) share. 
+The extends keyword makes the methods of the animal class available inside the cat class.
+The super keyword calls the constructor of the parent class. In this case, super(name) passes the name argument of the Cat class to the constructor of the Animal class. When the Animal constructor runs, it sets this._name = name; for new Cat instances.
+In a constructor(), you must always call the super method before you can use the this keyword — if you do not, JavaScript will throw a reference error. To avoid reference errors, it is best practice to call super on the first line of subclass constructors.
+When we call extends in a class declaration, all of the parent methods are available to the child class.
+
+
+class Cat extends Animal {
+  constructor(name, usesLitter) {
+    super(name);
+    this._usesLitter = usesLitter;
+  }
+    get usesLitter() {
+    return this._usesLitter;
+  }
+}
+const bryceCat = new Cat('Bryce', false);
+console.log(bryceCat.name);
+
+
+static method
+ we create a static method called .generateName() that returns a random name when it’s called. Because of the static keyword, we can only access .generateName() by appending it to the Animal class.
+You cannot access the .generateName() method from instances of the Animal class or instances of its subclasses
+
+class Animal {
+  constructor(name) {
+    this._name = name;
+    this._behavior = 0;
+  }
+
+  static generateName() {
+    const names = ['Angel', 'Spike', 'Buffy', 'Willow', 'Tara'];
+    const randomNumber = Math.floor(Math.random()*5);
+    return names[randomNumber];
+  }
+} 
+console.log(Animal.generateName()); // returns a name
+const tyson = new Animal('Tyson'); 
+tyson.generateName(); // TypeError
+
+--------------------------------------------------------
+MODULES
+JavaScript modules are reusable pieces of code that can be exported from one program and imported for use in another program.
+By separating code with similar logic into files called modules, we can:
+find, fix, and debug code more easily;
+reuse and recycle defined logic in different parts of our application;
+keep information private and protected from other modules;
+and, importantly, prevent pollution of the global namespace and potential naming collisions, by cautiously selecting variables and behavior we load into a program.
+
+We can get started with modules by defining a module in one file and making the module available for use in another file with Node.js module.exports syntax. Every JavaScript file run in Node has a local module object with an exports property used to define what should be exported from the file.
+let Menu = {};
+Menu.specialty = "Roasted Beet Burger with Mint Sauce";
+
+module.exports = Menu;
+let Menu = {}; creates the object that represents the module Menu.
+module.exports = Menu; exports the Menu object as a module. 
+module is a variable that represents the module, and exports exposes the module as an object.
+
+The pattern we use to export modules is thus:
+Create an object to represent the module.
+Add properties or methods to the module object.
+Export the module with module.exports.
+
+
+IMPORTING
+ In Node.js, use the require() function to import modules.
+
+ const Menu = require('./menu.js');
+require() is a JavaScript function that loads a module. It’s argument is the file path of the module: ./menu.js.
+
+We can also wrap any collection of data and functions in an object, and export the object using module.exports
+module.exports = {
+  specialty: "Roasted Beet Burger with Mint Sauce",
+  getSpecialty: function() {
+    return this.specialty;
+  } 
+}; 
+
+but as of ES6, JavaScript supports a new more readable and flexible syntax for exporting modules. 
+let Menu = {};
+
+export default Menu;
+export default uses the JavaScript export statement to export JavaScript objects, functions, and primitive data types.
+
+import Menu from './menu';
+
+named exports
+let specialty = '';
+function isVegetarian() {
+}; 
+function isLowSodium() {
+}; 
+
+export { specialty, isVegetarian };
+
+import { specialty, isVegetarian } from './menu';
+console.log(specialty);
+
+
+Export Named Exports
+Named exports are also distinct in that they can be exported as soon as they are declared, by placing the keyword export in front of variable declarations.
+export let specialty = '';
+export function isVegetarian() {
+}; 
+function isLowSodium() {
+}; 
+
+Export as
+export { specialty as chefsSpecial, isVegetarian as isVeg, isLowSodium };
+
+import { chefsSpecial, isVeg } from './menu';
+note that we have an option to alias an object that was not previously aliased when exported. For example, the isLowSodium object that we exported could be aliased with the as keyword when imported: import {isLowSodium as saltFree} from 'Menu';
+
+Another way of using aliases is to import the entire module as an alias:
+import * as Carte from './menu';
+
+Carte.chefsSpecial;
+Carte.isVeg();
+Carte.isLowSodium(); 
+
+Combining Export Statements
+export let Menu = {};
+
+export let specialty = '';
+export let isVegetarian = function() {
+}; 
+export let isLowSodium = function() {
+}; 
+let isGlutenFree = function() {
+};
+
+export default isGlutenFree;  
+--------------------------------------------------------------
+
+
+
+
+

@@ -181,3 +181,12 @@ Different users cant update the same table at the same time.
 Does not validate data types.
 
 ---------------------------------------------------------------------------------------
+###################
+## Node.JS
+###################
+
+1. Issue for running ES6 commands in Node.js
+- use .mjs file extension
+- add   "type": "module" in package.JSON
+- run node in terminal with --input-type=module
+---------------------------------------------------------------------------------------
