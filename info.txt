@@ -116,6 +116,7 @@ git merge <<branchName>> #to merge the branch to master
 git diff <<filename>> #to view changes made to a file #use q to exit the less file or set   git config --global core.pager ca
                       #would appear blank if no differnce found
 git log #to view log files
+git log --oneline --graph #for better viewing
 git checkout head <<filename>> #to retrieve the last commited version of the filename; HEAD refers to the last commit
 git checkout -- <<filename>> #to retrieve the last commited version of the filename -SAME as above
 git reset <<last6charsOfLastCommit>> #to retrieve all the last commit files
