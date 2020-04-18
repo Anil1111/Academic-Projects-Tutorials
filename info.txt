@@ -23,6 +23,13 @@
 5. Live Sass Compiler - Ritwick Dey - Watching Sass files and automatic transpiling of SCSS to CSS
 6. Live Server - Ritwick Dey - Starting up web pages in browser 
 7. Code Runner - Jun Han - Running JS code live
+8. Node.js Extension Pack - Wade Anderson - Node JS support
+9. ESLint - Dirk baeumer
+10. Visual Studio IntelliCode - Microsoft
+11. Prettier - Code formatter - Esben Peterson
+12. Debugger for Chrome - Debugging
+
+
 
 ---------------------------------------------------------------------------------------
 
@@ -66,6 +73,14 @@ JS (add to script tag in html):
 2. File --> AutoSave
 ---------------------------------------------------------------------------------------
 
+###################
+## Browser Extensions - Chrome
+###################
+
+1. JSON View #to view json files in browser with syntax highlighting
+  Ctrl + Alt + Mouse Click to collapse all options in dev tools
+
+---------------------------------------------------------------------------------------
 ###################
 ## Template Engines
 ###################
@@ -126,7 +141,7 @@ pwd #present working directory
 mkdir, touch, cd 
 cat <<filename>> #to view the contents of the file in BASH - Bourne Again shell
 cp sourceFile destFile #copy contents of sourceFile to destFile
-cp sourceFile1 sourceFile2 destDir/ #copy multiple files into the destDir/
+cp sourceFile1 sourceFile2 destDir/ #copy multiple files into the destDir/ #cp -r ../HTTP1/GET ./
 cp * destDir/    
 cp *name.txt destDir/ #* wildcard to select all files in the working directory to be copied & copy *name.txt
 mv sourceFile1 destDir/  #copy sourceFile into destDir/
