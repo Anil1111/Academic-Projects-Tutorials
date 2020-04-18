@@ -41,6 +41,7 @@
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
 4. jquery 
+5. Babel: npm install -g babel-cli, npm install -g babel-preset-env 
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -119,10 +120,18 @@ git log #to view log files
 git log --oneline --graph #for better viewing
 git checkout head <<filename>> #to retrieve the last commited version of the filename; HEAD refers to the last commit
 git checkout -- <<filename>> #to retrieve the last commited version of the filename -SAME as above
-git reset <<last6charsOfLastCommit>> #to retrieve all the last commit files
+git reset <<last6charsOfLastCommit>> #to retrieve all the last commit files 
 git reset head <<filename>> #to remove the file from staging
 git fetch & git merge origin/master #to fetch and later merge the latest updates into the master branch
-
+To fix detached Head:
+  git branch Temp #all changes need to be committed
+  git checkout master
+  git merge Temp
+  git branch -d Temp
+Removing unecessary changes from last commit:
+  git reset --hard HEAD 
+  git clean -f, git clean -n #remove all untracked files
+  git clean -d -f, git clean -f -n #to remove all untracked directories
 The workflow for Git collaborations typically follows this order:
   Fetch and merge changes from the remote
   Create a branch to work on a new project feature
@@ -205,4 +214,16 @@ Does not validate data types.
 - use .mjs file extension
 - add   "type": "module" in package.JSON
 - run node in terminal with --input-type=module
+---------------------------------------------------------------------------------------
+###################
+## Babel 
+###################
+
+Used to transpile ES6 to ES5 syntax
+1. install npm dependencies - Babel: npm install -g babel-cli, npm install -g babel-preset-env 
+2. create the .babelrc file with - { "presets": ["env"]}
+3. Append to script property in package.json - "build": "babel main.js -d lib" 
+  then you can use "npm run build"
+4. To view output file in bash/print in new js file - babel filename > fileCreated.js
+
 ---------------------------------------------------------------------------------------
