@@ -132,6 +132,13 @@ Removing unecessary changes from last commit:
   git reset --hard HEAD 
   git clean -f, git clean -n #remove all untracked files
   git clean -d -f, git clean -f -n #to remove all untracked directories
+Stashing to sideline some conflict changes in master while merging branch:
+  git Stash #to create a stash
+  git stash apply #to apply the stash
+  git stash show #to view all available stashes
+  git stash clear #clear any stash
+
+
 The workflow for Git collaborations typically follows this order:
   Fetch and merge changes from the remote
   Create a branch to work on a new project feature

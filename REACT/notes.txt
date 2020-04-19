@@ -1,12 +1,209 @@
-ES6
+React.js is a JavaScript library. It was developed by engineers at Facebook.
 
-Three reasons for the ES5 to ES6 updates are listed below:
+What is JSX?
+JSX is a syntax extension for JavaScript. It was written to be used with React. JSX code looks a lot like HTML.
+In this case, it means that JSX is not valid JavaScript. Web browsers can’t read it!
+If a JavaScript file contains JSX code, then that file will have to be compiled. That means that before the file reaches a web browser, a JSX compiler will translate any JSX into regular JavaScript.
 
-Readability and economy of code — The new syntax is often easier to understand (more readable) and requires fewer characters to create the same functionality (economy of code).
-Addresses sources of ES5 bugs — Some ES5 syntax led to common bugs. With ES6, Ecma introduced syntax that mitigates some of the most common pitfalls.
-A similarity to other programming languages — JavaScript ES6 is syntactically more similar to other object-oriented programming languages. This leads to less friction when experienced, non-JavaScript developers want to learn JavaScript.
+Here’s an example of a JSX element:
+<h1>Hello world</h1>
+JSX elements are treated as JavaScript expressions. They can go anywhere that JavaScript expressions can go.
+That means that a JSX element can be saved in a variable, passed to a function, stored in an object or array
 
-BABEL:
-Because ES6 is predictably backwards compatible, a collection of JavaScript programmers developed a JavaScript library called Babel that transpiles ES6 JavaScript to ES5.
+several JSX elements being stored in an object:
+const myTeam = {
+  center: <li>Benzo Walli</li>,
+  powerForward: <li>Rasha Loa</li>,
+  smallForward: <li>Tayshaun Dasmoto</li>,
+  shootingGuard: <li>Colmar Cumberbatch</li>,
+  pointGuard: <li>Femi Billon</li>
+};
 
-Transpilation is the process of converting one programming language to another.
+A single JSX element can have many attributes, just like in HTML:
+const panda = <img src="images/panda.jpg" alt="panda" width="500px" height="500px" />;
+
+NESTED JSX
+const theExample = (
+   <a href="https://www.example.com">
+     <h1>
+       Click me!
+     </h1>
+   </a>
+ );
+
+ a JSX expression must have exactly one outermost element.
+ The first opening tag and the final closing tag of a JSX expression must belong to the same JSX element!
+
+ Rendering JSX
+ To render a JSX expression means to make it appear onscreen.
+ The following code will render a JSX expression:
+ReactDOM.render(<h1>Hello world</h1>, document.getElementById('app'));
+
+ReactDOM is the name of a JavaScript library. This library contains several React-specific methods, all of which deal with the DOM in some way or another.
+ReactDOM.render() is the most common way to render JSX. It takes a JSX expression, creates a corresponding tree of DOM nodes, and adds that tree to the DOM.
+
+ReactDOM.render()‘s first argument should evaluate to a JSX expression, it doesn’t have to literally be a JSX expression.
+const toDoList = (
+  <ol>
+    <li>Learn React</li>
+    <li>Become a Developer</li>
+  </ol>
+);
+
+ReactDOM.render(
+  toDoList, 
+  document.getElementById('app')
+);
+
+is that it only updates DOM elements that have changed.
+That means that if you render the exact same thing twice in a row, the second render will do nothing:
+
+Problem of DOM Manipulation:
+This slowness is made worse by the fact that most JavaScript frameworks update the DOM much more than they have to.
+The Virtual DOM
+In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy.'A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
+Manipulating the DOM is slow. Manipulating the virtual DOM is much faster, because nothing gets drawn onscreen. 
+
+In summary, here’s what happens when you try to update the DOM in React:
+The entire virtual DOM gets updated.
+The virtual DOM gets compared to what it looked like before you updated it. React figures out which objects have changed.
+-By comparing the new virtual DOM with a pre-update version, React figures out exactly which virtual DOM objects have changed. This process is called “diffing.”
+The changed objects, and the changed objects only, get updated on the real DOM.
+Changes on the real DOM cause the screen to change.
+
+
+Advanced JSX:
+
+1. class vs className
+Grammar in JSX is mostly the same as in HTML, but there are subtle differences to watch out for. Probably the most frequent of these involves the word class.
+In JSX, you can’t use the word class! You have to use className instead:
+<h1 className="big">Hey</h1>
+This is because JSX gets translated into JavaScript, and class is a reserved word in JavaScript.
+When JSX is rendered, JSX className attributes are automatically rendered as class attributes.
+React elements and react components: https://reactkungfu.com/2015/10/the-difference-between-virtual-dom-and-dom/
+
+2. Self-Closing Tags
+In JSX, you have to include the slash. If you write a self-closing tag in JSX and forget the slash, you will raise an error:
+<br/> is valid and not <br>
+
+3. Curly braces in JSX
+Any code in between the tags of a JSX element will be read as JSX, not as regular JavaScript! JSX doesn’t add numbers - it reads them as text, just like HTML. The bwlow wil render in HTML as 2+3
+ReactDOM.render(
+  <h1>2 + 3</h1>,
+  document.getElementById('app')
+);
+
+4. JS in JSX
+treat me like ordinary JavaScript and not like JSX.”
+You can do this by wrapping your code in curly braces.
+<h1>{2 + 3}</h1>
+
+5.Variables in JSX
+That means that you can access variables while inside of a JSX expression, even if those variables were declared on the outside.
+const name = 'Gerdo';
+
+// Access your variable // from inside of a JSX expression:
+const greeting = <p>Hello, {name}!</p>;
+
+6. Variable Attributes in JSX
+When writing JSX, it’s common to use variables to set attributes.
+
+// Use a variable to set the `height` and `width` attributes:
+const sideLength = "200px";
+
+const panda = (
+  <img 
+    src="images/panda.jpg" 
+    alt="panda" 
+    height={sideLength} 
+    width={sideLength} />
+);
+
+7. Event Listeners in JSX
+You create an event listener by giving a JSX element a special attribute. Here’s an example:
+<img onClick={myFunc} />
+
+function myFunc() {
+  alert('Make myFunc the pFunc... omg that was horrible i am so sorry');
+}
+Note that in HTML, event listener names are written in all lowercase, such as onclick or onmouseover. In JSX, event listener names are written in camelCase, such as onClick or onMouseOver.
+
+8. JSX Conditionals: If Statements That Don't Work
+Here’s a rule that you need to know: you can not inject an if statement into a JSX expression.
+(
+  <h1>
+    {
+      if (purchase.complete) {
+        'Thank you for placing an order!'
+      }
+    }
+  </h1>
+)
+
+9. Conditionals that work:
+How can you write a conditional, if you can’t inject an if statement into JSX?
+Well, one option is to write an if statement, and not inject it into JSX.
+if (coinToss() === 'heads') {
+  img = <img src={pics.kitty}/>
+} else {
+  img = <img src={pics.doggy}/>
+}
+ReactDOM.render(img, document.getElementById('app'));
+
+10. JSX Conditionals: The Ternary Operator
+const headline = (
+  <h1>
+    { age >= drinkingAge ? 'Buy Drink' : 'Do Teen Stuff' }
+  </h1>
+);
+
+const img = <img src={pics[coinToss() === 'heads' ? kitty : doggy]} />;
+
+
+11.JSX Conditionals: &&
+&& works best in conditionals that will sometimes do an action, but other times do nothing at all.
+const tasty = (
+  <ul>
+    <li>Applesauce</li>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+);
+
+12. .map in JSX
+const strings = ['Home', 'Shop', 'About Me'];
+const listItems = strings.map(string => <li>{string}</li>);
+<ul>{listItems}</ul>
+
+13. Keys:
+<ul>
+  <li key="li-01">Example1</li>
+  <li key="li-02">Example2</li>
+  <li key="li-03">Example3</li>
+</ul>
+
+A key is a JSX attribute. The attribute’s name is key. The attribute’s value should be something unique, similar to an id attribute.
+keys don’t do anything that you can see! React uses them internally to keep track of lists. 
+Not all lists need to have keys. A list needs keys if either of the following are true:
+- The list-items have memory from one render to the next. For instance, when a to-do list renders, each item must “remember” whether it was checked off.
+- A list’s order might be shuffled. For instance, a list of search results might be shuffled from one render to the next.
+const people = ['Rowe', 'Prevost', 'Gare'];
+
+const peopleLis = people.map((person, i) =>
+  <li key={'person_'+i}>{person}</li>
+);
+ReactDOM.render(<ul>{peopleLis}</ul>, document.getElementById('app'));
+
+14. React.createElement
+The following JSX expression:
+const h1 = <h1>Hello world</h1>;
+
+can be rewritten without JSX, like this:
+const h1 = React.createElement(
+  "h1",
+  null,
+  "Hello, world"
+);
+When a JSX element is compiled, the compiler transforms the JSX element into the method that you see above: React.createElement(). Every JSX element is secretly a call to React.createElement().
