@@ -1,0 +1,126 @@
+ Node.js, invented by Ryan Dahl in 2009
+ Node.js is a JavaScript runtime, or an environment that allows us to execute JavaScript code outside of the browser. A “runtime” converts code written in a high-level, human-readable, programming language and compiles it down to code the computer can execute.
+ Though Node was created with the goal of building web servers and web applications in JavaScript, it can also be used for creating command-line applications or desktop applications. 
+ For more advanced development, Node can be combined with any number of robust frameworks like the Express.js framework for creating effective web application back-ends.
+
+NODE REPL:
+**REPL is an abbreviation for read–eval–print loop.
+It’s a program that loops, or repeatedly cycles, through three different states: a read state where the program reads input from a user, the eval state where the program evaluates the user’s input, and the print state where the program prints out its evaluation to a console. Then it loops through these states again.
+
+When you install Node, it comes with a built-in JavaScript REPL. You can access the REPL by typing the command node (with nothing after it) into the terminal and hitting enter. A > character will show up in the terminal indicating the REPL is running and prompting your input. The Node REPL will evaluate your input line by line.
+
+By default, you indicate the input is ready for eval when you hit enter. If you’d like to type multiple lines and then have them evaluated at once you can type .editor while in the REPL. Once in “editor” mode, you can type CONTROLD when you’re ready for the input to be evaluated. 
+ Each session of the REPL has a single shared memory; you can access any variables or functions you define until you exit the REPL.
+
+ A REPL can be extremely useful for performing calculations, learning a language, and developing code. It’s a place where you can explore language features and try things out while receiving immediate feedback. Figuring out how to do this outside of the browser or a website can be really empowering.
+The Node environment contains a number of Node-specific global elements in addition to those built into the JavaScript language. Every Node-specific global property sits inside the the Node global object. This object contains a number of useful properties and methods that are available anywhere in the Node environment.
+
+Access the global object. You can console.log(global) or just type global
+ Check out an easier to read list of the properties on the global object with Object.keys(global)
+ Add a property to the global object, eg. global.cat = 'meow!'.
+
+
+Running a Program with Node
+Node was designed with server-side web development in mind and has a lot of thoughtful functionality towards that end. At its most simple, however, it provides the ability to run JavaScript programs on our own computers instead of just in the browser’s console or embedded in HTML.
+
+Accessing the Process Object
+In computer science, a process is the instance of a computer program that is being executed. 
+Node has a global process object with useful methods and information about the current process.
+
+The process.env property is an object which stores and controls information about the environment in which the process is currently running. For example, the process.env object contains a PWD property which holds a string with the directory in which the current process is located.
+a web application in a development phase might perform different tasks than when it’s live to users. We could store this information on the process.env. One convention is to add a property to process.env with the key NODE_ENV and a value of either production or development.
+
+if (process.env.NODE_ENV === 'development'){
+  console.log('Testing! Testing! Does everything work?');
+}
+
+The process.memoryUsage() returns information on the CPU demands of the current process. It returns a property that looks similar to this:
+
+{ rss: 26247168,
+  heapTotal: 5767168,
+  heapUsed: 3573032,
+  external: 8772 }
+
+  Heap can mean different things in different contexts: a heap can refer to a specific data structure, but it can also refer to the a block of computer memory. process.memoryUsage().heapUsed will return a number representing how many bytes of memory the current process is using.
+
+  The process.argv property holds an array of command line values provided when the current process was initiated. The first element in the array is the absolute path to Node, which ran the process. . The second element in the array is the path to the file that’s running. The following elements will be any command line arguments provided when the process was initiated. Command line arguments are separated from one another with spaces.
+
+node myProgram.js testing several features
+console.log(process.argv[3]); // Prints 'several'
+
+
+Core Modules and Local Modules:
+Modularity is a software design technique where one program has distinct parts each providing a single piece of the overall functionality. These separate modules come together to build a cohesive whole. Modularity is essential for creating scalable programs which incorporate libraries and frameworks and separate the program’s concerns into manageable chunks. Essentially, a module is a collection of code located in a file. Instead of having an entire program located in a single file, code is organized into separate files and combined through requiring them where needed using the require() function.
+Node has several modules included within the environment to efficiently perform common tasks. These are known as the core modules. The core modules are defined within Node.js’s source and are located in the lib/ folder. Core modules are required by passing a string with the name of the module into the require() function:
+
+// Require in the 'events' core module:
+let events = require('events');
+
+The require() function will first check to see if its argument is a core module, if not, it will move on to different attempts to locate it.
+
+module.exports = class Dog {
+  constructor(name) {
+    this.name = name;
+  }
+  praise() {
+    return `Good dog, ${this.name}!`;
+  }
+};  
+
+// IN app.js
+Each JavaScript file in the Node environment has a special JavaScript object called module.exports. It holds everything in that file, or module, that’s available to be required into a different file.
+let Dog = require('./dog.js');
+const tadpole = new Dog('Tadpole');
+console.log(tadpole.praise());
+
+Event-Driven Architecture
+Node is often described as having event-driven architecture.
+Node provides an EventEmitter class which we can access by requiring in the events core module:
+// Require in the 'events' core module
+let events = require('events');
+
+// Create an instance of the EventEmitter class
+let myEmitter = new events.EventEmitter();
+
+Each event emitter instance has an .on() method which assigns a listener callback function to a named event. The .on() method takes as its first argument the name of the event as a string and, as its second argument, the listener callback function.
+Each event emitter instance also has an .emit() method which announces a named event has occurred. The .emit() method takes as its first argument the name of the event as a string and, as its second argument, the data that should be passed into the listener callback function.
+
+let newUserListener = (data) => {
+  console.log(`We have a new user: ${data}.`);
+};
+
+// Assign the newUserListener function as the listener callback for 'new user' events
+myEmitter.on('new user', newUserListener)
+
+// Emit a 'new user' event
+myEmitter.emit('new user', 'Lily Pad') //newUserListener will be invoked with 'Lily Pad'
+
+----------------------------------------------------------------------------------
+
+Web Server:
+A web server is a process running on a computer that listens for incoming requests for information over the internet and sends back responses. Each time a user navigates to a website on their browser, the browser makes a request to the web server of that website.
+
+Protocol:
+The specific format of a request (and the resulting response) is called the protocol. You might be familiar with the protocol used to access websites: HTTP.
+
+For the simplest websites, a client makes a single request. The web server receives that request and sends the client a response containing everything needed to view the website. This is called a static website
+Moreover, modern web applications often cater to the specific user rather than sending the same files to every visitor of a webpage. This is known as dynamic content.
+
+The collection of programming logic required to deliver dynamic content to a client, manage security, process payments, and myriad other tasks is sometimes known as the “application” or application server. 
+The application server can be responsible for anything from sending an email confirmation after a purchase to running the complicated algorithms a search engine uses to give us meaningful results.
+
+DB:
+The back-ends of modern web applications include some sort of database, often more than one. Databases are collections of information. There are many different databases, but we can divide them into two types: relational databases and non-relational databases (also known as NoSQL databases). Whereas relational databases store information in tables with columns and rows, non-relational databases might use other systems such as key-value pairs or a document storage model. SQL, Structured Query Language, is a programming language for accessing and changing data stored in relational databases. Popular relational databases include MySQL and PostgreSQL while popular NoSQL databases include MongoDB and Redis.
+
+API:
+In order to have consistent ways of interacting with data, a back-end will often include a web API. API stands for Application Program Interface and can mean a lot of different things, but a web API is a collection of predefined ways of, or rules for, interacting with a web application’s data, often through an HTTP request-response cycle. 
+this type of request indicates how it would like to interact with a web application’s data (create new data, read existing data, update existing data, or delete existing data), and it receives some data back as a response.
+
+Authorization and Authentication:
+Authentication is the process of validating the identity of a user. One technique for authentication is to use logins with usernames and passwords. These credentials need to be securely stored in the back-end on a database and checked upon each visit. 
+Authorization controls which users have access to which resources and actions. Certain application views, like the page to edit a social media personal profile, are only accessible to that user. Other activities, like deleting a post, are often similarly restricted.
+When building a robust web application back-end, we need to incorporate both authentication (Who is this user? Are they who they claim to be?) and authorization (Who is allowed to do and see what?) into our server-side logic to make sure we’re creating secure, personalized, and dynamic content.
+
+
+
+

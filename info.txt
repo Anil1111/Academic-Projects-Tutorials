@@ -42,6 +42,7 @@
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
 4. jquery 
 5. Babel: npm install -g babel-cli, npm install -g babel-preset-env 
+6. Nodemon: npm install -g nodemon #nodemon is a tool that helps develop node.js based applications by automatically restarting the node      application when file changes in the directory are detected.
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -221,6 +222,15 @@ Does not validate data types.
 - use .mjs file extension
 - add   "type": "module" in package.JSON
 - run node in terminal with --input-type=module
+
+---------------------------------------------------------------------------------------
+###################
+## Nodemon 
+###################
+
+1. nodemon [your node app]
+2. nodemon ./server.js localhost 8080
+
 ---------------------------------------------------------------------------------------
 ###################
 ## Babel 

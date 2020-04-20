@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/richierich25/Frontend-Projects#readme",
   "devDependencies": {
-    "handlebars": "^4.7.6"
+    "handlebars": "^4.7.6",
+    "nodemon": "^2.0.3"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",

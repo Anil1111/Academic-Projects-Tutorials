@@ -207,3 +207,93 @@ const h1 = React.createElement(
   "Hello, world"
 );
 When a JSX element is compiled, the compiler transforms the JSX element into the method that you see above: React.createElement(). Every JSX element is secretly a call to React.createElement().
+
+
+REACT COMPONENT:
+React component is a small, reusable chunk of code that is responsible for one job, which often involves rendering HTML.
+This code will create and render a new React component:
+
+import React from 'react';
+- This imported object contains methods that you need in order to use React. The object is called the React library.
+import ReactDOM from 'react-dom';
+-The methods imported from 'react-dom' are meant for interacting with the DOM. 
+
+A render method must contain a return statement. Usually, this return statement returns a JSX expression:
+class MyComponentClass extends React.Component {
+  render() {
+    return <h1>Hello world</h1>;
+  }
+};
+
+ReactDOM.render(
+  <MyComponentClass />,
+  document.getElementById('app')
+);
+
+every component must come from a component class.
+A component class is like a factory that creates components. If you have a component class, then you can use that class to produce as many components as you want.
+To make a component class, you use a base class from the React library: React.Component.
+React.Component is a JavaScript class. To create your own component class, you must subclass React.Component. You can do this by using the syntax class YourComponentNameGoesHere extends React.Component {}.
+
+To make a React component, you write a JSX element. Instead of naming your JSX element something like h1 or div like you’ve done before, give it the same name as a component class. Voilà, there’s your component instance!
+
+**JSX elements can be either HTML-like, or component instances. JSX uses capitalization to distinguish between the two! That is the React-specific reason why component class names must begin with capital letters. In a JSX element, that capitalized first letter says, “I will be a component instance and not an HTML tag.”
+
+ReactDOM.render() will tell <MyComponentClass /> to call its render method.
+<MyComponentClass /> will call its render method, which will return the JSX element <h1>Hello world</h1>.
+
+Use a Variable Attribute in a Component
+const redPanda = {
+  src: 'https://upload.wikimedia.org/wikipedia/commons/b/b2/Endangered_Red_Panda.jpg',
+  alt: 'Red Panda',  width:  '200px'
+};
+
+class RedPanda extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Cute Red Panda</h1>
+        <img         src={redPanda.src}          alt={redPanda.alt}          width={redPanda.width} />
+      </div>
+    );
+  }
+}
+
+
+Put Logic in a Render Function
+
+class Random extends React.Component {
+  render() {
+    const n = Math.floor(Math.random() * 10 + 1);
+    return <h1>The number is {n}!</h1>;
+  }
+}
+
+Use a Conditional in a Render Function
+Notice that the if statement is located inside of the render function, but before the return statement
+
+Use this in a Component
+You are especially likely to see this inside of the body of a component class declaration. Here’s an example:
+
+class IceCreamGuy extends React.Component {
+  get food() {
+    return 'ice cream';
+  }
+
+  render() {
+    return <h1>I like {this.food}.</h1>;
+  }
+}
+The simple answer is that this refers to an instance of IceCreamGuy
+The less simple answer is that this refers to the object on which this‘s enclosing method, in this case .render()
+Why don’t you need parentheses after this.food? Shouldn’t it be this.food()?
+You don’t need those parentheses because .food is a getter method. You can tell this from the get in the above class declaration body.
+
+Use an Event Listener in a Component
+ the component class has two methods: .myFunc() and .render(). .myFunc() is being used as an event handler. .myFunc() will be called any time that a user hovers over the rendered <div></div>.
+render() {
+  return (
+    <div onHover={myFunc}>
+    </div>
+  );
+}
