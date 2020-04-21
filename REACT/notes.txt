@@ -304,3 +304,33 @@ render() {
 Facebook has created a node module create-react-app to generate a boilerplate version of a React application.
 
 Besides providing something that works out-of-the-box, this has the added benefit of providing a consistent structure for React apps that you will recognize as you move between React projects. It also provides an out-of-the-box build script and development server.
+
+
+Folder Structure of react app:
+
+package.json
+name is the name of your app
+version is the current version
+"private": true is a failsafe setting to avoid accidentally publishing your app as a public package within the npm ecosystem.
+dependencies contains all the required node modules and versions required for the application
+devDependencies contains useful node modules and versions for using the React app in a development environment
+scripts specifies aliases that you can use to access some of the react-scripts commands in a more efficient manner. For example running npm test in your command line will run react-scripts test --env=jsdom behind the scenes.
+
+node_modules
+This directory contains dependencies and sub-dependencies of packages used by the current React app, as specified by package.json
+
+package-lock.json
+This file contains the exact dependency tree installed in node_modules/. This provides a way for teams working on private apps to ensure that they have the same version of dependencies and sub-dependencies. It also contains a history of changes to package.json, so you can quickly look back at dependency changes.
+
+public
+This directory contains assets that will be served directly without additional processing by webpack. index.html provides the entry point for the web app. You will also see a favicon (header icon) and a manifest.json.
+The manifest file configures how your web app will behave if it is added to an Android user’s home screen (Android users can “shortcut” web apps and load them directly from the Android UI). You can read more about it here.
+The web app manifest is a JSON file that tells the browser about your Progressive Web App and how it should behave when installed on the user's desktop or mobile device. A typical manifest file includes the app name, the icons the app should use, and the URL that should be opened when the app is launched.
+
+src
+This contains the JavaScript that will be processed by webpack and is the heart of the React app. Browsing this folder, you see the main App JavaScript component (App.js), its associated styles (App.css), and test suite (App.test.js). index.js and its styles (index.css) provide an entry into the App and also kicks off the registerServiceWorker.js. This service worker takes care of caching and updating files for the end-user. It allows for offline capability and faster page loads after the initial visit.
+As your React app grows, it is common to add a components/ directory to organize components and component-related files and a views directory to organize React views and view-related files.
+
+
+
+3. Starting the React app development server

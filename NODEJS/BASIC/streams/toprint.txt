@@ -1,0 +1,5 @@
+this keyword has been a mystery for me for a long time. It is a powerful feature but requires efforts to be understood.
+
+From a background like Java, PHP or other standard language, this is seen as an instance of the current object in the class method. Mostly, this cannot be used outside the method and such a simple approach does not create confusion.
+
+In JavaScript the situation is different: this is the current execution context of a function. The language has 4 function invocation types:
