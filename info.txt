@@ -156,6 +156,7 @@ ls / ls -alt #to list all subdirectories
 -a - lists all contents, including hidden files and directories
 -l - lists all contents of a directory in long format #Columns: access noOfChildLinks ownerName groupName size timestamp
 -t - order files and directories by the time they were last modified.
+ls -1 #to list items vertically stacked
 pwd #present working directory
 mkdir, touch, cd 
 cat <<filename>> #to view the contents of the file in BASH - Bourne Again shell
@@ -251,7 +252,7 @@ Used to transpile ES6 to ES5 syntax
 
 1. npm install -g create-react-app #to install
 2. create-react-app <name-of-app> #create new react project
-3. 
+3. npm start #to start the app on dev server
 
 
 ---------------------------------------------------------------------------------------
