@@ -297,3 +297,10 @@ render() {
     </div>
   );
 }
+
+**Creating a React App
+
+1. Set up the boilerplate application
+Facebook has created a node module create-react-app to generate a boilerplate version of a React application.
+
+Besides providing something that works out-of-the-box, this has the added benefit of providing a consistent structure for React apps that you will recognize as you move between React projects. It also provides an out-of-the-box build script and development server.

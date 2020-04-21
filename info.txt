@@ -43,6 +43,7 @@
 4. jquery 
 5. Babel: npm install -g babel-cli, npm install -g babel-preset-env 
 6. Nodemon: npm install -g nodemon #nodemon is a tool that helps develop node.js based applications by automatically restarting the node      application when file changes in the directory are detected.
+7. npm install -g create-react-app #to generate boiler plate version of react application
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -242,5 +243,15 @@ Used to transpile ES6 to ES5 syntax
 3. Append to script property in package.json - "build": "babel main.js -d lib" 
   then you can use "npm run build"
 4. To view output file in bash/print in new js file - babel filename > fileCreated.js
+
+---------------------------------------------------------------------------------------
+###################
+## React
+###################
+
+1. npm install -g create-react-app #to install
+2. create-react-app <name-of-app> #create new react project
+3. 
+
 
 ---------------------------------------------------------------------------------------
