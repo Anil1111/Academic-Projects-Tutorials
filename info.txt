@@ -82,6 +82,7 @@ JS (add to script tag in html):
 
 1. JSON View #to view json files in browser with syntax highlighting
   Ctrl + Alt + Mouse Click to collapse all options in dev tools
+2. React Developer Tools
 
 ---------------------------------------------------------------------------------------
 ###################
