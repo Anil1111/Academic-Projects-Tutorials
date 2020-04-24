@@ -140,6 +140,9 @@ Stashing to sideline some conflict changes in master while merging branch:
   git stash apply #to apply the stash
   git stash show #to view all available stashes
   git stash clear #clear any stash
+For removing already tracked file/folder:
+  git rm -r --cached <folder> 
+  git rm --cached <file>
 
 
 The workflow for Git collaborations typically follows this order:

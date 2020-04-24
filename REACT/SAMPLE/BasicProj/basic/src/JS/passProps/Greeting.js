@@ -10,3 +10,8 @@ export class Greeting extends React.Component {
   	}
   }
 }
+
+
+Greeting.defaultProps = {
+	name: 'Richard'
+};

@@ -369,7 +369,7 @@ render() {
 }
 
 Pass `props` to a Component
-If you want to pass information that isn’t a string, then wrap that information in curly braces
+**If you want to pass information that isn’t a string, then wrap that information in curly braces
 
 <Greeting name="Frarthur" town="Flundon" age={2} haunted={false} />
 <Greeting myInfo={["top", "secret", "lol"]} />
@@ -408,3 +408,178 @@ ReactDOM.render(
   <App />, 
   document.getElementById('app')
 );
+
+
+
+Put an Event Handler in a Component Class
+class Example extends React.Component {
+  handleEvent() {
+    alert(`I am an event handler.
+      If you see this message,
+      then I have been called.`);
+  }
+
+  render() {
+    return (
+      <h1 onClick={this.handleEvent}>
+        Hello world
+      </h1>
+    );
+  }
+}
+
+
+Receive an Event Handler as a prop
+export class Button extends React.Component {
+  render() {
+    return (
+      <button onClick={this.props.talk}>
+        Click me!
+      </button>
+    );
+  }
+}
+
+class Talker extends React.Component {
+  talk() {
+    let speech = '';
+    for (let i = 0; i < 10000; i++) {
+      speech += 'blah ';
+    }
+    alert(speech);
+  }
+  
+  render() {
+    return <Button talk={this.talk} />;
+  }
+}
+
+
+
+this.props.children
+Every component’s props object has a property named children.
+this.props.children will return everything in between a component’s opening and closing JSX tags.
+this.props.children would return everything in between <MyComponentClass> and </MyComponentClass>.
+
+Look at BigButton.js. In Example 1, <BigButton>‘s this.props.children would equal the text, “I am a child of BigButton.”
+<BigButton>
+  I am a child of BigButton.
+</BigButton>
+
+In Example 2, <BigButton>‘s this.props.children would equal a <LilButton /> component.
+<BigButton>
+  <LilButton />
+</BigButton>
+
+In Example 3, <BigButton>‘s this.props.children would equal undefined.
+<BigButton />
+
+If a component has more than one child between its JSX tags, then this.props.children will return those children in an array. However, if a component has only one child, then this.props.children will return the single child, not wrapped in an array.
+
+
+defaultProps
+If nobody passes any text to Button, then Button‘s display will be blank. It would be better if Button could display a default message instead.
+You can make this happen by giving your component class a property named defaultProps:
+
+class Example extends React.Component {
+  render() {
+    return <h1>{this.props.text}</h1>;
+  }
+}
+
+Example.defaultProps = { text: 'yo' }; 
+
+
+
+STATE.
+Dynamic information is information that can change.
+There are two ways for a component to get dynamic information: props and state. Besides props and state, every value used in a component should always stay exactly the same.
+
+Setting Initial State
+To make a component have state, give the component a state property. This property should be declared inside of a constructor method, like this:
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { mood: 'decent' };
+  }
+
+  render() {
+    return (
+      <h1>
+        I'm feeling {this.state.mood}!
+      </h1>
+    );
+  }
+}
+
+<Example />
+
+
+this.state should be equal to an object,
+ This object represents the initial “state” of any component instance. 
+ It is important to note that React components always have to call super in their constructors to be set up properly.
+Methods should never be comma-separated, if inside of a class body. This is to emphasize the fact that classes and object literals are different.
+this.setState() takes an object, and merges that object with the component’s current state. If there are properties in the current state that aren’t part of that object, then those properties remain how they were.
+
+Update state with this.setState
+A component changes its state by calling the function this.setState().
+this.setState() takes two arguments: an object that will update the component’s state, and a callback. You basically never need the callback.
+this.setState({ hungry: true });
+
+
+Call this.setState from Another Function
+The most common way to call this.setState() is to call a custom function that wraps a this.setState() call. .makeSomeFog() is an example:
+class Example extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { weather: 'sunny' };
+    this.makeSomeFog = this.makeSomeFog.bind(this);
+  }
+
+  makeSomeFog() {
+    this.setState({
+      weather: 'foggy'
+    });
+  }
+}
+
+
+
+this.setState Automatically Calls render
+Any time that you call this.setState(), this.setState() AUTOMATICALLY calls .render() as soon as the state has changed.
+Think of this.setState() as actually being two things: this.setState(), immediately followed by .render().
+That is why you can’t call this.setState() from inside of the .render() method! this.setState() automatically calls .render(). If .render() calls this.setState(), then an infinite loop is created.
+
+
+--------------------------------------------------
+
+Stateless Components Inherit From Stateful Components
+Our programming pattern uses two React components: a stateful component, and a stateless component. “Stateful” describes any component that has a state property; “stateless” describes any component that does not.
+In our pattern, a stateful component passes its state down to a stateless component.
+
+Build a Stateful Component Class
+Let’s make a stateful component pass its state to a stateless component.
+To make that happen, you need two component classes: a stateful class, and a stateless class.
+
+
+Don't Update props
+class Bad extends React.Component {
+  render() {
+    this.props.message = 'yo'; // NOOOOOOOOOOOOOO!!!
+    return <h1>{this.props.message}</h1>;
+  }
+}
+A component should never update this.props. Look at Bad.js to see an example of what not to do.
+This is potentially confusing. props and state store dynamic information. Dynamic information can change, by definition. If a component can’t change its props, then what are props for?
+
+A React component should use props to store information that can be changed, but can only be changed by a different component.
+A React component should use state to store information that the component itself can change.
+
+
+
+Child Components Update Their Parents' state
+The stateless, child component will update the state of the parent component.
+
+
+One Sibling to Display, Another to Change
+you will have one stateless component display information, and a different stateless component offer the ability to change that information.
