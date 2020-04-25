@@ -42,7 +42,7 @@ export class Player extends React.Component {
   render() {
     return (
       <div>
-        <h1 style={{ 'background-color': 'blue' }}>Video Player</h1>
+        <h1 style={{ backgroundColor: 'blue' }}>Video Player</h1>
         {/* <Menu onSelect={this.handleSelect}/> */}
         <Menu onSelect={this.chooseVideo} />
         <Video src={this.state.src} />

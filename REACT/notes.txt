@@ -627,3 +627,78 @@ If you want a font size of 30px, you can write:
 
 Share Styles Across Multiple Components
 One way to make styles reusable is to keep them in a separate JavaScript file. This file should export the styles that you want to reuse, via export. You can then import your styles into any component that wants them.
+
+
+Separate Container Components From Presentational Components: Explanation
+Here’s the basic idea behind it: if a component has to have state, make calculations based on props, or manage any other complex logic, then that component shouldn’t also have to render HTML-like JSX.
+Because a presentational component(HTML Content) will always get rendered by a container component(Logic in JS).
+
+Stateless Functional Components
+When you separate a container component from a presentational component, the presentational component will always end up like this: one render() function, and no other properties.
+If you have a component class with nothing but a render function, then you can rewrite that component class in a very different way. Instead of using React.Component, you can write it as a JavaScript function!
+
+// A component class written in the usual way:
+export class MyComponentClass extends React.Component {
+  render() {
+    return <h1>Hello world</h1>;
+  }
+}
+
+// The same component class, written as a stateless functional component:
+export const MyComponentClass = () => {
+  return <h1>Hello world</h1>;
+}
+
+A component class written as a function is called a stateless functional component. Stateless functional components have some advantages over typical component classes. 
+
+
+Stateless Functional Components and Props
+Stateless functional components usually have props passed to them.
+To access these props, give your stateless functional component a parameter. This parameter will automatically be equal to the component’s props object.
+It’s customary to name this parameter props
+// Normal way to display a prop using a variable:
+export class MyComponentClass extends React.component {
+  render() {
+  	let title = this.props.title;
+    return <h1>{title}</h1>;
+  }
+}
+
+// Stateless functional component way to display a prop using a variable:
+export const MyComponentClass = (props) => {
+	let title = props.title;
+  return <h1>{title}</h1>;
+}
+
+
+propTypes
+propTypes are useful for two reasons. The first reason is prop validation.
+
+Validation can ensure that your props are doing what they’re supposed to be doing. If props are missing, or if they’re present but they aren’t what you’re expecting, then a warning will print in the console.
+
+This is useful, but reason #2 is arguably more useful: documentation.
+Documenting props makes it easier to glance at a file and quickly understand the component class inside. When you have a lot of files, and you will, this can be a huge benefit.
+
+Apply PropTypes
+If a component class expects a prop, then you can give that component class a propType!
+Notice that the value of propTypes is an object, not a function!
+export class MessageDisplayer extends React.Component {
+  render() {
+    return <h1>{this.props.message}</h1>;
+  }
+}
+
+// This propTypes object should have
+// one property for each expected prop:
+MessageDisplayer.propTypes = {
+  message: React.PropTypes.string
+};
+ Notice the difference in capitalization between the propTypes object and React.PropTypes!
+
+
+
+React Forms
+In a React form, you want the server to know about every new character or deletion, as soon as it happens. That way, your screen will always be in sync with the rest of your application.
+
+Input onChange
+A traditional form doesn’t update the server until a user hits “submit.” But you want to update the server any time a user enters or deletes any character.

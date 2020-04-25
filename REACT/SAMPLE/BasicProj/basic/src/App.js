@@ -14,7 +14,9 @@ import { Parent } from './JS/passState/parent';
 import { ParentII } from './JS/passStateII/parent';
 import { ParentIII } from './JS/passStateIII/parent';
 import { Player } from './JS/videoPlayer/player';
-import { Style } from './JS/style/style'
+import { Style } from './JS/style/style';
+import { GuineaPigsContainer } from './JS/separateContainer/containers/GuineaPigsContainer';
+import { BookList } from './JS/propTypes/books/bookList';
 import './App.css';
 
 function App() {
@@ -36,6 +38,8 @@ function App() {
       <ParentIII /> <hr />
       <Player /><hr />
       <Style /><hr />
+      <GuineaPigsContainer />< hr />
+      <BookList /><hr />
     </div>
   )
 };
