@@ -16,9 +16,9 @@ export class Player extends React.Component {
     this.state = { src: VIDEOS.fast };
     this.chooseVideo = this.chooseVideo.bind(this);
   }
-  
+
   chooseVideo(newVideo) {
-    this.setState({ src: VIDEOS[newVideo]});
+    this.setState({ src: VIDEOS[newVideo] });
   }
 
   // handleSelect(option) {
@@ -42,10 +42,10 @@ export class Player extends React.Component {
   render() {
     return (
       <div>
-        <h1>Video Player</h1>
+        <h1 style={{ 'background-color': 'blue' }}>Video Player</h1>
         {/* <Menu onSelect={this.handleSelect}/> */}
-        <Menu onSelect={this.chooseVideo}/>
-        <Video src={this.state.src}/>
+        <Menu onSelect={this.chooseVideo} />
+        <Video src={this.state.src} />
       </div>
     );
   }

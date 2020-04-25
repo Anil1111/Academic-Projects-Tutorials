@@ -925,10 +925,12 @@ The .json() method converts a returned promise to a JSON object.
 
 async is a keyword that is used to create functions that will return promises.
 
-await is a keyword that is used to tell a program to continue moving through the message queue while a promise resolves.
+Some messages include:
 PO_RB: 05a06d569a41479fa012e71078a7c84d
 WL_FS: SIJAJ4HNCJWTIOYWNGVPVDIETR3VKVEELDDCJQNAWMH2SZDM, NJC2WB5RKJ5VKZ5JE0LQZ2LV2Y4ZMSMVSPRQ0NWWGLO353OT
 WL_OW: 07965a4b5e3e12a191274b42895b494c
+R_Y: WI2EC2SuzrtxtyFMbXPPJQ, xcy84JxMyFVkCdSZge4XghfYzNMXleFwg7y5nVnb8lAlSeY88AWDK--UxMSe4bLfc93MX192gsjOmgc57JR12wNC9oGsDSK1E71j6Wl95qHVzaA8iofLIus5D_aiXnYx
+await is a keyword that is used to tell a program to continue moving through the message queue while a promise resolves.
 await can only be used within functions declared with async.
 
 

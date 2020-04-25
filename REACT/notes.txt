@@ -583,3 +583,47 @@ The stateless, child component will update the state of the parent component.
 
 One Sibling to Display, Another to Change
 you will have one stateless component display information, and a different stateless component offer the ability to change that information.
+
+---------------------------------------------------------------------------
+Inline Styles
+An inline style is a style that’s written as an attribute, like this:
+<h1 style={{ color: 'red' }}>Hello world</h1>
+The outer curly braces inject JavaScript into JSX. They say, “everything between us should be read as JavaScript, not JSX.”
+The inner curly braces create a JavaScript object literal. They make this a valid JavaScript object:
+{ color: 'red' }
+
+Make A Style Object Variable
+An alternative that’s often nicer is to store a style object in a variable, and then inject that variable into JSX.
+const style = {
+  color: 'darkcyan',
+  background: 'mintcream'
+};
+
+return (
+  <h1 style={styles}>
+    Hello world
+  </h1>
+);
+
+Style Name Syntax
+In regular JavaScript, style names are written in hyphenated-lowercase:
+const styles = {
+  'margin-top':       "20px",
+  'background-color': "green"
+};
+
+In React, those same names are instead written in camelCase:
+const styles = {
+  marginTop:       "20px",
+  backgroundColor: "green"
+};
+
+Style Value Syntax
+In regular JS, style values are almost always strings. Even if a style value is numeric, you usually have to write it as a string so that you can specify a unit. For example, you have to write "450px" or "20%".
+In React, if you write a style value as a number, then the unit "px" is assumed.
+If you want a font size of 30px, you can write:
+{ fontSize: 30 }
+{ fontSize: "2em" }
+
+Share Styles Across Multiple Components
+One way to make styles reusable is to keep them in a separate JavaScript file. This file should export the styles that you want to reuse, via export. You can then import your styles into any component that wants them.
