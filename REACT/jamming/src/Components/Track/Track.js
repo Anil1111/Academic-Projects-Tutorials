@@ -4,10 +4,6 @@ import './Track.css';
 // const isRemoval = true;
 
 export class Track extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   renderAction() {
     if (this.props.isRemoval) {
       return <button className="Track-action" onClick={this.removeTrack.bind(this)}>-</button>

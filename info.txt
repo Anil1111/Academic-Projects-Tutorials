@@ -44,6 +44,7 @@
 5. Babel: npm install -g babel-cli, npm install -g babel-preset-env 
 6. Nodemon: npm install -g nodemon #nodemon is a tool that helps develop node.js based applications by automatically restarting the node      application when file changes in the directory are detected.
 7. npm install -g create-react-app #to generate boiler plate version of react application
+8. npm install -g surge #to deploy static websites
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -257,6 +258,19 @@ Used to transpile ES6 to ES5 syntax
 1. npm install -g create-react-app #to install
 2. create-react-app <name-of-app> #create new react project
 3. npm start #to start the app on dev server
+
+
+---------------------------------------------------------------------------------------
+###################
+## Surge
+###################
+
+1. npm install -g surge ; npm install --save-dev surge #to install surge globally
+2. npm run build #to production build your app in build/ folder
+- cd into your build folder
+3. surge --domain jammWithRichard.surge.sh #deploy your app into a customdomain.surge.sh
+4. echo jammWithRichard.surge.sh > CNAME #creating a CNAME file with your customdomain.surge.sh
+5. surge #to deploy and later browse in public 
 
 
 ---------------------------------------------------------------------------------------
