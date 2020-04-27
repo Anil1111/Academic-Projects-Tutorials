@@ -1,4 +1,4 @@
-const apiKey = 'xcy84JxMyFVkCdSZge4XghfYzNMXleFwg7y5nVnb8lAlSeY88AWDK--UxMSe4bLfc93MX192gsjOmgc57JR12wNC9oGsDSK1E71j6Wl95qHVzaA8iofLIus5D_aiXnYx';
+const apiKey = '';
 
 export const yelp = {
   createBusiness(business) {
