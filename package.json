@@ -18,6 +18,7 @@
   "homepage": "https://github.com/richierich25/Frontend-Projects#readme",
   "devDependencies": {
     "create-react-app": "^3.4.1",
+    "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "nodemon": "^2.0.3"
   },

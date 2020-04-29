@@ -243,5 +243,176 @@ Authorization controls which users have access to which resources and actions. C
 When building a robust web application back-end, we need to incorporate both authentication (Who is this user? Are they who they claim to be?) and authorization (Who is allowed to do and see what?) into our server-side logic to make sure we’re creating secure, personalized, and dynamic content.
 
 
+------------------------------------------------------------
+LEARN EXPRESS ROUTES
+
+Starting A Server
+const express = require('express');
+const app = express();
+
+On the first line, we import the Express library with require. When invoked on the second line, it returns an instance of an Express application. This application can then be used to start a server and specify server behavior.
+The purpose of a server is to listen for requests, perform whatever action is required to satisfy the request, and then return a response. In order for our server to start responding, we have to tell the server where to listen for new requests by providing a port number argument to a method called app.listen()
+The second argument is a callback function that will be called once the server is running and ready to receive responses.
+
+const PORT = 4001;
+app.listen(PORT, () => {
+  console.log(`Server is listening on port ${PORT}`);
+});
+
+Writing Your First Route
+To tell our server how to deal with any given request, we register a series of routes. Routes define the control flow for requests based on the request’s path and HTTP verb.For example, if your server receives a GET request at ‘/monsters’, we will use a route to define the appropriate functionality for that HTTP verb (GET) and path (/monsters).
+The HTTP verb is always included in the request, and it is one of a finite number of options used to specify expected functionality. GET requests are used for retrieving resources from a server
+
+Express uses app.get() to register routes to match GET requests. Express routes (including app.get()) usually take two arguments, a path (usually a string), and a callback function to handle the request and send a response.
+
+const moods = [{ mood: 'excited about express!'}, { mood: 'route-tastic!' }];
+app.get('/moods', (req, res, next) => {
+  // Here we would send back the moods array in response
+});
+The route above will match any GET request to '/moods' and call the callback function, passing in two objects as the first two arguments. These objects represent the request sent to the server and the response that the Express server should eventually send to the client.
+If no routes are matched on a client request, the Express server will handle sending a 404 Not Found response to the client.
+
+const express = require('express');
+const app = express();
+
+const PORT = process.env.PORT || 4001;
+
+// Open a call to `app.get()` below:
+app.get('/expressions', (req, res, next) => {
+  console.log(req);
+});
+
+app.listen(PORT, () => {
+  console.log(`Listening on port ${PORT}`);
+});
 
 
+Sending A Response
+HTTP follows a one request-one response cycle. Each client expects exactly one response per request, and each server should only send a single response back to the client per request.
+Express servers send responses using the .send() method on the response object. .send() will take any input and include it in the response body.
+In addition to .send(), .json() can be used to explicitly send JSON-formatted responses. .json() sends any JavaScript object passed into it.
+
+const monsters = [{ type: 'werewolf' }, { type: 'hydra' }, { type: 'chupacabra' }];
+app.get('/monsters', (req, res, next) => {
+  res.send(monsters);
+});
+
+Matching Route Paths
+Express tries to match requests by route, meaning that if we send a request to <server address>:<port number>/api-endpoint, the Express server will search through any registered routes in order and try to match /api-endpoint.
+
+Express searches through routes in the order that they are registered in your code. The first one that is matched will be used, and its callback will be called.
+
+
+
+Getting A Single Expression
+Routes become much more powerful when they can be used dynamically. Express servers provide this functionality with named route parameters. Parameters are route path segments that begin with : in their Express route definitions. They act as wildcards, matching any text at that path segment. For example /monsters/:id will match both/monsters/1 and /monsters/45.
+Express parses any parameters, extracts their actual values, and attaches them as an object to the request object: req.params. This object’s keys are any parameter names in the route, and each key’s value is the actual value of that field per request.
+
+const monsters = { hydra: { height: 3, age: 4 }, dragon: { height: 200, age: 350 } };
+// GET /monsters/hydra
+app.get('/monsters/:name', (req, res, next) => {
+  console.log(req.params) // { name: 'hydra' };
+  res.send(monsters[req.params.name]);
+});
+
+Setting Status Codes
+Express allows us to set the status code on responses before they are sent. Response codes provide information to clients about how their requests were handled.
+any res.send() has by default sent a 200 OK status code.
+The res object has a .status() method to allow us to set the status code, and other methods like .send() can be chained from it.
+
+const monsterStoreInventory = { fenrirs: 4, banshees: 1, jerseyDevils: 4, krakens: 3 };
+app.get('/monsters-inventory/:name', (req, res, next) => {
+  const monsterInventory = monsterStoreInventory[req.params.name];
+  if (monsterInventory) {
+    res.send(monsterInventory);
+  } else {
+    res.status(404).send('Monster not found');
+  }
+});
+
+
+Matching Longer Paths
+ Route parameters will match anything in their specific part of the path, so a route matching /monsters/:name would match all the following request paths:
+/monsters/hydra
+/monsters/jörmungandr
+/monsters/manticore
+/monsters/123
+but wont match => /monsters/
+
+
+Other HTTP Methods
+This course will cover three other important HTTP methods: PUT, POST, and DELETE. Express provides methods for each one: app.put(), app.post(), and app.delete().
+PUT requests are used for updating existing resources. In our Express Yourself machine, a PUT request will be used to update the name or emoji of an expression already saved in our database.
+
+Using Queries
+ Query strings appear at the end of the path in URLs, and they are indicated with a ? character. For instance, in /monsters/1?name=chimera&age=1, the query string is name=chimera&age=1 and the path is /monsters/1/
+ Query strings do not count as part of the route path. Instead, the Express server parses them into a JavaScript object and attaches it to the request body as the value of req.query. The key: value relationship is indicated by the = character in a query string, and key-value pairs are separated by &. In the above example route, the req.query object would be { name: 'chimera', age: '1' }.
+
+const monsters = { '1': { name: 'cerberus', age: '4'  } };
+// PUT /monsters/1?name=chimera&age=1
+app.put('/monsters/:id', (req, res, next) => {
+  const monsterUpdates = req.query;
+  monsters[req.params.id] = monsterUpdates;
+  res.send(monsters[req.params.id]);
+});
+
+
+Creating An Expression
+POST is the HTTP method verb used for creating new resources. Because POST routes create new data, their paths do not end with a route parameter, but instead end with the type of resource to be created.
+For example, to create a new monster, a client would make a POST request to /monsters. The client does not know the id of the monster until it is created and sent back by the server, therefore POST /monsters/:id doesn’t make sense
+Express uses .post() as its method for POST requests.
+The HTTP status code for a newly-created resource is 201 Created.
+
+
+Deleting Old Expressions
+DELETE is the HTTP method verb used to delete resources. Because DELETE routes delete currently existing data, their paths should usually end with a route parameter to indicate which resource to delete.
+Express uses .delete() as its method for DELETE requests.
+Servers often send a 204 No Content status code if deletion occurs without error.
+
+
+
+Express.Router
+An Express router provides a subset of Express methods. To create an instance of one, we invoke the .Router() method on the top-level Express import.
+To use a router, we mount it at a certain path using app.use() and pass in the router as the second argument.
+
+const express = require('express');
+const app = express();
+
+const monsters = {
+  '1': {
+    name: 'godzilla',
+    age: 250000000
+  },
+  '2': {
+    Name: 'manticore',
+    age: 21
+  }
+}
+
+const monstersRouter = express.Router();
+app.use('/monsters', monstersRouter);
+
+monstersRouter.get('/:id', (req, res, next) => {
+  const monster = monsters[req.params.id];
+  If (monster) {
+    res.send(monster);
+  } else {
+    res.status(404).send();
+  }
+
+
+Using Multiple Router Files
+Generally, we will keep each router in its own file, and require them in the main application. This allows us to keep our code clean and our files short.
+
+crete monster.js file
+module.exports = monstersRouter;
+
+To use this router in another file, we use module.exports so that other files can access monstersRouter. The only other new line of code required is that Express must be required in each file, since we’ll need to create a router with express.Router().
+
+Our main.js file could then be refactored to import the monstersRouter:
+
+// main.js
+const express = require('express');
+const app = express();
+const monstersRouter = require('./monsters.js');
+app.use('/monsters', monstersRouter);

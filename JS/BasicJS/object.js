@@ -32,7 +32,7 @@ returnAnyProp(spaceship, 'homePlanet'); // Returns 'Earth'
 // /If we tried to write our returnAnyProp() function with dot notation (returnAnyProp.propName) the computer would look for a key of 'propName' on our object and not the value of the propName parameter.
 
 
-const spaceship3 = {type: 'shuttle'};
+const spaceship3 = { type: 'shuttle' };
 // spaceship3 = {type: 'alien'}; // TypeError: Assignment to constant variable.
 spaceship3.type = 'alien'; // Changes the value of the type property
 spaceship3.speed = 'Mach 5'; // Creates a new key of 'speed' with a value of 'Mach 5'
@@ -46,13 +46,13 @@ delete spaceship3.speed;  // Removes the mission
 // /For example console is a global javascript object and .log() is a method on that object. Math is also a global javascript object and .floor() is a method on it.
 
 const alienShip2 = {
-  invade: function () { 
+  invade: function () {
     console.log('Hello! We have come to dominate your planet. Instead of Earth, it shall be called New Xaculon.')
   }
 };
 //or
 const alienShip = {
-  invade () { 
+  invade() {
     console.log('Hello! We have come to dominate your planet. Instead of Earth, it shall be called New Xaculon.')
   }
 };
@@ -61,18 +61,19 @@ const alienShip = {
 
 //Nested Objects
 let spaceship5 = {
-  passengers: [{name: 'Space Dog'}], 
+  passengers: [{ name: 'Space Dog' }],
   telescope: {
     yearBuilt: 2018,
     model: "91031-XLT",
-    focalLength: 2032 
+    focalLength: 2032
   },
   crew: {
-    captain: { 
-      name: 'Sandra', 
-      degree: 'Computer Engineering', 
+    captain: {
+      name: 'Sandra',
+      degree: 'Computer Engineering',
       encourageTeam() { console.log('We got this!') },
-     'favorite foods': ['cookies', 'cakes', 'candy', 'spinach'] }
+      'favorite foods': ['cookies', 'cakes', 'candy', 'spinach']
+    }
   },
   engine: {
     model: "Nimbus2000"
@@ -87,7 +88,7 @@ let spaceship5 = {
       terabytes: 50
     }
   }
-}; 
+};
 
 let capFave = spaceship5.crew.captain['favorite foods'][0];
 let firstPassenger = spaceship5.passengers[0];
@@ -96,8 +97,8 @@ let firstPassenger = spaceship5.passengers[0];
 //Objects are passed by reference. This means when we pass a variable assigned to an object into a function as an argument, the computer interprets the parameter name as pointing to the space in memory holding that object. As a result, functions which change object properties actually mutate the object permanently (even when the object is assigned to a const variable).
 
 const spaceship4 = {
-  homePlanet : 'Earth',
-  color : 'silver'
+  homePlanet: 'Earth',
+  color: 'silver'
 };
 
 let paintIt = obj => {
@@ -110,13 +111,13 @@ spaceship4.color // Returns 'glorious gold'
 //Re-assignment
 // /However, reassignment of the spaceship variable wouldn’t work in the same way:
 let spaceship6 = {
-  homePlanet : 'Earth',
-  color : 'red'
+  homePlanet: 'Earth',
+  color: 'red'
 };
 let tryReassignment = obj => {
   obj = {
-    identified : false, 
-    'transport type' : 'flying'
+    identified: false,
+    'transport type': 'flying'
   }
   // console.log(obj) // Prints {'identified': false, 'transport type': 'flying'}
 
@@ -125,7 +126,7 @@ tryReassignment(spaceship6) // The attempt at reassignment does not work.
 spaceship // Still returns {homePlanet : 'Earth', color : 'red'};
 
 spaceship6 = {
-  identified : false, 
+  identified: false,
   'transport type': 'flying'
 }; // Regular reassignment still works.
 //because When we passed spaceship into that function, obj became a reference to the memory location of the spaceship object, but not to the spaceship variable. This is because the obj parameter of the tryReassignment() function is a variable in its own right. The body of tryReassignment() has no knowledge of the spaceship variable at all!
@@ -135,27 +136,28 @@ spaceship6 = {
 //LOOPS
 let spaceship7 = {
   crew: {
-    captain: { 
-      name: 'Lily', 
-      degree: 'Computer Engineering', 
-      cheerTeam() { console.log('You got this!') } 
-      },
-    'chief officer': { 
-      name: 'Dan', 
-      degree: 'Aerospace Engineering', 
-      agree() { console.log('I agree, captain!') } 
-      },
-    medic: { 
-      name: 'Clementine', 
-      degree: 'Physics', 
-      announce() { console.log(`Jets on!`) } },
+    captain: {
+      name: 'Lily',
+      degree: 'Computer Engineering',
+      cheerTeam() { console.log('You got this!') }
+    },
+    'chief officer': {
+      name: 'Dan',
+      degree: 'Aerospace Engineering',
+      agree() { console.log('I agree, captain!') }
+    },
+    medic: {
+      name: 'Clementine',
+      degree: 'Physics',
+      announce() { console.log(`Jets on!`) }
+    },
     translator: {
-      name: 'Shauna', 
-      degree: 'Conservation Science', 
-      powerFuel() { console.log('The tank is full!') } 
-      }
+      name: 'Shauna',
+      degree: 'Conservation Science',
+      powerFuel() { console.log('The tank is full!') }
+    }
   }
-}; 
+};
 // for...in
 for (let crewMember in spaceship7['crew']) {
   // console.log(`${crewMember}: ${spaceship7.crew[crewMember].name}`)
@@ -179,7 +181,7 @@ const engine = {
   // method shorthand, with one argument
   start(adverb) {
     console.log(`The engine starts up ${adverb}...`);
-  },  
+  },
   // anonymous arrow function expression with no arguments
   sputter: () => {
     console.log('The engine sputters...');
@@ -193,3 +195,10 @@ engine.sputter();
 const activity = 'Surfing';
 const beach = { activity };
 console.log(beach); // { activity: 'Surfing' }
+
+
+//hasOwnProperty() is a function which can be called on any object and takes a string as an input. It returns a boolean which is true if the property is located on the object, otherwise it returns false. hasOwnProperty() is located on Object. prototype and thus available for any object
+let queryArguments = { 'emoji': '😀', 'name': 'happy' };
+if (queryArguments.hasOwnProperty('emoji')) {
+  console.log('done');
+}

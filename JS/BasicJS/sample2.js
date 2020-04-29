@@ -10,9 +10,9 @@ const checkConsistentOutput = (func, val) => {
   let firstTry = func(val);
   let secondTry = func(val);
   if (firstTry === secondTry) {
-      return firstTry;
+    return firstTry;
   } else {
-      return 'This function returned inconsistent results';
+    return 'This function returned inconsistent results';
   }
 };
 
@@ -35,7 +35,7 @@ artists.forEach(artist => {
 
 
 // When .map() is called on an array, it takes an argument of a callback function and returns a new array!
-const numbers = [1, 2, 3, 4, 5]; 
+const numbers = [1, 2, 3, 4, 5];
 
 const bigNumbers = numbers.map(number => number * 10);
 // console.log(bigNumbers); //all the numbers will be multiplied by 10 // Output: [10, 20, 30, 40, 50]
@@ -44,17 +44,17 @@ const bigNumbers = numbers.map(number => number * 10);
 
 //Filter
 //Like .map(), .filter() returns a new array. However, .filter() returns an array of elements after filtering out certain elements from the original array. The callback function for the .filter() method should return true or false depending on the element that is passed to it. The elements that cause the callback function to return true are added to the new array.
-const words = ['chair', 'music', 'pillow', 'brick', 'pen', 'door']; 
+const words = ['chair', 'music', 'pillow', 'brick', 'pen', 'door'];
 
 const shortWords = words.filter(word => {
   return word.length < 6;
 });
 //Or
-const longFavoriteWords = words.filter(function(word) {
+const longFavoriteWords = words.filter(function (word) {
   return word.length > 7;
 });
 //or
-const longFavoriteWords2 = words.filter((word)=> {
+const longFavoriteWords2 = words.filter((word) => {
   return word.length > 7;
 });
 //console.log(shortWords); // Output: ['chair', 'music', 'brick', 'pen', 'door']
@@ -63,7 +63,7 @@ const longFavoriteWords2 = words.filter((word)=> {
 //findIndex()
 //We sometimes want to find the location of an element in an array. That’s where the .findIndex() method comes in! Calling .findIndex() on an array will return the index of the first element that evaluates to true in the callback function.
 //If there isn’t a single element in the array that satisfies the condition in the callback, then .findIndex() will return -1
-const jumbledNums = [123, 25, 78, 5, 9]; 
+const jumbledNums = [123, 25, 78, 5, 9];
 
 const lessThanTen = jumbledNums.findIndex(num => {
   return num < 10;
@@ -103,23 +103,23 @@ const words3 = ['unique', 'uncanny', 'pique', 'oxymoron', 'guise'];
 
 
 
-  const isEven = (n) => {
-    return n % 2 == 0;
-  }
-  
-  let printMsg = (evenFunc, num) => {
-    const isNumEven = evenFunc(num);
-    console.log(`The number ${num} is an even number: ${isNumEven}.`)
-  }
-  
-  // Pass in isEven as the callback function
-  printMsg(isEven, 4); 
-  // Prints: The number 4 is an even number: True.
+const isEven = (n) => {
+  return n % 2 == 0;
+}
+
+let printMsg = (evenFunc, num) => {
+  const isNumEven = evenFunc(num);
+  console.log(`The number ${num} is an even number: ${isNumEven}.`)
+}
+
+// Pass in isEven as the callback function
+printMsg(isEven, 4);
+// Prints: The number 4 is an even number: True.
 
 
-  //Sort
-  //The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
-  const months = ['March', 'Jan', 'Feb', 'Dec', 'April', 'May'];
+//Sort
+//The sort() method sorts the elements of an array in place and returns the sorted array. The default sort order is ascending, built upon converting the elements into strings, then comparing their sequences of UTF-16 code units values.
+const months = ['March', 'Jan', 'Feb', 'Dec', 'April', 'May'];
 months.sort();
 // console.log(months);
 // expected output: Array ["Dec", "Feb", "Jan", "March"]
@@ -135,7 +135,16 @@ array1.sort();
 // If compareFunction(a, b) returns 0, leave a and b unchanged with respect to each other, but sorted with respect to all different elements. Note: the ECMAscript standard does not guarantee this behavior, thus, not all browsers (e.g. Mozilla versions dating back to at least 2003) respect this.
 // If compareFunction(a, b) returns greater than 0, sort b to an index lower than a (i.e. b comes first).
 const sortYears = arr => arr.sort((x, y) => y - x); //descending order
-const sortYears = arr => arr.sort(); //ascending order
+const sortYears2 = arr => arr.sort(); //ascending order
 
 const years = [1970, 1999, 1951, 1982, 1963, 2011, 2018, 1922]
-console.log(sortYears(years));
+// console.log(sortYears(years));
+
+
+// Find()
+// The find() method returns the value of the first element in an array that pass a test (provided as a function).
+const year1963 = years.find(year => {
+  return year === 1963;
+})
+console.log(year1963);
+
