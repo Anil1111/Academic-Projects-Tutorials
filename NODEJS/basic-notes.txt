@@ -547,3 +547,23 @@ The best open-source packages have extremely well written documentation. Documen
 Open-Source Middleware: Body Parsing
 When we implement middleware, we take in the req object, so that we can see information about the request. This object includes a good deal of important information about the request that we can use to inform our response, however for some requests it misses a fundamental piece. An HTTP request can include a body, a set of information to be transmitted to the server for processing. This is useful when the end user needs to send information to the server. If you’ve ever uploaded a post onto a social media website or filled out a registration form chances are you’ve sent an HTTP request with a body. The lucky thing about using open-source middleware is that even though parsing the body of an HTTP request is a tricky operation requiring knowledge about network data transfer concepts, we easily manage it by importing a library to do it for us.
 
+
+Error-Handling Middleware
+Error handling middleware needs to be the last app.use() in your file. If an error happens in any of our routes, we want to make sure it gets passed to our error handler. The middleware stack progresses through routes as they are presented in a file, therefore the error handler should sit at the bottom of the file.
+The biggest difference is that there is an additional parameter in our callback function, err. This represents the error object, and we can use it to investigate the error and perform different tasks depending on what kind of error was thrown
+
+app.use((req, res, next) => {
+  const newValue = possiblyProblematicOperation();
+  if (newValue === undefined) {
+    let undefinedError = new Error('newValue was not defined!');
+    return next(undefinedError);
+  }
+  next();
+});
+
+app.use((err, req, res, next) => {
+  const status = err.status || 500;
+  res.status(status).send(err.message);
+});
+
+check to see if this function returned anything at all. If it didn’t, we create a new Error and pass it to next().

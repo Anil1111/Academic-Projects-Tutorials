@@ -19,6 +19,7 @@
   "devDependencies": {
     "body-parser": "^1.19.0",
     "create-react-app": "^3.4.1",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
     "morgan": "^1.10.0",
