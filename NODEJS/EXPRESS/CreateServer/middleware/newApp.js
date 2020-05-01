@@ -84,13 +84,12 @@ app.post('/cards/', validCard, (req, res, next) => {
 });
 
 // Get a single Card
-app.get('/cards/:cardId', findCard, validCard, (req, res, next) => {
+app.get('/cards/:cardId', findCard, (req, res, next) => {
   res.send(cards[req.cardId]);
 });
 
 // Update a Card
-app.put('/cards/:cardId', findCard, (req, res, next) => {
-
+app.put('/cards/:cardId', findCard, validCard, (req, res, next) => {
   if (!req.newCard.id || req.newCard.id !== req.cardId) {
     req.newCard.id = req.cardId;
   }
@@ -106,7 +105,7 @@ app.delete('/cards/:cardId', findCard, (req, res, next) => {
 
 
 app.use((err, req, res, next) => {
-  err.status(500).send(err.message);
+  res.status(500).send(err.message);
 });
 
 // Start the server

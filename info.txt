@@ -52,6 +52,7 @@
   -npm install -g morgan #for logging in express
   -npm install -g body-parser #body parsing middleware
   -npm install -g errorhandler #error  handling
+  -npm install -g cors #cors filters
 
 ---------------------------------------------------------------------------------------
 

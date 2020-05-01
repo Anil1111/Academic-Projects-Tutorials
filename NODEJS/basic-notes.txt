@@ -567,3 +567,70 @@ app.use((err, req, res, next) => {
 });
 
 check to see if this function returned anything at all. If it didn’t, we create a new Error and pass it to next().
+
+
+
+ROUTER PARAMETERS
+When building interfaces with Express, we will run into the pattern of expecting certain information in a requested URL and using that information to identify the data that is being requested. To give an example:
+
+app.get('/sorcerers/:sorcererName', (req, res, next) => {
+  const sorcerer = Sorcerers[req.params.sorcererName];
+  res.send(sorcerer.info);
+});
+
+app.get('/sorcerers/:sorcererName/spellhistory', (req, res, next) => {
+  const sorcerer = Sorcerers[req.params.sorcererName];
+  const spellHistory = Spells[sorcerer.id].history;
+  res.send(spellHistory);
+});
+
+
+router.param()
+When a specific parameter is present in a route, we can write a function that will perform the necessary lookup and attach it to the req object in subsequent middleware that is run.
+
+app.param('spellId', (req, res, next, id) => {
+  let spellId = Number(id);
+    try {
+      const found = SpellBook.find((spell) => {
+        return spellId === spell.id;
+      })
+      if (found) {
+        req.spell = found;
+        next();
+      } else {
+        next(new Error('Your magic spell was not found in any of our tomes'));
+      };
+    } catch (err) {
+      next(err)
+    }
+});
+
+In the code above we intercept any request to a route handler with the :spellId parameter. Note that in the app.param function signature, 'spellId' does not have the leading :. The actual ID will be passed in as the fourth argument, id in this case, to the app.param callback function when a request arrives.
+
+Merge Parameters
+When we’re building web endpoints, we might want to access some property of a complex object. In order to do this in Express, we can design a nested router. This would be a router that is invoked within another router. In order to pass parameters the parent router has access to, we pass a special configuration object when defining the router.
+
+const sorcererRouter = express.Router();
+const familiarRouter = express.Router({mergeParams: true});
+
+sorcererRouter.use('/:sorcererId/familiars', familiarRouter);
+
+sorcererRouter.get('/', (req, res, next) => {
+  res.status(200).send(Sorcerers);
+  next();
+});
+
+sorcererRouter.param('sorcererId', (req, res, next, id) => {
+  const sorcerer = getSorcererById(id);   
+  req.sorcerer = sorcerer;
+  next();
+});
+
+familiarRouter.get('/', (req, res, next) => {
+  res.status(200).send(`Sorcerer ${req.sorcerer} has familiars ${getFamiliars(sorcerer)}`);
+});
+
+app.use('/sorcerer', sorcererRouter);
+
+In the code above we define two endpoints: /sorcerer and /sorcerer/:sorcererId/familiars. The familiars are nested into the sorcerer endpoint — indicating the relationship that a sorcerer has multiple familiars. Take careful note of the {mergeParameters: true} argument that gets passed when creating the familiarRouter. This argument tells Express that the familiarRouter should have access to parents passed into its parent router, that is, the sorcererRouter.
+We then tell express that the path for the familiarRouter is the same as the path for the sorcererRouter with the additional path /:sorcererId/familiars. We then can create a family of routes (a router) built by appending routes to familiarRouter‘s base: /sorcerer/:sorcererId/familiars.
