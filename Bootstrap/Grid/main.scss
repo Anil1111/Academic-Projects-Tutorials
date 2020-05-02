@@ -1,10 +1,7 @@
-@import "../node_modules/bootstrap/scss/bootstrap.scss"; 
-
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 section {
-
   .grid {
-
     > div:nth-of-type(1) {
       // border: 1px solid red;
     }

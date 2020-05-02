@@ -1,0 +1,203 @@
+JSON
+JSON: JavaScript Object Notation.
+JSON is a syntax for storing and exchanging data.
+JSON is text, written with JavaScript object notation
+
+Exchanging Data
+When exchanging data between a browser and a server, the data can only be text.
+JSON is text, and we can convert any JavaScript object into JSON, and send JSON to the server.
+We can also convert any JSON received from the server into JavaScript objects.
+This way we can work with the data as JavaScript objects, with no complicated parsing and translations.
+
+Sending Data
+If you have data stored in a JavaScript object, you can convert the object into JSON, and send it to a server:
+var myObj = {name: "John", age: 31, city: "New York"};
+var myJSON = JSON.stringify(myObj);
+//Output: {"name":"John","age":31,"city":"New York"}
+
+Receiving Data
+If you receive data in JSON format, you can convert it into a JavaScript object:
+var myJSON2 = '{"name":"John", "age":31, "city":"New York"}';
+var myObj2 = JSON.parse(myJSON2);
+//console.log(myObj2); //Output: { name: 'John', age: 31, city: 'New York' }
+
+
+JSON Syntax Rules
+JSON syntax is derived from JavaScript object notation syntax:
+Data is in name/value pairs
+Data is separated by commas
+Curly braces hold objects
+Square brackets hold arrays
+
+JSON Data - A Name and a Value
+JSON data is written as name/value pairs
+"name":"John" //JSON names require double quotes. JavaScript names don't.
+
+JSON - Evaluates to JavaScript Objects
+The JSON format is almost identical to JavaScript objects.
+In JSON, keys must be strings, written with double quotes:
+{ "name":"John" }
+
+In JavaScript, keys can be strings, numbers, or identifier names:
+{ name:"John" }
+
+
+JSON Values
+In JSON, values must be one of the following data types:
+1. a string - { "name":"John" }
+2. a number - { "age":30 }
+3. an object (JSON object) - 
+    {
+    "employee":{ "name":"John", "age":30, "city":"New York" }
+    }
+4. an array
+    {
+    "employees":[ "John", "Anna", "Peter" ]
+    }
+5. a boolean - { "sale":true }
+6. null - { "middlename":null }
+
+JSON Uses JavaScript Syntax
+With JavaScript you can create an object and assign data to it, like this:
+var person = { name: "John", age: 31, city: "New York" };
+person.name;
+person["name"];
+
+Data can be modified like this:
+person.name = "Gilbert";
+person["name"] = "Gilbert";
+
+JSON Files
+The file type for JSON files is ".json"
+The MIME type for JSON text is "application/json"
+
+JSON is Unlike XML Because
+JSON doesn't use end tag
+JSON is shorter
+JSON is quicker to read and write
+JSON can use arrays
+
+Why JSON is Better Than XML
+XML is much more difficult to parse than JSON.
+JSON is parsed into a ready-to-use JavaScript object.
+
+Exceptions
+Parsing Dates
+Date objects are not allowed in JSON.
+If you need to include a date, write it as a string.
+You can convert it back into a date object later:
+var text = '{ "name":"John", "birth":"1986-12-14", "city":"New York"}';
+var obj = JSON.parse(text);
+obj.birth = new Date(obj.birth); ///Output- { name: 'John', birth: 1986-12-14T00:00:00.000Z, city: 'New York' } 
+ 
+
+Parsing Functions
+Functions are not allowed in JSON.
+If you need to include a function, write it as a string.
+You can convert it back into a function later:
+var text = '{ "name":"John", "age":"function () {return 30;}", "city":"New York"}';
+var obj = JSON.parse(text);
+obj.age = eval("(" + obj.age + ")"); //{ name: 'John', age: [Function (anonymous)], city: 'New York' }
+
+
+Stringify a JavaScript Array
+var arr = [ "John", "Peter", "Sally", "Jane" ];
+var myJSON = JSON.stringify(arr); //Output - ["John","Peter","Sally","Jane"]
+
+
+Exceptions
+Stringify Dates
+In JSON, date objects are not allowed. The JSON.stringify() function will convert any dates into strings.
+obj = { name: "John", today: new Date(), city: "New York" };
+myJSON = JSON.stringify(obj);
+console.log(myJSON); //Output- {"name":"John","today":"2020-04-30T08:39:18.611Z","city":"New York"}
+
+Stringify Functions
+In JSON, functions are not allowed as object values.
+The JSON.stringify() function will remove any functions from a JavaScript object, both the key and the value:
+obj = { name: "John", age: function () { return 30; }, city: "New York" };
+myJSON = JSON.stringify(obj);
+console.log(myJSON); //Output - {"name":"John","city":"New York"}
+
+his can be omitted if you convert your functions into strings before running the JSON.stringify() function.
+var obj = { name: "John", age: function () {return 30;}, city: "New York" };
+obj.age = obj.age.toString();
+var myJSON = JSON.stringify(obj);
+
+
+JSON Objects
+JSON objects are surrounded by curly braces {}.
+JSON objects are written in key/value pairs.
+Keys must be strings, and values must be a valid JSON data type (string, number, object, array, boolean or null).
+Keys and values are separated by a colon.
+Each key/value pair is separated by a comma.
+
+Accessing Object Values
+myObj = { "name":"John", "age":30, "car":null };
+x = myObj.name;
+x = myObj["name"];
+
+
+Looping an Object
+myObj = { "name":"John", "age":30, "car":null };
+for (x in myObj) {
+  document.getElementById("demo").innerHTML += x;
+}
+
+
+Nested JSON Objects
+myObj = {
+  "name":"John",
+  "age":30,
+  "cars": {
+    "car1":"Ford",
+    "car2":"BMW",
+    "car3":"Fiat"
+  }
+ }
+x = myObj.cars.car2;
+// or:
+x = myObj.cars["car2"];
+delete myObj.cars.car2;
+
+
+Arrays in JSON Objects
+{
+"name":"John",
+"age":30,
+"cars":[ "Ford", "BMW", "Fiat" ]
+}
+x = myObj.cars[0];
+
+Looping Through an Array
+for (i in myObj.cars) {
+  x += myObj.cars[i];
+}
+
+
+Nested Arrays in JSON Objects
+myObj = {
+  "name":"John",
+  "age":30,
+  "cars": [
+    { "name":"Ford", "models":[ "Fiesta", "Focus", "Mustang" ] },
+    { "name":"BMW", "models":[ "320", "X3", "X5" ] },
+    { "name":"Fiat", "models":[ "500", "Panda" ] }
+  ]
+ }
+
+ for (i in myObj.cars) {
+  x += "<h1>" + myObj.cars[i].name + "</h1>";
+  for (j in myObj.cars[i].models) {
+    x += myObj.cars[i].models[j];
+  }
+}
+
+
+.json()
+The json() method of the Body mixin takes a Response stream and reads it to completion. It returns a promise that resolves with the result of parsing the body text as JSON.
+
+Syntax
+response.json().then(data => {
+  // do something with your data
+});

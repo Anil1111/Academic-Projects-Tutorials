@@ -143,6 +143,8 @@ const years = [1970, 1999, 1951, 1982, 1963, 2011, 2018, 1922]
 
 // Find()
 // The find() method returns the value of the first element in an array that pass a test (provided as a function).
+//If it finds an array element where the function returns a true value, find() returns the value of that array element (and does not check the remaining values)
+//Otherwise it returns undefined
 const year1963 = years.find(year => {
   return year === 1963;
 })

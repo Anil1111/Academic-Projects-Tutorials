@@ -17,10 +17,17 @@
   },
   "homepage": "https://github.com/richierich25/Frontend-Projects#readme",
   "devDependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
     "create-react-app": "^3.4.1",
+    "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "handlebars": "^4.7.6",
-    "nodemon": "^2.0.3"
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.3",
+    "bootstrap": "^4.4.1",
+    "holderjs": "^2.9.6",
+    "jquery": "^3.5.0"
   },
   "dependencies": {
     "babel-cli": "^6.26.0",
