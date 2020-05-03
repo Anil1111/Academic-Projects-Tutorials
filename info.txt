@@ -9,6 +9,7 @@
 5. Alt + Shift + F = Use formatter to format the page (User settings can be found in settings.JSON)
 6. Alt + Click on HTML tag to collapse all content in Chrome Developer tools                            **Chrome Dev Tools
 7. Ctrl +Alt + N = To run the JS code using inbuilt node and output in console; using the Code runner extension
+8. Command: workbench.action.terminal.clear; Keybindings: Ctrl + K; When: terminalFocus
 ---------------------------------------------------------------------------------------
 
 ###################
@@ -154,7 +155,10 @@ Stashing to sideline some conflict changes in master while merging branch:
 For removing already tracked file/folder:
   git rm -r --cached <folder> 
   git rm --cached <file>
-
+Reference error in Master branch
+  rm .git/refs/remotes/origin/master
+  git fetch
+  git branch --set-upstream-to=origin/master
 
 The workflow for Git collaborations typically follows this order:
   Fetch and merge changes from the remote

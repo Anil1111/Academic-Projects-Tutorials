@@ -30,7 +30,6 @@ const apiRouter = require('./server/api');
 app.use('/api', apiRouter);
 
 
-
 //error handler
 app.use((err, req, res, next) => {
   let errCode = err.status || 500;

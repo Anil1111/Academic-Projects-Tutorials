@@ -1,5 +1,4 @@
 const faker = require('faker');
-const checkMillionDollarIdea = require('./checkMillionDollarIdea');
 
 let minionIdCounter = 1;
 
@@ -114,11 +113,6 @@ const isValidIdea = (instance) => {
     instance.weeklyRevenue = Number(instance.weeklyRevenue);
   } else {
     throw new Error('Idea\'s weeklyRevenue must be a number.');
-  }
-  if (!isNaN(parseFloat(instance.numWeeks)) && isFinite(instance.numWeeks) && !isNaN(parseFloat(instance.weeklyRevenue)) && isFinite(instance.weeklyRevenue)) {
-    if (!checkMillionDollarIdea(instance)) {
-      throw new Error('Idea not worth a million dollar.');
-    }
   }
   return true;
 }
