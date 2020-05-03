@@ -225,15 +225,8 @@ To remove nano error: dos2unix /usr/share/nano/git.nanorc  #execute the command 
 chmod +x <<script>>.sh #provide execute privilege to script
 ./<<scriptname.sh>> #running a bash script
 
----------------------------------------------------------------------------------------
-###################
-## SQLite
-###################
-
-Database is stored in a single file.
-Different users cant update the same table at the same time.
-Does not validate data types.
-
+3.SQLite Usage:
+sqlite3 <<sqlite DB name>> #the sqlite3 alias has been configured in bash_profile
 ---------------------------------------------------------------------------------------
 ###################
 ## Node.JS
