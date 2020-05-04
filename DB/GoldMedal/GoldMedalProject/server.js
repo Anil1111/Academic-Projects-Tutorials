@@ -3,7 +3,7 @@ const parse = require('csv-parse');
 const sqlite3 = require('sqlite3');
 const cors = require('cors');
 const fs = require('fs');
-const {createCountryTable, createGoldMedalTable, goldMedalNumber, bestYear, mostSummerWins, mostWinterWins, bestDiscipline, bestSport, bestEvent, numberMenMedalists, numberWomenMedalists, mostMedaledAthlete, orderedMedals, orderedSports} = require('./sql');
+const { createCountryTable, createGoldMedalTable, goldMedalNumber, bestYear, mostSummerWins, mostWinterWins, bestDiscipline, bestSport, bestEvent, numberMenMedalists, numberWomenMedalists, mostMedaledAthlete, orderedMedals, orderedSports } = require('./sql');
 
 const db = new sqlite3.Database('./gold_medals.sqlite');
 
@@ -25,7 +25,7 @@ const lowerCaseObjectKeys = (questionableKeys) => {
 
 const fixCountryName = countryName => {
   // Fixes case for country names
-  return countryName.replace(/\w\S*/g, txt => {return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+  return countryName.replace(/\w\S*/g, txt => { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
 };
 
 app.get('/country/:countryName', (req, res, next) => {
@@ -34,19 +34,19 @@ app.get('/country/:countryName', (req, res, next) => {
   const goldMedalQuery = goldMedalNumber(countryName);
   const summerWinsQuery = mostSummerWins(countryName);
   const winterWinsQuery = mostWinterWins(countryName);
-  const disciplineQuery = bestDiscipline(countryName); 
+  const disciplineQuery = bestDiscipline(countryName);
   const sportQuery = bestSport(countryName);
   const eventQuery = bestEvent(countryName);
   const menMedalistsQuery = numberMenMedalists(countryName);
   const womenMedalistsQuery = numberWomenMedalists(countryName);
   const yearQuery = bestYear(countryName);
   const mostMedalsQuery = mostMedaledAthlete(countryName);
-  
-  let country = {'name': countryName};
+
+  let country = { 'name': countryName };
   db.serialize(() => {
     db.parallelize(() => {
       // Add population & gdp
-      db.get("SELECT * FROM Country WHERE name = $name", {$name: countryName}, (err, row) => {
+      db.get("SELECT * FROM Country WHERE name = $name", { $name: countryName }, (err, row) => {
         if (err) {
           console.log(`Error while finding country details for ${countryName}.`);
           console.log(err);
@@ -253,7 +253,7 @@ app.get('/country', (req, res, next) => {
             });
           }
         }
-        res.json({countries: rows});
+        res.json({ countries: rows });
       });
     });
   });
@@ -267,7 +267,7 @@ app.get('/country/:countryName/medals', (req, res, next) => {
   const orderedMedalQuery = orderedMedals(countryName, sortBy, isAscending);
   db.all(orderedMedalQuery, (err, rows) => {
     if (rows) {
-      res.json({'medals': rows});
+      res.json({ 'medals': rows });
     } else {
       res.json();
     }
@@ -277,8 +277,8 @@ app.get('/country/:countryName/medals', (req, res, next) => {
 const transformSport = sport => {
   const loweredSport = lowerCaseObjectKeys(sport);
   return {
-    'sportName':      loweredSport.sport,
-    'numberMedals':   loweredSport.count,
+    'sportName': loweredSport.sport,
+    'numberMedals': loweredSport.count,
     'percentageWins': loweredSport.percent,
   };
 };
@@ -299,7 +299,7 @@ app.get('/country/:countryName/sports', (req, res, next) => {
         rows.forEach((row, index, allRows) => {
           allRows[index] = transformSport(row);
         });
-        res.json({sports: rows});
+        res.json({ sports: rows });
       }
     });
   } else {
@@ -347,21 +347,21 @@ app.listen(3001, () => {
         return;
       } else {
         fs.createReadStream('data/country.csv')
-        .pipe(parse({from: 2}))
-        .on('data', function(csvrow) {
-          db.run("INSERT INTO Country (name, code, population, gdp) VALUES ($name, $code, $population, $gdp)", {
-            $name: csvrow[0],
-            $code: csvrow[1],
-            $population: csvrow[2],
-            $gdp: csvrow[3]
-          }, (err) => {
-            if (err) {
-              console.log("Error while inserting Country data");
-              console.log(err);
-              return;
-            }
+          .pipe(parse({ from: 2 }))
+          .on('data', function (csvrow) {
+            db.run("INSERT INTO Country (name, code, population, gdp) VALUES ($name, $code, $population, $gdp)", {
+              $name: csvrow[0],
+              $code: csvrow[1],
+              $population: csvrow[2],
+              $gdp: csvrow[3]
+            }, (err) => {
+              if (err) {
+                console.log("Error while inserting Country data");
+                console.log(err);
+                return;
+              }
+            });
           });
-        });
       }
     });
 
@@ -374,28 +374,28 @@ app.listen(3001, () => {
       } else {
         let idCounter = 1;
         fs.createReadStream('data/goldmedal.csv')
-        .pipe(parse({from: 2}))
-        .on('data', function(csvrow) {
-          db.run("INSERT INTO GoldMedal (id, year, city, sport, discipline, name, country, gender, event, season) VALUES ($id, $year, $city, $sport, $discipline, $name, $country, $gender, $event, $season)", {
-            $id: idCounter,
-            $year: csvrow[0],
-            $city: csvrow[1],
-            $sport: csvrow[2],
-            $discipline: csvrow[3],
-            $name: csvrow[4],
-            $country: csvrow[5],
-            $gender: csvrow[6],
-            $event: csvrow[7],
-            $season: csvrow[8]
-          }, (err) => {
-            if (err) {
-              console.log("Error while inserting GoldMedal data");
-              console.log(err);
-              return;
-            }
+          .pipe(parse({ from: 2 }))
+          .on('data', function (csvrow) {
+            db.run("INSERT INTO GoldMedal (id, year, city, sport, discipline, name, country, gender, event, season) VALUES ($id, $year, $city, $sport, $discipline, $name, $country, $gender, $event, $season)", {
+              $id: idCounter,
+              $year: csvrow[0],
+              $city: csvrow[1],
+              $sport: csvrow[2],
+              $discipline: csvrow[3],
+              $name: csvrow[4],
+              $country: csvrow[5],
+              $gender: csvrow[6],
+              $event: csvrow[7],
+              $season: csvrow[8]
+            }, (err) => {
+              if (err) {
+                console.log("Error while inserting GoldMedal data");
+                console.log(err);
+                return;
+              }
+            });
+            idCounter += 1;
           });
-          idCounter += 1;
-        });
       }
     });
     db.get("SELECT name FROM GoldMedal LIMIT 1;", (err, row) => {

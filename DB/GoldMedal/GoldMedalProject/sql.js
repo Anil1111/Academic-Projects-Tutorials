@@ -6,7 +6,11 @@ Returns a SQL query string that will create the Country table with four columns:
 */
 
 const createCountryTable = () => {
-  return;
+  return `CREATE TABLE Country (
+    name TEXT NOT NULL,
+    code TEXT NOT NULL,
+    gdp INTEGER,
+    population INTEGER);`;
 };
 
 /*
@@ -14,7 +18,17 @@ Returns a SQL query string that will create the GoldMedal table with ten columns
 */
 
 const createGoldMedalTable = () => {
-  return;
+  return `CREATE TABLE GoldMedal (
+    id INTEGER PRIMARY KEY,
+    year INTEGER NOT NULL,
+    city TEXT NOT NULL,
+    season TEXT NOT NULL,
+    name TEXT NOT NULL,
+    country TEXT NOT NULL,
+    gender TEXT NOT NULL,
+    sport TEXT NOT NULL,
+    discipline TEXT NOT NULL,
+    event TEXT NOT NULL);`;
 };
 
 /*
@@ -22,7 +36,8 @@ Returns a SQL query string that will find the number of gold medals for the give
 */
 
 const goldMedalNumber = country => {
-    return;
+  return `select count(*) from GoldMedal
+    where country = '${country}'`;
 };
 
 /*
@@ -31,7 +46,9 @@ won the most summer medals, along with the number of medals aliased to 'count'.
 */
 
 const mostSummerWins = country => {
-  return;
+  return `select year, count(*) as count from GoldMedal
+  where country = '${country}' and season = 'Summer'
+  group by year ORDER BY COUNT(*) DESC LIMIT 1`;
 };
 
 /*
@@ -40,7 +57,9 @@ won the most winter medals, along with the number of medals aliased to 'count'.
 */
 
 const mostWinterWins = country => {
-  return;
+  return `select year, count(*) as count from GoldMedal
+  where country = '${country}' and season = 'Winter'
+  group by year ORDER BY COUNT(*) DESC LIMIT 1`;
 };
 
 /*
@@ -49,7 +68,10 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestYear = country => {
-  return;
+  return `select year, count(*) as count from GoldMedal
+  where country = '${country}'
+  group by year
+  order by count desc limit 1`;
 };
 
 /*
@@ -58,7 +80,10 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestDiscipline = country => {
-  return;
+  return `select discipline, count(*) as count from GoldMedal
+  where country = '${country}'
+  group by discipline
+  order by count desc limit 1`
 };
 
 /*
@@ -67,7 +92,10 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestSport = country => {
-  return;
+  return `select sport, count(*) as count from GoldMedal
+  where country = '${country}'
+  group by sport
+  order by count desc limit 1`
 };
 
 /*
@@ -76,7 +104,10 @@ won the most medals, along with the number of medals aliased to 'count'.
 */
 
 const bestEvent = country => {
-  return;
+  return `select event, count(*) as count from GoldMedal
+  where country = '${country}'
+  group by event
+  order by count desc limit 1`
 };
 
 /*
@@ -84,7 +115,8 @@ Returns a SQL query string that will find the number of male medalists.
 */
 
 const numberMenMedalists = country => {
-  return;
+  return `select count( distinct name) as count from GoldMedal
+  where country = '${country}' and gender = 'Men'`
 };
 
 /*
@@ -92,7 +124,8 @@ Returns a SQL query string that will find the number of female medalists.
 */
 
 const numberWomenMedalists = country => {
-  return;
+  return `select count(distinct name) as count from GoldMedal
+  where country = '${country}' and gender = 'Women'`
 };
 
 /*
@@ -100,7 +133,10 @@ Returns a SQL query string that will find the athlete with the most medals.
 */
 
 const mostMedaledAthlete = country => {
-  return;
+  return `select name, count(*) as count from GoldMedal
+  where country = '${country}'
+  group by name
+  order by count desc limit 1`
 };
 
 /*
@@ -109,7 +145,15 @@ optionally ordered by the given field in the specified direction.
 */
 
 const orderedMedals = (country, field, sortAscending) => {
-  return;
+  let orderingString = '';
+  if (field) {
+    if (isAscending) {
+      orderingString = `ORDER BY ${field} ASC`;
+    } else {
+      orderingString = `ORDER BY ${field} DESC`;
+    }
+  }
+  return `SELECT * FROM GoldMedal WHERE country = '${country}' ${orderingString};`;
 };
 
 /*
@@ -120,7 +164,15 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 */
 
 const orderedSports = (country, field, sortAscending) => {
-  return;
+  let orderingString = '';
+  if (field) {
+    if (isAscending) {
+      orderingString = `ORDER BY ${field} ASC`;
+    } else {
+      orderingString = `ORDER BY ${field} DESC`;
+    }
+  }
+  return `SELECT sport, COUNT(sport) AS count, (COUNT(sport) * 100 / (select COUNT(*) FROM GoldMedal WHERE country = '${country}')) AS percent FROM GoldMedal WHERE country = '${country}' GROUP BY sport ${orderingString};`;
 };
 
 module.exports = {
