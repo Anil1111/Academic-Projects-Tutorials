@@ -1,0 +1,310 @@
+SELECT is the clause we use every time we want to query information from a database.
+AS renames a column or table.
+DISTINCT return unique values.
+WHERE is a popular command that lets you filter the results of the query based on conditions that you specify.
+LIKE and BETWEEN are special operators.
+AND and OR combines multiple conditions.
+ORDER BY sorts the result.
+LIMIT specifies the maximum number of rows that the query will return.
+CASE creates different outputs.
+
+SELECT name,
+ CASE
+  WHEN imdb_rating > 8 THEN 'Fantastic'
+  WHEN imdb_rating > 6 THEN 'Poorly Received'
+  ELSE 'Avoid at All Costs'
+ END
+FROM movies;
+
+
+
+SQL is a programming language designed to manipulate and manage data stored in relational databases.
+
+A relational database is a database that organizes information into one or more tables.
+A table is a collection of data organized into rows and columns.
+A statement is a string of characters that the database recognizes as a valid command.
+
+CREATE TABLE creates a new table.
+INSERT INTO adds a new row to a table.
+SELECT queries data from a table.
+ALTER TABLE changes an existing table.
+UPDATE edits a row in a table.
+DELETE FROM deletes rows from a table.
+Constraints add information about how a column can be used.
+
+
+COUNT(): count the number of rows
+SUM(): the sum of the values in a column
+MAX()/MIN(): the largest/smallest value
+AVG(): the average of the values in a column
+ROUND(): round the values in the column
+
+Aggregate functions combine multiple rows together to form a single value of more meaningful information.
+GROUP BY is a clause used with aggregate functions to combine data from one or more columns.
+HAVING limit the results of a query based on an aggregate property.
+
+
+JOIN will combine rows from different tables if the join condition is true.
+LEFT JOIN will return every row in the left table, and if the join condition is not met, NULL values are used to fill in the columns from the right table.
+Primary key is a column that serves a unique identifier for the rows in the table.
+Foreign key is a column that contains the primary key to another table.
+INNER JOIN lets us combine all matching rows of two tables
+CROSS JOIN lets us combine all rows of one table with all rows of another table. A more common usage of CROSS JOIN is when we need to compare each row of a table to a list of values.   
+UNION stacks one dataset on top of another.
+WITH allows us to define one or more temporary tables that can be used in the final query.
+
+SELECT * FROM table1
+LEFT JOIN table2
+  ON table1.c2 = table2.c2;
+
+SELECT * FROM table1
+UNION
+SELECT * FROM table2;
+
+SELECT shirts.shirt_color, pants.pants_color
+FROM shirts
+CROSS JOIN pants;
+
+WITH previous_results AS (
+   SELECT ...
+   ...
+   ...
+   ...
+)
+SELECT *
+FROM previous_results
+JOIN customers
+  ON _____ = _____;
+
+
+
+with previous_query as (
+SELECT customer_id
+FROM orders
+GROUP BY customer_id)
+select customers.customer_name,
+  previous_query.subscriptions
+from previous_query
+join customers
+on customers.customer_id = previous_query.customer_id;
+
+
+What is SQLite?
+SQLite is a database engine. It is software that allows users to interact with a relational database. In SQLite, a database is stored in a single file — a trait that distinguishes it from other database engines. This fact allows for a great deal of accessibility: copying a database is no more complicated than copying the file that stores the data, sharing a database can mean sending an email attachment.
+
+Drawbacks to SQLite
+SQLite’s signature portability unfortunately makes it a poor choice when many different users are updating the table at the same time (to maintain integrity of data, only one user can write to the file at a time). 
+Lastly, SQLite does not validate data types. Where many other database software would reject data that does not conform to a table’s schema, SQLite allows users to store data of any type into any column.
+SQLite creates schemas, which constrain the type of data in each column, but it does not enforce them. 
+
+Uses for SQLite
+Even considering the drawbacks, the benefits of being able to access and manipulate a database without involving a server application are huge
+
+
+Setting Up DB Browser
+What is DB Browser
+DB Browser is a visual tool used to organize commands sent to SQLite. With databases, it’s easy to lose track of commands that have been run. DB Browser lets you see exactly the sequence of commands you are executing before you run them. DB Browser will also allow you to see the column structure for the tables within the database you’re working with, so inserting data or other manipulation of data is more manageable and doesn’t require performing queries every time you need to remember the structure of your data.
+
+-------------------------------------------------------------------------
+Introduction NODE SQLite
+
+Opening A Database
+const sqlite3 = require('sqlite3');
+The code above gives us a JavaScript object, called sqlite3 that we can interact with via methods
+
+const db = new sqlite3.Database('./db.sqlite');
+This code will create a new database file, in the current folder, named db.sqlite
+
+Retrieving All Rows
+Recall that a query is a statement that speaks to a database and requests specific information from it. To execute a query and retrieve all rows returned, we use db.all()
+db.all("SELECT * FROM Dog WHERE breed='Corgi'", (error, rows) => {
+  printQueryResults(rows);
+});
+
+Retrieving A Single Row
+db.all("SELECT * FROM Dog", (error, rows) => {
+  printQueryResults(rows.find(row => row.id === 1));
+});
+In this example, we fetch all the rows from a database. Doing this populates a JavaScript variable, rows, that contains the results of our SELECT statement (all the rows from the database). We use JavaScript’s .find() method to find the row with an ID of 1.
+
+
+With a tiny database, this might be OK, but it will be a considerable and unnecessary load if the database is large in any sense. Luckily, we have a different method that will fetch a single row from a database: db.get()
+db.get("SELECT * FROM Dog WHERE owner_name = 'Charlie'", (error, row) => {
+  printQueryResults(row); 
+});
+It’s important to note that even if multiple rows match the query, db.get() will only return a single result. In the example above, if “Charlie” owns multiple dogs, the code provided will still only print information about one dog.
+
+
+Using Placeholders
+ A placeholder is a part of our SQL query that we want to be interpolated with a variable’s contents
+ We want the value of the JavaScript variable to be placed within the SQL query. To do this properly, we’ll need to pass a particular argument to our db.run() command that will tell it how to interpolate the query.
+
+ const furLength1 = "short";
+const furLength2 = "long";
+const furColor1 = "brown";
+const furColor2 = "grey";
+
+const findDogByFur = (length, color) => {
+  db.all(
+    "SELECT * FROM Dog WHERE fur_length = $furLength AND fur_color = $furColor", 
+    {
+      $furLength: length,
+      $furColor: color
+    }, 
+    (error, rows) => {
+      printQueryResults(rows);
+    }
+  );
+});
+
+const ids = [1, 25, 45, 100, 360, 382];
+// your code below:
+ids.forEach((id) => { 
+  db.get("SELECT * FROM TemperatureData WHERE id = $id",
+  {
+    $id: id
+  },
+  (error, rows) => {
+    printQueryResults(rows);
+  })
+})
+
+
+Using db.run()
+ To perform SQL commands that do not return rows, we use db.run() to run the command. db.run() does not return a value, but, depending on the SQL command, it may attach properties to the this keyword within the scope of the callback. In some cases, like creating a table, db.run() will not modify this. In other cases, like when INSERTing a row, a callback to db.run() will be able to access this.lastID, the ID of the last INSERTed row.
+
+
+ const newRow = {
+  location: 'Istanbul, Turkey',
+  year: 1976,
+}
+
+db.run('INSERT INTO TemperatureData (location, year) VALUES ($location, $year)', {
+  $location: newRow.location,
+  $year: newRow.year
+}, function(error) {
+  // handle errors here!
+
+  console.log(this.lastID);
+});
+
+
+Handling Errors Gracefully
+For db.run(), db.each(), db.get(), and db.all(), the first argument to the callback will always be an Error object if an error occurred. If there is no error, this argument will be null. We can check if this error exists, and if it does exist, we can handle it.
+const newRow = {
+  location: 'Istanbul, Turkey',
+  year: 1976,
+  tempAvg: 13.35
+}
+
+db.run('INSERT INTO TemperatureData (location, year, temp_avg) VALUES ($location, $year, $tempAvg)', {
+  $location: newRow.location,
+  $year: newRow.year,
+  $tempAvg: newRow.tempAvg
+}, function(error) {
+  if(error){
+    return console.log(error);
+  }
+  
+  console.log(this.lastID); 
+  db.get('SELECT * FROM TemperatureData WHERE id = $id', {
+  		$id: this.lastID
+	},
+  function(error, row){
+    printQueryResults(row);
+ 	});
+});
+
+
+
+Using db.each()
+db.each() takes a query and a callback function that it performs on each row returned from the query. This is a useful technique for transforming or updating rows. This is also useful for memory management — we only have to look at one row at a time instead of trying to process every returned row at the same time. db.each() additionally takes an optional second callback function, which will be called when all of the queries are completed and processed.
+
+db.each("SELECT * FROM Dog WHERE breed = 'Labrador'", 
+  (error, row) => {
+    // This gets called for every row our query returns
+    console.log(`${row.name} is a good dog`);
+  },
+  (error, numberOfRows) => {
+    // This gets called after each of our rows have been processed
+    console.log(`There were ${numberOfRows} good dogs`);
+});
+
+
+const temperaturesByYear = {};
+
+db.run('DROP TABLE IF EXISTS Average', error => {
+  if (error) {
+    throw error;
+  }
+  db.each('SELECT * FROM TemperatureData',
+    (error, row) => {
+      if (error) {
+        throw error;
+      }
+      addClimateRowToObject(row, temperaturesByYear);
+    }, 
+    error => {
+      if (error) {
+        throw error;
+      }
+      const averageTemperatureByYear = calculateAverages(temperaturesByYear);
+			printQueryResults(averageTemperatureByYear);
+    }
+  );
+});
+
+
+Creating A New Table
+Serial Queries
+By default, the commands we issue to our database run in parallel. Every request we make gets sent to the database — which processes them all as quickly as it can, regardless of the order in which they got sent. This is usually a good thing because it means that we can get results faster, but in our case, we don’t want to try to INSERT data into a table that hasn’t been created yet. One way to avoid this issue is to write all of our code in nested callbacks, let’s take a look at how that might look:
+
+db.run("DROP TABLE Dog", error => {
+  db.run("CREATE TABLE Dog", error => {
+    db.run("INSERT INTO Dog (breed, name, owner, fur_color, fur_length) VALUES ('Dachschund', 'Spike', 'Elizabeth', 'Brown', 'Short')", error => {
+    }
+  }
+}
+
+
+As you can see, with this technique every command gets increasingly indented, which becomes a bit of an eyesore if we want to guarantee multiple things run chronologically. Another way of accomplishing this task is by using the db.serialize() method like so:
+  
+db.serialize(() => {                                                                                                                          
+  db.run("DROP TABLE Dog");
+  db.run("CREATE TABLE Dog");
+  db.run("INSERT INTO Dog (breed, name, owner, fur_color, fur_length) VALUES  ('Dachshund', 'Spike', 'Elizabeth', 'Brown', 'Short')");
+});
+
+db.serialize(() => { 
+  db.run('DROP TABLE IF EXISTS Average', error => console.log(error)
+  )
+  db.run('CREATE TABLE Average (id INTEGER PRIMARY KEY, year INTEGER NOT NULL, temperature REAL NOT NULL)', logNodeError);
+  db.each('SELECT * FROM TemperatureData',
+    (error, row) => {
+      if (error) {
+        throw error;
+      }
+      addClimateRowToObject(row, temperaturesByYear);
+    }, 
+    error => {
+      if (error) {
+        throw error;
+      }
+      const averageTemperatureByYear = calculateAverages(temperaturesByYear);
+      averageTemperatureByYear.forEach(row => {
+        db.run('INSERT INTO Average (year, temperature) VALUES ($year, $temp)', {
+          $year: row.year,
+          $temp: row.temperature
+        }, err => {
+          if (err) {
+            console.log(err);
+          }
+        });
+      });
+    db.all('SELECT * FROM Average',
+    (error, row) => {
+      printQueryResults(row)
+    })
+    });
+  });
+  

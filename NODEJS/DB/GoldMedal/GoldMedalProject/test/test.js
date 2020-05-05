@@ -515,7 +515,7 @@ describe('numberWomenMedalists', function () {
   });
 });
 
-xdescribe('mostMedaledAthlete', function () {
+describe('mostMedaledAthlete', function () {
   it('a function called mostMedaledAthlete exists', function () {
     expect(sql.mostMedaledAthlete).to.exist;
     expect(typeof sql.mostMedaledAthlete).to.equal('function');

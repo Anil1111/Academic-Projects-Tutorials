@@ -147,7 +147,7 @@ optionally ordered by the given field in the specified direction.
 const orderedMedals = (country, field, sortAscending) => {
   let orderingString = '';
   if (field) {
-    if (isAscending) {
+    if (sortAscending) {
       orderingString = `ORDER BY ${field} ASC`;
     } else {
       orderingString = `ORDER BY ${field} DESC`;
@@ -166,7 +166,7 @@ aliased as 'percent'. Optionally ordered by the given field in the specified dir
 const orderedSports = (country, field, sortAscending) => {
   let orderingString = '';
   if (field) {
-    if (isAscending) {
+    if (sortAscending) {
       orderingString = `ORDER BY ${field} ASC`;
     } else {
       orderingString = `ORDER BY ${field} DESC`;

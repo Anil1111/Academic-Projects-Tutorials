@@ -29,6 +29,7 @@
 10. Visual Studio IntelliCode - Microsoft
 11. Prettier - Code formatter - Esben Peterson
 12. Debugger for Chrome - Debugging
+13. SQLite - alexcvzz #for querying sqlite databases
 
 
 
