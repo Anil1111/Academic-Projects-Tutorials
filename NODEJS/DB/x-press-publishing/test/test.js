@@ -11,7 +11,7 @@ const seed = require('./seed.js');
 const prodDb = new sqlite3.Database('./database.sqlite');
 let testDb = new sqlite3.Database(process.env.TEST_DATABASE);
 
-describe('Artist Table', function () {
+xdescribe('Artist Table', function () {
   it('should exist', function (done) {
     prodDb.get("SELECT name FROM sqlite_master WHERE type='table' AND name='Artist'", (error, table) => {
       if (error || !table) {
@@ -727,6 +727,7 @@ xdescribe('GET /api/series/:seriesId/issues', function () {
       .get('/api/series/2/issues')
       .then(function (response) {
         const issues = response.body.issues;
+        // console.log(response.body);
         expect(issues.length).to.equal(2);
         expect(issues.find(issue => issue.id === 1)).to.exist;
         expect(issues.find(issue => issue.id === 2)).to.exist;
@@ -755,7 +756,7 @@ xdescribe('GET /api/series/:seriesId/issues', function () {
   });
 });
 
-xdescribe('POST /api/series/:seriesId/issues', function () {
+describe('POST /api/series/:seriesId/issues', function () {
   let newIssue;
 
   beforeEach(function (done) {
