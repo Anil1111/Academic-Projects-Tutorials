@@ -3,37 +3,7 @@ const issuesRouter = express.Router({ mergeParams: true });
 const sqlite3 = require('sqlite3');
 const db = new sqlite3.Database(process.env.TEST_DATABASE || './database.sqlite');
 
-
-issuesRouter.param('issueId', (req, res, next, id) => {
-  req.issueId = id;
-
-  db.get("select * from Issue where id = $id",
-    { $id: req.issueId },
-    (err, row) => {
-      if (err || !row) {
-        err ? console.log(err) : '';
-        res.status(404).send('No matching ID present');
-      } else {
-        req.issue = { issue: row };
-        next();
-      }
-    }
-  );
-});
-
-const validateIssues = (req, res, next) => {
-  issue = req.body.issue;
-  if (!issue.name || !issue.description || !issue.publication_date) {
-    res.status(400).send('Not a valid issue');
-  } else {
-    req.newIssue = issue;
-    next();
-  }
-};
-
-//GET All Request
 issuesRouter.get('/', (req, res, next) => {
-  console.log('helloooo');
   db.all("select * from Issue where series_id = $id",
     { $id: req.seriesId },
     (err, rows) => {
@@ -47,17 +17,24 @@ issuesRouter.get('/', (req, res, next) => {
     })
 });
 
-//GET ONE ID
-issuesRouter.get('/:issueId', (req, res, next) => {
-  res.send(req.issue);
-});
+const validateIssues = (req, res, next) => {
+  issue = req.body.issue;
+  if (!issue.name || !issue.issueNumber || !issue.publicationDate || !issue.artistId) {
+    res.status(400).send('Not a valid issue');
+  } else {
+    req.newIssue = issue;
+    next();
+  }
+};
+
 
 //POST NEW Issue 
 issuesRouter.post('/', validateIssues, (req, res, next) => {
-  db.run(`insert into Issue( name, issue_number, publication_date)
-      values ($name, $description, $publication_date, $artist_id, $series_id)`,
+  // console.log(req.newIssue);
+  db.run(`insert into Issue( name, issue_number, publication_date, artist_id, series_id)
+      values ($name, $issue_number, $publication_date, $artist_id, $series_id)`,
     {
-      $name: req.newIssue.name, $description: req.newIssue.description, $publication_date: req.newIssue.publication_date, $artist_id: req.newIssue.artist_id, $series_id: req.newIssue.series_id
+      $name: req.newIssue.name, $issue_number: req.newIssue.issueNumber, $publication_date: req.newIssue.publicationDate, $artist_id: req.newIssue.artistId, $series_id: req.seriesId
     },
     function (err) {
       if (err) {
@@ -81,10 +58,25 @@ issuesRouter.post('/', validateIssues, (req, res, next) => {
   )
 });
 
+issuesRouter.param('issueId', (req, res, next, id) => {
+  req.issueId = id;
+
+  db.get("select * from Issue where id = $id",
+    { $id: req.issueId },
+    (err, row) => {
+      if (err || !row) {
+        err ? console.log(err) : '';
+        res.status(404).send('No matching ID present');
+      } else {
+        req.issue = { issue: row };
+        next();
+      }
+    }
+  );
+});
 
 issuesRouter.put('/:issueId', validateIssues, (req, res, next) => {
-  db.run(`update Issue set name = '${req.newIssue.name}', description = '${req.newIssue.description}'
-        where id = ${req.issueId}`,
+  db.run(`update Issue set name = '${req.newIssue.name}', issue_number = '${req.newIssue.issueNumber}', publication_date = '${req.newIssue.publicationDate}', artist_id = '${req.newIssue.artistId}' where id = ${req.issueId} and series_id = ${req.seriesId}`,
     err => {
       if (err) {
         console.log(err);
@@ -107,28 +99,19 @@ issuesRouter.put('/:issueId', validateIssues, (req, res, next) => {
 });
 
 issuesRouter.delete('/:issueId', (req, res, next) => {
-  console.log(req.newIssue);
-  db.run(`delete from Issue`,
+  db.run(`delete from Issue where id = ${req.issueId} and series_id = ${req.seriesId}`,
     err => {
       if (err) {
         console.log(err);
         res.status(400).send('Could not Delete!');
       } else {
-        db.get("select * from Issue where id = $id",
-          { $id: req.issueId },
-          (err, row) => {
-            if (err || !row) {
-              console.log(err);
-              res.status(404).send();
-            } else {
-              res.send({ issue: row });
-            }
-          }
-        );
+        res.status(204).send();
+
       }
     }
   )
 });
+
 
 
 module.exports = issuesRouter;
