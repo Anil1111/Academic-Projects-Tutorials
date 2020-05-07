@@ -30,6 +30,8 @@
 11. Prettier - Code formatter - Esben Peterson
 12. Debugger for Chrome - Debugging
 13. SQLite - alexcvzz #for querying sqlite databases
+14. vscode-icons - vscode icons team #for great folder icons - To toggle Ctrl+Shift+P -> Activate vscode icons
+
 
 
 
@@ -38,7 +40,8 @@
 ###################
 ## NPM Libraries Used 
 ###################
-** Use --save-dev to download and install into local repository
+** Use --save-dev to download and install into local repository as dev dependency; -g to install globally; with no argument to install as a dependency
+npm i -g npm@latest #to update npm client to latest
 1. Bootstrap: npm install -g bootstrap
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
@@ -55,6 +58,7 @@
   -npm install -g body-parser #body parsing middleware
   -npm install -g errorhandler #error  handling
   -npm install -g cors #cors filters
+12. npm install -g node-gyp & npm install --global --production windows-build-tools #OPTIONAL - Open with admin priveleges for configuring
 
 ---------------------------------------------------------------------------------------
 
@@ -290,4 +294,16 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 1. to stop: jenkins.exe stop
 2. to start: jenkins.exe start
 3. to restart: jenkins.exe restart
+---------------------------------------------------------------------------------------
+###################
+## MongoDB
+###################
+
+1. mongod #to start mongodb deamon
+2. mongo #to start mongo client
+3. show dbs #to list all the dbs in the mongodb; will work only after inserting data
+4. use <<dbname>> #to create a new dbname
+5. db.books.insert({ JSON Object}) #inserting value into a new collection books
+6. show collections #show collections inside the DB
+7. db.books.find() #list all documents inside the collection
 ---------------------------------------------------------------------------------------

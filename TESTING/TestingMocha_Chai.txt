@@ -89,3 +89,32 @@ Edge Cases
 Tests are often written for various edge cases. This is common, because poor handling of edge cases is responsible for a lot of bugs!
 An example of a common edge case is: how does a function handle weird input? What happens if a function that expects to get a number is passed a string, or is passed no argument at all? Do we want to throw an error? Return undefined? Regardless, we want the decision to be consistent and well-documented.
 Planning and testing for these edge cases is a common use of tests, and it can make the difference between code that will work 80% of the time, and code that will work 100% of the time.
+
+
+Manual Testing
+Software testing is the process of assessing the completeness and quality of computer software. Usually this is done by running a part of a system (like a web application) and comparing the actual behavior to the expected behavior.
+
+One way to perform software testing is manual testing. Manual testing is a form of testing done by a human interacting with a system. With web apps, this might be clicking, dragging, and typing through a webpage. A list of actions and expected behaviors would be given. If the observed behavior doesn’t match the expected behavior, the application has an error.
+
+
+Automated Testing
+Automated testing is the use of software to control the execution of tests and the comparison of actual behavior to expected behavior. All the testing you just did (and more) could be performed by a computer program.
+
+
+The Test Suite
+You can refer to the code defining your app as implementation code, and the code defining your tests as test code.
+A collection of tests for a web application is called a test suite. In the last exercise, you ran a test suite with npm test. In that case the test suite contained all tests for the application.
+For example, if implementation code is written in index.js then the corresponding test code may be written in index-test.js.
+
+Regression
+When adding a new feature to your product, it’s possible that something will break. If that break occurs within a feature developed earlier, it is called regression. When functionality previously developed and tested stops working, you may say the functionality regressed.
+
+--------------------------------------------
+YOUTUBE: Academmind:
+
+Diff kinds of test:
+1. Unit Tests - Fully Isolated
+2. Integration Tests - With dependencies - function calling a function
+3. End-to-End Test - Full flow of the DOM/UI
+
+
