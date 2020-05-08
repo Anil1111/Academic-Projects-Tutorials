@@ -1,0 +1,14 @@
+1. textContent :
+The textContent property sets or returns the text content of the specified node, and all its descendants.
+Note: This property is similar to the innerText property, however there are some differences:
+textContent returns the text content of all elements, while innerText returns the content of all elements, except for <script> and <style> elements.
+innerText will not return the text of elements that are hidden with CSS (textContent will)
+
+<button onclick="myFunction()" id="myBtn">Try it</button>
+<p><strong>Note:</strong> The textContent property is not supported in Internet Explorer 8 and earlier.</p>
+<p id="demo"></p>
+
+function myFunction() {
+  var x = document.getElementById("myBtn").textContent;
+  document.getElementById("demo").innerHTML = x;  
+}

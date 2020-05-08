@@ -1,0 +1,14 @@
+{
+  "name": "rooster",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha test/*_test.js --watch"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^7.1.2"
+  }
+}

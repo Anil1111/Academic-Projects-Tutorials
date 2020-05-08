@@ -109,6 +109,195 @@ For example, if implementation code is written in index.js then the correspondin
 Regression
 When adding a new feature to your product, it’s possible that something will break. If that break occurs within a feature developed earlier, it is called regression. When functionality previously developed and tested stops working, you may say the functionality regressed.
 
+Mocha
+Instead of testing every function manually, developers automate their tests with a test framework.
+Developers use test frameworks to organize and automate tests that provide useful feedback when errors occur. In this lesson we will use the Mocha test framework to write tests against JavaScript methods.
+
+describe and it blocks
+In Mocha we group tests using the describe function and define tests using the it function. These two functions can be used to make your test suite complete, maintainable, and expressive in the following ways:
+Structure your test suite: you can organize tests into nested groups that reflect the structure of your implementation code.
+Provide informative messages: you can define your tests using human-readable strings.
+
+describe('Math', () => {
+  describe('.max', () => {
+    it('returns the argument with the highest value', () => {
+      // Your test goes here
+    });
+    it('returns -Infinity when no arguments are provided', () => {
+      // Your test goes here
+    });
+  });
+});
+Both the describe and it functions accept two parameters: a descriptive string and a callback function. Though the functions are flexible, they are commonly used in the structure above: nest describe blocks to resemble the structure of your implementation code and write individual tests in it blocks. This makes your test suite isolated, maintainable, and expressive.
+
+assert [From NODE]
+In programming, a test compares an expected outcome to an actual outcome.
+assert.ok(a === 3);
+
+In this case a === 3 evaluates to true, so no error is thrown.
+If an argument passed to assert.ok() evaluates to false, an AssertionError is thrown. The error communicates to Mocha that a test has failed, and Mocha logs the error message to the console.
+
+Setup, Exercise, and Verify
+This distinct and well-defined separation of steps makes your test more reliable, maintainable, and expressive.
+
+The phases are defined as follows:
+Setup - create objects, variables, and set conditions that your test depends on
+Exercise - execute the functionality you are testing
+Verify - check your expectations against the result of the exercise phase. You can use the assert library here
+Teardown - 
+const assert = require('assert');
+
+// Naive approach
+describe('.pop', () => {
+  it('returns the last element in the array [naive]', () => {
+    assert.ok(pop(['padawan', 'knight']) === 'knight'); 
+  });
+});
+
+// 3 phase approach
+describe('.pop', () => {
+  it('returns the last element in the array [3phase]', () => {
+    // Setup
+    const knightString = 'knight';
+    const jediPath = ['padawan', knightString];
+
+    // Exercise
+    const popped = pop(jediPath);
+
+    // Verify
+    assert.ok(popped === knightString);
+  });
+});
+
+Some tests require a fourth phase called teardown. This step makes your test isolated.
+
+Teardown - reset any conditions that were changed during the test
+A test, like the example in this exercise, can make changes to its environment that could affect other tests. The teardown phase is used to reset the environment before the next test runs.
+
+describe('appendFileSync', () => {
+  it('writes a string to text file at given path name', () => {
+
+    // Setup
+    const path = './message.txt';
+    const str = 'Hello Node.js';
+    
+    // Exercise: write to file
+    fs.appendFileSync(path, str);
+
+    // Verify: compare file contents to string
+    const contents = fs.readFileSync(path);
+    assert.ok(contents.toString() === str);
+
+    // Teardown: delete path
+    fs.unlinkSync(path);
+  });
+});
+
+
+Hooks
+Using teardown in the it block made your test isolated, but not reliable.
+If the system encounters an error before it reaches the teardown, it will not execute that phase. In the previous example, an error may occur after the file is created but before it is deleted. The file would persist and may cause false negatives in future test runs.
+
+Mocha provides hooks to solve that problem.
+A hook is a piece of code that is executed when a certain event happens. Hooks can be used to set and reset conditions like the setup and teardown phases do. In Mocha, a hook is written within a describe block.
+
+describe('example', () => {
+
+  afterEach(() => {
+    // teardown goes here
+  });
+
+  it('.sample', () => {
+    // test goes here
+  });
+});
+
+The other hooks in the Mocha library are 
+1.before() - Executed once before all tests
+2.beforeEach() - executed before each test 
+3. after() - Executed once after all tests
+
+
+WRITE EXPRESSIVE TESTS
+A good test framework is fast, complete, reliable, isolated, maintainable, and expressive. In this lesson you will learn how to use Node’s assert library to write more expressive tests.
+An expressive test is easy to read and descriptive, making it useful as a form of documentation for your implementation code. One way to make a test more expressive is clarifying its verify phase — the step where expected outcome is compared to actual outcome.
+Node.js provides a library called assert with methods that help you write more expressive verification code. You can use the methods in this library in place of conditional statements to write less code and use human-readable language.
+
+
+assert.ok
+As a Node module, assert can be imported at the top of your files with
+const assert = require('assert');
+
+describe('-', () => {
+  it('returns the difference of two values', () => {
+    const bigNum = 100;
+		const smallNum = 4;
+		const expected = 96;
+    
+    const result =  bigNum - smallNum;
+
+    // Write assertion here
+    assert.ok(result, expected);
+  });
+});
+
+
+assert.equal
+The second line is more expressive: instead of parsing the entire statement, a reader only needs to read the first two words to know the test is verifying equality!
+
+assert.ok(landAnimals[2] == waterAnimals[2]);
+assert.equal(landAnimals[2], waterAnimals[2]);
+
+
+assert.strictEqual
+const a = 3;
+const b = '3';
+assert.ok(a == b);
+assert.ok(a === b);
+The first assertion will not throw an error because it uses loose (==) equality. It performs a type conversion when comparing two things.
+The second will throw an error because it uses strict (===) equality. It returns false if the types differ.
+
+assert.strictEqual().
+assert.equal() performs a == comparison
+assert.strictEqual() performs a === comparison
+
+
+assert.deepEqual I
+Both assertions will throw an error because distinct objects are not considered equal when using either loose or strict equality in JavaScript.
+const a = {relation: 'twin', age: '17'};
+const b = {relation: 'twin', age: '17'};
+assert.equal(a, b);
+assert.strictEqual(a, b);
+
+
+If you need to compare the values within two objects, you can use assert.deepEqual(). This method compares the values of each object using loose (==) equality.
+
+The following code will not throw an error…
+assert.deepEqual(a, b);
+…and you can confirm by manually comparing the relation and age properties of each object.
+a.relation == b.relation;
+a.age == b.age;
+
+
+
+assert.deepEqual II
+In the last exercise you used deepEqual() to compare the values of two objects with loose equality. Arrays are also objects, so deepEqual() also compares their values with loose equality.
+const arr1 = [1, 2, 3];
+const arr2 = [1, 2, 3];
+const arr3 = [1, 2, '3'];
+
+assert.deepEqual(arr1, arr2); // No error
+assert.deepEqual(arr1, arr3); // No error
+
+assert.notEqual
+describe('Numbers', () => {
+  it('1 does not equal 2', () => {
+    // Verify
+    assert.notEqual(1, 2);
+  });
+});
+
+
 --------------------------------------------
 YOUTUBE: Academmind:
 

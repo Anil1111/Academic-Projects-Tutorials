@@ -40,7 +40,7 @@
 ###################
 ## NPM Libraries Used 
 ###################
-** Use --save-dev to download and install into local repository as dev dependency; -g to install globally; with no argument to install as a dependency
+** Use --save-dev to download and install into local repository as dev dependency; -g to install globally; with no argument to install as a dependency or use -d
 npm i -g npm@latest #to update npm client to latest
 1. Bootstrap: npm install -g bootstrap
 2. SASS: npm install -g sass
