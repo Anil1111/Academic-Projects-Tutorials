@@ -42,6 +42,8 @@
 ###################
 ** Use --save-dev to download and install into local repository as dev dependency; -g to install globally; with no argument to install as a dependency or use -d
 npm i -g npm@latest #to update npm client to latest
+npm init -y #to start a npm project with -y as yes to all default params
+npm outdated #to find the outdated packages
 1. Bootstrap: npm install -g bootstrap
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
@@ -208,6 +210,7 @@ grep -i <<searchText>> fileName #case insensitive search
 grep -r <<searchText>> dirName #check recursively in all the files within the directory and outputs filenames and lines
 grep -r <<searchText>> . #search in present directory as . represents it
 grep -l <<searchText>> dirName #check recursively in all the files within the directory and outputs filenames only
+grep -v fileName #outputs all the lines where the fileName does not appear
 wc <<fileName>> #command outputs the number of lines, words, and characters in a file
 sed 's/<<searchText>>/<<replaceText>>/g' <<fileName>> #sed(stream editor) which is used for search and replace in fileName; s stands for substitution, whereas g stands for global
 ---------------------------------------------------------------------------------------
@@ -306,4 +309,30 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 5. db.books.insert({ JSON Object}) #inserting value into a new collection books
 6. show collections #show collections inside the DB
 7. db.books.find() #list all documents inside the collection
+---------------------------------------------------------------------------------------
+
+###################
+## WebdriverIO
+###################
+
+1. Have latest node installed
+2. Setup Project by creating directory
+  $ mkdir webdriverio-test && cd webdriverio-test
+  $ npm init -y
+3. Install WebdriverIO CLI
+  $ npm i --save-dev @wdio/cli
+4. Generate Configuration File
+  $ npx wdio config -y
+5. Create Spec Files
+  $ mkdir .\test\specs
+  $ touch ./test/specs/basic.js
+6. Async mode:
+describe('webdriver.io page', () => {
+    it('should have the right title', async () => {
+        await browser.url('https://webdriver.io')
+        await expect(browser).toHaveTitle('WebdriverIO');
+    })
+})
+7. Start the Testrunner
+  $ npx wdio wdio.conf.js
 ---------------------------------------------------------------------------------------

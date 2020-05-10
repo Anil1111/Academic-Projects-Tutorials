@@ -298,6 +298,399 @@ describe('Numbers', () => {
 });
 
 
+
+ TDD WITH MOCHA
+ Introduction
+Test-driven development (TDD) is a programming technique where you write test code before implementation code. Test code is written to define the desired behavior of your program. The test output provides descriptive error messages that inform the implementation of your program.
+
+The Red-Green-Refactor Cycle
+One of the driving forces of TDD is the red-green-refactor cycle. “Red” and “green” correspond to the color of the text that our test framework produces in the terminal while running the tests in our suite. Red signifies failing tests and green corresponds to passing tests.
+
+Red — Write tests that describe the intended behavior of implementation code, and then compare developer expectations with the actual results of implementation code. The tests should always fail at first because the implementation code for the desired behavior will be written in response to the failing test.
+Green — Write just enough implementation code to make the test pass. The tests return green because the implementation code executes the intended behavior described by the test in the red phase.
+
+Refactor — Clean up and optimize code following the characteristics of a good test. Refactoring involves actively considering test and implementation code and making revisions to the code base.
+
+
+Getting Into The Red I
+
+Step 1: Write The Test
+The first step to writing a test with Mocha is to use describe and it blocks to describe the desired behavior of your code. It’s very important for tests to thoroughly describe the desired behavior with natural language. This will create the most helpful error messages and make it easy for you to understand the behavior that your test failed in executing.
+Before running our test, we would use an assert statement to compare the desired result of our method with the actual result.
+
+The first step in developing this method would be writing a test that could look like this:
+
+describe('Phrase', () => {
+  describe('.initials', () => {
+    it('returns the first letter of each word in a phrase.', () => {
+      assert.equal(Phrase.initials('Nelson Mandela'), 'NM');
+    })
+  })
+})
+
+Step 2: Run the test
+If we ran this test we would get the following error message in the terminal:
+
+Step 3: The test fails (yea!)
+The error message tells us that the error is related to the Phrase.initials code block. The ReferenceError tells us that the error is thrown because we don’t have a Phrase object. In the next exercise, we’ll show you the minimum possible code required to get this test to pass.
+
+Red To Green I
+The red error messages describe the failures of our implementation code, so we can specifically address each issue that is preventing our test from passing.
+Following TDD, the next step would be writing the minimum possible implementation code to make our test pass. In this example, that would involve adding a line of implementation code so that .initials() returns our expected result, which is NM.
+The minimum possible implementation code to make the test pass:
+
+const Phrase = {
+  initials(phr) {
+    return 'NM';
+  }
+}
+
+
+Congrats you’re in the green!
+When refactoring, it’s critical to test early and often — if our tests turn red, then we know that something went wrong while we were refactoring, and we can undo those changes.
+Let’s consider the test for our Phrase.initials method. We could rewrite the test with setup, exercise, and verification stages to make it more expressive and maintainable.
+
+describe('Phrase', () => {
+  describe('.initials', () => {
+    it('returns the first letter of each word in a phrase.', () => {
+      // Setup
+      const inputName = 'Nelson Mandela';
+      const expectedInitials = 'NM';
+      // Exercise
+      const result = Phrase.initials(inputName);
+      // Verification
+      assert.equal(result, expectedInitials);
+    });
+  });
+});
+
+
+Getting into the Red II
+The next step is to repeat this cycle to build a more complete implementation of the .initials method.
+Here is what a second test for .initials() would look like:
+
+describe('Phrase', () => {
+  describe('.initials', () => {
+
+    . . .
+
+    it('returns the initials of a name', () => {
+      const nameInput = 'Juan Manuel Santos';
+      const expectedInitials = 'JMS';
+
+      const result = Phrase.initials(nameInput);
+
+      assert.equal(result, expectedInitials);
+    });
+  });
+});
+
+Red to Green II
+Now that we have tests that cover more than one condition, it is time to program the actual behavior that we want our .initials method to execute.
+
+const Phrase = {
+  initials(inputName) {
+    // Create an empty array for initials
+    const initials = [];
+    // Create an array of strings 
+    const words = inputName.split(" ");
+    // Iterate through the array of strings and push the first character of each to array
+    words.forEach((word) => {
+      initials.push(word.charAt(0));
+    });
+    // Return the initials as one string
+    return initials.join("");
+  }
+}
+
+Edge Case
+An edge case is a problem or situation that occurs only at an extreme (maximum or minimum) operating parameter — you can think of these as special cases that you need to account for.
+
+The test for throwing an error when a number is passed to Phrase.initials() would look like this:
+
+it('raises an error if the parameter passed in is not a string', () => {
+  // Setup
+  const nameInput = 14;   
+  // Exercise
+  const exercise = () => { Phrase.initials(nameInput) };
+  // Verification
+  assert.throws(exercise, /only use string/);        
+})
+
+After getting our intended error message we would write just enough implementation code to pass the test. Which in this case would be adding the following to Phrase.initials():
+
+if (typeof inputName !== "string") {
+  throw new Error("ERROR: only use string");
+}
+
+
+The Testing Pyramid
+
+Most full-stack web applications include the following layers:
+A view that appears in a user’s web browser
+A server that handles HTTP requests
+A database that stores information about user interactions
+
+Unit tests are isolated and fast tests that check one small behavior within your web application.
+For example, we want to test whether our database can save a comment. 
+
+System tests 
+System tests are a group of fully integrated tests that exercise your entire web application.
+For example, we want to test whether our blog renders with the correct post and comments.
+This test exercises every layer of the web application:
+
+The database stores the blog post.
+The server sends the HTML to the browser.
+The browser renders the view.
+A test like this is slow and less descriptive but provides you with confidence that a large slice of your system is working as intended. 
+
+Integration tests 
+Integration tests include everything between unit tests and system tests. They exercise multiple parts of the web application, often in different layers.
+For example, an integration test may check whether your web application can save a server-generated comment to the database. This test integrates two layers of your web application:
+The server receives the comment and sends it to the database.
+The database stores your comment.
+
+Shape of a testing suite
+The goal of a full-stack web application’s testing suite is to provide you with confidence that your application works as expected while executing in a timely fashion.
+You could write few integration tests that provide you with confidence, and more unit tests that execute quickly and provide you with specific feedback.
+The number and types of unit and integration tests that you write can be mapped onto the testing pyramid.
+
+
+The Testing Pyramid
+The testing pyramid is an approach to structuring your test suite.
+
+Browser-level integration tests sit on the top of the pyramid. This layer is the narrowest because it should have the fewest number of tests — the slow nature of browser-level tests make them more expensive than server-level tests.
+While server tests don’t need to interact with the browser, they usually exercise parts of the model or database. They sit close to the middle of the spectrum between unit and system tests. They provide a moderate level of confidence as they may exercise multiple layers of the stack. Server tests are more expensive and provide less specific error messages than model tests.
+Compared to browser and server tests, model and database tests exercise a smaller portion of the stack. They provide the most specific feedback, but not much confidence that the whole system is working as expected. Because they are the cheapest, you can write a lot of them without significantly slowing the amount of time it takes to run your test suite.
+
+
+Outside-In Test-Driven Development
+Outside-in TDD is an approach that developers use to build full-stack web applications. It leverages the same red, green, refactor steps that we covered above, but with one caveat — a failing test does not always inform you to write new implementation code. Instead, it may require that you implement new functionality at a different level.
+You start at the top of the stack, the view, and write tests as you work your way towards the database layer.
+If a test pushes you to a lower level, you restart your red, green, refactor cycle by writing a new test. This test informs the implementation at your new layer. You continue the TDD cycle at this lower level until:
+You need to drop another layer to implement the desired behavior
+You have addressed the reason for dropping to the current layer
+Once you address the reason for dropping a layer, you can start working your way back up the testing pyramid. If you’re in the model/database layer, you step up to the server, and run your server tests to see if you get a different response. The response should be one of the following:
+The test passes — you can start another red, green, refactor cycle at the server level or step up to the view layer.
+The test fails — the server test that pushed you to the model layer fails, but for a different reason. This is common, and indicates that you’re making progress. This failure may indicate that you need to write additional implementation at the server level, or drop back to the model.
+
+Let’s take stock of our seven new tests:
+
+Feature: Comments are rendered to a user’s browser.
+Server: The server generates an HTML field for comments.
+Server: The server has access to ten comments from the database.
+Model: The Comment.latest method returns ten comments from your database.
+Model: The Comment.latest method returns the last ten comments in your database in reverse chronological order.
+Model: The Comment.latest method returns an empty array when your database has zero comments.
+Model: The Comment.latest method returns all of the comments when your database has between zero and ten comments.
+
+Refactoring Your Test Suite
+The way you approach refactoring will vary based on the size and types of tests in your suite. One guiding light in refactoring is to optimize the suite for confidence and speed. Because we used TDD to implement our comment feature, we should feel confident that our comments are working as expected, and the feature is fully covered.
+
+Consider the questions below when deciding how to refactor your suite:
+
+How much longer does it take to run my test suite with these new tests?
+Is the additional amount of time that your test suite takes to run acceptable?
+Is there overlap between any of my new tests?
+Is there overlap between my new tests and existing tests?
+
+
+TDD FEATURE-LEVEL TESTS
+Starting at the feature level of the pyramid (going outside-in) means you begin by writing tests that inform implementation of the code that a user’s browser renders.
+
+Feature Test Toolbelt
+
+Chai
+Node.js has a default assertion library that provides enough functionality to write basic test code. The Chai testing library extends the types of assertions we can make.
+Chai is an assertion library for Node.js and browsers that can be paired with any JavaScript testing framework.
+
+PhantomJS
+PhantomJS is a headless browser scriptable with a JavaScript API, which allows us to write tests that mimic user interaction and then evaluate the results. It does not require us to render the application in a browser.
+A browser runs “headless” when it doesn’t render anything to the screen, but runs in the background.
+
+WebdriverI/O
+WebdriverIO provides methods that allow us to programmatically interact with the user-facing elements of our app in the headless browser that PhantomJS runs.
+
+
+Normal Browser vs Headless Browser:
+Real Browsers are running and performing functions or commands in front of users in UI (User Interface). While doing automation testing, user writes code and run it. A browser opens and starts performing functions according to written commands. Examples of Real browsers are Google Chrome, Firefox, and Internet Explorer etc.
+
+Headless browsers are basically web browsers that lack a graphical user interface. They are running and performing functions or commands in the backend without any UI (User Interface) showing to the users. While doing automation testing, user writes code and run it. A browser never shows up but testing start happening at the backend. Examples of Headless browsers are HtmlUnit, PhantomJS and ZombieJS etc.
+
+Headless Browsers are much faster than real browsers:
+Real browsers take time opening, rendering html, CSS, Javascript and images while headless browsers don’t require it. Headless browsers will start performing functions without waiting for page to load completely.
+
+Headless browsers aren’t representing real users:
+That’s why user can’t catch some bugs like images are crashing or not as UI is not showing to him.
+
+Error Detection in Real Browsers is Quite Easy:
+In Real browser as functions are performing in front of user and he can interact with it so he can easily detect where the tests goes fail. And can easily debug if anything goes wrong.
+
+
+
+Feature Test I
+Feature tests exercise behavior by simulating a user navigating the application in a web browser.
+
+The first feature test we want to write is to check our application’s empty state. The functionality we want to test is:
+When a user visits the homepage, the poems section is empty
+
+We want to make sure that when there are no poems in the database, there are no poems rendered on the homepage. This is the application’s empty state.
+describe('Poetry web app', () => {
+  describe('user visits root', () => {
+
+  });
+});
+
+
+The Plumbing
+Next, we reach for our feature testing toolbelt. We start by to using the global browser variable that is provided by WebdriverI/O.
+
+The browser variable is powerful because it gives us access to the browser that Phantom is running in the background. We can simulate a user interacting with our website by calling different methods on the global browser variable in our test suite.
+
+For example, we can use browser.url() to simulate a user visiting the home page of our application, which is the first behavior we want to test.
+The .url method navigates to the URL that is passed to it as an argument. The following line of code would navigate to the Codecademy website in the Phantom browser.
+browser.url('https://www.codecademy.com')
+
+describe('poetry web app', () => {
+  describe('user visits root', () => {
+    it('page starts blank', () => {
+      browser.url('/');
+    });  
+  });
+});
+
+Assert
+The last thing our test needs is an assert statement to verify that the behavior we expect is equal to the actual behavior of our code.
+We want to make sure our app is in an empty state.
+We can write a test for this behavior by deciding that poems will be listed in an HTML element with an id attribute set to poems. Then, write an assert statement to verify that the element with the ID poems is empty
+assert.equal(browser.getText('#poems'), '')
+
+Because we will render the poetry onto the page as text, we can evaluate the contents of the HTML element as a string.
+The .getText method, from WebdriverI/O, gets the text content from the selected DOM element.
+describe('User visits root', () => {
+  describe('without existing poems', () => {
+    it('page starts blank', () => {
+      browser.url('/');
+
+      assert.equal(browser.getText('#poems'), '');
+    });
+  });
+});
+
+Feature Test I: Passing
+When executing a feature test that fails, errors will have messages that discuss the failure in terms of HTML (i.e. that text or button that you said would be on the page isn’t on the page) or HTTP (i.e. the request that this page made resulted in a 404 HTTP status because the route you requested didn’t exist).
+The error message describes the issue in terms of HTML elements and tells us that the element we are expecting does not exist on our page. This is because we have not yet created the HTML in our index.html file.
+
+Using a strict TDD approach, we would write just enough HTML code to make our test pass. Let’s do that now.
+<section id="poems"></section>
+
+Feature Test II: Setup
+  describe('demo poetry web app', () => { 
+    it('saves the user poem and title', () => {
+      const title = 'Words Birth Worlds';
+      const poem = 'Our words are marvelous weapons with which we could behead the sun';
+    });
+  });
+
+
+Feature Test II: Exercise
+we will use the .setValue method, which sends a sequence of keystrokes to an element, based on a string argument.
+We will use .setValue() to mimic a user entering the title and poem into the corresponding HTML input elements at the root of our web app.
+The first argument passed to .setValue() is the CSS selector that references an HTML element, and the second argument is the value you want to assign that element.
+
+  describe('demo poetry web app', () => { 
+    it('saves the user poem and title', () => {
+      // Setup
+      const title = 'Words Birth Worlds';
+      const poem = 'Our words are marvelous weapons with which we could behead the sun';
+     // Exercise
+      browser.url('/');
+      browser.setValue('input[id=title]', title);
+      browser.setValue('textarea[id=poem]', poem);
+      browser.click('input[type=submit]');
+    });
+  });
+
+  Feature Test II: Verify
+  The Chai Assertion Library allows us to use the .include method to check if the string that is returned from .getText() includes the substrings of the title and poem that the user has submitted:
+assert.include(browser.getText('#poems'), title);
+assert.include(browser.getText('#poems'), poem);
+     // Exercise
+      browser.url('/');
+      browser.setValue('input[id=title]', title);
+      browser.setValue('textarea[id=poem]', poem);
+      browser.click('input[type=submit]');
+      // Verify
+      assert.include(browser.getText('#poems'), title);
+      assert.include(browser.getText('#poems'), poem);
+
+
+Stuck In The Red
+The error message describes the HTML issue that is preventing our test from continuing.
+To address this error message, we would create an <input> with the ID, title in our index.html file. It would look like this:
+The complete index.html file would now look like this:
+
+<section id="poems">
+</section>
+
+<label for="title">Title</label>
+<input id="title">
+
+<label for="poem">Your poem:</label>
+<textarea id="poem"></textarea>
+
+<input type="submit">
+
+
+
+SERVER TESTING STACK
+Server tests are used to test the server response only, not any front-end rendering of code or user interactions. We “disconnect” the browser and interact directly with the server using requests. 
+Server tests are commonly used to test API responses, but we also use server tests for any server response that our application relies on. This can include checking status codes and error messages.
+
+Testing HTML Responses
+Our back-end server is serving dynamic HTML to the user. For the homepage, this is located in the jsdom-test.js file to the right. It is possible to use .include() to verify that the HTML response contains certain Strings, but gets cumbersome to verify the hierarchical relationships of DOM elements.
+We can use the jsdom library to improve this type of assertion. It allows us to select elements of the DOM and check relationships and content. To increase the readability of our tests, we abstracted the jsdom functionality into a custom function, parseTextFromHTML:
+
+const parseTextFromHTML = (htmlAsString, selector) => {
+  const selectedElement = jsdom(htmlAsString).querySelector(selector);
+  if (selectedElement !== null) {
+    return selectedElement.textContent;
+  } else {
+    throw new Error(`No element with selector ${selector} found in HTML string`);
+  }
+};
+
+
+Async / Await
+A server typically handles many requests at a time, but may be only capable of processing a subset of the requests concurrently. One side effect of this is that the server response time is neither instant nor predictable. If no other processes are occurring on the server, requests are handled quickly, but if the server is close to full capacity, the request can take a few seconds or even timeout.
+We need a way to receive asynchronous responses from the server and then act on them. The async/await pattern introduced in Node 8 helps us write readable descriptions of the behavior of our application which is an important part of writing good tests.
+To use this pattern, define the function with the async keyword. Then, within the function, use the await keyword in front of the asynchronous function you are calling. For example:
+
+const foo = async () => {
+  console.log(await someAsyncThing());
+  return true;
+}
+
+foo();
+
+
+SuperTest
+const request = require('supertest');
+This library was specifically designed for testing Node server responses and integrates well with Mocha and Chai. To use SuperTest, we pass the app object from our app into the request function. To make a GET request, we use .get() with the desired route as the argument:
+await request(app)
+          .get('/')
+          .send();
+
+It is also possible to perform a POST using SuperTest. We chain any desired properties or inputs to the HTTP call, and use .send() to make the request:
+await request(app)
+          .post('/messages')
+          .type('form')
+          .send({author, message});
+
+
+
+
+          
 --------------------------------------------
 YOUTUBE: Academmind:
 
