@@ -688,9 +688,271 @@ await request(app)
           .send({author, message});
 
 
+SERVER TESTING PATTERNS
+As you develop an application, you may realize that you can replace feature tests or reduce them with equal coverage at a lower level. One question to ask when deciding between a full feature test versus a server test is:
+“Is it worth trading a slow feature test for a faster server test that doesn’t test the UI?”
+
+describe('when the Message is valid', () => {
+    it('creates a new message', async () => {
+      const author = 'user name';
+      const message ='feature testing with TDD makes me feel empowered to create a better workflow';
+      
+      //save message
+      const response = await request(app)
+        .post('/messages')
+        .type('form')
+        .send({author, message});
+      //check response to verify message is saved
+      assert.include(parseTextFromHTML(response, '#messages'), message);
+    });
+})
+
+Status Codes
+Server tests are slightly faster than browser-driven feature tests. Since the web browser is cut out of the test, we are not testing how things are rendered for the user. Instead, we are focused on the server response.
+One use of TDD at the server level is to ensure that the HTTP status codes are returned as expected. Verifying status codes provide the most basic level of confidence that the server is functioning correctly.
+
+To verify status codes, we are asserting that the response status is equal to the status code integer that our application requires:
+assert.equal(response.status, 200);
 
 
-          
+Response Content
+Many servers return dynamic HTML content based on the user, the URL accessed, header values, and more. We use TDD to ensure the server responds correctly for each case.
+We can organize our tests into two categories:
+
+tests that exercise the “Happy Path” — expected use cases of our application
+tests that exercise the “Sad Path” — unexpected or invalid use of our application
+
+As an example, after requesting a valid profile page for “My Name”, you may receive the following response content:
+response.text = '<div><div id="my-name">My Name</div></div>';
+You can retrieve the content of #my-name and check it using the following:
+assert.include(parseTextFromHTML(response.text, '#my-name'), "My Name"); //True
+
+We could also write a separate test to check the corresponding “sad path”. Perhaps there is not yet a page for “Your Name”, so you should not receive a response containing similar HTML. We use .notInclude() to verify that the response is not including “Your Name” :
+assert.notInclude(parseTextFromHTML(response.text, '#my-name'), "Your Name"); //True
+
+
+Refactoring: Route Parameters
+Think: 'welcome/:username' => '<h1>Your Name is ' + req.params.username +'</h1>'.
+
+Refactoring: Handlebars
+ In the code so far, we have been responding with inline HTML strings. On a large project, this could make it difficult for the front end developer to organize and maintain.
+An improved approach to this is using a templating library like Handlebars to separate the HTML view from the JavaScript controller.
+
+In the web app that you’ve built in this lesson, we’ve placed the templates in the /views folder and have an extension of .handlebars. Our controller will now use render to create the view and pass in any variables:
+const param = 'Foo';
+res.render('templateName', {param});
+The templates are written like regular HTML, but variables can be accessed within the view using double curly braces:
+
+<h1>{{ param }}</h1>
+
+When the view is rendered, it will replace {{ param }} with its actual value:
+<h1>Foo</h1>
+
+
+API Errors
+one of the use cases for server testing is for checking API responses, especially the “sad path” where a user interacts with the server in an unexpected or disallowed manner. We need to make sure our server properly handles invalid passwords, form field errors, etc.
+Keep in mind that while there may only be one “happy path” for an interaction (user submits a valid password), there can be many corresponding “sad paths” (password is too short, doesn’t contain special characters, etc). By testing the majority of these on the server level, it saves us from testing them at a more resource intensive level including the user view.
+
+
+MONGOOSE FUNDAMENTALS
+What is Data?
+Data in the context of software and web development is digital information.
+
+What is a Database?
+A database is a structured set of data held in a computer.
+Databases support storage and manipulation of data. For a web application to have persistence, a developer uses a database to store data. The developer can write methods to create, read, update, and delete information in the database.
+
+Mongoose Collections & Documents
+Mongo stores data in ‘binary’ JSON (BSON) documents. BSON documents have a similar structure to JavaScript objects.
+
+MongoDB stores documents in a collection. A MongoDB database is made up of these collections of documents.
+A Mongo collection is like a table in a spreadsheet or relational database — each document is like a row in the spreadsheet.
+Documents contain one or more key/value pairs. Each key has a corresponding value of a specified data type, like array, number, or string. MongoDB organizes documents with similar structure into collections.
+
+Schemas
+Mongoose is a JavaScript library that provides methods to interact with a MongoDB database. Mongoose translates JavaScript objects (JSON) to BSON data in a MongoDB database, and vice versa.
+
+Mongoose interactions are based on Schema and Model declarations.
+A Schema defines the shape of the documents within that collection.
+A Model maps to a MongoDB collection and its documents.
+
+
+Mongoose Schema
+Remember, each record in a MongoDB database is a document with key/value pairs as entries. Using Mongoose’s Schema, we can set the structure of those documents dynamically.
+Imagine you were creating a Schema for the database of a web-based poetry application where you could both write and publish poems. Each key in our poemSchema will define a property in our documents which will be cast to its associated SchemaType.
+
+const poemSchema = new mongoose.Schema({
+  title: String
+})
+
+Each document that is derived from the poemSchema above will have a title property with a string saved to it.
+Mongoose will cast mismatched data types to the specified SchemaType. For example, if we entered the number 1 as a title for a poem, Mongoose would cast the entry so that it entered that database as a string "1". Using casting, Mongoose ensures that string properties are assigned strings values.
+
+Paths
+The key-value pair in a schema is called a path. Paths define the name and type of fields in a MongoDB document.
+const poemSchema = new mongoose.Schema({
+  title: String,
+  body: [String],
+  published: Boolean,
+})
+
+The schema above has three paths: title, body, and published. Each path is set to a different schema type. The [String] schema type, assigned to body, means a document that is derived from the poemSchema schema can store an array of strings to the body field.
+
+Paths in Mongoose can have many data types. Besides data types like string, integer, boolean, and array, Mongoose also provides:
+Timestamp − timestamp. This can be handy for recording when a document has been modified or added.
+Object ID − This datatype is used to store the document’s ID.
+
+Validators
+Often, we want to specify more than just the type of a path — we can use validators to ensure other aspects of a document’s input value.
+Data validation is intended to provide guarantees about user input. Mongoose has several built-in validators.
+
+const poemSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  body: {
+    type: [String],
+    required: true
+  },
+  published: {
+    type: Boolean,
+    required: true
+  },
+})
+
+If you save a document with an invalid path value, you will receive this error message Path `title` is required.. You can define a custom error message like this:
+const poemSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: 'Title is required!'
+  }
+})
+
+Models
+we need to convert our poemSchema into a Model we can work with. Schemas provide the definition for a model. A model maps to a collection in your MongoDB database.
+Models are defined by passing a Schema instance to mongoose.model like this:
+mongoose.model(modelName, schema):
+
+The first argument is the singular name of the collection your model is for. The second argument is your previously created Schema. In the case of our poetry web app, turning our schema into a model would look like this:
+const Poem = mongoose.model('Poem', poemSchema); 
+
+Models are constructors that we define based on our Schema. They represent documents which can be saved and retrieved from our database. All document creation and retrieval from the database is handled by these models.
+
+
+Create
+Our model is a class with properties that we define in our schema. We can construct documents as instances of our model. Creating documents and saving them to the database can be done by calling .create() on our model. In the poetry app example it would look like this:
+
+const Poem = mongoose.model('Poem', poemSchema);
+
+const poemProperties = {
+    title: "Rewrite Reality" ,
+    body: ["Re-imagine the consumption of the stagnant status quo", 
+           "No matter how nice you dress", 
+           "The emperor is still wearing no clothes"],
+    published: false
+}
+
+runWithDatabase(async () => {
+  // Create and save a document
+  await Poem.create(poemProperties);
+});
+
+The runWithDatabase function is designed to accept a method as input, and run it after we connect to a database and before we disconnect from it.
+This would create a new document in our database, with the paths and properties defined in the code above. 
+
+
+Queries
+At this point, we will start creating instances in a MongoDB database, then query the database for the values we saved. All of the method calls and queries will be passed to runWithDatabase().
+If we wanted to search for the poem that we saved to the database, we could write a Mongoose query and call .findOne() on our Poem model:
+
+runWithDatabase(async () => {
+   Poem.create(poemProperties)
+   const poemMatch = await Poem.findOne({ title: 'Rewrite Reality' });
+   console.log(`Found poem: ${poemMatch.body}`);
+});
+
+.findOne() returns a document that has a title path with the value 'Rewrite Reality'
+What if we wanted to find all the documents that matched a specified criteria? We can use .find(), which returns an array of all the documents that match the argument passed to it.
+
+runWithDatabase(async () => {
+  Poem.create(manyPoems);
+  let publishedPoems = await Poem.find({ published: true })
+  // Check that it works by logging the number of returned documents
+  console.log(`Published Poems: ${publishedPoems.length}`)
+});
+
+
+Methods
+Mongoose supports the creation of methods on both instances of documents and collections of documents (the model).
+
+.statics() adds static “class” methods to the model.
+.methods() adds an instance method to documents.
+
+
+Model Methods — .statics()
+
+const poemSchema = new mongoose.Schema({
+...
+)}
+
+poemSchema.statics.firstAlphabetically = function(callback) {
+  return this.findOne({}).sort('title').exec(callback);
+}
+The method is part of the model, which in this example would return the first document, after sorting the values of the title path alphabetically.
+
+In order to use the new .firstAlphabetically method, we would call it inside runWithDatabase() on the Poem model like this:
+
+const Poem = mongoose.model('Poem', poemSchema);
+runWithDatabase(async () => {
+  Poem.create(properties));
+  const firstAlpha = await Poem.firstAlphabetically();
+  console.log(`The first poem alphabetically is: ${firstAlpha.title}. It goes like this: ${'\n'} ${firstAlpha.body}`);
+});
+
+
+Document Methods — .methods()
+Instances of a model are documents. Documents have many of their own built-in instance methods. It is also possible to create custom document instance methods. Below, we create a method for our poem example to change the published path value to true on any document in the database.
+
+const poemSchema = new mongoose.Schema({
+...
+)}
+
+poemSchema.methods.publish = function(callback) {
+  this.published = true;
+  return this.save();
+}
+
+.save() writes the current JavaScript object as a MongoDB document.
+
+Inside runWithDatabase() we could call .publish() on a document like this:
+
+const Poem = mongoose.model('Poem', poemSchema);
+runWithDatabase(async () => {
+  Poem.create(properties));
+  ...
+  const publishIt = await Poem.findOne({ title: 'Rewrite Reality' });
+  console.log(publishIt.published)
+  await publishIt.publish();
+  console.log(`${publishIt.title} has had its publish field changed to ${publishIt.published}`)
+  });
+
+Output:
+false
+Rewrite Reality has had its publish field changed to true
+
+
+Mongoose is a Node package that interacts with a running MongoDB database.
+MongoDB stores documents in collections and collections of documents in databases. Each document has key-value pairs as entries.
+Using a Schema, we can set the structure of documents dynamically, using paths with schema types and validators.
+Models are JavaScript classes that we compile from our Schema definitions.
+You can use models to create, read, update, and delete documents from a database.
+You can query a database using .find() and .findOne(). Mongo also provides query operators to allow for more complex queries.
+Mongoose also allows for the creation of methods associated with a database:
+.statics() adds static “class” methods to the Models itself.
+.methods() adds an instance method to documents.
+
+
 --------------------------------------------
 YOUTUBE: Academmind:
 
