@@ -33,6 +33,19 @@
 14. vscode-icons - vscode icons team #for great folder icons - To toggle Ctrl+Shift+P -> Activate vscode icons
 
 
+---------------------------------------------------------------------------------------
+
+###################
+## NPM Syntax
+###################
+npm i <<package>> --save-dev  #Use --save-dev to download and install into local repository as dev dependency;
+npm i <<package>> -g #to install globally; 
+npm i <<package>> -d  #to install as a local dependency
+npm i -g npm@latest #to update npm client to latest
+npm init -y #to start a npm project with -y as yes to all default params
+npm outdated --save #to find the outdated packages in dependencies
+npm outdated --save-dev #to find the outdated packages in dev-dependencies
+npm config ls -l | grep config #to find the location of the npmrc config files in the system
 
 
 ---------------------------------------------------------------------------------------
@@ -40,10 +53,7 @@
 ###################
 ## NPM Libraries Used 
 ###################
-** Use --save-dev to download and install into local repository as dev dependency; -g to install globally; with no argument to install as a dependency or use -d
-npm i -g npm@latest #to update npm client to latest
-npm init -y #to start a npm project with -y as yes to all default params
-npm outdated #to find the outdated packages
+
 1. Bootstrap: npm install -g bootstrap
 2. SASS: npm install -g sass
 3. holderjs: npm install -g holderjs #Used for providing UI support for blank sized images
@@ -60,7 +70,15 @@ npm outdated #to find the outdated packages
   -npm install -g body-parser #body parsing middleware
   -npm install -g errorhandler #error  handling
   -npm install -g cors #cors filters
+  -npm i -g express-handlebars #integrating handlebars with express for creating views
+  -npm i -g supertest #library for testing node server responses
+  -npm i -g jsdom
 12. npm install -g node-gyp & npm install --global --production windows-build-tools #OPTIONAL - Open with admin priveleges for configuring
+13. npm i --save-dev @wdio/cli && npx wdio config -y #to install all packages required for webdriverio in chrome headless browser
+14. npm install -g mocha #Testing framework
+    npm install -g chai #Assertion Library
+15. npm i -g mongoose #Node package for integrating MongoDB
+16. 
 
 ---------------------------------------------------------------------------------------
 
@@ -326,7 +344,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 5. Create Spec Files
   $ mkdir .\test\specs
   $ touch ./test/specs/basic.js
-6. Async mode:
+6. Async mode: (in basic.js)
 describe('webdriver.io page', () => {
     it('should have the right title', async () => {
         await browser.url('https://webdriver.io')

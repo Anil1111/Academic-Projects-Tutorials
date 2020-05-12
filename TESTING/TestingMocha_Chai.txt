@@ -798,7 +798,7 @@ const poemSchema = new mongoose.Schema({
 
 The schema above has three paths: title, body, and published. Each path is set to a different schema type. The [String] schema type, assigned to body, means a document that is derived from the poemSchema schema can store an array of strings to the body field.
 
-Paths in Mongoose can have many data types. Besides data types like string, integer, boolean, and array, Mongoose also provides:
+Paths in Mongoose can have many data types. Besides data types like string, integer (Number), boolean, and array, Mongoose also provides:
 Timestamp − timestamp. This can be handy for recording when a document has been modified or added.
 Object ID − This datatype is used to store the document’s ID.
 
@@ -952,6 +952,131 @@ Mongoose also allows for the creation of methods associated with a database:
 .statics() adds static “class” methods to the Models itself.
 .methods() adds an instance method to documents.
 
+
+
+MODEL TESTING PATTERNS
+A chat app manages messages, users, and chat rooms. A restaurant app manages customers, tables, and orders. How do applications define these entities and their interactions? The answer is the model layer.
+Models represent the entities and interactions in a web application’s problem domain. A model can define each entity, describe the shape of the data stored for each entity, validate the data, store it in a database, and interact with it.
+
+To better understand the concept of a model, take this example: a full-stack web application manages the inventory of a zoo. It can add animals, remove animals, count animals, and store that information for later use. The app can be divided into three layers:
+1. Front-end: a webpage with buttons to allow users to add and remove animals. Could be implemented with HTML and CSS.
+2. Server: an application to handle HTTP requests and responses. It routes requests, like the addition and removal of animals, and defines responses, like the count of animals after addition/removal. Could be implemented with Express.
+3. Database and Models: storage and shape of the animal data. The data is grouped by animal, each with properties like species name, count, and risk-level. These fields and the methods to interact with them are defined by models, and the storage is managed by a database. Could be implemented with Mongoose models and a MongoDB database.
+
+
+Path Definition
+You’ll need multiple model tests to satisfy this server test. Since they don’t touch HTML/CSS selectors nor HTTP actions/status codes, model tests are typically faster than feature-level and server-level tests.
+
+The model tests will confirm that:
+the Dinosaur model is defined
+the Dinosaur model has a path called name
+
+  describe('#name', () => {
+    it('is a String', () => {
+      const dino = new Dinosaur({
+        name: 'T-rex'
+      });
+      
+      assert.strictEqual(dino.name, 'T-rex')
+    });
+  });
+
+
+Hooks
+let’s recall some good TDD practices:
+make your tests expressive by writing them in four phases
+make your tests isolated with setup and teardown phases
+follow the red, green, refactor cycle
+
+setup and teardown phases in beforeEach and afterEach hooks provided by Mocha.
+
+Before each test, your beforeEach hook will connect to the database and drop any old data using these method calls:
+await mongoose.connect(databaseUrl, options);
+await mongoose.connection.db.dropDatabase();
+
+After each test, your afterEach hook will disconnect from the database with
+await mongoose.disconnect();
+
+You can refactor these hooks by wrapping the three calls in two helper functions: connectAndDrop and disconnect. In your test file, import those functions and add them to your hooks.
+
+
+Path Validation I
+you’ll be using a custom validator function. It receives the value to validate as its first argument. It returns a Boolean, which is false if the value fails validation. Avoid arrow notation () =>. Using function() notation preserves the proper binding of this. Here’s the syntax:
+
+// Define validator
+validate = function (value) {
+  ...
+}
+
+// Add validator to Schema
+const DinosaurSchema = new Schema({
+  count: {
+    type: Number,
+    validate: [validator, 'custom err msg']
+  }
+});
+
+
+You can test validation like this:
+Create an instance of a model with validators and execute the validations with the validateSync method. Any validation errors will be stored in [instance].errors.[path], like dino.errors.count.
+Make assertions on [instance].errors.[path] and its properties.
+
+
+Path Validation II
+Remember that validation error messages are defined in the schema like this:
+
+age: {
+   type: Number,
+   validate: [validator, 'Age must be above 9.']
+}
+
+And you can assert the value of multiple properties of [instance].errors.[path] like message, path, kind, and name. You can write out multiple assertions or use assert.include:
+
+  const errorInfo = person.errors.age;
+  assert.include(errorInfo, {
+    message: 'Age must be above 9.',
+    path: 'age',
+    kind: 'user defined',
+    name: 'ValidatorError'
+  });
+
+
+Methods I
+Mongoose schemas support:
+static methods: methods called by a model. They typically operate on a collection of documents (instances of the model).
+instance methods: methods called by an instance of a model. They typically operate on the document (model instance) itself.
+
+From the previous exercise, you might recognize Dinosaur.findOne() as a static method and dino.save() as an instance method.
+
+it requires a static method, which is defined in [schema].statics and called according to the example below.
+
+// static method - implementation
+DinosaurSchema.statics.findByName = function(name, callback) {
+  return this.findOne({ name: name }, callback);
+};
+// static method - call the method
+await Dinosaur.findByName('Velociraptor')
+
+Use function() notation instead of arrow => notation to properly bind this.
+
+
+Methods II
+.breed() will increase the count of one dinosaur. This kind of method is specific to an instance of a model, so you’ll need to define it as an instance method. Do this by storing it in [schema].methods as shown below.
+
+// instance method - implementation
+DinosaurSchema.methods.breed = function() {
+  this.count = this.count + 1;
+};
+// instance method - call the method
+dino.breed()
+
+
+The model layer represents entities and interactions in a web app’s problem domain.
+Model paths can be test-driven using validators. Call validateSync and make assertions on the properties of [instance].errors.[path].
+The storage of data can be tested with construction and updating methods like save and update. Retrieval can be tested with query methods like find, findOne, and findby.
+Static methods are stored in [schema].statics and instance methods are stored in [schema].methods. Both can be tested like any other JavaScript function.
+
+Model.find({cost: {$lt: 50} }) => $lt represent less than which selects all items costing lesser than 50
 
 --------------------------------------------
 YOUTUBE: Academmind:
