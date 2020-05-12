@@ -10,7 +10,7 @@ const app = require('../app');
 const debug = require('debug')('calculator-js:server');
 const http = require('http');
 // Uncomment this line once directed by an error message
-// const {mongoose, databaseUrl, options} = require('../database');
+const {mongoose, databaseUrl, options} = require('../database');
 
 /**
  * Get port from environment and store in Express.
@@ -30,9 +30,9 @@ const server = http.createServer(app);
  */
 
 // Uncomment the two lines below once directed by an error message
-// mongoose.connect(databaseUrl, options).then(()=> {
+mongoose.connect(databaseUrl, options).then(()=> {
 server.listen(port);
-// });
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

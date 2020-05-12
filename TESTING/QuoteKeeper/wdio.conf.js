@@ -1,3 +1,6 @@
+const { connectAndDrop, disconnect } = require('./database');
+const port = process.env.PORT || 4001;
+
 exports.config = {
     //
     // ====================
@@ -89,7 +92,7 @@ exports.config = {
     // with `/`, the base url gets prepended, not including the path portion of your baseUrl.
     // If your `url` parameter starts without a scheme or `/` (like `some/path`), the base url
     // gets prepended directly.
-    baseUrl: 'http://localhost',
+    baseUrl: `http://localhost:${port}/`,
     //
     // Default timeout for all waitFor* commands.
     waitforTimeout: 10000,
@@ -132,6 +135,16 @@ exports.config = {
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
+    },
+    async onPrepare() {
+        // Uncomment this line once directed by an error message
+        connectAndDrop();
+        expressServer = app.listen(port);
+    },
+    async onComplete() {
+        // Uncomment this line once directed by an error message
+        disconnect();
+        await expressServer.close();
     },
     //
     // =====
