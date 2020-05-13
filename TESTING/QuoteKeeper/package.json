@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/www.sh",
-    "test": "bash ./bin/mocha-test.sh && PORT=8001 bin/wdio-test.sh"
+    "start": "nodemon ./bin/www.sh --watch",
+    "test": "bash ./bin/mocha-test.sh && bash ./bin/wdio-test.sh"
   },
   "keywords": [],
   "author": "",

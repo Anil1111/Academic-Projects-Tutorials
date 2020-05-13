@@ -7,7 +7,7 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('calculator-js:server');
+const debug = require('debug')('quotekeeper:server');
 const http = require('http');
 // Uncomment this line once directed by an error message
 const {mongoose, databaseUrl, options} = require('../database');

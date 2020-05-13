@@ -1,5 +1,7 @@
 const { connectAndDrop, disconnect } = require('./database');
 const port = process.env.PORT || 4001;
+const app = require('./app');
+let expressServer;
 
 exports.config = {
     //
@@ -20,7 +22,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './test/**/*.js'
+        './test/features/*.js'
     ],
     // Patterns to exclude.
     exclude: [
@@ -187,8 +189,12 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {Array.<String>} specs List of spec file paths that are to be run
      */
-    // before: function (capabilities, specs) {
-    // },
+    before: function (capabilities, specs) {
+        browser.setNetworkConditions({
+            latency: 2000,
+            throughput: 450 * 1024
+        });
+    },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
