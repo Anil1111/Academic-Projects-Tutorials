@@ -31,6 +31,13 @@
 12. Debugger for Chrome - Debugging
 13. SQLite - alexcvzz #for querying sqlite databases
 14. vscode-icons - vscode icons team #for great folder icons - To toggle Ctrl+Shift+P -> Activate vscode icons
+15. Java Extension Pack - Microsoft
+    Spring Boot tools - Pivotal
+    Spring Boot Dashboard - Microsoft
+    Tomcat for Java - Wei Shen
+    Spring Initializr Java Support - Microsoft
+    Checkstyle for Java - ShengChen
+    
 
 
 ---------------------------------------------------------------------------------------
@@ -361,17 +368,15 @@ describe('webdriver.io page', () => {
 
 1. To reduce Network Speed:
   Three Dots -> More Tools --> Network Condiitons
+  
 ---------------------------------------------------------------------------------------
-
 ###################
 ## SSL Certificate Generation
 ###################
 
 * Keytool run from bin of JDK/JRE Path
 -- Assuming keystore has been created and password is set
-
 1. Command to convert jks format keystore to pkcs12
-
 Format: keytool -importkeystore -srckeystore <<AbsolutePathToKeystore>> -destkeystore <<AbsolutePathToKeystore>> -deststoretype pkcs12 
 Command: keytool -importkeystore -srckeystore C:\Users\Username\.keystore -destkeystore C:\Users\Username\.keystore -deststoretype pkcs12
 - Prompt for first and last name: <<ProvdetheCNName>>
@@ -382,13 +387,11 @@ Command: keytool -importkeystore -srckeystore C:\Users\Username\.keystore -destk
 - Proompt for keystore password
 
 2. Command to set parameters for CSR:
-
 Format: keytool -genkey -alias <<aliasName>> -keyalg RSA -keysize 2048 -validity <<ValidDays>>
 Command: keytool -genkey -alias app2020 -keyalg RSA -keysize 2048 -validity 720
 -- Prompt for keystore password
 
 3. Generate the CSR"
-
 Format: JAVA Home/keytool –certreq –keyalg RSA –alias <<aliasCreatedAbove>> –file <<AbsolutePathToOutputFile>> –keystore <<AbsolutePathToKeystore>>  -ext SAN=dns:<<cn name>>
 Command: keytool –certreq –keyalg RSA –alias app2020 –file C:/Users/Username/intvmaip02.txt –keystore C:/Users/Username/.keystore –ext SAN=dns:mywebsiteName
 - Proompt for keystore password

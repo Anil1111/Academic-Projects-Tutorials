@@ -5,21 +5,58 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "CodeLens (Launch) - Noodle",
+      "request": "launch",
+      "mainClass": "Sample.Inheritance.Noodle",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - PrimeDirective",
+      "request": "launch",
+      "mainClass": "Sample.PrimeDirective",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - FizzBuzz",
+      "request": "launch",
+      "mainClass": "Sample.FizzBuzz",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Newsfeed",
+      "request": "launch",
+      "mainClass": "Sample.Newsfeed",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Store",
+      "request": "launch",
+      "mainClass": "Sample.Store",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - HelloWorld",
+      "request": "launch",
+      "mainClass": "Sample.HelloWorld",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
       "name": "run select spec",
       "type": "node",
       "request": "launch",
-      "args": ["wdio.conf.js"],
+      "args": [
+        "wdio.conf.js"
+      ],
       "cwd": "${workspaceFolder}/TESTING/CakeBar/",
       "autoAttachChildProcesses": true,
       "program": "${workspaceRoot}/TESTING/CakeBar/node_modules/@wdio/cli/bin/wdio.js",
       "console": "integratedTerminal"
     }
-    // {
-    //   "type": "chrome",
-    //   "request": "launch",
-    //   "name": "Debug in Chrome",
-    //   "url": "http://localhost:5500/",
-    //   "webRoot": "${workspaceFolder}"
-    // }
   ]
 }
