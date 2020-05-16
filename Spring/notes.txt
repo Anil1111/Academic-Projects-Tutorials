@@ -1,0 +1,1 @@
+SPing Boot is used to build restful API using JAVA as the language. Can be also used to build microservices.

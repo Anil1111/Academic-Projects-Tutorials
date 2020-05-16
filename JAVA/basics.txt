@@ -645,3 +645,89 @@ Return type
 Number and type of parameters
 You may have also noticed the @Override keyword above printBalance() in CheckingAccount. This annotation informs the compiler that we want to override a method in the parent class. If the method doesn’t exist in the parent class, we’ll get a helpful error when we compile the program.
 
+
+Using a Child Class as its Parent Class
+An important facet of polymorphism is the ability to use a child class object where an object of its parent class is expected.
+
+One way to do this explicitly is to instantiate a child class object as a member of the parent class. We can instantiate a CheckingAcount object as a BankAccount(Parent Class) like this:
+BankAccount kaylasAccount = new CheckingAcount(600.00);
+We can use kaylasAccount as if it were an instance of BankAccount, in any situation where a BankAccount object would be expected. (This would be true even if kaylasAccount were instantiated as a CheckingAccount, but using the explicit child as parent syntax is most helpful when we want to declare objects in bulk.)
+
+It is important to note here that the compiler just considers kaylasAccount to be any old BankAccount. But because method overriding is handled at runtime, if we call printBalance(), we’ll see something CheckingAccount specific:
+This is because at runtime, kaylasAccount is recognized as the CheckingAccount it is. So, what if CheckingAccount has a method transferToSavings() that BankAccount does not have? Can kaylasAccount still use that method?
+Well, no. The compiler believes that kaylasAccount is just a BankAccount that doesn’t have some fancy child class transferToSavings() method, so it would throw an error
+
+Child Classes in Arrays and ArrayLists
+In fact, we can put instances of different classes that share a parent class together in an array or ArrayList! For example, let’s say we have a Monster parent class with a few child classes: Vampire, Werewolf, and Zombie. We can set up an array with instances of each:
+
+dracula = new Vampire();
+wolfman = new Werewolf();
+zombie1 = new Zombie();
+Monster[] monsters = {dracula, wolfman, zombie1};
+
+We can even iterate through the list of items — regardless of subclass — and perform the same action with each item:
+
+for (Monster monster : monsters) {
+  monster.attack();
+}
+
+
+Debugging
+
+In Java, there are many different ways of classifying errors, but they can be boiled down to three categories:
+Syntax errors: Errors found by the compiler.
+Run-time errors: Errors that occur when the program is running.
+Logic errors: Errors found by the programmer looking for the causes of erroneous results.
+
+Syntax Errors
+When we are writing Java programs, the compiler is our first line of defense against errors. It can catch syntax errors.
+Syntax errors represent grammar errors in the use of the programming language.
+
+Run-time Errors
+Errors which happen during program execution (run-time) after successful compilation are called run-time errors.
+Some common run-time errors:
+Division by zero also known as division error
+Trying to open a file that doesn’t exist
+
+Exceptions
+Java uses exceptions to handle errors and other exceptional events. Exceptions are the conditions that occur at runtime and may cause the termination of the program.
+
+When an exception occurs, Java displays a message that includes the name of the exception, the line of the program where the exception occurred, and a stack trace. The stack trace includes:
+The method that was running
+The method that invoked it
+The method that invoked that one
+
+Some common exceptions that you will see in the wild:
+ArithmeticException: Something went wrong during an arithmetic operation; for example, division by zero.
+NullPointerException: You tried to access an instance variable or invoke a method on an object that is currently null.
+ArrayIndexOutOfBoundsException: The index you are using is either negative or greater than the last index of the array (i.e., array.length-1).
+FileNotFoundException: Java didn’t find the file it was looking for.
+
+Exception Handling
+One way to handle exceptions is using the try/catch:
+
+The try statement allows you to define a block of code to be tested for errors while it is being executed.
+The catch statement allows you to define a block of code to be executed if an error occurs in the try block.
+
+try {
+  //  Block of code to try
+} catch (NullPointerException e) {
+  // Print the error message like this:
+  System.err.println("NullPointerException: " + e.getMessage());
+  // Or handle the error another way here
+}
+Notice how we used System.err.println() here instead of System.out.println(). System.err.println() will print to the standard error and the text will be in red.
+
+You can also chain exceptions together:
+
+try {
+  //  Block of code to try
+} catch (NullPointerException e) {
+  //  Code to handle a NullPointerException
+} catch (ArithmeticException e) {
+  //  Code to handle an ArithmeticException
+}
+
+
+Logic Errors
+These types of errors which provide incorrect output, but appears to be error-free, are called logic errors. Logic errors occur when there is a design flaw in your program

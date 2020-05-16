@@ -6,6 +6,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - Fortune",
+      "request": "launch",
+      "mainClass": "Sample.Fortune",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
+      "name": "CodeLens (Launch) - Language",
+      "request": "launch",
+      "mainClass": "Sample.LanguageFam.Language",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - Noodle",
       "request": "launch",
       "mainClass": "Sample.Inheritance.Noodle",

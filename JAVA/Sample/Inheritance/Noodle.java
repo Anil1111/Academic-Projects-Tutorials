@@ -1,5 +1,7 @@
 package Sample.Inheritance;
 
+import java.util.ArrayList;
+
 public class Noodle {
   
   protected double lengthInCentimeters;
@@ -23,6 +25,10 @@ public class Noodle {
     System.out.println("Boiling.");
     this.texture = "cooked"; 
   }
+
+  public String getCookPrep() {
+    return "Boil noodle for 7 minutes and add sauce."; 
+  }
   
   public static void main(String[] args) {  
     Ramen yasaiRamen = new Ramen();
@@ -31,6 +37,19 @@ public class Noodle {
 
     Spaetzle kaesespaetzle = new Spaetzle();
     kaesespaetzle.cook();
+
+    // ArrayList<Noodle> allTheNoodles = new ArrayList<Noodle>();
+    Noodle spaetzle = new Spaetzle();
+    Noodle ramen = new Ramen();
+    Noodle pho = new Pho();
+    // allTheNoodles.add(spaetzle);
+    // allTheNoodles.add(ramen);
+    // allTheNoodles.add(pho);  
+    Noodle[] allTheNoodles = {spaetzle, ramen, pho};
+    for (Noodle noodle : allTheNoodles) { 
+      System.out.println(noodle.getCookPrep());
+      
+    }
   }
   
 }
