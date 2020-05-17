@@ -1,2 +1,0 @@
-ECMA Script is the standard, and JS is the implementation.
-JS is a loosely typed language.

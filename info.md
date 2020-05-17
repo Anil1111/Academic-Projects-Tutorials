@@ -1,45 +1,3 @@
-## VSCode Shortcuts
-
-1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
-2. `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
-3. `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
-4. Ctrl + Shift + P Open up the command pallet in VSCode
-5. Alt + Shift + F Use formatter to format the page (User settings can be found in settings.JSON)
-6. Alt + Click on HTML tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools
-7. Ctrl +Alt + N = To run the JS code using inbuilt node and output in console; using the Code runner extension
-8. Command: workbench.action.terminal.clear; Keybindings: Ctrl + K; When: terminalFocus
-   9 Ctrl + P / Ctrl + E #To open file from the VScode workbench
-
----
-
-## VSCode Extensions
-
-1. GIT History - Don Jayamanne - Useful for working with GIT source control
-2. Beautify css/sass/scss/less - michelemelluso - Code beautifier and syntax recommendation (OPTIONAL)
-3. Beautify - HookyQR - Code formatter
-4. Bootstrap 4, Font awesome 4, Font Awesome 5 Free & Pro snippets - Ashok Koyi - Bootstrap 4 & Font Awesome code recommendation
-5. Open in browser - TechER - Opening default browser from VSCode
-6. Live Sass Compiler - Ritwick Dey - Watching Sass files and automatic transpiling of SCSS to CSS
-7. Live Server - Ritwick Dey - Starting up web pages in browser
-8. Code Runner - Jun Han - Running JS code live
-9. Node.js Extension Pack - Wade Anderson - Node JS support
-10. ESLint - Dirk baeumer
-11. Visual Studio IntelliCode - Microsoft
-12. Prettier - Code formatter - Esben Peterson
-13. Debugger for Chrome - Debugging
-14. SQLite - alexcvzz #for querying sqlite databases
-15. vscode-icons - vscode icons team #for great folder icons - To toggle Ctrl+Shift+P -> Activate vscode icons
-16. Java Extension Pack - Microsoft
-    Spring Boot tools - Pivotal
-    Spring Boot Dashboard - Microsoft
-    Tomcat for Java - Wei Shen
-    Spring Initializr Java Support - Microsoft
-    Checkstyle for Java - ShengChen
-17. Auto-Open Markdown Preview - hnw
-
----
-
-
 ## Bootstrap requirements
 
 CSS (CDN): <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
@@ -209,3 +167,8 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 6. ng lint #check code for coding standards
 
 
+---
+
+## Typescript
+
+1. `tsc <<typescriptFile>> `#Complile typescript file

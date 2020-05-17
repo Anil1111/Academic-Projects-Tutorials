@@ -42,3 +42,5 @@
 14. `npm install -g mocha` #Testing framework  
     `npm install -g chai` #Assertion Library
 15. `npm i -g mongoose` #Node package for integrating MongoDB
+15. `npm i -g typescript@latest` #Typescipt
+16. `npm i -g lite-server` #for automatic compilation of TS files
