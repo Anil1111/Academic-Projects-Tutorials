@@ -159,16 +159,20 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 
 ## Angular
 
-1. npm install -g @angular/cli@latest #Install the latest ng client:
-2. ng version; ng v #check version of angular
-3. ng generate; ng g #generate new files for angular
-4. ng serve #run the angular application
-5. ng build #build the angular application
-6. ng lint #check code for coding standards
+1. `npm install -g @angular/cli@latest` #Install the latest ng client:
+2. `ng version; ng v` #check version of angular
+3. `ng generate; ng g` #generate new files for angular
+4. `ng serve` #run the angular application
+5. `ng build` #build the angular application
+6. `ng lint` #check code for coding standards
 
 
 ---
 
 ## Typescript
 
-1. `tsc <<typescriptFile>> `#Complile typescript file
+1. `tsc <<typescriptFile>>` #Complile typescript file
+2. `tsc --init` #create a tsconfig.js file
+3. `tsc -b` #to build the ts file
+4. `tsc -w` #to watch for ts compilation
+5. `"start": "lite-server"` in package.json scripts key for running on a live server

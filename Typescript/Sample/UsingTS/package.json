@@ -5,12 +5,16 @@
   "main": "using-ts.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "lite-server"
+    "start": "lite-server",
+    "compile": "tsc && node app.js",
+    "dev": "nodemon -e ts  --exec \"npm run compile\""
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "lite-server": "^2.5.4"
+    "lite-server": "^2.5.4",
+    "nodemon": "^2.0.4",
+    "typescript": "^3.9.2"
   }
 }

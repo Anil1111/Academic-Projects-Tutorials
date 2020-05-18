@@ -5,10 +5,7 @@
       "type": "npm",
       "script": "test",
       "path": "NODEJS/EXPRESS/BossMachine/",
-      "group": {
-        "kind": "test",
-        "isDefault": true
-      },
+      "group": "test",
       "problemMatcher": [],
       "label": "npm: test - NODEJS/EXPRESS/BossMachine",
       "detail": "cross-env PORT=8000 mocha --watch"
@@ -20,6 +17,31 @@
       "problemMatcher": [],
       "label": "npm: test",
       "detail": "echo \"Error: no test specified\" && exit 1"
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "Typescript/Sample/UsingTS/tsconfig.json",
+      "problemMatcher": [
+        "$tsc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true,
+      },
+      "label": "tsc: build - Typescript/Sample/UsingTS/tsconfig.json"
+    },
+    {
+      "type": "typescript",
+      "tsconfig": "Typescript/Sample/UsingTS/tsconfig.json",
+      "option": "watch",
+      "problemMatcher": [
+        "$tsc-watch"
+      ],
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "label": "tsc: watch - Typescript/Sample/UsingTS/tsconfig.json"
     }
   ]
 }
