@@ -2,11 +2,11 @@
   "name": "UsingTS",
   "version": "1.0.0",
   "description": "",
-  "main": "using-ts.js",
+  "main": "./dist/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "lite-server",
-    "compile": "tsc && node app.js",
+    "compile": "tsc && node ./dist/app.js",
     "dev": "nodemon -e ts  --exec \"npm run compile\""
   },
   "keywords": [],

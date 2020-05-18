@@ -10,7 +10,8 @@
 8. Command: `workbench.action.terminal.clear`; Keybindings: `Ctrl + K; When: terminalFocus`
 9. `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
 10. `Ctrl + Shift + B` #Run build task
-
+11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
+up or down
 ---
 
 ## VSCode Extensions
@@ -39,6 +40,13 @@
 17. **Auto-Open Markdown Preview** - _hnw_  
 18. **Path Intellisense** - _Christian Kohler_
 19. **TSLint** - _Microsoft_
+
+---
+## VSCode settings
+
+1. **Set git-bash as default terminal**:   
+Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar, there add the path to the git-bash: `C:\Program Files\Git\bin\bashe.exe`
+2. `File --> AutoSave` set autosave on 
 
 ---
 

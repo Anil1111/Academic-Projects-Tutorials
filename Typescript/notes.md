@@ -34,8 +34,12 @@
 - below ones are not available in JS
 6. **tuple** #fixed length array with fixed types
 7. **enum** #global constants numbers for which you apply labels
-8. **any** #takes any type
-- **undefined** is also a valid type in TS
+8. **any** #takes any type  
+disables all TS internal type checking
+9. **undefined** #is also a valid type in TS
+10. **Function** #used to  define function params and return type
+11. **unknown**  #better type checking than `any` as explicit type checking is required
+12. **never**
 
 ## Forms of other types in TS
 1. **Union Types** #combination of different core data types
@@ -131,13 +135,13 @@ This would be the type of such an object:
 
 Type aliases can be used to "create" your own types. You're not limited to storing union types though - you can also provide an alias to a (possibly complex) object type.
 
-```javascript
+```typescript
 type User = { name: string; age: number };
 const u1: User = { name: 'Max', age: 30 }; // this works!
 ```
 
 You will be able to simplify code like below:
-```javascript
+```typescript
 function greet(user: { name: string; age: number }) {
   console.log('Hi, I am ' + user.name);
 }
@@ -147,7 +151,7 @@ function isOlder(user: { name: string; age: number }, checkAge: number) {
 }
 ```
 
-```javascript
+```typescript
 function greet(user: User) {
   console.log('Hi, I am ' + user.name);
 }
@@ -161,7 +165,30 @@ function isOlder(user: User, checkAge: number) {
 
 ## Function In depth
 
-### 
+
+`enum Role {ADMIN, READ_ONLY, AUTHOR};` Enum declaration
+
+Function that does not return anything has by default return type of `void`
+
+### Using function types
+
+```typescript
+let combineValues: (a: number, b: number) => number;
+//combineValues can be assigned nay function that takes 2 numbers as argument and returns a number
+```
+
+```typescript
+function sendRequest(data: string, cb: (response: any) => void) {
+  // ... sending a request with "data"
+  return cb({data: 'Hi there!'});
+}
+ 
+sendRequest('Send this!', (response) => { 
+  console.log(response);
+  return true;
+ });
+```
+
 
 
 ---
