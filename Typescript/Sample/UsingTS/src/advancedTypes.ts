@@ -64,7 +64,7 @@ if (typeof userInput === "string") {
 }
 
 function generateError(message: string, code: number): never {
-  throw { message: message, code: code };
+  throw { message: message, code: code }; //object with keys as message and code
   // while (true) //also returns never
 }
 
