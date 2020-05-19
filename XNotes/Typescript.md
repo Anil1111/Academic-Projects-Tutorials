@@ -59,6 +59,7 @@
    ...
    "removeComments": true, //removing comments from the generated JS files
    "noEmit": true, //for not generating any JS files; where only TS files are required
+   "noEmitOnError": true // will ensure no filed gets compiled even if one error present in any TS file
    ...
 }
 

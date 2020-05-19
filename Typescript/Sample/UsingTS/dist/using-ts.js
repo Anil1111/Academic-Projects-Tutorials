@@ -5,9 +5,11 @@ var input2 = document.getElementById("num2");
 function add3(num1, num2) {
     return num1 + num2;
 }
-button.addEventListener("click", function () {
-    console.log(add(+input1.value, +input2.value));
-});
+if (button) {
+    button.addEventListener("click", function () {
+        console.log(add(+input1.value, +input2.value));
+    });
+}
 function add2(n1, n2, showResult, phrase) {
     var result = n1 + n2;
     if (showResult) {

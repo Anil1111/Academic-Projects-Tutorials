@@ -189,11 +189,71 @@ sendRequest('Send this!', (response) => {
  });
 ```
 
-
-
 ---
 
+## Next gen JS and TS
+
+### Const and Let
+- Both `const` and `let` are used to define variables that are block scoped   
+
+`const` Used to define variables whose values do not change  
+`let` Used to define block scope variables   
+`var` Can either be of global scope or function scoped; thus prone to errors   
+
+```javascript
+var age = 29;
+
+if (age > 15) {
+  var isOld = false; //var is global scoped in If blocks and therefore let should be used as it is always block scoped
+};
+
+console.log(isOld); //false
+
+```
+
+### Arrow functions
+
+```typescript
+const add = (n1: number, n2: number) => n1 + n2;
+//similar to
+const add = (n1: number, n2: number) => {
+  return n1 + n2;
+}
+```
 
 
+```typescript
+const printOutput: (a: number | string) => void = output => console.log(output);
+```
 
+
+### Default Functions
+Where we assign default values to function parameters
+
+```typescript
+const add = (n1: number, n2: number = 3) => n1 + n2;
+console.log(add(5)); //prints 8
+```
+
+```typescript
+const add = (n1: number = 1, n2: number) => n1 + n2;
+console.log(add(5)); //throws error as TS maps 5 to n1 and does not automatically find that n2 is the one to be assigned
+```
+
+
+### Spread Operator
+
+Can be used to copy all the contents of an array or object using `....`
+
+```typescript
+const hobbies = ['Sports', 'Cooking'];
+const activeHobbies = ['Hiking'];
+
+activeHobbies.push(hobbies); //error as connot push array of strings
+activeHobbies.push(hobbies[0], hobbies[1]); //possible but cumbersome
+activeHobbies.push(...hobbies);
+
+```
+
+### Rest parameters
 

@@ -5,12 +5,11 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "chrome",
       "request": "launch",
-      "name": "Launch Program",
-      "program": "${workspaceFolder}/Typescript/Sample/UsingTS/using-ts.ts",
-      "preLaunchTask": "tsc: build - Typescript/Sample/UsingTS/tsconfig.json",
-      "outFiles": ["${workspaceFolder}/Typescript/Sample/UsingTS/*.js"]
+      "name": "Debug in Chrome",
+      "url": "http://localhost:3000/",
+      "webRoot": "${workspaceFolder}/Typescript/Sample/UsingTS"
     }
   ]
 }
