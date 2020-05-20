@@ -1,17 +1,51 @@
 ## VSCode Shortcuts
 
+1. `Ctrl + K Z` #Open Zen mode to concentrate on coding
+1. `Ctrl + Space` #Code completion
 1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
 2. `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
 3. `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
-4. `Ctrl + Shift + P` Open up the command pallet in VSCode
+4. `Shift + Ctrl + P` Open up the command pallet in VSCode
+    - Remove the `>` symbol and you are at the _search files_ command pallette
+    - type `@` keyword and you can list out all the entities in the file
+5. `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
+    - After doing `Ctrl + E`, select the file to opne, and press `Ctrl + Right` #split the file to the right
 5. `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
-6. `Alt + Click on HTML` tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools
+6. `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
 7. `Ctrl +Alt + N` = To run the JS code using inbuilt node and output in console; using the Code runner extension
 8. Command: `workbench.action.terminal.clear`; Keybindings: `Ctrl + K; When: terminalFocus`
-9. `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
 10. `Ctrl + Shift + B` #Run build task
 11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
+12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
 up or down
+12. `Ctrl + '+'` #To increase/decrease the font size of the VSCode
+13. `Ctrl + ,` #access settings
+14. ``Shift + Ctrl + `` #create new termina l
+15. `Ctrl + B` #toggle sidebar
+16. `Shift + Ctrl + E` #focussing on sidebar
+16. `Shift + Ctrl + N` #new VSCode window
+17. `Ctrl + Tab` #Change File Tabs
+18. `Alt + Left/ Alt + Right` #Move between files
+18. `Ctrl + W` #close files
+19. `Ctrl + \` #to toggle split screen
+20. `Ctrl + Home` #to go the start of file   
+    `Ctrl + End` #to go to the end of file
+21. `Shift + Ctrl + K` #to remove line
+22. `Ctrl+ Enter` #to insert line from between the line   
+    `Ctrl + Enter` #from a file in sidebar will toggle split screen
+24. `Shift + Alt + A` #to insert block comment
+24. `Shift + Ctrl + \` #shift to matching brackets
+25. `Ctrl + D` #select next match 
+26. `Ctrl + U` #de-select match
+27. `Alt + Click` #add cursor to select specific points
+28. `Ctrl + Right/left` #move along the line faster by moving by words
+29. `CTrl + Shift + o` #go to a command or entity
+30. `F2` on the element you wish to refactor #will refactor all intances within the file and across all files wherever it is referenced
+
+
+
+
+
 ---
 
 ## VSCode Extensions
@@ -40,6 +74,8 @@ up or down
 17. **Auto-Open Markdown Preview** - _hnw_  
 18. **Path Intellisense** - _Christian Kohler_
 19. **TSLint** - _Microsoft_
+20. **Numbered Bookmarks** - _Alessandro Fragnani_
+21. **Paste JSON As Code** - _quicktype_
 
 ---
 ## VSCode settings

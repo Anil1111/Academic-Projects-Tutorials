@@ -182,8 +182,24 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 6. `ng lint` #check code for coding standards
 
 ---
+## Paste JSON as Code
 
+- Ensure the extension is installed
+1. Create the _myFile_.json with the JSON text
+2. Create the corresponding empty _myFile_.ts file
+3. CLick `Ctrl + Shift + P` and type `Paste JSON as Code`
+4. On the bar opened, give the toplevel interface name as _myFile_
+5. The _myFile_.js gets automatically populated with it
 
+---
+## Numbered Bookmarks
 
+- Ensure extension is installed
+1. Navigate to the line where you wish to add the bookmark
+2. Click on `Ctrl + Shift + <<anyNum>>` to add the bookmark there
+3. To go to the bookmark, open the command pallette
+4. Enter the number of the bookmark you wish to dive 
+
+---
 
 

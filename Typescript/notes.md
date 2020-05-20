@@ -306,7 +306,7 @@ console.log(newName, newAge, human2); //Max 28 { name: 'Max', age: 28 }
 
 ---
 
-## Classes and Interface
+## Classes
 
 ### Classes
 
@@ -415,7 +415,7 @@ The subclass has access to the constructor of the parent class
 >`super()`   
 is used inside the constructor to call the constructor of the parents class with the modified params
 needs to be called first inside the constructor
-
+> We can inherit from only one class
 
 ```typescript
 // class Department6 defined above
@@ -498,3 +498,287 @@ console.log(accDep4.lastReport); //access the getter lastReport as a property no
 accDep4.lastReport = 'new report'; //using the setter to add new report
 console.log(accDep4.lastReport);
 ```
+
+### Static Method and Properties
+
+Declaring a method or property as `static` allows them to be accessible on the class itself and does not require to be called on the instantiated object
+
+```typescript
+class Department8 {
+  public static fiscalyear = 2020;
+  protected employees: string[] = [];
+
+  constructor(private readonly id: string, public name: string) {
+    console.log(this.fiscalyear); //error
+    console.log(Department8.fiscalyear);  //use this
+  }
+  static createEmployee(name: string) {
+    return { name: name };
+  }
+}
+
+const employee1 = Department8.createEmployee("Rich");
+console.log(employee1, Department8.fiscalyear);
+```
+
+### Abstract Classes
+
+- Any class that has an abstract method must be an abstract class   
+- Absstract methods are used when you want each subclass to have that specific method but have different implementation of it. Thus all subclasses inheriting an abstract method must have concrete implementation
+- **asbtract methods must contain no implementation**   
+- Their can also be abstract properties.
+- **abstract classes cannot be instantiated but only inhertited**
+
+```typescript
+abstract class Department9 {
+  abstract protected employees: string[] = [];
+  constructor(protected readonly id: string, public name: string) {}
+  
+  abstract describe(): void; //no implementation
+}
+
+class ITDepartment9 extends Department9 {
+  constructor(id: string, public admins: string[]) {
+    super(id, 'IT');
+  }
+    //subclass must implement the abstract method
+  describe(){
+    console.log('IT department' + this.id);
+  }
+}
+
+```
+
+
+### Singletons and Private Constructors
+
+Implementing a singleton class (class that has only one object) requires implementing of Private constructors as creation of objects cannot be allowed outside the class
+
+```typescript
+class AccountingDepartment5 extends Department7 {
+  private static instance: AccountingDepartment5;
+
+  private constructor(id: string, private reports: string[]) {
+    super(id, "IT");
+  }
+  //will only declare the AccountingDepartment5 object once and every other time it will return its instance
+  static getInstance(){
+    if (AccountingDepartment5.instance){
+      return AccountingDepartment5.instance;
+    }
+    this.instance = new AccountingDepartment5('id5', []);
+    return this.instance;
+  }
+}
+
+// const accDep5 = new AccountingDepartment5("id5", []); //error as constructor is private
+const accDep5 = AccountingDepartment5.getInstance();
+const accDep6 = AccountingDepartment5.getInstance();
+console.log(accDep5, accDep6); // both will be same as only singleton pattern causes only object to be created
+```
+
+---
+
+## Interface
+
+### Why required ?
+To ensure that each class that implements the interface will have a specific functionality (implement the methods and have the properties defined)   
+_Vanilla JS does not support interfaces as it is only a TS feature and therefore compiled JS will convert it into functions and classes_
+
+
+### Syntax
+- Describes how the strcuture of an object
+- Can be used to typecheck objects that should have a specific structure
+ - Will have no assignements on properties and no implememntation on methods 
+- A class can implement multiple interfaces using the `implements` keyword
+- Doesnt allow public, private, static and so on except `readonly`
+- Interfaces cant be instantiated
+
+```typescript
+interface Person { //no implementation at all
+  name: string;
+  age: number;
+  greet(phrase: string): void; 
+}
+
+let user: Person; //using interface to create an object
+user = {
+  name: 'Rich',
+  age: 23,
+  greet(phrase: string) {
+    console.log(phrase + ' ' + this.name);
+  }
+};
+
+user.greet('Hi i am - ');
+```
+
+### Comparison with custom types
+
+Can be used interchangeably with custom types. However, interfaces are specific for defining the structure of properties.
+
+```typescript
+type Person {
+  name: string;
+  age: number;
+  greet(phrase: string): void; 
+}
+```
+
+
+### Interface with classes
+- it can be used as a contract that is implemented by the class
+- all properties and methods of the interface needs to be implemented by the class that implements the interface
+
+```typescript
+interface Greetable {
+  name: string,
+  greet(phrase: string): void;
+}
+
+class NewPerson implements Greetable {
+  constructor(public name: string, public age: number){
+  }
+  greet(phrase: string){
+    console.log(phrase + ' ' + this.name);
+  }
+}
+
+let greetUser: Greetable; //this type declaration enables greeUser to always the have the greet method
+greetUser = new NewPerson('Rich', 28); // as greetUser is of type Greetable that has been implemented by NewPerson
+greetUser.greet('Hi i am - ');
+console.log(greetUser);
+```
+
+### Difference with Abstract Classes
+- Abstract classes may contain methods with implementation along with abstract classes, whereas Interface does not have any implementation at all throughout.
+
+### Extending Interface - Inheritance
+- an interface can extend multiple interfaces, but classes can only extend one class
+
+1. It is possible to implement several interfaces
+
+```typescript
+interface Named3 {
+  readonly name: string
+}
+interface Greetable3 {
+  greet(phrase: string): void;
+}
+
+class NewPerson3 implements Greetable3, Named3 {
+  constructor(public name: string, public age: number){
+  }
+  greet(phrase: string){
+    console.log(phrase + ' ' + this.name);
+  }
+}
+```
+
+2. It is possible to extend an interface into one and then implement the combined interface
+
+```typescript
+interface Named4 {
+  readonly name: string
+}
+interface Greetable4 extends Named4{
+  greet(phrase: string): void;
+}
+
+class NewPerson4 implements Greetable4 {
+  constructor(public name: string, public age: number){
+  }
+  greet(phrase: string){
+    console.log(phrase + ' ' + this.name);
+  }
+}
+```
+
+3. It is possible to extend several interfaces
+
+```typescript
+interface Named4 {
+  readonly name: string
+}
+interface AnotherInterface {
+  readonly age: number
+}
+interface YetAnotherInterface {
+  readonly address: string
+}
+
+interface Greetable4 extends Named4, AnotherInterface, YetAnotherInterface{
+  greet(phrase: string): void;
+}
+
+```
+
+### Interface as Function Types
+- Can be used instead of custom types in the form of function types
+
+```typescript
+interface AddFn2 {
+  (a: number, b: number): number;
+}
+
+let add6: AddFn2;
+add6 = (a: number, b:number) =>{
+    return a+b;
+}
+
+console.log(add6(8,8)); //return 16
+```
+
+### Optional Properties and Methods
+- using the operator `?` we can make a property or method optional
+
+```typescript
+interface Named5 {
+  readonly name?: string;
+  outputName?: string; //optional porperty
+}
+
+interface Greetable5 extends Named5 {
+  greet?(phrase: string): void; //myMethod ?() {}
+}
+```
+
+---
+
+## Super Advanced Types
+
+
+### Intersection Types
+
+1. Intersection types on objects is the combination of the properties
+
+```typescript
+type Admin = {
+  name: string;
+  privileges: string[];
+};
+type Employee = {
+  name: string;
+  startDate: Date;
+};
+type ElevatedEmployee = Admin & Employee; //intersection types - combination of object properties
+const emp1: ElevatedEmployee = {
+  name: "Rich",
+  privileges: ["create-server"],
+  startDate: new Date(),
+};
+```
+
+2. Intersection types on union types is the intersection of those types
+
+```typescript
+type Combinable2 = string | number;
+type Numeric = number | boolean;
+type Universal = Combinable2 & Numeric; //intersection of the two union types - type number (the only intersecting type)
+```
+
+
+### Type Guards
+- helps with the union types
+
+

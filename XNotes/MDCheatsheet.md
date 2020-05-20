@@ -30,7 +30,7 @@ _This text_ is Italic
 ~~This text~~ is strike through
 
 <!-- escaping -->
-
+`` escape `abc` ``   
 \* file \*
 
 <!-- Blockquote -->
