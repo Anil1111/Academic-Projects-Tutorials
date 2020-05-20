@@ -780,5 +780,112 @@ type Universal = Combinable2 & Numeric; //intersection of the two union types - 
 
 ### Type Guards
 - helps with the union types
+- presents the approach required to check if a property or method exists before using them
 
 
+1. For normal Union types
+- Use the `typeof` method
+
+```typescript
+type Combinable3 = string | number;
+
+function add8(a: Combinable3, b: Combinable3) {
+  if(typeof a === 'string' || typeof b === 'string'){ //type guard using typeof
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+
+```
+
+2. For objects
+- use the `property in object`
+
+```typescript
+const emp2: ElevatedEmployee = {
+  name: "Rich",
+  privileges: ["create-server"],
+  startDate: new Date(),
+};
+
+type UnknownEmployee = Employee | Admin;
+
+function printEmployeeInformation(emp: UnknownEmployee) {
+  console.log('Name: ' + emp.name);
+  if ('privileges' in emp) { //JS code to check if property privileges exists on the object emp; type guards
+    console.log('Privilege ' + emp.privileges);
+  }
+  if ('startDate' in emp) { 
+    console.log('StartDate ' + emp.startDate);
+  }
+}
+
+```
+
+3. For classes
+- uses either the `property in object` or `instanceof` method
+
+```typescript
+class Car {
+  drive() {
+    console.log('Driving a car');
+  }  
+}
+
+class Truck {
+  drive() {
+    console.log('Driving a truck');
+  }
+  loadCargo(amount: number){
+    console.log('loading cargo..'+ amount);
+  }
+}
+
+type Vehicle = Car | Truck;
+
+function useVehicle(vehicle: Vehicle){
+  vehicle.drive();
+  if('loadCargo' in vehicle){
+    vehicle.loadCargo(2000);
+  }
+}
+
+```
+
+```typescript
+function useVehicle2(vehicle: Vehicle){
+  vehicle.drive();
+  if(vehicle instanceof Truck){
+    vehicle.loadCargo(4000);
+  }
+}
+
+```
+
+### Discriminated Union
+Requires the interfaces/classes to have one common property that describes the object uniquely, and we use this property in our check:
+
+```typescript
+interface Bird2{
+  type: 'bird'; //assigning literal type of only 'horse' to type
+  flyingSpeed: number;
+}
+interface Horse2{
+  type: 'horse'
+  runningSpeed: number;
+}
+
+type Animal2 = Bird2 | Horse2;
+function moveAnimal2(animal: Animal2){
+  let speed;
+  switch(animal.type) { //switch used to choose between the correct type
+    case 'bird':
+      speed = animal.flyingSpeed;
+      break;
+    case 'horse':
+      speed = animal.runningSpeed;
+      break;
+  }
+  console.log('Moving speed is:' + speed);
+}
+```

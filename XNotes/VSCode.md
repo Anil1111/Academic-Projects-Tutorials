@@ -17,7 +17,9 @@
 10. `Ctrl + Shift + B` #Run build task
 11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
 12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
-up or down
+    - `Shift + Alt + Right` #for selecting the corresponding data
+    - `Shift + Alt + Left` #for shrinking the selected data
+    
 12. `Ctrl + '+'` #To increase/decrease the font size of the VSCode
 13. `Ctrl + ,` #access settings
 14. ``Shift + Ctrl + `` #create new termina l
@@ -76,6 +78,7 @@ up or down
 19. **TSLint** - _Microsoft_
 20. **Numbered Bookmarks** - _Alessandro Fragnani_
 21. **Paste JSON As Code** - _quicktype_
+22. **Git Lens** - 
 
 ---
 ## VSCode settings

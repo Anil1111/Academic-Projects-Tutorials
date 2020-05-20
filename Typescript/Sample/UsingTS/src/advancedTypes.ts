@@ -62,7 +62,7 @@ if (typeof userInput === "string") {
   //extra type check is required
   userName = userInput;
 }
-
+// made severa;
 function generateError(message: string, code: number): never {
   throw { message: message, code: code }; //object with keys as message and code
   // while (true) //also returns never
