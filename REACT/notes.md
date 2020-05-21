@@ -1,16 +1,18 @@
+# React.JS
 React.js is a JavaScript library. It was developed by engineers at Facebook.
 
-What is JSX?
+## What is JSX?
 JSX is a syntax extension for JavaScript. It was written to be used with React. JSX code looks a lot like HTML.
 In this case, it means that JSX is not valid JavaScript. Web browsers can’t read it!
 If a JavaScript file contains JSX code, then that file will have to be compiled. That means that before the file reaches a web browser, a JSX compiler will translate any JSX into regular JavaScript.
 
-Here’s an example of a JSX element:
-<h1>Hello world</h1>
-JSX elements are treated as JavaScript expressions. They can go anywhere that JavaScript expressions can go.
-That means that a JSX element can be saved in a variable, passed to a function, stored in an object or array
+Here’s an example of a JSX element:   
+`<h1>Hello world</h1>`   
 
-several JSX elements being stored in an object:
+JSX elements are treated as JavaScript expressions. They can go anywhere that JavaScript expressions can go. That means that a JSX element can be saved in a variable, passed to a function, stored in an object or array
+
+Several JSX elements being stored in an object:
+```javascript
 const myTeam = {
   center: <li>Benzo Walli</li>,
   powerForward: <li>Rasha Loa</li>,
@@ -18,11 +20,15 @@ const myTeam = {
   shootingGuard: <li>Colmar Cumberbatch</li>,
   pointGuard: <li>Femi Billon</li>
 };
+```
 
 A single JSX element can have many attributes, just like in HTML:
+```javascript
 const panda = <img src="images/panda.jpg" alt="panda" width="500px" height="500px" />;
+```
 
-NESTED JSX
+## NESTED JSX
+```javascript
 const theExample = (
    <a href="https://www.example.com">
      <h1>
@@ -30,19 +36,26 @@ const theExample = (
      </h1>
    </a>
  );
+ ```
 
  a JSX expression must have exactly one outermost element.
  The first opening tag and the final closing tag of a JSX expression must belong to the same JSX element!
 
- Rendering JSX
- To render a JSX expression means to make it appear onscreen.
- The following code will render a JSX expression:
+## Rendering JSX
+
+To render a JSX expression means to make it appear onscreen.
+The following code will render a JSX expression:
+
+```javascript
 ReactDOM.render(<h1>Hello world</h1>, document.getElementById('app'));
+```
 
-ReactDOM is the name of a JavaScript library. This library contains several React-specific methods, all of which deal with the DOM in some way or another.
-ReactDOM.render() is the most common way to render JSX. It takes a JSX expression, creates a corresponding tree of DOM nodes, and adds that tree to the DOM.
+**ReactDOM** is the name of a JavaScript library. This library contains several React-specific methods, all of which deal with the DOM in some way or another.   
+`ReactDOM.render()` is the most common way to render JSX. It takes a JSX expression, creates a corresponding tree of DOM nodes, and adds that tree to the DOM.
 
-ReactDOM.render()‘s first argument should evaluate to a JSX expression, it doesn’t have to literally be a JSX expression.
+`ReactDOM.render()`‘s first argument should evaluate to a JSX expression, it doesn’t have to literally be a JSX expression.
+
+```javascript
 const toDoList = (
   <ol>
     <li>Learn React</li>
@@ -54,11 +67,14 @@ ReactDOM.render(
   toDoList, 
   document.getElementById('app')
 );
+```
 
-is that it only updates DOM elements that have changed.
+_it only updates DOM elements that have changed._   
 That means that if you render the exact same thing twice in a row, the second render will do nothing:
 
-Problem of DOM Manipulation:
+
+## Problem of DOM Manipulation:
+
 This slowness is made worse by the fact that most JavaScript frameworks update the DOM much more than they have to.
 The Virtual DOM
 In React, for every DOM object, there is a corresponding “virtual DOM object.” A virtual DOM object is a representation of a DOM object, like a lightweight copy.'A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.

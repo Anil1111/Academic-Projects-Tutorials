@@ -33,6 +33,8 @@
    ]
    ...
 }
+// for support for = new Promise() syntax
+// "lib": ["es5", "es2015", "dom", "scripthost"]
 ```
 
 ```json

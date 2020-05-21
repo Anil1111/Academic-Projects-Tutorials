@@ -1,5 +1,6 @@
 ## VSCode Shortcuts
 
+1. `Ctrl + K + Ctrl + S` #opens keybindings
 1. `Ctrl + K Z` #Open Zen mode to concentrate on coding
 1. `Ctrl + Space` #Code completion
 1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
@@ -19,14 +20,13 @@
 12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
     - `Shift + Alt + Right` #for selecting the corresponding data
     - `Shift + Alt + Left` #for shrinking the selected data
-    
 12. `Ctrl + '+'` #To increase/decrease the font size of the VSCode
 13. `Ctrl + ,` #access settings
-14. ``Shift + Ctrl + `` #create new termina l
-15. `Ctrl + B` #toggle sidebar
+14. ``Shift + Ctrl + `` #create new terminal
+15. `Ctrl + B` #toggle on/off sidebar
 16. `Shift + Ctrl + E` #focussing on sidebar
 16. `Shift + Ctrl + N` #new VSCode window
-17. `Ctrl + Tab` #Change File Tabs
+17. `Ctrl + Tab` #**Change File Tabs**
 18. `Alt + Left/ Alt + Right` #Move between files
 18. `Ctrl + W` #close files
 19. `Ctrl + \` #to toggle split screen
@@ -41,11 +41,16 @@
 26. `Ctrl + U` #de-select match
 27. `Alt + Click` #add cursor to select specific points
 28. `Ctrl + Right/left` #move along the line faster by moving by words
-29. `CTrl + Shift + o` #go to a command or entity
+29. `CTrl + Shift + o` #go to a function or entity withing the page
 30. `F2` on the element you wish to refactor #will refactor all intances within the file and across all files wherever it is referenced
+31. `Alt + /` **Custom** to go to next terminal
+32. `Alt + '` **Custom** to kill current terminal
+33. `Fn + Left Arrow / Rt Arrow` go to start/end of the line
+34. `Alt + #` where # is a number to select individual tabs in VSCode 
 
 
-
+## Shortcut from Integrated Terminal
+1. `code fileName.ext` opens the file in a new tab in VSCode 
 
 
 ---

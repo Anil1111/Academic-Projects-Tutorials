@@ -6,7 +6,7 @@ Note: To run the associated code:
 `nodemon ./dist/<<filename.js>>` for viewing console logs in integrated terninal   
 
 >`npm run dev` custom script to compile and run nodemon on app.js
-
+ 
 ## Features
 - Is an object oriented programming language
 - Additional to features including Static typing, classes and generics  on from JS
@@ -872,7 +872,7 @@ interface Bird2{
 }
 interface Horse2{
   type: 'horse'
-  runningSpeed: number;
+  runningSpeed: number; 
 }
 
 type Animal2 = Bird2 | Horse2;
@@ -889,3 +889,148 @@ function moveAnimal2(animal: Animal2){
   console.log('Moving speed is:' + speed);
 }
 ```
+
+### Typecasting
+Escpecially dont to ensure proper DOM manipulations
+
+1. Without typecasting
+
+```typescript
+const para = document.querySelector('p'); //type is HTMLParagraphElement or Null
+const para2 = document.getElementById('message-output'); //type is HTMLElement or NUll
+const userInputElement = document.getElementById('user-input')!; //type is HTMLElement or NUll
+//the ! symbol tells typescript that we are sure that an element like this exists in the DOM and wont yield null
+
+userInputElement.value = 'Hi-there'; //value property will give an error as the generic HTMLElement type does not have specific properties like value
+
+```
+
+2. With Typecasting
+
+- Method 1
+```typescript
+const userInputElement2 = <HTMLInputElement> document.getElementById('user-input'); //typecasting with HTMLInputElement
+userInputElement2.value = 'Hi-there'; //no error
+```
+
+- Method 2
+```typescript
+const userInputElement3 = document.getElementById('user-input') as HTMLInputElement; //typecasting with HTMLInputElement
+userInputElement3.value = 'Hi-there'! //no error 
+```
+
+- Method 3 with no need of `!`
+```typescript
+const userInputElement4 = document.getElementById('user-input'); 
+
+if(userInputElement4){ //use if as a replacement to '!'
+  (userInputElement4 as HTMLInputElement).value = 'Hi-there'! 
+} 
+```
+
+### Index Properties
+
+> **Index Types**   
+Are types that are declared using the `[]` symbol, and are used to declare objects for which we do not know the number of properties nor the name of the properties it will hold.   
+We only know the type that the key will be and the type of the value   
+The prop can only be string, number or symbols but not anyhting else
+
+```typescript
+interface ErrorContainer {
+  // id: string; //can have pre-defined properties but cannot be of type number as prop below is declared to be of type string
+  //syntax: [nameOfProp: typeOfPropName]: typeOfPropValueReturned
+  [prop: string]: string; 
+}
+
+//below object can hold n number of errors 
+const errorBag: ErrorContainer = {
+  // email: 1 //will not accept nos
+  // 1: 'not valid email' //will be valid as 1 can be interpreted as string but not vice versa
+  email: 'not a valid email!',
+  username: 'must start with capital char!'
+}; 
+
+```
+
+
+### Function overloads
+
+```typescript
+//overloading the add10 function so that all return types are understood by TS
+function add10(a: number, b: number): number;
+function add10(a: string, b: string): string;
+function add10(a: string, b: number): string;
+function add10(a: number, b: string): string;
+function add10(a: Combinable4, b: Combinable4) {
+  if(typeof a === 'string' || typeof b === 'string'){
+    return a.toString() + b.toString();
+  }
+  return a + b;
+};
+
+const result11 = add10('Rich', 'Abraham');
+result11.split(''); //no error even without typecasting as TS knows output is string
+//but
+const result12 = add10(5,6);
+result12.split(''); //error as TS now knows that it will return number
+```
+
+
+### Optional Chaining
+
+```typescript
+const fetchedUserData2 = {
+  id: '1',
+  name: 'Rich',
+  job: { title: 'CEO', description: ' My company'}
+};
+
+```
+
+What if the job property is the result of an API Call, then TS is not sure whether we will get the job property, then we use optional chaining cause if data is not present then TS will show error
+
+
+1. JS way of handling optional chaining
+```javascript
+console.log(fetchedUserData2.job.title); //will give error as we are not sure job property will  be ther ein JSON response
+console.log(fetchedUserData2.job && fetchedUserData2.job.title); //will work as JS uses chaining to handle this 
+
+```
+
+2. TS way of handling optional chaining
+```typescript
+//the below syntax ensure that job is checked only if fetchedUserData3 exists; title is checked only if job exists
+console.log(fetchedUserData2.job?.title);
+```
+
+### Nullish Coalescing
+To work with data that you are not sure whether it is null, undefined or valid   
+We use the Nullish Coalescing operator `??`
+
+>If input is `null` or `undefined` then below example is set to 'DEFAULT'   
+If input is valid or `''` empty, then it is of value ''
+
+```typescript
+const userInput5 = '';
+const storedData5 = userInput4 ?? 'DEFAULT'; //prints empty string
+console.log(storedData5); //for empty val, it incorrectly makes its type 'DEFAULT'
+```
+
+---
+
+## Generics
+
+Examples of generic usage:
+1. Array<string> or string[]
+2. Promise<string>
+
+**Generic Type**
+is a type which is connected with another type and is flexible regarding which type the other type is
+Eg: Array type does not care what type of data is inside it, but just requires some information on the type
+
+
+### Generic Function
+
+
+
+
