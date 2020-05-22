@@ -1,34 +1,33 @@
-//THIS keyword
+console.log("-------------------This in objects----------------------");
 const goat = {
   dietType: 'herbivore',
   makeSound() {
-    // console.log('baaa');
+    console.log('baaa');
   },
   diet() {
-    // console.log(this.dietType); //without this it throws a reference error
+    console.log(this.dietType); //without this it throws a reference error
   }
 };
 
-goat.diet(); 
-// Output: herbivore
+goat.diet(); // Output: herbivore
 
-//THIS in arrow functions
+console.log("-------------------This in Arrow Functions----------------------");
 //If we use the this keyword in a method then the value of this is the calling object.
 
 const goat2 = {
   dietType: 'herbivore',
   makeSound() {
-    // console.log('baaa');
+    console.log('baaa');
   },
   diet: () => {
-    // console.log(this.dietType);  //DO NOT USE ARROW FUNCTIONS WITH THIS
+    console.log(this.dietType);  //DO NOT USE ARROW FUNCTIONS WITH THIS
   }
 };
 
-goat.diet(); // Prints undefined
+goat2.diet(); // Prints undefined
 
 
-//PRIVACY
+console.log("-------------------Privacy----------------------");
 // / One common convention is to place an underscore _ before the name of a property to mean that the property should not be altered.
 //JavaScript objects do not have built-in privacy, rather there are conventions to follow to notify other developers about the intent of the code.
 const bankAccount = {
@@ -88,7 +87,7 @@ const robot = {
 // robot.numOfSensors = 100;
 // console.log(robot.numOfSensors);
 
-//FACTORY FUNCTIONS
+console.log("-------------------Factory Functions----------------------");
 // /A factory function is a function that returns an object and can be reused to make multiple object instances. 
 
 const monsterFactory = (name, age, energySource, catchPhrase) => {
@@ -106,7 +105,8 @@ const ghost = monsterFactory('Ghouly', 251, 'ectoplasm', 'BOO!');
 // ghost.scare(); // 'BOO!'
 
 
-//DESTRUCTURING
+console.log("-------------------Destructuring----------------------");
+
 const monsterFactory2 = (name, age) => {
   return { 
     name: name,
@@ -148,7 +148,7 @@ console.log(invented); // '1974'
 console.log(largestCube); // '17x17x17'
 
 
-const robot = {
+const robot2 = {
 	model: 'SAL-1000',
   mobile: true,
   sentient: false,
@@ -156,15 +156,37 @@ const robot = {
   energyLevel: 75
 };
 
+console.log("-------------------Object Methods----------------------");
+
 //We’d like to grab the property names, otherwise known as keys, and save the keys in an array which is assigned to robotKeys
-const robotKeys = Object.keys(robot);
-console.log(robotKeys);
+const robotKeys = Object.keys(robot2);
+console.log(robotKeys); //[ 'model', 'mobile', 'sentient', 'armor', 'energyLevel' ]
 
 // Object.entries() will also return an array, but the array will contain more arrays that have both the key and value of the properties in an object.
-const robotEntries = Object.entries(robot);
+const robotEntries = Object.entries(robot2);
 console.log(robotEntries);
+/*
+ [
+  [ 'model', 'SAL-1000' ],
+  [ 'mobile', true ],
+  [ 'sentient', false ],
+  [ 'armor', 'Steel-plated' ],
+  [ 'energyLevel', 75 ]
+] 
+*/
+
 
 // The Object.assign() method copies all enumerable own properties from one or more source objects to a target object.
-const newRobot = Object.assign({laserBlaster: true, voiceRecognition: true}, robot);
+const newRobot = Object.assign({laserBlaster: true, voiceRecognition: true}, robot2);
 console.log(newRobot);
-
+/* 
+{
+  laserBlaster: true,
+  voiceRecognition: true,
+  model: 'SAL-1000',
+  mobile: true,
+  sentient: false,
+  armor: 'Steel-plated',
+  energyLevel: 75
+} 
+*/

@@ -1,3 +1,4 @@
+console.log("-------------------'Objects'----------------------");
 //We use curly braces, {}, to designate an object literal:
 //We separate each key-value pair in an object literal with a comma (,). Keys are strings, but when we have a key that does not have any special characters in it, JavaScript allows us to omit the quotation marks:
 
@@ -25,7 +26,7 @@ spaceship2['Active Duty'];   // Returns true
 spaceship2['Fuel Type'];   // Returns  'Turbo Fuel'
 spaceship2['numCrew'];   // Returns 5 *** ALL KEYS SHOULD BE IN ''
 
-//Objects
+console.log("-------------------Object----------------------");
 // /Objects are mutable meaning we can update them after we create them!
 let returnAnyProp = (objectName, propName) => objectName[propName];
 returnAnyProp(spaceship, 'homePlanet'); // Returns 'Earth'
@@ -41,7 +42,7 @@ spaceship3.speed = 'Mach 5'; // Creates a new key of 'speed' with a value of 'Ma
 delete spaceship3.speed;  // Removes the mission
 
 
-//METHODS
+console.log("-------------------Mthods----------------------");
 //When the data stored on an object is a function we call that a method. A property is what an object has, while a method is what an object does.
 // /For example console is a global javascript object and .log() is a method on that object. Math is also a global javascript object and .floor() is a method on it.
 
@@ -59,7 +60,7 @@ const alienShip = {
 // alienShip.invade(); // Prints 'Hello! We have come to dominate your planet. Instead of Earth, it shall be called New Xaculon.'
 
 
-//Nested Objects
+console.log("-------------------Nested Objects----------------------");
 let spaceship5 = {
   passengers: [{ name: 'Space Dog' }],
   telescope: {
@@ -93,7 +94,7 @@ let spaceship5 = {
 let capFave = spaceship5.crew.captain['favorite foods'][0];
 let firstPassenger = spaceship5.passengers[0];
 
-//Pass by reference
+console.log("-------------------Pass by Reference----------------------");
 //Objects are passed by reference. This means when we pass a variable assigned to an object into a function as an argument, the computer interprets the parameter name as pointing to the space in memory holding that object. As a result, functions which change object properties actually mutate the object permanently (even when the object is assigned to a const variable).
 
 const spaceship4 = {
@@ -108,7 +109,7 @@ paintIt(spaceship4);
 spaceship4.color // Returns 'glorious gold'
 
 
-//Re-assignment
+console.log("-------------------Re-assignment----------------------");
 // /However, reassignment of the spaceship variable wouldn’t work in the same way:
 let spaceship6 = {
   homePlanet: 'Earth',
@@ -133,7 +134,7 @@ spaceship6 = {
 //When we did the reassignment in the body of tryReassignment(), the obj variable came to refer to the memory location of the object {'identified' : false, 'transport type' : 'flying'}, while the spaceship variable was completely unchanged from its earlier value.
 
 
-//LOOPS
+console.log("-------------------loops----------------------");
 let spaceship7 = {
   crew: {
     captain: {

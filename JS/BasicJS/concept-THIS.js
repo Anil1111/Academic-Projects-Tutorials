@@ -1,33 +1,54 @@
 
 console.log('\n ------------ Function invocation -------------------');
-//Normal Type of function invocation
+/* 
+In JavaScript the situation is different: this is the current execution context of a function. The language has 4 function invocation types:
+
+function invocation: alert('Hello World!')
+method invocation: console.log('Hello World!')
+constructor invocation: new RegExp('\\d')
+indirect invocation: alert.call(undefined, 'Hello World!')
+ */
+
+console.log('------------ Normal Type of function invocation -------------------');
 function hello(name) {
   return 'Hello ' + name + '!';
 }
 const message = hello('World');
 console.log('Function Type 1 - ' + message); // => 'Hello World!'
 
-//Advanced function invocation
+
+console.log('------------ Advanced function invocation -------------------');
+
 const message2 = (function (name) {
   return 'Hello ' + name + '!';
 })('World');
 console.log('Function Type 2 - ' + message2) // => 'Hello World!'
 
+console.log('------------ This in a normal function = global / window in browser-------------------');
 
-// 'This' in a normal function = global / window in browser
+let myNumber;
 function sum(a, b) {
   console.log(`THIS in a normal function - ${this === global}`); // => true
   this.myNumber = 20; // add 'myNumber' property to global object
   return a + b;
 }
-// sum() is invoked as a function
-// this in sum() is a global object (window)
+// sum() is invoked as a function invocation;this in sum() is a global object (window in browsers)
 sum(15, 16);     // => 31
 global.myNumber; // => 20
 
 
+//if this is used outside the function scope, it still refers to the global object:
+console.log(`this outside the function ${this === global}`); // => true
+let myString = 'Hello World!'; //is local to the module
+myString2 = 'Crazy World'; //is a global varaible
+global.myString3 = 'More crazier'; //is defined on the global of node 
+console.log('this on a local constant ' + myString); // => 'Hello World!'
+console.log('this on a global constant ' + myString2); // => 'Hello World!'
+console.log('this on a global constant ' + global.myString3); // => 'Hello World!'
 
-//this in a function invocation, strict mode
+
+
+console.log('------------ this in a function invocation, strict mode-------------------');
 function execute() {
   'use strict';
   function concat(str1, str2) {
@@ -41,10 +62,12 @@ function execute() {
 }
 execute();
 
+console.log('------------ this in NON Strict Mode-------------------');
 
 function nonStrictSum(a, b) {
   // non-strict mode
   console.log(`This' in a non strict mode - ${this === global}`); // => true
+  console.log(`This' in a non strict mode -Undefined - ${this === undefined}`); // => false
   return a + b;
 }
 function strictSum(a, b) {
@@ -60,7 +83,11 @@ nonStrictSum(5, 6); // => 11
 // this in strictSum() is undefined
 strictSum(8, 12); // => 20
 
-//this in an inner function - NO this binding
+console.log('------------ PITFALL 1-------------------');
+console.log('------------ this in an inner function - NO this binding-------------------');
+// A common trap with the function invocation is thinking that this is the same in an inner function as in the outer function.
+//below the inner function is invoked as a function alone
+
 const numbers = {
   numberA: 5,
   numberB: 10,
@@ -76,7 +103,12 @@ const numbers = {
 };
 numbers.sum(); // => NaN or throws TypeError in strict mode
 
-//this in an inner function - WITH this binding
+//numbers.sum() is a method invocation on an object (see 3.), so the context in sum is numbers object
+//calculate() is a function invocation (but not method invocation), thus here this is the global object window
+//To make this have a desired value, modify the inner function’s context with indirect invocation (using .call() or .apply().) or create a bound function (using .bind()
+
+
+console.log('------------Solution 1 - this in an inner function - Using Call-------------------');
 const numbers2 = {
   numberA: 5,
   numberB: 10,
@@ -86,13 +118,17 @@ const numbers2 = {
       console.log(`Inside a function with THIS bound - ${this === numbers2}`); // => true
       return this.numberA + this.numberB;
     }
-    // use .call() method to modify the context
+    // use .call() method to modify the context, an indirect invocation
+    //adds the context of this to the function invocation explicitly
     return calculate.call(this);
   }
 };
 numbers2.sum(); // => 15
 
-//this in an inner function - WITH this binding - Arrow function
+console.log('------------Solution 2 - this in an inner function- Arrow function-------------------');
+
+//The arrow function binds this lexically, or simpler just uses this value of sum() method.
+
 const numbers3 = {
   numberA: 5,
   numberB: 10,
@@ -107,7 +143,8 @@ const numbers3 = {
 };
 numbers3.sum(); // => 15
 
-console.log('\n ------------ Method invocation -------------------');
+
+console.log('\n\n ------------ Method invocation -------------------');
 const myObject = {
   // helloFunction is a method
   helloFunction: function () {
@@ -130,8 +167,7 @@ const calc = {
 calc.increment(); // => 1
 calc.increment(); // => 2
 
-
-////this in a method invocation - from javascript object
+console.log(' ------------ this in a method invocation - from javascript object-------------------');
 const myDog = Object.create({
   sayName() {
     console.log(`The myDog constructor - ${this === myDog}`); // => true
@@ -143,8 +179,8 @@ myDog.name = 'Milo';
 myDog.sayName(); // => 'Milo'
 
 
+console.log(' ------------ this in a method invocation - from class-------------------');
 
-//this in a method invocation - from class
 class Planet {
   constructor(name) {
     this.name = name;
@@ -158,72 +194,67 @@ const earth = new Planet('Earth');
 // method invocation. the context is earth
 earth.getName(); // => 'Earth'
 
-
-//Pitfall: separating method from its object
+console.log(' ------------Pitfall2 : separating method from its object-------------------');
 
 //Normal function
 function Pet(type, legs) {
   this.type = type;
   this.legs = legs;
 
-  this.logInfo = function () {
-    console.log(`The Pet function, comparison - ${this === myCat}`); // => false
-    console.log(`The Pet function - The ${this.type} has ${this.legs} legs`);
+  this.logInfo = function (prefix) {
+    console.log(`${prefix} The Pet function, comparison - ${this === myCat}`); // => false
+    console.log(`${prefix} The Pet function - The ${this.type} has ${this.legs} legs`);
+
   }
 }
 const myCat = new Pet('Cat', 4);
-// logs "The undefined has undefined legs"
-// or throws a TypeError in strict mode
-setTimeout(myCat.logInfo, 1000);
-myCat.logInfo();
+myCat.logInfo('Normal Function'); //will work normlly
 
-//With Binding of this
+setTimeout(myCat.logInfo.bind(this, 'SETTIMEOUT Normal Function'), 1000);
+// SETTIMEOUT Normal Function The Pet function, comparison - false
+//SETTIMEOUT Normal Function The Pet function - The undefined has undefined legs
+
+console.log(' ------------Solution 1 : With Binding of this-------------------');
+
 function Pet2(type, legs) {
   this.type = type;
   this.legs = legs;
-  this.logInfo = function () {
-    console.log(`The Pet2 bind function, comparison - ${this === myCat}`); // => true
-    console.log(`The Pet2 bind function - The ${this.type} has ${this.legs} legs`);
+  this.logInfo = function (prefix) {
+    console.log(`${prefix} The Pet2 bind function, comparison - ${this === myCat2}`); // => true
+    console.log(`${prefix} The Pet2 bind function - The ${this.type} has ${this.legs} legs`);
   };
 }
-const myCat2 = new Pet2('Cat', 4);
+const myCat2 = new Pet2('Dog', 6);
+myCat2.logInfo('Normal Bound function'); //will work normally
+
+const boundLogInfo2 = myCat2.logInfo.bind(this, 'SETTIMEOUT Bound Function'); //will not work as this is global
+setTimeout(boundLogInfo2, 1000);
+
 // Create a bound function
-const boundLogInfo = myCat2.logInfo.bind(myCat2);
+const boundLogInfo = myCat2.logInfo.bind(myCat2, 'SETTIMEOUT Bound Function');
 // logs "The Cat has 4 legs"
 setTimeout(boundLogInfo, 1000);
 
 
-//Arrow function
+console.log(' ------------Solution 2 : With Arrow Function-------------------');
 function Pet3(type, legs) {
   this.type = type;
   this.legs = legs;
 
-  this.logInfo = () => {
-    console.log(`The Pet3 arrow function, comparison - ${this === myCat}`); // => true
-    console.log(`The Pet3 arrow function - The ${this.type} has ${this.legs} legs`);
+  this.logInfo = (prefix) => {
+    console.log(`${prefix} The Pet3 arrow function, comparison - ${this === myCat3}`); // => true
+    console.log(`${prefix} The Pet3 arrow function - The ${this.type} has ${this.legs} legs`);
   };
 }
-const myCat3 = new Pet3('Cat', 4);
+const myCat3 = new Pet3('Alien', 8);
 // logs "The Cat has 4 legs"
-setTimeout(myCat3.logInfo, 1000);
-myCat3.logInfo();
+setTimeout(myCat3.logInfo.bind(this, 'SETTIMEOUT Arrow Function'), 1000);
+myCat3.logInfo('Normal Arrow function');
+
 
 
 
 console.log('\n ------------ Constructor invocation -------------------');
-
-class City {
-  constructor(name, traveled) {
-    this.name = name;
-    this.traveled = false;
-  }
-
-  travel() {
-    this.traveled = true;
-  }
-}
-const paris = new City('Paris', false);
-paris.travel();
 
 
 function Foo() {
@@ -245,8 +276,8 @@ class Bar {
 const barInstance = new Bar();
 barInstance.property; // => 'Default Value'
 
+console.log(' ------------ Pitfall3: forgetting about new -------------------');
 
-//Pitfall: forgetting about new
 function Vehicle(type, wheelsCount) {
   this.type = type;
   this.wheelsCount = wheelsCount;
@@ -259,7 +290,7 @@ car.wheelsCount // => 4
 console.log(`The vehicle constructor that is not a NEW object- ${car === global}`); // => true
 
 
-console.log('\n ------------ Indirect invocation -------------------');
+console.log('\n ------------ Indirect invocation -Call & Apply -------------------');
 //It can be used to simulate a method call on an object
 
 const rabbit = { name: 'White Rabbit' };
@@ -272,7 +303,7 @@ concatName.call(rabbit, 'Hello ');  // => 'Hello White Rabbit'
 concatName.apply(rabbit, ['Bye ']); // => 'Bye White Rabbit'
 
 
-// ------------------ Bound Function -------------------')
+console.log('------------ Bound invocation - Bind-------------------');
 function multiply(number) {
   'use strict';
   return this * number;
@@ -285,7 +316,10 @@ double(10); // => 20
 
 
 
-// this inside a bound function
+console.log('------------ This in Bound Function-------------------');
+//this is the first argument of .bind() when invoking a bound function
+//The role of .bind() is to create a new function, which invocation will have the context as the first argument passed to .bind(). 
+
 const numbers4 = {
   array: [3, 5, 10],
   getNumbers() {
@@ -293,32 +327,25 @@ const numbers4 = {
   }
 };
 
-// Create a bound function
-const boundGetNumbers = numbers4.getNumbers.bind(numbers4);
-boundGetNumbers(); // => [3, 5, 10]
 // Extract method from object
 const simpleGetNumbers = numbers4.getNumbers;
-simpleGetNumbers(); // => undefined or throws an error in strict mode
+console.log(numbers4.getNumbers()); //works
+console.log(simpleGetNumbers()); // undefined or throws an error in strict mode
+
+const boundGetNumbers = numbers4.getNumbers.bind(numbers4); // Create a new bound function
+console.log(boundGetNumbers()); // => [3, 5, 10]
+
+//.bind() makes a permanent context link and will always keep it. A bound function cannot change its linked context when using .call() or .apply() with a different context or even a rebound doesn’t have any effect.
+
 
 
 console.log('\n ------------ Arrow Function -------------------');
-console.log('------------ IGNORE all pet function from Method Invocation -------------------');
 
 //Arrow function is designed to declare the function in a shorter form and lexically bind the context.
 const hello2 = (name) => {
   return 'Hello ' + name;
 };
 hello2('World'); // => 'Hello World'
-// Keep only even numbers
-[1, 2, 5, 6].filter(item => item % 2 === 0); // => [2, 6]
-
-
-const sumArguments = (...args) => {
-  console.log(`Sum arguments ${typeof arguments}`); // => 'undefined'
-  return args.reduce((result, item) => result + item);
-};
-sumArguments.name;      // => ''
-sumArguments(5, 5, 6); // => 16
 
 
 // /this in arrow function
@@ -330,6 +357,7 @@ class Point {
 
   log() {
     console.log(`Point in Arrow functions - ${this === myPoint}`); // => true
+    //setTimeout() calls the arrow function with the same context (myPoint object) as the log() method
     setTimeout(() => {
       console.log(`Point in Arrow functions and Timeout- ${this === myPoint}`);      // => true
       console.log(`Point in Arrow functions and Timeout - ${this.x} : ${this.y}`); // => '95:165'
@@ -340,3 +368,21 @@ const myPoint = new Point(95, 165);
 myPoint.log();
 
 
+console.log('------------ Pitfall 4- Defining method with an arrow function -------------------');
+
+function Period (hours, minutes) { 
+  this.hours = hours;
+  this.minutes = minutes;
+}
+
+Period.prototype.format = () => {
+  console.log(`${this === global}`); // => true
+  return this.hours + ' hours and ' + this.minutes + ' minutes';
+};
+
+const walkPeriod = new Period(2, 30);
+console.log(walkPeriod.format()); // => 'undefined hours and undefined minutes'
+
+
+
+console.log('\n\n------------ Executing all SET timeout functions -------------------');

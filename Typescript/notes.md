@@ -1019,6 +1019,7 @@ console.log(storedData5); //for empty val, it incorrectly makes its type 'DEFAUL
 ---
 
 ## Generics
+Gives us fleibility combined with type safety
 
 Examples of generic usage:
 1. Array<string> or string[]
@@ -1031,6 +1032,168 @@ Eg: Array type does not care what type of data is inside it, but just requires s
 
 ### Generic Function
 
+Issue without using generic function
+```typescript
+function merge(objA: Object, objB: Object) {
+  return Object.assign(objA, objB);
+} 
+
+const mergedObj = merge({name: 'Rich'}, {age: 20} );
+mergedObj.name; //error as TS only knows merge returns an object
+```
 
 
+One way to solve the error is by typecasting the mergedObj or telling TS that both objects will return different types using Generic Function and the result will be an intersection of those types
 
+```typescript
+function merge2<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+const mergedObj2 = merge2({name: 'Rich'}, {age: 20} );
+console.log(mergedObj2.name); //name is now available 
+```
+
+Types are set dynamically and we can reuse merge2 as it takes any 2 objects as argument
+```typescript
+function merge3<T, U>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+const mergedObj3 = merge2({name: 'Rich', hobbies: ['Sports'] }, {age: 20} );
+
+//not necessary to provide the return type as TS automatically infers 
+const mergedObj4 = merge2<{name: string, hobbies: string[]}, {age: number}>({name: 'Rich', hobbies: ['Sports'] }, {age: 20} );
+```
+
+
+### Constraints in Generic Functions
+
+Issue
+```typescript
+const mergedObj5 = merge2({name: 'Rich', hobbies: ['Sports'] }, 30 );
+console.log(mergedObj5); //does not show 30 as it is not an object
+```
+
+Constrained using extends keyword
+```typescript
+function merge4<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
+}
+ const mergedObj6 = merge4({name: 'Rich', hobbies: ['Sports'] }, 30 );
+//we get an error as now we extended T and U to be an object and therefore it has to be an object
+
+```
+
+### Another type of Generic Function
+
+```typescript
+interface Lengthy {
+  length: number;
+};
+
+//we can use the string type or a union type but we want T to be flexible; the only constraint is that it should have a length property
+function countAndPrint<T extends Lengthy>(element: T){
+  let descriptionText = 'Got no value';
+  if (element.length === 1){
+    descriptionText = 'Got 1 element';
+  } else if (element.length > 1) {
+    descriptionText = `Got ${element.length} element`;
+  } 
+  return [element, descriptionText];
+};
+
+console.log(countAndPrint('HI there!'));
+console.log( countAndPrint(['Sports', 'Cooking' ]));
+console.log( countAndPrint([]));
+console.log( countAndPrint(10)); //error as type number
+```
+
+
+### keyOf Constraint
+
+Using `keyof` property to find use the key of an object
+
+Issue
+```typescript
+function extractAndConvert(obj: Object, key: string){
+     return 'Value of' + obj[key];  //error as TS does not infer that key of the object will return a value or not
+}
+console.log(extractAndConvert({}, 'name')); //Value of undefined
+```
+
+Solution
+```typescript
+function extractAndConvert2<T extends object, U extends keyof T>(obj: T, key: U){
+   return 'Value of ' + obj[key];  //no error
+}
+console.log(extractAndConvert2({name: 'Rich'}, 'name')); //Value of Rich 
+ ```
+
+
+ ### Generic Classes
+
+```typescript
+//adding constraint: extends string and number to provide typesafety and flexibility at the same time
+class DataStorage<T extends string | number> {
+  private data: T[] = [];
+
+  addItem(item: T) {
+    this.data.push(item);
+  }
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return; //guard to ensure that if object are provided, then last element of array is not removed everytime
+    } else {
+      this.data.splice(this.data.indexOf(item), 1);
+    }
+  }
+  getItems() {
+    return [...this.data];
+  }
+}
+
+const textStorage = new DataStorage<string>();
+const numbStorage = new DataStorage<number>();
+
+```
+
+
+### Generic Utility Types
+
+Available only for typescript [Typescript Utilities](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+These types are only present in TS, and provides higher type safety
+
+1. Partial Type
+Partial is a type that is also of object type but wraps itself on CourseGoal and makes its properties optional and therefore can be assigned {} and will ultimately return type of courseGoal   
+Partial can be used in cases where you want to temporarily make all the properties of an interface optional
+
+```typescript
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+  let courseGoal: Partial<CourseGoal> = {};
+  courseGoal.title = title;
+  courseGoal.description = description;
+  courseGoal.completeUntil = date;
+  return courseGoal as CourseGoal;
+}
+```
+
+2. Readonly Type
+can be used on an object too
+
+```typescript
+const names: Readonly<string[]> = ['Rich', 'Anna'];
+names.push('Manu'); //notallowed
+names.pop(); //not allowed
+```
+
+
+### Generic Types vs Union Types
+
+If we rewrite datastorage as union type:
+With Union we say that we can have a mix of the given types but with T extends types, we say that only that type can be used
+Generics are used to lock the types used in methods whereas union types provide flexibility

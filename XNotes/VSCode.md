@@ -5,6 +5,7 @@
 1. `Ctrl + Space` #Code completion
 1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
 2. `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
+2. `Shift + Alt + (drag mouse)` Column box selection
 3. `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
 4. `Shift + Ctrl + P` Open up the command pallet in VSCode
     - Remove the `>` symbol and you are at the _search files_ command pallette
@@ -27,10 +28,11 @@
 16. `Shift + Ctrl + E` #focussing on sidebar
 16. `Shift + Ctrl + N` #new VSCode window
 17. `Ctrl + Tab` #**Change File Tabs**
+17. `Ctrl + K   Rt Arrow/Left Arrow` To toggle between the editor groups
 18. `Alt + Left/ Alt + Right` #Move between files
 18. `Ctrl + W` #close files
 19. `Ctrl + \` #to toggle split screen
-20. `Ctrl + Home` #to go the start of file   
+20. `Ctrl + Home` #to go the start of file     
     `Ctrl + End` #to go to the end of file
 21. `Shift + Ctrl + K` #to remove line
 22. `Ctrl+ Enter` #to insert line from between the line   
@@ -47,6 +49,8 @@
 32. `Alt + '` **Custom** to kill current terminal
 33. `Fn + Left Arrow / Rt Arrow` go to start/end of the line
 34. `Alt + #` where # is a number to select individual tabs in VSCode 
+35. `CTrl + L` select the entire line
+26. `Ctrl + K V` to open preview mode of the MD file to the right
 
 
 ## Shortcut from Integrated Terminal

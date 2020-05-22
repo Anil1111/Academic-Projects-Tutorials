@@ -1,9 +1,11 @@
-// /There are only seven fundamental data types in JavaScript, and six of those are the primitive data types: string, number, boolean, null, undefined, and symbol. And objects
+console.log("-------------------Java Script----------------------");
+// There are only seven fundamental data types in JavaScript, and six of those are the primitive data types: string, number, boolean, null, undefined, and symbol. And objects
 
 // Common methods
 let dateToday = new Date();
 let thisYear = dateToday.getFullYear();
 
+console.log("-------------------Arrow Notation----------------------");
 //implicit return using arrow notation in a function
 const double = num => num *2;
 
@@ -12,7 +14,8 @@ function double1(num) {
   return sum;
 }
 
-// Good scoping example
+console.log("-------------------Good scoping example----------------------");
+
 const logSkyColor = () => {
   const dusk = true;
   let color = 'blue'; 
@@ -24,7 +27,8 @@ const logSkyColor = () => {
 };
 //console.log(color); // ReferenceError; Avoid reference error
 
-//Switch example
+console.log("-------------------Switch----------------------");
+
 const calculateWeight = (earthWeight , planet)  => {
   let weight;
   switch (planet) {
@@ -40,7 +44,7 @@ const calculateWeight = (earthWeight , planet)  => {
 };
 // console.log(calculateWeight(80, 'abc'));
 
-//Calculate truthy or falsy
+console.log("-------------------Truthy or Falsy----------------------");
 const truthyOrFalsy = value => {
   if (value) {
       return true;
@@ -51,7 +55,7 @@ const truthyOrFalsy = value => {
 const truthyOrFalsy2 = value => value ? true : false;
 
 
-//Arrays
+console.log("-------------------Arrays----------------------");
 const itemTracker = ['item 0', 'item 1', 'item 2'];
 itemTracker.push('item 3', 'item 4'); //Adds elements
 itemTracker.pop(); //returns the element that is removed from end of the array
@@ -66,7 +70,7 @@ let removedItems = vegetables.splice(1, 2); // ["Cabbage", "Carrot"] (the origin
 let removedItems2 = vegetables.slice(1, 3);  //return a new array made from index 1 copying 3 elements
 
 
-//Loops
+console.log("-------------------Loops----------------------");
 for (let counter = 3; counter >= 0; counter--){
   // console.log(counter);
 };
