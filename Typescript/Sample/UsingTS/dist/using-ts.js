@@ -11,7 +11,7 @@ if (button) {
     });
 }
 function add2(n1, n2, showResult, phrase) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     if (showResult) {
         console.log(phrase + result);
     }
@@ -19,10 +19,10 @@ function add2(n1, n2, showResult, phrase) {
         return result;
     }
 }
-var number1;
+let number1;
 number1 = 5;
-var number2 = 2.8;
-var printResult3 = true;
-var resultPhrase = "Result is: ";
+const number2 = 2.8;
+const printResult3 = true;
+let resultPhrase = "Result is: ";
 add2(number1, number2, printResult3, resultPhrase);
 //# sourceMappingURL=using-ts.js.map

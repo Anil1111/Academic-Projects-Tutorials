@@ -1197,3 +1197,87 @@ names.pop(); //not allowed
 If we rewrite datastorage as union type:
 With Union we say that we can have a mix of the given types but with T extends types, we say that only that type can be used
 Generics are used to lock the types used in methods whereas union types provide flexibility
+
+---
+
+## Decorators
+
+Used for Meta-Programming   
+Exposes tools to other developers which uses ut for writing better utilities code by developers but has little impact on end users ie decorators needs to added on classes explicitly
+
+
+### Sample Decorator
+Decorators are denoted by: `@pointAtAFunction` 
+_Logger gets executed when the class is defined itself right at start not when it is instantiated_
+
+Decorator Function: When a decorator is placed on a class, it takes the constructor as its argument 
+```typescript
+function Logger(constructor: Function) {
+  console.log('Loggin.....');
+  console.log(constructor); //[Function: Pers]
+}
+```
+
+```typescript
+@Logger
+class Pers {
+  name = 'Rich';
+  constructor(){
+    console.log('Creating person object..');
+  }
+}
+
+const pers = new Pers();
+console.log(pers); //Pers2 { name: 'Rich' }
+```
+
+
+### Decorator Factory
+By creating functions
+Allows us to pass params to the Decorator that return an inner functions
+
+```typescript
+function Logger2(logString: string) {
+  return function (constructor: Function) {
+    console.log(logString);
+    console.log(constructor);
+  }
+}
+
+@Logger2('LOGGING - PERSON')
+class Pers2 {
+  name = 'Rich';
+
+  constructor(){
+    console.log('Creating person object..');
+  }
+}
+
+```
+
+### Other Decorator Functions
+
+```typescript
+function WithTemplate2(template: string, hookId: string) {
+return (constructor: any) => {
+    const hookEl = document.getElementById(hookId);
+    const p = new constructor(); //creating a new object with the constructor
+    if (hookEl){
+      hookEl.innerHTML = template;
+      hookEl.querySelector('h1')!.textContent = p.name;
+    }
+  }
+  
+}
+
+@WithTemplate2('<h1>New person</h1>', 'app') //renders on browser
+class Pers4 {
+  name = 'Rich';
+  constructor(){
+    console.log('Creating person object..');
+  }
+}
+
+const pers4 = new Pers4();
+console.log(Pers4);
+```

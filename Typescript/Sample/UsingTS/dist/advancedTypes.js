@@ -13,28 +13,28 @@ function printResult2(num) {
 printResult(add(5, 12));
 console.log(printResult(add(5, 12)));
 console.log("----------------Functions as Types-------------------------");
-var combineValues;
+let combineValues;
 combineValues = 5;
-var combineValues2;
+let combineValues2;
 combineValues2 = printResult;
-var combineValues3;
+let combineValues3;
 combineValues3 = add;
 console.log(combineValues3(8, 8));
 console.log("----------------Functions Types and callback-------------------------");
 function addHandler(num1, num2, cb) {
-    var result = num1 + num2;
+    const result = num1 + num2;
     cb(result);
 }
-addHandler(10, 20, function (result) {
+addHandler(10, 20, (result) => {
     console.log("Result:" + result);
     return result;
 });
 console.log("----------------Unknown Types-------------------------");
-var userInput;
-var userName;
+let userInput;
+let userName;
 userInput = 5;
 userInput = "Max";
-var userInput1;
+let userInput1;
 userName = userInput1;
 if (typeof userInput === "string") {
     userName = userInput;

@@ -1,313 +1,264 @@
 "use strict";
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 console.log("----------------Class-------------------------");
-var Department = (function () {
-    function Department(n) {
+class Department {
+    constructor(n) {
         this.name = n;
     }
-    Department.prototype.describe = function () {
+    describe() {
         console.log("Department:" + this.name);
-    };
-    return Department;
-}());
-var accounting = new Department("Accounting");
+    }
+}
+const accounting = new Department("Accounting");
 console.log(accounting);
-var accountingCopy = {
+const accountingCopy = {
     describe: accounting.describe,
 };
 accountingCopy.describe();
-var Department2 = (function () {
-    function Department2(n) {
+class Department2 {
+    constructor(n) {
         this.name = n;
     }
-    Department2.prototype.describe = function () {
+    describe() {
         console.log("Department2:" + this.name);
-    };
-    return Department2;
-}());
-var accounting2 = new Department2("Accounting");
+    }
+}
+const accounting2 = new Department2("Accounting");
 console.log(accounting2);
-var accountingCopy2 = {
+const accountingCopy2 = {
     describe: accounting2.describe,
 };
 console.log("----------------Access Modifiers-------------------------");
-var Department3 = (function () {
-    function Department3(n) {
+class Department3 {
+    constructor(n) {
         this.employees = [];
         this.name = n;
     }
-    Department3.prototype.describe = function () {
+    describe() {
         console.log("Department2:" + this.name);
-    };
-    Department3.prototype.addEmployee = function (employee) {
+    }
+    addEmployee(employee) {
         this.employees.push(employee);
-    };
-    Department3.prototype.printEmployeeInformation = function () {
+    }
+    printEmployeeInformation() {
         console.log(this.employees.length);
         console.log(this.employees);
-    };
-    return Department3;
-}());
-var accounting3 = new Department3("Accounting");
+    }
+}
+const accounting3 = new Department3("Accounting");
 accounting3.addEmployee("Max");
 accounting3.addEmployee("Max");
 accounting3.describe();
 accounting3.printEmployeeInformation();
-var Department4 = (function () {
-    function Department4(n) {
+class Department4 {
+    constructor(n) {
         this.employees = [];
         this.name = n;
     }
-    Department4.prototype.describe = function () {
+    describe() {
         console.log("Department2:" + this.name);
-    };
-    Department4.prototype.addEmployee = function (employee) {
+    }
+    addEmployee(employee) {
         this.employees.push(employee);
-    };
-    Department4.prototype.printEmployeeInformation = function () {
+    }
+    printEmployeeInformation() {
         console.log(this.employees.length);
         console.log(this.employees);
-    };
-    return Department4;
-}());
-var accounting4 = new Department4("Accounting");
+    }
+}
+const accounting4 = new Department4("Accounting");
 accounting4.addEmployee("Max");
 accounting4.addEmployee("Max");
 console.log("----------------Shorthand initialization-------------------------");
-var Department5 = (function () {
-    function Department5(id, name) {
+class Department5 {
+    constructor(id, name) {
         this.id = id;
         this.name = name;
         this.employees = [];
     }
-    Department5.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-    };
-    return Department5;
-}());
-var accounting5 = new Department5("id1", "Accounting");
+    describe() {
+        console.log(`Department (${this.id}): ${this.name}`);
+    }
+}
+const accounting5 = new Department5("id1", "Accounting");
 console.log(accounting5);
 accounting5.describe();
 console.log("----------------Readonly property-------------------------");
-var Department6 = (function () {
-    function Department6(id, name) {
+class Department6 {
+    constructor(id, name) {
         this.id = id;
         this.name = name;
         this.employees = [];
     }
-    Department6.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-    };
-    Department6.prototype.addEmployee = function (employee) {
+    describe() {
+        console.log(`Department (${this.id}): ${this.name}`);
+    }
+    addEmployee(employee) {
         this.employees.push(employee);
-    };
-    return Department6;
-}());
+    }
+}
 console.log("----------------Inheritance-------------------------");
-var ITDepartment = (function (_super) {
-    __extends(ITDepartment, _super);
-    function ITDepartment() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    return ITDepartment;
-}(Department6));
-var accounting6 = new ITDepartment("id2", "ITD");
+class ITDepartment extends Department6 {
+}
+const accounting6 = new ITDepartment("id2", "ITD");
 console.log(accounting6);
-var ITDepartment2 = (function (_super) {
-    __extends(ITDepartment2, _super);
-    function ITDepartment2(id, admins) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.admins = admins;
-        return _this;
+class ITDepartment2 extends Department6 {
+    constructor(id, admins) {
+        super(id, "IT");
+        this.admins = admins;
     }
-    return ITDepartment2;
-}(Department6));
-var it = new ITDepartment2("id3", ["Max", "Rich"]);
+}
+const it = new ITDepartment2("id3", ["Max", "Rich"]);
 console.log(it);
-var AccountingDepartment = (function (_super) {
-    __extends(AccountingDepartment, _super);
-    function AccountingDepartment(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.reports = reports;
-        return _this;
+class AccountingDepartment extends Department6 {
+    constructor(id, reports) {
+        super(id, "IT");
+        this.reports = reports;
     }
-    AccountingDepartment.prototype.addReport = function (report) {
+    addReport(report) {
         this.reports.push(report);
-    };
-    AccountingDepartment.prototype.printReports = function () {
+    }
+    printReports() {
         console.log(this.reports);
-    };
-    return AccountingDepartment;
-}(Department6));
-var accDep = new AccountingDepartment("id4", []);
+    }
+}
+const accDep = new AccountingDepartment("id4", []);
 accDep.addReport("Something went wrong!");
 accDep.printReports();
 console.log("----------------Overriding Properties & Protected-------------------------");
-var AccountingDepartment2 = (function (_super) {
-    __extends(AccountingDepartment2, _super);
-    function AccountingDepartment2(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.reports = reports;
-        return _this;
+class AccountingDepartment2 extends Department6 {
+    constructor(id, reports) {
+        super(id, "IT");
+        this.reports = reports;
     }
-    AccountingDepartment2.prototype.addEmployee = function (name) {
+    addEmployee(name) {
         if (name === "Max") {
             return;
         }
-    };
-    return AccountingDepartment2;
-}(Department6));
-var Department7 = (function () {
-    function Department7(id, name) {
+    }
+}
+class Department7 {
+    constructor(id, name) {
         this.id = id;
         this.name = name;
         this.employees = [];
     }
-    Department7.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-    };
-    Department7.prototype.addEmployee = function (employee) {
-        this.employees.push(employee);
-    };
-    return Department7;
-}());
-var AccountingDepartment3 = (function (_super) {
-    __extends(AccountingDepartment3, _super);
-    function AccountingDepartment3(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.reports = reports;
-        return _this;
+    describe() {
+        console.log(`Department (${this.id}): ${this.name}`);
     }
-    AccountingDepartment3.prototype.addEmployee = function (name) {
+    addEmployee(employee) {
+        this.employees.push(employee);
+    }
+}
+class AccountingDepartment3 extends Department7 {
+    constructor(id, reports) {
+        super(id, "IT");
+        this.reports = reports;
+    }
+    addEmployee(name) {
         if (name === "Max") {
             return;
         }
         this.employees.push(name);
-    };
-    return AccountingDepartment3;
-}(Department7));
-var accDep3 = new AccountingDepartment3("id4", []);
+    }
+}
+const accDep3 = new AccountingDepartment3("id4", []);
 accDep3.addEmployee("Samuel");
 console.log(accDep3);
 console.log("----------------Getters and Setters-------------------------");
-var AccountingDepartment4 = (function (_super) {
-    __extends(AccountingDepartment4, _super);
-    function AccountingDepartment4(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.reports = reports;
-        _this._lastReport = reports[0];
-        return _this;
+class AccountingDepartment4 extends Department7 {
+    constructor(id, reports) {
+        super(id, "IT");
+        this.reports = reports;
+        this._lastReport = reports[0];
     }
-    Object.defineProperty(AccountingDepartment4.prototype, "lastReport", {
-        get: function () {
-            if (this._lastReport) {
-                return this._lastReport;
-            }
-            throw new Error("No report found!");
-        },
-        set: function (value) {
-            if (!value) {
-                throw new Error("Please pass valid value!");
-            }
-            this.addReport(value);
-        },
-        enumerable: false,
-        configurable: true
-    });
-    AccountingDepartment4.prototype.addReport = function (report) {
+    get lastReport() {
+        if (this._lastReport) {
+            return this._lastReport;
+        }
+        throw new Error("No report found!");
+    }
+    set lastReport(value) {
+        if (!value) {
+            throw new Error("Please pass valid value!");
+        }
+        this.addReport(value);
+    }
+    addReport(report) {
         this.reports.push(report);
         this._lastReport = report;
-    };
-    AccountingDepartment4.prototype.printReports = function () {
+    }
+    printReports() {
         console.log(this.reports);
-    };
-    return AccountingDepartment4;
-}(Department7));
-var accDep4 = new AccountingDepartment4("id5", []);
+    }
+}
+const accDep4 = new AccountingDepartment4("id5", []);
 accDep4.addReport("Something went wrong!");
 console.log(accDep4.lastReport);
 accDep4.lastReport = "new report";
 console.log(accDep4.lastReport);
 console.log("----------------Static Method and properties-------------------------");
-var Department8 = (function () {
-    function Department8(id, name) {
-        this.id = id;
-        this.name = name;
-        this.employees = [];
-        console.log(Department8.fiscalyear);
+let Department8 = (() => {
+    class Department8 {
+        constructor(id, name) {
+            this.id = id;
+            this.name = name;
+            this.employees = [];
+            console.log(Department8.fiscalyear);
+        }
+        describe() {
+            console.log(`Department (${this.id}): ${this.name}`);
+        }
+        addEmployee(employee) {
+            this.employees.push(employee);
+        }
+        static createEmployee(name) {
+            return { name: name };
+        }
     }
-    Department8.prototype.describe = function () {
-        console.log("Department (" + this.id + "): " + this.name);
-    };
-    Department8.prototype.addEmployee = function (employee) {
-        this.employees.push(employee);
-    };
-    Department8.createEmployee = function (name) {
-        return { name: name };
-    };
     Department8.fiscalyear = 2020;
     return Department8;
-}());
-var employee1 = Department8.createEmployee("Rich");
+})();
+const employee1 = Department8.createEmployee("Rich");
 console.log(employee1, Department8.fiscalyear);
 console.log("----------------Abstract Classes-------------------------");
-var Department9 = (function () {
-    function Department9(id, name) {
+class Department9 {
+    constructor(id, name) {
         this.id = id;
         this.name = name;
         this.employees = [];
     }
-    Department9.prototype.addEmployee = function (employee) {
+    addEmployee(employee) {
         this.employees.push(employee);
-    };
-    return Department9;
-}());
-var ITDepartment9 = (function (_super) {
-    __extends(ITDepartment9, _super);
-    function ITDepartment9(id, admins) {
-        var _this = _super.call(this, id, 'IT') || this;
-        _this.admins = admins;
-        return _this;
     }
-    ITDepartment9.prototype.describe = function () {
+}
+class ITDepartment9 extends Department9 {
+    constructor(id, admins) {
+        super(id, 'IT');
+        this.admins = admins;
+    }
+    describe() {
         console.log('IT department' + this.id);
-    };
-    return ITDepartment9;
-}(Department9));
-var it9 = new ITDepartment9("id9", ["Max", "Rich"]);
+    }
+}
+const it9 = new ITDepartment9("id9", ["Max", "Rich"]);
 it9.describe();
 console.log("----------------Singletons and Private Constructors-------------------------");
-var AccountingDepartment5 = (function (_super) {
-    __extends(AccountingDepartment5, _super);
-    function AccountingDepartment5(id, reports) {
-        var _this = _super.call(this, id, "IT") || this;
-        _this.reports = reports;
-        _this._lastReport = reports[0];
-        return _this;
+class AccountingDepartment5 extends Department7 {
+    constructor(id, reports) {
+        super(id, "IT");
+        this.reports = reports;
+        this._lastReport = reports[0];
     }
-    AccountingDepartment5.getInstance = function () {
+    static getInstance() {
         if (AccountingDepartment5.instance) {
             return AccountingDepartment5.instance;
         }
         this.instance = new AccountingDepartment5('id5', []);
         return this.instance;
-    };
-    return AccountingDepartment5;
-}(Department7));
-var accDep5 = AccountingDepartment5.getInstance();
-var accDep6 = AccountingDepartment5.getInstance();
+    }
+}
+const accDep5 = AccountingDepartment5.getInstance();
+const accDep6 = AccountingDepartment5.getInstance();
 console.log(accDep5, accDep6);
 console.log("----------------Abstract Classes-------------------------");
 //# sourceMappingURL=class.js.map

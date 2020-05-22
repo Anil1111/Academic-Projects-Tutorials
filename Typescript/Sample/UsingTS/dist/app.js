@@ -1,126 +1,84 @@
 "use strict";
-var __spreadArrays = (this && this.__spreadArrays) || function () {
-    for (var s = 0, i = 0, il = arguments.length; i < il; i++) s += arguments[i].length;
-    for (var r = Array(s), k = 0, i = 0; i < il; i++)
-        for (var a = arguments[i], j = 0, jl = a.length; j < jl; j++, k++)
-            r[k] = a[j];
-    return r;
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-console.log("-------------------Generics----------------------");
-var names10 = ["Rich", "Abraham"];
-var names11 = ["Rich", "Abraham"];
-var promise = new Promise(function (resolve, reject) {
-    setTimeout(function () {
-        resolve("this is done");
-    }, 1000);
-});
-promise.then(function (data) {
-    data.split("");
-});
-console.log("-------------------Generic Function----------------------");
-function merge(objA, objB) {
-    return Object.assign(objA, objB);
+console.log("-------------------Decorators----------------------");
+function Logger(constructor) {
+    console.log('Loggin.....');
+    console.log(constructor);
 }
-var mergedObj = merge({ name: "Rich" }, { age: 20 });
-function merge2(objA, objB) {
-    return Object.assign(objA, objB);
-}
-var mergedObj2 = merge2({ name: "Rich" }, { age: 20 });
-console.log(mergedObj2.name);
-function merge3(objA, objB) {
-    return Object.assign(objA, objB);
-}
-var mergedObj3 = merge2({ name: "Rich", hobbies: ["Sports"] }, { age: 20 });
-console.log(mergedObj3);
-var mergedObj4 = merge2({ name: "Rich", hobbies: ["Sports"] }, { age: 20 });
-console.log("-------------------Constraints----------------------");
-var mergedObj5 = merge2({ name: "Rich", hobbies: ["Sports"] }, 30);
-console.log(mergedObj5);
-function merge4(objA, objB) {
-    return Object.assign(objA, objB);
-}
-var mergedObj6 = merge4({ name: "Rich", hobbies: ["Sports"] }, { age: 20 });
-console.log(mergedObj6);
-console.log("-------------------Another Generic Function----------------------");
-function countAndPrint(element) {
-    var descriptionText = "Got no value";
-    if (element.length === 1) {
-        descriptionText = "Got 1 element";
-    }
-    else if (element.length > 1) {
-        descriptionText = "Got " + element.length + " element";
-    }
-    return [element, descriptionText];
-}
-console.log(countAndPrint("HI there!"));
-console.log(countAndPrint(["Sports", "Cooking"]));
-console.log(countAndPrint([]));
-console.log("-------------------'keyOf Constraint'----------------------");
-function extractAndConvert(obj, key) {
-}
-console.log(extractAndConvert({}, "name"));
-function extractAndConvert2(obj, key) {
-    return "Value of " + obj[key];
-}
-console.log(extractAndConvert2({ name: "Rich" }, "name"));
-console.log("-------------------'Generic Classes'----------------------");
-var DataStorage = (function () {
-    function DataStorage() {
-        this.data = [];
-    }
-    DataStorage.prototype.addItem = function (item) {
-        this.data.push(item);
-    };
-    DataStorage.prototype.removeItem = function (item) {
-        if (this.data.indexOf(item) === -1) {
-            return;
-        }
-        else {
-            this.data.splice(this.data.indexOf(item), 1);
+let Pers = (() => {
+    let Pers = class Pers {
+        constructor() {
+            this.name = 'Rich';
+            console.log('Creating person object..');
         }
     };
-    DataStorage.prototype.getItems = function () {
-        return __spreadArrays(this.data);
+    Pers = __decorate([
+        Logger
+    ], Pers);
+    return Pers;
+})();
+const pers = new Pers();
+console.log(pers);
+console.log("-------------------Decorator Factory----------------------");
+function Logger2(logString) {
+    return function (constructor) {
+        console.log(logString);
+        console.log(constructor);
     };
-    return DataStorage;
-}());
-var textStorage = new DataStorage();
-textStorage.addItem("Rich");
-textStorage.addItem("Samson");
-textStorage.addItem("Abr");
-textStorage.removeItem("Abr");
-console.log(textStorage.getItems());
-var numbStorage = new DataStorage();
-numbStorage.addItem(10);
-numbStorage.addItem(20);
-numbStorage.addItem(30);
-numbStorage.removeItem(20);
-console.log(numbStorage.getItems());
-var objStorage = new DataStorage();
-objStorage.addItem({ name: "Rich" });
-objStorage.addItem({ name: "Abr" });
-objStorage.addItem({ name: 'karl' });
-objStorage.removeItem({ name: "Abr" });
-console.log(objStorage.getItems());
-var myObj = { name: 'doom' };
-objStorage.addItem(myObj);
-console.log(objStorage.getItems());
-objStorage.removeItem(myObj);
-console.log(objStorage.getItems());
-var DataStorage2 = (function () {
-    function DataStorage2() {
-    }
-    return DataStorage2;
-}());
-console.log("-------------------Generic Utility Types ----------------------");
-function createCourseGoal(title, description, date) {
-    var courseGoal = {};
-    courseGoal.title = title;
-    courseGoal.description = description;
-    courseGoal.completeUntil = date;
-    return courseGoal;
 }
-var names = ['Rich', 'Anna'];
-console.log("------------------- Generic Types vs Union Types----------------------");
-console.log("------------------- ----------------------");
+let Pers2 = (() => {
+    let Pers2 = class Pers2 {
+        constructor() {
+            this.name = 'Rich';
+            console.log('Creating person object..');
+        }
+    };
+    Pers2 = __decorate([
+        Logger2('LOGGING - PERSON')
+    ], Pers2);
+    return Pers2;
+})();
+const pers2 = new Pers2();
+console.log(pers2);
+console.log("-------------------Other Decorator Functions----------------------");
+function WithTemplate(template, hookId) {
+    return (_) => {
+    };
+}
+let Pers3 = (() => {
+    let Pers3 = class Pers3 {
+        constructor() {
+            this.name = 'Rich';
+            console.log('Creating person object..');
+        }
+    };
+    Pers3 = __decorate([
+        WithTemplate('<h1>Myy Person</h1>', 'app')
+    ], Pers3);
+    return Pers3;
+})();
+function WithTemplate2(template, hookId) {
+    return (constructor) => {
+    };
+}
+let Pers4 = (() => {
+    let Pers4 = class Pers4 {
+        constructor() {
+            this.name = 'Rich';
+            console.log('Creating person object..');
+        }
+    };
+    Pers4 = __decorate([
+        WithTemplate2('<h1>New person</h1>', 'app')
+    ], Pers4);
+    return Pers4;
+})();
+const pers4 = new Pers4();
+console.log(Pers4);
+console.log("-------------------Decorator Factory----------------------");
 //# sourceMappingURL=app.js.map
