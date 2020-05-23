@@ -14,8 +14,8 @@
     - After doing `Ctrl + E`, select the file to opne, and press `Ctrl + Right` #split the file to the right
 5. `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
 6. `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
-7. `Ctrl +Alt + N` = To run the JS code using inbuilt node and output in console; using the Code runner extension
-8. Command: `workbench.action.terminal.clear`; Keybindings: `Ctrl + K; When: terminalFocus`
+7. `Ctrl +Alt + N` To run the JS code using inbuilt node and output in console; using the Code runner extension
+8. `CTrl + / + Shift` to clear the terminal; Command: `workbench.action.terminal.clear`;
 10. `Ctrl + Shift + B` #Run build task
 11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
 12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down

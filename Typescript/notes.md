@@ -1261,7 +1261,7 @@ class Pers2 {
 function WithTemplate2(template: string, hookId: string) {
 return (constructor: any) => {
     const hookEl = document.getElementById(hookId);
-    const p = new constructor(); //creating a new object with the constructor
+    const p = new constructor(); //the constructor function represents the class Pers4 and will retain all the prop and params passed below
     if (hookEl){
       hookEl.innerHTML = template;
       hookEl.querySelector('h1')!.textContent = p.name;
@@ -1281,3 +1281,238 @@ class Pers4 {
 const pers4 = new Pers4();
 console.log(Pers4);
 ```
+
+### Multiple Decorators
+When multiple decorators are present, they get executed bottom up but the decorator factory is executed sequentially
+
+```typescript
+//Although Logger3 is called before WithTemplate3, WithTemplate3 return function is executed first as it is bottom up 
+@Logger3('LGGGING - MULTIPLE DECO')
+@WithTemplate3('<h1>Multiple Decorators</h1>', 'app3') //renders on browser
+class Pers5 {
+  
+  name = 'RichMult';
+
+  constructor(){
+    console.log('Inside Constructor - Creating person object');
+  }
+}
+```
+
+
+### Property Decorators
+
+```typescript
+
+//For instance property like title, target will be the prototype of the object
+//if it was a static property, then it would refer to the constructor
+//but we use 'any' as we are not sure
+function Log(target: any, propertyName: string | Symbol) {
+  console.log('Property Decorator');
+  console.log(target, propertyName);//prototype constructor, "title" 
+  //executes when class is defined
+}
+
+class Product {
+  @Log //adding decorator to a property; it received two arguments
+  public title: string;
+  private _price: number;
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+
+  set price(val: number){
+    if (val > 0){
+      this._price;      
+    } else {
+      throw new Error('Invalid pirce - should be positive!');
+    }
+  }
+  getPriceWithTax(tax: number) {
+    return this._price * (1 + tax);
+  }
+}
+
+```
+
+### Accessor and Parameter Decorators
+Example showing the below 4 types of decorators:
+1. **Property Decorator** - On an object Property
+2. **Accessor Decorator** - On the getter/setter function of an object
+3. **Method Decorator** - On a method of an Object
+4. **Parameter Decorator** - On a parameter passed in a method
+
+```typescript
+function Log(target: any, propertyName: string | Symbol) {
+  console.log('Property Decorator');
+  console.log(target);//prototype constructor
+  console.log(propertyName);//"title" 
+  //executes when class is defined
+}
+
+function Log2(target: any, name: string, descriptor: PropertyDescriptor){
+  console.log('Accessor decorator!');
+  console.log(target); //prototype of Product2
+  console.log(name); //price - which is the name of the accessor
+  console.log(descriptor); //setter function
+}
+
+//same params and can reuse Log2
+function Log3(target: any, name: string, descriptor: PropertyDescriptor) {
+  console.log('Method decorator!');
+  console.log(target); //prototype of Product2
+  console.log(name); //getPriceWithTax - which is the name of the method
+  console.log(descriptor); //descriptor of the method
+}
+
+function Log4(target: any, name: string | symbol, position: number){
+  console.log('Parameter decorator!');
+  console.log(target); //prototype of Product2
+  console.log(name); //getPriceWithTax - which is the name of the method
+  console.log(position); //0 - position of the param in function
+
+}
+
+class Product2 {
+  @Log //is a property Decorator
+  public title: string;
+  private _price: number;
+  constructor(t: string, p: number) {
+    this.title = t;
+    this._price = p;
+  }
+
+  @Log2 //is an accessor decorator
+  set price(val: number){
+    if (val > 0){
+      this._price;      
+    } else {
+      throw new Error('Invalid pirce - should be positive!');
+    }
+  }
+
+  @Log3 //is a method decorator
+  getPriceWithTax(@Log4 tax: number) { 
+    //@Log4 is a parameter decorator
+    return this._price * (1 + tax);
+  }
+}
+```
+
+### Order of Decorator Execution
+All decorators above are running without actually instantiating of the class _but executed when the class is defined itself_   
+It is just used to execute the function when the class/method is defined, and to do some behind the scene work.
+
+
+### Returning or Changing a class in a class decorator
+
+In the below example, we do the following:
+- We are returning a new class
+- providing a class name is not mandatory
+- we extend the originalConstructor to have all the props and params passed
+- this will ensure that the template will be rendered to DOM only when the object of the class is instantiated
+- The below decorator will now work only when the class is instanitated as the new class is returned that replaces the original class or constructor function 
+
+
+```typescript
+
+//special type for assigning type of constructor: {new(...args: any[]): {} }
+// function that can be called with new keyword: { new(): {} }
+function WithTemplate4(template: string, hookId: string) {
+  return function<T extends {new(...args: any[]): {name: string} } >(originalConstructor: T){
+    return class extends originalConstructor {
+      //to accept any number of arguments
+      //replacing args with _ below as we tell TS we dont use it
+      constructor(..._: any[]) {
+        super();
+        //moving the logic inside this
+        const hookEl = document.getElementById(hookId);
+        if (hookEl){
+          hookEl.innerHTML = template;
+          hookEl.querySelector('h1')!.textContent = this.name;
+        }
+      }
+    }
+  }
+};
+
+@WithTemplate4('<h1>Changing Class</h1>', 'app4') //renders on browser
+class Pers6 {
+  name = 'RichChange';
+
+  constructor(){
+    console.log('Inside Constructor - Creating person object');
+  }
+}
+
+const pers6 = new Pers6();
+console.log(pers6);
+```
+
+### Other decorator return types
+
+Similar to class decorators, other decorators that can return are: _Method and Access Decorators_ 
+
+What can be returned for the above two?   
+A brand new property descriptor
+
+#### Sample property descriptor for Accessor Descriptor
+
+```javascript
+  {get: undefined, enumerable: false, configurable: true, set: ƒ}
+  configurable: true //
+  enumerable: false // 
+  get: undefined //as get is not defined for the Object
+  set: ƒ price(val) //returns the accessor function
+  __proto__: Object
+```
+
+#### Sample property desciptor for Method Descriptor
+
+```javascript
+  {writable: true, enumerable: false, configurable: true, value: ƒ}
+  configurable: true //can change the configuration and delete the property
+  enumerable: false //decides if it shows up when you loop the object; but if you use for in loop then this method in the object is not printed as a property
+  value: ƒ getPriceWithTax(tax) //returns the method function
+  writable: true //if it can be changed after the object is created
+  __proto__: Object
+```
+
+
+### Changing the return of Method decorator by creating Autobind Decorator
+
+The below code shows how to overwrite the method descriptor using the Method Decorator
+
+
+```typescript
+function Autobind(_target: any, _methodName: string, descriptor: PropertyDescriptor){
+ const originalMethod = descriptor.value;
+  const adjDescriptor: PropertyDescriptor = {
+    configurable: true,
+    enumerable: false,
+    //the function is used to implement some logic without directly executing the value ie descriptor.name ie func() of the property
+    get() {
+      const boundFn = originalMethod.bind(this); //this refers to the object on which it was originally referred
+      return boundFn;
+    }
+ };
+ return adjDescriptor;
+}
+
+class Printer2 {
+  message = 'This works!';
+
+  @Autobind
+  showMessage() {
+    console.log(this.message);
+  }
+}
+
+const printer2 = new Printer2();
+const button3 = document.querySelector('#newButton2')! ;
+button3.addEventListener('click', printer2.showMessage);
+```
+
+### Validation with Decorators - I
+

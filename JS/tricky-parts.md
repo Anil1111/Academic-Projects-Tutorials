@@ -98,3 +98,102 @@ The language has 4 function invocation types:
 - indirect invocation: `alert.call(undefined, 'Hello World!')`
 
 Detailed explanation about it: [Mystery of this](https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/).
+
+
+## Symbol in JS:
+
+For normal primitive types:
+1. Number(3) or 3
+2. String('abc') or 'abc'
+3. Boolean(true) or true
+
+For Symbol primitive data type, we need to use the notation `Symbol(description)`
+```javascript
+const s1 = Symbol();
+const s2 = Symbol(123);
+const s3 = Symbol('Rich');
+```
+All `Symbol()` generates guaranteed unique values   
+_You can think of each of them having extremely large unique numbers_   
+**It is used as a unique identifiers in object properties**
+Will always create a new Symbol
+
+```javascript
+const symb1 = Symbol();
+const symb2 = Symbol();
+console.log(`${symb1 === symb2}`); //returns false for === and ==
+
+const symb3 = Symbol('cat');
+const symb4 = Symbol('cat');
+console.log(`${symb3 == symb4}`); //returns false
+```
+
+### Symbols from Global Registry
+
+```javascript
+//gives a global symbol but isnt unique to a description
+const sym1 = Symbol.for('cat');  //checks whether 'cat' symbol exists in registry and if exists returns it or else creates it
+const sym2 = Symbol.for('cat'); 
+console.log(sym1 === sym2); //returns true for == and ===
+
+//provides the key/desciption for the symbol
+console.log(Symbol.keyFor(sym2)); //cat
+```
+
+
+
+### Using Symbols in Objects
+```javascript
+let user ={
+  id: 9876,
+  name: 'Rich'
+};
+
+const idSymb = Symbol('id');
+user[idSymb] = 2132131232; //process to add symbol to object
+// user[Symbol('id')] = 2132131232; //process to add symbol to object
+console.log(user);
+console.log(user[idSymb]); //{ id: 9876, name: 'Rich', [Symbol(id)]: 2132131232 }
+```
+
+```javascript
+const MY_KEY = Symbol();
+let obj = {};
+
+obj[MY_KEY] = 123;
+console.log(obj[MY_KEY]); //123
+```
+
+
+
+### Symbols are hidden
+
+```javascript
+console.log(Object.getOwnPropertyNames(user2)); //prints [ 'id', 'name' ]
+console.log(Object.getOwnPropertySymbols(user2)); //[ Symbol(id) ]
+```
+
+
+### Use Cases
+
+```javascript
+const RED2 = Symbol('red');
+const BLUE2 = Symbol('blue');
+const cat2 = 'blue';
+
+function getThreatLevel2(color) {
+  switch (color) {
+    case RED2:
+      return 'severe';
+    case BLUE2:
+      return 'high';
+    default:
+      console.log('Not sure of the color');
+  }
+}
+
+console.log('\n' + getThreatLevel2(BLUE2)); //high
+console.log(getThreatLevel2(cat2)); //returns undefined as cat2 is a string 'blue' whereas BLUE2 is a unique symbol
+```
+
+
