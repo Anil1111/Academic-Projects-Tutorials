@@ -1,5 +1,5 @@
 {
-  "name": "UsingTS",
+  "name": "using-ts",
   "version": "1.0.0",
   "description": "",
   "main": "./dist/app.js",
@@ -15,9 +15,9 @@
   "devDependencies": {
     "lite-server": "^2.5.4",
     "nodemon": "^2.0.4",
-    "typescript": "^3.9.2"
+    "typescript": "^3.9.2",
+    "tslint": "^6.1.2",
+    "typescript-tslint-plugin": "^0.5.5"
   },
-  "dependencies": {
-    "tslint": "^6.1.2"
-  }
+  "dependencies": {}
 }

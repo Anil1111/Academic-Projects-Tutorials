@@ -88,6 +88,8 @@
 20. **Numbered Bookmarks** - _Alessandro Fragnani_
 21. **Paste JSON As Code** - _quicktype_
 22. **Git Lens** - 
+23. **Bracket Pair Colorizer 2** - _CoeenradS_
+
 
 ---
 ## VSCode settings

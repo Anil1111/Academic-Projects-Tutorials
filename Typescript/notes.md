@@ -1516,3 +1516,89 @@ button3.addEventListener('click', printer2.showMessage);
 
 ### Validation with Decorators - I
 
+Create a ValidatorConfig that will register all the validators for each object properties in a storage and then use the validate() to run the validations and return true/false
+
+```typescript
+interface ValidatorConfig { //to store all the validators of Course2
+  //property will represent the class name with index type notation
+  [property: string]: {
+    //properties of the class
+    [validatableProp: string]: string[]; //['required', 'positive']
+  };
+}
+
+const registeredValidators: ValidatorConfig = {}; //initialy null value
+ 
+//below decorators can be part of an external library
+//use the @Required and @PositiveNumber decorators to register/store the validator function and decorator 
+function Required(target: any, propName: string) {
+  console.log("Executing Requried decorator " + propName);
+  //target.constructor.name gives the class name as the constructor function represents the class
+  registeredValidators[target.constructor.name] = {
+    [propName]: ['required'], //ideally we should add 'required' to all the existing validators but here we explicitly overwrite
+  };
+}
+
+function PositiveNumber(target: any, propName: string) {
+  console.log("Executing PositiveNumber decorator " + propName);
+  registeredValidators[target.constructor.name] = {
+    [propName]: ["positive"],
+  };
+}
+
+//should run through all validator functions are run a logic
+//obtain which constructor function and then the validator functions registered on them
+function validate(obj: any){
+  const objValidatorConfig = registeredValidators[obj.constructor.name]; //class name
+  if (!objValidatorConfig) {
+    return true; //as no validators registered, thus nothing to do and is Valid
+  } 
+
+  //loop through properties for which validators registered ie title (Required) and price (PositiveNumber)
+  for (const prop in objValidatorConfig){ //iterate the object properties in class
+    for (const validator of objValidatorConfig[prop]){ //iterate the validators
+      switch (validator) {
+        case 'required':
+          return !!obj[prop]; //createdCourse[title] and !! converts it into boolean
+        case 'positive':
+          return obj[prop] > 0;
+      }
+    }
+  }
+  return true;
+}
+```
+
+The class and actual calling of the Validators
+```typescript
+class Course2 {
+  @Required
+  title: string;
+
+  @PositiveNumber
+  price: number;
+
+  constructor(title: string, price: number) {
+    this.title = title;
+    this.price = price;
+  }
+}
+
+const courseForm2 = document.getElementById("newForm")!;
+courseForm2.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const titleEl = document.getElementById("title2") as HTMLInputElement;
+  const priceEl = <HTMLInputElement>document.getElementById("price2");
+  const title = titleEl.value;
+  const price = Number(priceEl.value);
+
+  const createdCourse = new Course2(title, price);
+  console.log(createdCourse); //but works for empty title and price
+
+  // Will throw the error if you do not give a value or enter negative price
+  if (!validate(createdCourse)){
+    alert('Invalid Input!');
+    return;
+  }
+});
+```
