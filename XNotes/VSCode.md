@@ -2,6 +2,7 @@
 
 1. `Ctrl + K + Ctrl + S` #opens keybindings
 1. `Ctrl + K Z` #Open Zen mode to concentrate on coding
+    - Uncheck from settings `Zen Mode: Hide Line Numbers`
 1. `Ctrl + Space` #Code completion
 1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
 2. `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
@@ -51,7 +52,7 @@
 34. `Alt + #` where # is a number to select individual tabs in VSCode 
 35. `CTrl + L` select the entire line
 26. `Ctrl + K V` to open preview mode of the MD file to the right
-
+27. `Double click new tab` to remove the file preview mode of all new unedited tabs
 
 ## Shortcut from Integrated Terminal
 1. `code fileName.ext` opens the file in a new tab in VSCode 

@@ -1,5 +1,12 @@
 ## Typescript
 
+### Crete tsconfig.json
+Used to get configuration option for generating JS from TS.
+1. `npm i --save-dev typescript` install typescript
+2. `tsc --init` in project folder
+
+---
+
 1. `tsc <<typescriptFile>>` #Complile typescript file
 2. `tsc --init` #create a tsconfig.js file
 3. `tsc -b` #to build the ts file
@@ -63,6 +70,59 @@
    "noEmit": true, //for not generating any JS files; where only TS files are required
    "noEmitOnError": true // will ensure no filed gets compiled even if one error present in any TS file
    ...
+}
+
+```
+
+Providing support to decorators
+```json
+    "experimentalDecorators": true /* Enables experimental support for ES7 
+```
+
+
+### Sample tsconfig.json
+
+```json
+{
+  "compilerOptions": {
+    "target": "es6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
+    "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    "lib": [
+      "es5",
+      "es2015",
+      "dom",
+      "scripthost",
+      "dom.iterable"
+    ] /* Specify library files to be included in the compilation. */,
+
+    "sourceMap": true /* Generates corresponding '.map' file. */,
+
+    "outDir": "./dist" /* Redirect output structure to the directory. */,
+    "rootDir": "./src" /* Specify the root directory of input files. Use to 
+    "removeComments": true /* Do not emit comments to output. */,
+
+    /* Strict Type-Checking Options */
+    "strict": true /* Enable all strict type-checking options. */,
+    "noUnusedLocals": true,                /* Report errors on unused locals. */
+    "noUnusedParameters": true,            /* Report errors on unused parameters. */
+    "noImplicitReturns": true,             /* Report error when not all code paths in function return a value. */
+    /* Module Resolution Options */
+    "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+
+    "esModuleInterop": true /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */,
+
+    /* Experimental Options */
+    "experimentalDecorators": true /* Enables experimental support for ES7 decorators. */,
+    /* Advanced Options */
+    "skipLibCheck": true /* Skip type checking of declaration files. */,
+    "forceConsistentCasingInFileNames": true /* Disallow inconsistently-cased references to the same file. */
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts"
+  ]
 }
 
 ```

@@ -1,6 +1,6 @@
 ## NPM Syntax
 
-`npm i <<package>> --save-dev` #Use --save-dev to download and install into local repository as dev dependency;  
+`npm i <<package>> --save-dev` or `-D` #Use --save-dev to download and install into local repository as dev dependency;  
 `npm i <<package>> -g` #to install globally;  
 `npm i <<package>> -d` #to install as a local dependency  
 `npm i -g npm@latest` #to update npm client to latest  

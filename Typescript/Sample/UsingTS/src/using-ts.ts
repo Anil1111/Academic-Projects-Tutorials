@@ -1,11 +1,11 @@
 //export { add, add2 }; //to avoid es lint errors due to same variables bw=etween ts and js files.
 
 var button = document.querySelector("button");
-var input1 = document.getElementById("num1")! as HTMLInputElement;
+var input1 = document.getElementById("num10")! as HTMLInputElement;
 var input2 = document.getElementById("num2") as HTMLInputElement;
 
-function add3(num1: number, num2: number) {
-  return num1 + num2;
+function add3(num10: number, num2: number) {
+  return num10 + num2;
 }
 
 // var button = document.querySelector("button")!; //cheaper method

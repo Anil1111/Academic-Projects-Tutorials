@@ -206,3 +206,13 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
   `"gitlens.menus": false` property has to be defined in the settings.json incase you wish to hide the toolbar on top of VSCode
 
 ---
+
+## Windows Shortcuts
+
+1. `Windows + Down Arrow` Minimize the active window
+---
+
+## Integrated Terminal Shortcuts
+
+1. `code fileName` opens the file in a new tab on the active workspace
+---

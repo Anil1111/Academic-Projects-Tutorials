@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Debug in Chrome",
       "url": "http://localhost:3000/",
-      "webRoot": "${workspaceFolder}/Typescript/Sample/UsingTS"
+      "webRoot": "${workspaceFolder}/Typescript/DragDrop"
     }
   ]
 }
