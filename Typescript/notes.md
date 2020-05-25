@@ -731,6 +731,7 @@ console.log(add6(8,8)); //return 16
 
 ### Optional Properties and Methods
 - using the operator `?` we can make a property or method optional
+- optional paramters should always be last in a constructor/method
 
 ```typescript
 interface Named5 {

@@ -154,3 +154,108 @@ var res =
 String(x1) +String(x2) +String(x3) +String(x4) +String(x5);
 // false true  Mon May 18 2020 16:05:48 GMT+0530 (India Standard Time) 12345 12345
 ```
+
+
+## Difference between null and undefined
+The value null is written with a literal: `null`. null is not an identifier for a property of the global object, like undefined can be. Instead, null expresses a lack of identification, indicating that a variable points to no object. In APIs, null is often retrieved in a place where an object can be expected but no object is relevant. 
+
+This contrasts null from the similar primitive value undefined , which is an unintentional absence of any object value.That is because a variable that has been declared but not assigned any value is `undefined`, not `null`.
+
+
+
+```javascript
+// foo does not exist. It is not defined and has never been initialized:
+foo; //ReferenceError: foo is not defined
+
+// foo is known to exist now but it has no type or value:
+var foo = null; 
+foo; //null
+```
+
+```javascript
+typeof null          // "object" (not "null" for legacy reasons)
+typeof undefined     // "undefined"
+null === undefined   // false
+null  == undefined   // true
+null === null        // true
+null == null         // true
+!null                // true
+isNaN(1 + null)      // false
+isNaN(1 + undefined) // true
+```
+
+
+## ==null and != null
+
+[Source](http://adripofjavascript.com/blog/drips/equals-equals-null-in-javascript.html "Link to a drip of JS")
+
+```javascript
+var ethos = {
+    achilles: "glory",
+    aeneas: "duty",
+    hades: null // Beyond human understanding
+};
+
+function printEthos (name) {
+    console.log(ethos[name]);
+}
+
+// Outputs: "glory"
+printEthos("achilles");
+
+// Outputs: "null"
+printEthos("hades");
+
+// Outputs: "undefined"
+printEthos("thor");
+```
+
+We can improve above by
+```javascript
+function printEthos (name) {
+    if (ethos[name]) {
+        console.log(ethos[name]);
+    } else {
+        console.log(name + " has no recorded ethos.");
+    }
+}
+
+// Outputs: "hades has no recorded ethos."
+printEthos("hades");
+
+// Outputs: "thor has no recorded ethos."
+printEthos("thor");
+```
+
+Consider what happens in the case of Pythagoras.
+```javascript
+ethos.pythagoras = 0; // The sublimity of Number
+
+// Outputs: "pythagoras has no recorded ethos"
+printEthos("pythagoras");
+//Because 0 is a falsy value, "pythagoras" isn't recognized as having an ethos.
+```
+
+So we need something that won't accidentally catch falsy values when we really just want to catch nothingness as opposed to somethingness. And that's what == null does.
+```javascript
+function printEthos (name) {
+    if (ethos[name] != null) { //null == undefined
+        console.log(ethos[name]);
+    } else {
+        console.log(name + " has no recorded ethos.");
+    }
+}
+
+// Outputs: "hades has no recorded ethos."
+printEthos("hades");
+
+// Outputs: "thor has no recorded ethos."
+printEthos("thor");
+
+// Outputs: 0
+printEthos("pythagoras");
+```
+
+**Despite the fact that null is a falsy value (i.e. it evaluates to false if coerced to a boolean), it isn't considered loosely equal to any of the other falsy values in JavaScript. In fact, the only values that null is loosely equal to are undefined and itself.**
+
+Because of this interesting property, it has become somewhat conventional to use == null and != as a more concise way of checking whether a given value is "nothing" (null/undefined) or "something" (anything else).
