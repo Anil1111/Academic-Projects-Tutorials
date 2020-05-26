@@ -528,6 +528,7 @@ console.log(employee1, Department8.fiscalyear);
 - **asbtract methods must contain no implementation**   
 - Their can also be abstract properties.
 - **abstract classes cannot be instantiated but only inhertited**
+- abstract methods cannot be private
 
 ```typescript
 abstract class Department9 {

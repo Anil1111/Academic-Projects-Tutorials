@@ -29,7 +29,7 @@ _This text_ is Italic
 
 ~~This text~~ is strike through
 
-<!-- escaping -->
+<!-- escaping ` and *-->
 `` escape `abc` ``   
 \* file \*
 

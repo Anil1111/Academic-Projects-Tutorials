@@ -30,6 +30,7 @@
 16. `Shift + Ctrl + N` #new VSCode window
 17. `Ctrl + Tab` #**Change File Tabs**
 17. `Ctrl + K   Rt Arrow/Left Arrow` To toggle between the editor groups
+17. `Ctrl + Shift + Tab` to toggle between the editor groups
 18. `Alt + Left/ Alt + Right` #Move between files
 18. `Ctrl + W` #close files
 19. `Ctrl + \` #to toggle split screen
@@ -53,6 +54,19 @@
 35. `CTrl + L` select the entire line
 26. `Ctrl + K V` to open preview mode of the MD file to the right
 27. `Double click new tab` to remove the file preview mode of all new unedited tabs
+28. `Ctrl + K Ctrl + 0` fold all code
+29. `Ctrl + K Ctl + J` unfold all code
+30. `Ctrl + Shift + [ or ] ` fold or unfload a block code
+31. `Ctrl + K Ctrl + ]` unfold recursively
+32. `Ctrl + SHift + ;` to toggle breadcrumbs and then use `arrow keys` to navigate and later `space / enter` to view the contents
+33. `Ctrl + Hover on Function` to view the function definition
+34. `Ctrl + Alt + Click` to view the definiton on the side pane
+35. ``Alt+ ` `` peek the definition inline
+36. `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
+37. `Ctrl + Shift + M` to open the problems tab
+
+
+
 
 ## Shortcut from Integrated Terminal
 1. `code fileName.ext` opens the file in a new tab in VSCode 
