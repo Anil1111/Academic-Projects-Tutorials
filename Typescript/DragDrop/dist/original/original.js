@@ -5,14 +5,11 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProjectInput = exports.ProjectList = exports.ProjectItem = exports.Component = exports.Autobind = exports.ProjectState = exports.State = exports.Project = exports.ProjectStatus = void 0;
 var ProjectStatus;
 (function (ProjectStatus) {
     ProjectStatus[ProjectStatus["ACTIVE"] = 0] = "ACTIVE";
     ProjectStatus[ProjectStatus["FINISHED"] = 1] = "FINISHED";
 })(ProjectStatus || (ProjectStatus = {}));
-exports.ProjectStatus = ProjectStatus;
 class Project {
     constructor(id, title, description, people, status) {
         this.id = id;
@@ -22,7 +19,6 @@ class Project {
         this.status = status;
     }
 }
-exports.Project = Project;
 class State {
     constructor() {
         this.listeners = [];
@@ -31,7 +27,6 @@ class State {
         this.listeners.push(listenedFn);
     }
 }
-exports.State = State;
 class ProjectState extends State {
     constructor() {
         super();
@@ -65,7 +60,6 @@ class ProjectState extends State {
         }
     }
 }
-exports.ProjectState = ProjectState;
 const projectState = ProjectState.getInstance();
 function validate(validatableInput) {
     let isValid = true;
@@ -104,7 +98,6 @@ function Autobind(_target, _methodName, descriptor) {
     };
     return adjDescriptor;
 }
-exports.Autobind = Autobind;
 class Component {
     constructor(templateId, hostElementId, insertAtStart, newElementId) {
         this.templateElement = (document.getElementById(templateId));
@@ -120,7 +113,6 @@ class Component {
         this.hostElement.insertAdjacentElement(insertAtStart ? "afterbegin" : "beforeend", this.element);
     }
 }
-exports.Component = Component;
 let ProjectItem = (() => {
     class ProjectItem extends Component {
         constructor(hostId, project) {
@@ -162,7 +154,6 @@ let ProjectItem = (() => {
     ], ProjectItem.prototype, "dragEndHandler", null);
     return ProjectItem;
 })();
-exports.ProjectItem = ProjectItem;
 let ProjectList = (() => {
     class ProjectList extends Component {
         constructor(type) {
@@ -229,7 +220,6 @@ let ProjectList = (() => {
     ], ProjectList.prototype, "dragLeaveHandler", null);
     return ProjectList;
 })();
-exports.ProjectList = ProjectList;
 let ProjectInput = (() => {
     class ProjectInput extends Component {
         constructor() {
@@ -292,8 +282,7 @@ let ProjectInput = (() => {
     ], ProjectInput.prototype, "submitHandler", null);
     return ProjectInput;
 })();
-exports.ProjectInput = ProjectInput;
 const prjInput = new ProjectInput();
 const activePrjList = new ProjectList("active");
 const finishedPrjList = new ProjectList("finished");
-//# sourceMappingURL=app.js.map
+//# sourceMappingURL=original.js.map
