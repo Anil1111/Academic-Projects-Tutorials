@@ -1604,3 +1604,51 @@ courseForm2.addEventListener("submit", (event) => {
   }
 });
 ```
+
+
+
+
+## Module
+
+### Splitting Code into Multiple Files
+1. Namespaces and File bundling
+2. ES6 Imports/Exports
+
+### Namespace
+We can use namespaces to enclose TS code. It is a TS only feature and has no JS equivalent.
+**All code and dependent code need to be entered inside the same namespace but can exist on different files**   
+
+Two ways of using namespaces:
+1. Enter all references together in app.ts/main file
+2. Enter all imports/references into individual files inlcuding app.ts/main file
+
+
+>Prerequisite in tsconfig.json:
+```json
+{
+  "compilerOptions": {
+    "module": "amd",    /* only `amd` and `system` support outfile*/
+    "outFile": "./dist/bundle.js",  /* Concatenate and emit output to single file. */
+  }
+}
+```
+
+```typescript
+namespace App {
+  export interface Draggable {
+    //interface code
+  }
+  export class Abc {
+    //class definition
+  }
+}
+```
+
+```typescript
+/// <reference path="./drag-drop-interfaces.ts" />
+
+namespace App {
+ //enclose all the reamining code from other files into the same namespace
+}
+```
+

@@ -13,3 +13,4 @@
 11. `Ctrl + W` closes current tab
 12. `Ctrl + Tab` moves to the tabs on right
 13. `Ctrl + Shift + Tab` moves to the tabs on left
+14. `Ctrl + Shift + T` open the last closed window

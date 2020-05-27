@@ -79,6 +79,13 @@ Providing support to decorators
     "experimentalDecorators": true /* Enables experimental support for ES7 
 ```
 
+Providing support to namespace and bundling of all js files
+```json
+    "module": "amd",    /* only `amd` and `system` support outfile*/
+    "outFile": "./dist/bundle.js",  /* Concatenate and emit output to single file. */
+```
+
+
 
 ### Sample tsconfig.json
 
@@ -96,7 +103,7 @@ Providing support to decorators
     ] /* Specify library files to be included in the compilation. */,
 
     "sourceMap": true /* Generates corresponding '.map' file. */,
-
+    "outFile": "./dist/bundle.js",  /* Concatenate and emit output to single file. */
     "outDir": "./dist" /* Redirect output structure to the directory. */,
     "rootDir": "./src" /* Specify the root directory of input files. Use to 
     "removeComments": true /* Do not emit comments to output. */,

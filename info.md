@@ -1,47 +1,34 @@
-## Bootstrap requirements
+## Softwares Used
 
-### CSS (CDN):
+1. **VSCode** - Text Editor or IDE
+2. **GIT** & **GIT Bash**- Version control System
+3. **NodeJS** - JS Runtime
+4. **Inkspace** - SVG Creator
+5. **MongoDB** & **MongoDBCommunity**- NoSQL DB
+6. **SQLite** & **DBBrowser** - SQL DB
+7. **POSTMAN** - RestAPI Testing
+---
 
-`<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`  
-SASS (import to scss file) : `@import "../node_modules/bootstrap/scss/bootstrap.scss";`
-
-### JS (CDN):
-
-```html
-<script
-  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-  crossorigin="anonymous"
-></script>
-<script
-  src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-  crossorigin="anonymous"
-></script>
-```
-
-JS (add to script tag in html):
-
-```html
-<script src="../node_modules/jquery/dist/jquery.min.js"></script>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-<!-- #the bundle contains popperJS+JS -->
-```
+## Package Manager Used
+1. npm
+2. yarn
 
 ---
 
-## Softwares Used
+## Naming convention
+1. **CAPITALLETTERS** All top level directories constitute a framework/Language/Programming Tool. 
+2. **CAPITAL-LETTERS** All project names
+3. **file-names** All file names
 
-1. **VSCode** - Text Editor
-2. **GIT** - Version control
-3. **NodeJS**
-4. **Inkspace** - SVG Creator
+---
+## Project layout
 
+1. **notes.txt**
+    - Represents notes with respect to the language/framework talked about    
+2. **stepsToRun.md**
+   - Represents the file that can be used to run the projects enclosed
+3. **XNotes/**
+   - Represents the directory that comprises of all the Generic notes
 ---
 
 ## Browser Extensions - Chrome
@@ -69,9 +56,9 @@ JS (add to script tag in html):
 
 1. Issue for running ES6 commands in Node.js
 
-- use .mjs file extension
-- add "type": "module" in package.JSON
-- run node in terminal with --input-type=module
+- use `.mjs` file extension
+- add `"type": "module"` in package.JSON
+- run node in terminal with `--input-type=module`
 
 ---
 
@@ -215,4 +202,41 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 ## Integrated Terminal Shortcuts
 
 1. `code fileName` opens the file in a new tab on the active workspace
+---
+
+## Bootstrap requirements
+
+### CSS (CDN):
+
+`<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`  
+SASS (import to scss file) : `@import "../node_modules/bootstrap/scss/bootstrap.scss";`
+
+### JS (CDN):
+
+```html
+<script
+  src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+  crossorigin="anonymous"
+></script>
+<script
+  src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+  integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+  crossorigin="anonymous"
+></script>
+```
+
+JS (add to script tag in html):
+
+```html
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!-- #the bundle contains popperJS+JS -->
+```
+
 ---
