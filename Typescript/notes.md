@@ -1716,6 +1716,10 @@ import NewName from '../pathToFile.js'
 
 ---
 
+## Libraries with TS
+
+### Normal Libraries
+
 
 
 

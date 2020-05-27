@@ -6,6 +6,10 @@
 - Optimized code with less code to download
 - Possibility to add several build steps
 
+### NPM packages required
+```bash
+npm i -D webpack webpack-cli webpack-dev-server typescript ts-loader clean-webpack-plugin
+```
 
 ### Changes to be made
 No need for an extension in the import statements as it automatically checks for `js` extensions.

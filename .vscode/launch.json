@@ -5,6 +5,13 @@
   "version": "0.2.0",
   "configurations": [
     {
+      "type": "java",
+      "name": "CodeLens (Launch) - Noodle",
+      "request": "launch",
+      "mainClass": "Sample.Inheritance.Noodle",
+      "projectName": "Frontend_Examples_4892d113"
+    },
+    {
       "type": "chrome",
       "request": "launch",
       "name": "Debug in Chrome",

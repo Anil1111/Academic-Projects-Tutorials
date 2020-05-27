@@ -1,4 +1,4 @@
-# GoogleChrome Shortcuts
+## GoogleChrome Shortcuts
 
 1. `F11` displays screen in full screen mode
 2. `Ctrl + +/-` zoom into the window
@@ -14,3 +14,29 @@
 12. `Ctrl + Tab` moves to the tabs on right
 13. `Ctrl + Shift + Tab` moves to the tabs on left
 14. `Ctrl + Shift + T` open the last closed window
+
+---
+
+## Browser Extensions - Chrome
+
+1. **JSON View** #to view json files in browser with syntax highlighting    
+    - `Ctrl + Alt + Mouse Click` to collapse all options in dev tools
+2. **React Developer Tools**
+3. **Postman**
+4. **Markdown Viewer**   
+Below configuration needs to be made for Markdown to render properly in the browser
+    - `Allow Access to file URL's` option needs to be enabled from the extension window after installation in the browser itself
+    - Under `Site Access`, Allow this extension to read and change all your data on websites you visit should be enabled for `On All sites`
+5. **Width and Height Display**
+6. **Wizdler**
+
+---
+
+## Template Engines
+
+1. _Safari_ - Webkit
+2. _Edge_ - Trident
+3. _Chrome and Opera_ - Blink
+4. _Firefox_ - Gecko
+
+---

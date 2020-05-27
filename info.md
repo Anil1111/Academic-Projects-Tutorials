@@ -31,27 +31,6 @@
    - Represents the directory that comprises of all the Generic notes
 ---
 
-## Browser Extensions - Chrome
-
-1. **JSON View** #to view json files in browser with syntax highlighting
-   `Ctrl + Alt + Mouse Click` to collapse all options in dev tools
-2. **React Developer Tools**
-3. **Postman**
-4. **Markdown Viewer**
-5. **Width and Height Display**
-6. **Wizdler**
-
----
-
-## Template Engines
-
-1. _Safari_ - Webkit
-2. _Edge_ - Trident
-3. _Chrome and Opera_ - Blink
-4. _Firefox_ - Gecko
-
----
-
 ## Node.JS
 
 1. Issue for running ES6 commands in Node.js

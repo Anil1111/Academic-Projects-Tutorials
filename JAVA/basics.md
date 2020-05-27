@@ -1,26 +1,35 @@
+# Java
+
+## Syntax
+
 Hello Java File!
+```java
 public class HelloYou {
   public static void main(String[] args) { 
   }
 }
-String[] args is a placeholder for information we want to pass into our program. 
+```
+`String[] args` is a placeholder for information we want to pass into our program. 
 
-Commenting Code
-When comments are short we use the single-line syntax: //.
+## Commenting Code
+When comments are short we use the single-line syntax: `//`.
+```java
 // calculate customer satisfaction rating
+```
 
-When comments are long we use the multi-line syntax: /* and */.
+When comments are long we use the multi-line syntax: `/* and */`.
+```java
 /*
 We chose to store information across multiple databases to
 minimize the possibility of data loss. We'll need to be careful
 to make sure it does not go out of sync!
 */
+```
 
-
-Semicolons and Whitespace
+## Semicolons and Whitespace
 Java does not interpret whitespace, the areas of the code without syntax
 
-Compilation: Catching Errors
+## Compilation: Catching Errors
 Java is a compiled programming language, meaning the code we write in a .java file is transformed into byte code by a compiler before it is executed by the Java Virtual Machine on your computer.
 A compiler is a program that translates human-friendly programming languages into other programming languages that computers can execute.
 The compiling process catches mistakes before the computer runs our code.

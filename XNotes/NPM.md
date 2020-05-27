@@ -26,7 +26,6 @@
 9. `npm install -g express` #to install express js
 10. `npm install -g newman` #OPTIONAL - to run collections exported from POSTMAN
  `newman run <<nameOfCollection>>`
-
 11. Express middleware
     - `npm install -g morgan` #for logging in express
     - `npm install -g body-parser` #body parsing middleware
@@ -46,3 +45,4 @@
 16. `npm i -g lite-server` #for automatic compilation of TS files
 17. `npm i -g webpack webpack-cli webpack-dev-server typescript ts-loader` #for webpack set up   
     `npm i -g clean-webpack-plugin`  #for cleaning the output folder of webpack
+    `npm i -g @webpack-cli/init` #for using init command in npx
