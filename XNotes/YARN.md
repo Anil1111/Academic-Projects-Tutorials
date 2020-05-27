@@ -18,6 +18,7 @@ Works from packages from NPM repository
 8. `yarn install` to install any/all packages explicitly mentioned in the package.json
 9. `yarn remove <<packageName>>` to remove a package from dependency
 10. `yarn add <<packageName>>@x.xx.x` to install a package having specific version of x.xx.x
+10. `yarn add <<packageName>>@x.xx.x -D` to install a package as a dev dependency
 11. `yarn outdated` find outdated versions of installed packages
 12. `yarn outdated <<packageNAme>>` find the outdated version of specific package
 13. `yarn upgrade <<packageName>>` upgrading a specific package

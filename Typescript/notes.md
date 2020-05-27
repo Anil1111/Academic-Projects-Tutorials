@@ -1654,8 +1654,10 @@ namespace App {
 
 ### ES6 Modules
 
+Better approach as compared to Namespace as we explicitly mention the dependency in each file and do not depend on one file to assimilate all the imports.   
 Modern browser supports ES6 modules natively which is a feature in JS.   
-Need to add the `.js` extension to all js files imported to render in browser unless using webpack.
+Need to add the `.js` extension to all js files imported to render in browser unless using webpack.   
+Each import will occur only once even though it is called in multiple files.
 
 Prerequisite in tsconfig.json:
 ```json
@@ -1670,6 +1672,7 @@ Prerequisite in tsconfig.json:
 Changes in index.html
 ```html
   <!-- Removed defer and added type="module"-->
+  <!-- Depends on Modern browser to import modules -->
   <script type="module" src="./dist/app.js"></script>
 ```
 
@@ -1679,6 +1682,45 @@ import { NameOfObject } from '../pathtoFile/file.js'; //remember to add .js exte
 
 export fileName; //in respective files
 ```
+
+
+
+
+
+### Different kinds of import and export
+
+```typescript
+import * as NewName from '../pathToFile.js'
+//any function/object within can then be used as `NewName.Object`
+```
+
+```typescript
+import { OldName as NewName} from '../pathToFile.js'
+//within the file, use the `NewName`
+```
+
+#### Using default export
+
+**Only default export is allowed per file**
+```typescript
+//other named exports will be allowed but no other default export
+
+export default abstract class Component<T extends HTMLElement, U extends HTMLElement> {}
+```
+
+```typescript
+//importing the default exported component
+
+import NewName from '../pathToFile.js'
+```
+
+---
+
+
+
+
+
+
 
 
 

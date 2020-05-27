@@ -28,13 +28,13 @@
  `newman run <<nameOfCollection>>`
 
 11. Express middleware
-    -`npm install -g morgan` #for logging in express
-    -`npm install -g body-parser` #body parsing middleware
-    -`npm install -g errorhandler` #error handling
-    -`npm install -g cors` #cors filters
-    -`npm i -g express-handlebars` #integrating handlebars with express for creating views
-    -`npm i -g supertest` #library for testing node server responses
-    -`npm i -g jsdom`
+    - `npm install -g morgan` #for logging in express
+    - `npm install -g body-parser` #body parsing middleware
+    - `npm install -g errorhandler` #error handling
+    - `npm install -g cors` #cors filters
+    - `npm i -g express-handlebars` #integrating handlebars with express for creating views
+    - `npm i -g supertest` #library for testing node server responses
+    - `npm i -g jsdom`
 12. `npm install -g node-gyp`  
 `npm install --global --production windows-build-tools` #OPTIONAL - Open with admin priveleges for configuring
 13. `npm i --save-dev @wdio/cli`  
@@ -44,3 +44,5 @@
 15. `npm i -g mongoose` #Node package for integrating MongoDB
 15. `npm i -g typescript@latest` #Typescipt
 16. `npm i -g lite-server` #for automatic compilation of TS files
+17. `npm i -g webpack webpack-cli webpack-dev-server typescript ts-loader` #for webpack set up   
+    `npm i -g clean-webpack-plugin`  #for cleaning the output folder of webpack
