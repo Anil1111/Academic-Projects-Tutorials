@@ -21,4 +21,32 @@ npm i -D gulp gulp-cli
 npx gulp
 ```
 
+### Run any one off commands with npx
+
+npx will download and execute any package you give it. This is useful for one-off commands, such as:
+
+```bash
+npx pa11y https://scottlogic.com
+```
+```bash
+npx cowsay goodbye!
+```
+
+Using react
+
+```bash
+npx create-react-app harrys-site
+```
+
+Running a static web server
+```bash
+cd my-website
+npx http-server
+```
+
+Deploying to a live server
+```bash
+cd my-website
+npx now --public
+```
 

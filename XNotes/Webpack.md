@@ -160,3 +160,43 @@ Changes to `package.json`
   }
 }
 ```
+
+### NPX command for Weboack cli
+
+```bash
+npx webpack-cli init --auto
+```
+
+1. Appends the `package.json` with
+
+```json
+{
+  "name": "NameofProject",
+  "version": "1.0.0",
+  "description": "My webpack project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack",
+    "start": "webpack-dev-server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-plugin-syntax-dynamic-import": "^6.18.0",
+    "html-webpack-plugin": "^4.3.0",
+    "terser-webpack-plugin": "^3.0.2",
+    "webpack": "^4.43.0",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.11.0",
+    "workbox-webpack-plugin": "^5.1.3"
+  }
+}
+```
+
+2. Adds the below files:
+    - index.html
+    - src/index.js
+    - .yo-rc.json
+    - README.md
