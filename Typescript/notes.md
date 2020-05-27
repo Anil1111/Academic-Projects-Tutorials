@@ -1652,3 +1652,33 @@ namespace App {
 }
 ```
 
+### ES6 Modules
+
+Modern browser supports ES6 modules natively which is a feature in JS.   
+Need to add the `.js` extension to all js files imported to render in browser unless using webpack.
+
+Prerequisite in tsconfig.json:
+```json
+{
+  "compilerOptions": {
+    "target": "es6", 
+    "module": "es2015", //atleast es6
+    // "outFile": "./dist/bundle.js",  //comment this as it is not supported by ES6
+}
+```
+
+Changes in index.html
+```html
+  <!-- Removed defer and added type="module"-->
+  <script type="module" src="./dist/app.js"></script>
+```
+
+Syntax
+```typescript
+import { NameOfObject } from '../pathtoFile/file.js'; //remember to add .js extension 
+
+export fileName; //in respective files
+```
+
+
+
