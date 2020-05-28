@@ -14,6 +14,8 @@
 12. `Ctrl + Tab` moves to the tabs on right
 13. `Ctrl + Shift + Tab` moves to the tabs on left
 14. `Ctrl + Shift + T` open the last closed window
+15. `Ctrl + F5` for hard reload which includes reloading forced
+
 
 ---
 
@@ -40,3 +42,4 @@ Below configuration needs to be made for Markdown to render properly in the brow
 4. _Firefox_ - Gecko
 
 ---
+

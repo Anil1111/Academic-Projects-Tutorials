@@ -188,7 +188,10 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 ### CSS (CDN):
 
 `<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`  
-SASS (import to scss file) : `@import "../node_modules/bootstrap/scss/bootstrap.scss";`
+
+SASS (import to scss file) 
+`@import "../node_modules/bootstrap/scss/bootstrap.scss";`
+`@import "~//bootstrap/scss/bootstrap"`
 
 ### JS (CDN):
 

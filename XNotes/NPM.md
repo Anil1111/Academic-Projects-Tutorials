@@ -14,18 +14,22 @@
 
 
 ## NPM Libraries Used
-
-1. **Bootstrap**: `npm install -g bootstrap`
+1. **Bootstrap**
+    - `npm install -g bootstrap`
+    - `npm i -d jquery popper.js` #the js libraries that bootstrap depends on
 2. **SASS**: `npm install -g sass`
-3. **holderjs**: `npm install -g holderjs` #Used for providing UI support for blank sized images
+3. **holderjs**: 
+    - `npm install -g holderjs` #Used for providing UI support for blank sized images
 4. **jquery**
-5. **Babel**: `npm install -g babel-cli`, `npm install -g babel-preset-env`
+5. **Babel**: 
+    - `npm install -g babel-cli`, 
+    - `npm install -g babel-preset-env`
 6. **Nodemon**: `npm install -g nodemon` #nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 7. `npm install -g create-react-app` #to generate boiler plate version of react application
 8. `npm install -g surge` #to deploy static websites
 9. `npm install -g express` #to install express js
 10. `npm install -g newman` #OPTIONAL - to run collections exported from POSTMAN
- `newman run <<nameOfCollection>>`
+    -  `newman run <<nameOfCollection>>`
 11. Express middleware
     - `npm install -g morgan` #for logging in express
     - `npm install -g body-parser` #body parsing middleware
@@ -39,10 +43,18 @@
 13. `npm i --save-dev @wdio/cli`  
 `npx wdio config -y` #to install all packages required for webdriverio in chrome headless browser
 14. `npm install -g mocha` #Testing framework  
-    `npm install -g chai` #Assertion Library
+    - `npm install -g chai` #Assertion Library
 15. `npm i -g mongoose` #Node package for integrating MongoDB
 15. `npm i -g typescript@latest` #Typescipt
 16. `npm i -g lite-server` #for automatic compilation of TS files
-17. `npm i -g webpack webpack-cli webpack-dev-server typescript ts-loader` #for webpack set up   
-    `npm i -g clean-webpack-plugin`  #for cleaning the output folder of webpack
-    `npm i -g @webpack-cli/init` #for using init command in npx
+17. `npm i -d webpack webpack-cli webpack-dev-server clean-webpack-plugin` #for webpack set up in  #webpack and corresponding CLI, webpack development server and plugin to clean the output directory each time 
+    - `npm i -d typescript ts-loader`  #TS specific loader
+    - `npm i -d @webpack-cli/init` #for using init command in npx
+    - `npm i -d style-loader css-loader` #for CSS specific loader
+    - `npm i -d sass-loader node-sass` #for SASS specific loader  
+    - `npm i -d html-webpack-plugin`  plugin that will include all webpack bundles in the body using script tags
+    - `npm i -d webpack-merge` merge package to merge two config files
+    - `npm i -d html-loader file-loader` html-loader causes each image file to be 'require' by js & file-loader automatically sets the dynamic path
+    - `npm i -d mini-css-extract-plugin` css loader to inject dynamically created css into the html
+    - `npm i -d optimize-css-assets-webpack-plugin` minifying css files
+    
