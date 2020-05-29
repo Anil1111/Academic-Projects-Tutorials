@@ -1,5 +1,5 @@
-Create Lodash Object
-1.
+# Create Lodash Object
+1. 
 Before we get started implementing our new methods, we need to create an object to contain them. This object will represent our library containing all the functionality we add to it.
 
 Create a new variable called _ that is initialized to an empty object.

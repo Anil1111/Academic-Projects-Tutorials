@@ -23,7 +23,7 @@
 `git diff <<filename>>` #To view changes made to a file #use q to exit the less file  
 `set git config --global` #Would appear blank if no differnce found  
 `git log` #To view log files  
-`git log --oneline --graph` #For better viewing  
+`git log --oneline --graph`/ `git shortlog` #For better viewing  of the log output
 `git checkout head <<filename>>` #To retrieve the last commited version of the filename; HEAD refers to the last commit  
 `git checkout --<<filename>>` #To retrieve the last commited version of the filename -SAME as above  
 `git reset <<last6charsOfLastCommit>>` #to retrieve all the last commit files  

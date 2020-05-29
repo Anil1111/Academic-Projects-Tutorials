@@ -24,13 +24,13 @@ npm i -D webpack webpack-cli webpack-dev-server clean-webpack-plugin style-loade
 npm i -D webpack webpack-cli webpack-dev-server clean-webpack-plugin style-loader css-loader sass-loader node-sass
 
 #General plugins
-npm i -d html-webpack-plugin
+npm i -D html-webpack-plugin
 
 #General packages
-npm i -d webpack-merge
-npm i -d html-loader file-loader
-npm i -d mini-css-extract-plugin
-npm i -d optimize-css-assets-webpack-plugin
+npm i -D webpack-merge
+npm i -D html-loader file-loader
+npm i -D mini-css-extract-plugin
+npm i -D optimize-css-assets-webpack-plugin
 ```
 
 ### Changes to be made if TS project

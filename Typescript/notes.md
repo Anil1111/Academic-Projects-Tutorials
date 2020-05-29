@@ -1718,7 +1718,132 @@ import NewName from '../pathToFile.js'
 
 ## Libraries with TS
 
-### Normal Libraries
+### Lodash JS Library with TS
+
+```typescript
+import _ from 'lodash';
+//to make it work with TS, we need to update the tsconfig.json as we get error 'Could not find a declaration for module 'lodash''
+//error as it is built only for vanilla js
+
+console.log(_.shuffle([1,2,3]));
+```
+1. Temporary Solution - We can change `noEmitOnError` property in `tsconfig.json`
+```json
+  "compilerOptions": {
+    //other options
+    //by default the below option is set to false and need not be added
+    "noEmitOnError": false, //add this option inorder to emit the result even if we get the above error
+  }
+```
+
+2. Use type packages `*.d.ts` that provide logic to TS to use the JS libraries
+
+```bash
+npm i -D @types/lodash
+npm i -D @types/jquery
+
+```
+
+3. Usage of 'declare' to let TS know that variables exist
+
+```html
+<body>
+  <script>
+    var GLOBAL = 'this is set!';
+  </script>
+</body>
+```
+
+```typescript
+declare var GLOBAL: any; //declare TS variables explicitly that you as a developer know will exist 
+console.log(GLOBAL); //without declaration, will give error as TS does not know it has been defined in the index.html
+```
+
+
+### Class Transformer
+used to map your plain javascript objects to the instances of classes you have. It works with TS and JS
+
+```bash
+`npm i -g lite-server`
+`npm i class-transformer reflect-metadata`
+```
+
+```typescript
+import { Product } from "./product.model";
+import "reflect-metadata"; //dependency for clas-transformer
+import { plainToClass } from "class-transformer";
+
+
+const products = [ //simulated json response
+  { title: "carpet", price: 14.0 },
+  { title: "chair", price: 7.0 },
+];
+
+// const loadedProducts = products.map((prod) => { //traditional way
+//   return new Product(prod.title, prod.price);
+// });
+
+//using plainToClass(className, data)
+const loadedProducts = plainToClass(Product, products);
+
+
+for (const prod of loadedProducts) {
+  console.log(prod.getInformation());
+      //  ["carpet", "$14"]
+      //  ["chair", "$7"]
+}
+```
+
+### Class Validator
+Package that allows us to set up validation rules on classes using decorators.
+
+```bash
+npm i class-validator
+```
+Changes to `tsconfig.json`
+```json
+    "experimentalDecorators": true,  //set the property
+```
+
+Code for the model
+```typescript
+//importing all the decorators to be used for validation
+import { IsNotEmpty, IsNumber, IsPositive} from 'class-validator';
+
+export class Product {
+  @IsNotEmpty()
+  title: string;
+  @IsNumber()
+  @IsPositive()
+  price: number;
+  constructor(t: string, p: number){
+    this.title = t;
+    this.price = p;
+  }
+
+  getInformation(){
+    return [this.title, `$${this.price}`]
+  }
+} 
+```
+
+Code in app.ts
+```typescript
+import { validate } from "class-validator";
+
+const newProd = new Product("", -5.99);
+
+//validate function returns a promise
+validate(newProd).then((errors) => {
+  if (errors.length > 0) {
+    console.log("Validation errors");
+    console.log(errors);
+  } else {
+    console.log(newProd.getInformation());
+  }
+});
+```
+
 
 
 

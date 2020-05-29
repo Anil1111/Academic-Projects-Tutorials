@@ -148,6 +148,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 6. `ng lint` #check code for coding standards
 
 ---
+
 ## Paste JSON as Code
 
 - Ensure the extension is installed
@@ -158,6 +159,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 5. The _myFile_.js gets automatically populated with it
 
 ---
+
 ## Numbered Bookmarks
 
 - Ensure extension is installed
@@ -167,6 +169,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 4. Enter the number of the bookmark you wish to dive 
 
 ---
+
 ## Git Lens
 
   `"gitlens.menus": false` property has to be defined in the settings.json incase you wish to hide the toolbar on top of VSCode

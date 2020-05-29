@@ -41,6 +41,7 @@ _This text_ is Italic
 
 [Rich Google](https://google.com)  
 [Rich Google](https://google.com "Google on hover")
+[Typescript Reference]('../XNotes/Typescript.md')
 
 <!-- Horizontal Rule -->
 

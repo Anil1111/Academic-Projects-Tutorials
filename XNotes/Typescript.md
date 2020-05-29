@@ -94,6 +94,8 @@ Providing support to namespace and bundling of all js files
   "compilerOptions": {
     "target": "es6" /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */,
     "module": "commonjs" /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', 'es2020', or 'ESNext'. */,
+    //extremely important which decides how modules are rendered in TS, default is commonjs
+    //for namespace integration and advanced modules, use es2015
     "lib": [
       "es5",
       "es2015",
@@ -133,3 +135,42 @@ Providing support to namespace and bundling of all js files
 }
 
 ```
+
+
+### Sample tsconfig.json with webpack
+
+```json
+{
+  "compilerOptions": {
+    "target": "es6",  //atleast es6
+    "module": "es2015", //supporting es6 module notation
+    "lib": [ //providing support for interacting with DOM
+      "dom", 
+      "es6",
+      "dom.iterable",
+      "scripthost"
+    ],  
+    "sourceMap": true,  
+    "removeComments": true, 
+    "strict": true, 
+    "noUnusedLocals": true,   
+    "noUnusedParameters": true,   
+    "noImplicitReturns": true,        
+    "esModuleInterop": true, 
+    "experimentalDecorators": true, 
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true 
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": [
+    "src/**/*.ts" //ts source folder
+  ]
+}
+
+```
+
+
+### TS change for using JS libraries
+Install Type packages. Eg: from [here](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types)
