@@ -60,6 +60,8 @@
     - `npm i -g lite-server` #for automatic compilation of TS files
     - `npm i class-transformer reflect-metadata` used to map your plain javascript objects to the instances of classes you have. and make sure to import it in a global place, like app.ts with `import "reflect-metadata";` and `import { plainToClass } from "class-transformer";`
     - `npm i class-validator` Package that allows us to set up validation rules on classes using decorators
+    - `npm i axios` Promise based HTTP client for the browser and node.js
+    - `npm i -D @types/googlemaps` type support for google maps
 17. **Webpack**
     - `npm i -D webpack webpack-cli webpack-dev-server clean-webpack-plugin` #webpack set up in  #webpack and corresponding CLI, webpack development server and plugin to clean the output directory each time 
     - `npm i -D typescript ts-loader`  #TS specific loader

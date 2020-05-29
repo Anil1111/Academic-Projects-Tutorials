@@ -23,7 +23,7 @@
 `git diff <<filename>>` #To view changes made to a file #use q to exit the less file  
 `set git config --global` #Would appear blank if no differnce found  
 `git log` #To view log files  
-`git log --oneline --graph`/ `git shortlog` #For better viewing  of the log output
+`git log --oneline --graph`/ `git shortlog` #For better viewing of the log output
 `git checkout head <<filename>>` #To retrieve the last commited version of the filename; HEAD refers to the last commit  
 `git checkout --<<filename>>` #To retrieve the last commited version of the filename -SAME as above  
 `git reset <<last6charsOfLastCommit>>` #to retrieve all the last commit files  
@@ -50,12 +50,10 @@
 `git stash show` #to view all available stashes  
 `git stash clear` #clear any stash
 
-
 ### For removing already tracked file/folder:
 
 `git rm -r --cached <folder>`  
 `git rm --cached <file>`
-
 
 ### Reference error in Master branch
 
@@ -63,12 +61,19 @@
 `git fetch`  
 `git branch --set-upstream-to=origin/master`
 
-
 ### The workflow for Git collaborations typically follows this order:
+
 1. Fetch and merge changes from the remote
 2. Create a branch to work on a new project feature
 3. Develop the feature on your branch and commit your work
 4. Fetch and merge from the remote again (in case new commits were made while you were working)
 5. Push your branch up to the remote for review and Merge the accepted branh chages into master
+
+### GIT commit with Vim
+
+1. `git add .`
+2. `git commit`
+   - it will open up the vim editor where you can enter multiline commit messages
+   - use `esc` + `:wq` to save the commit file and press `enter`
 
 ---

@@ -58,6 +58,7 @@ Used to get configuration option for generating JS from TS.
 "compilerOptions": {
    ...
    "outDir": "./dist", //generates all JS and source maps here; also the output directory retains the directory structure from input src folders
+   //the above is generated while using `tsc -w`
    "rootDir": "./src", //all src files of TS stored here; if rootDir not given then all TS files in other folders also gets compiled into the outDir
 
    ...
@@ -143,14 +144,15 @@ Providing support to namespace and bundling of all js files
 {
   "compilerOptions": {
     "target": "es6",  //atleast es6
-    "module": "es2015", //supporting es6 module notation
+    "module": "es2015", //supporting es6 module notation or Use "commonjs"
     "lib": [ //providing support for interacting with DOM
       "dom", 
       "es6",
       "dom.iterable",
       "scripthost"
     ],  
-    "sourceMap": true,  
+    "sourceMap": true,
+    "outDir": "./dist",   //determined where the output files get saved
     "removeComments": true, 
     "strict": true, 
     "noUnusedLocals": true,   

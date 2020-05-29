@@ -1744,7 +1744,7 @@ npm i -D @types/jquery
 
 ```
 
-3. Usage of 'declare' to let TS know that variables exist
+3. Usage of 'declare' to let TS know that variables exist globally
 
 ```html
 <body>
