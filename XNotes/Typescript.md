@@ -176,3 +176,14 @@ Providing support to namespace and bundling of all js files
 
 ### TS change for using JS libraries
 Install Type packages. Eg: from [here](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types)
+
+### Sample tsconfig.json with Node Project
+```json
+  "compilerOptions": {
+    "target": "es2018", 
+    "module": "commonjs", 
+    "moduleResolution": "node", 
+    "outDir": "./dist",   
+    "rootDir": "./src", 
+  }
+```

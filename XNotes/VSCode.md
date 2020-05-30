@@ -16,7 +16,7 @@
 5. `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
 6. `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
 7. `Ctrl +Alt + N` To run the JS code using inbuilt node and output in console; using the Code runner extension
-8. `CTrl + / + Shift` to clear the terminal; Command: `workbench.action.terminal.clear`;
+8. `CTrl + / + Shift` or `Ctrl + /` to clear the terminal; Command: `workbench.action.terminal.clear`;
 10. `Ctrl + Shift + B` #Run build task
 11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
 12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
@@ -64,7 +64,7 @@
 35. ``Alt+ ` `` peek the definition inline
 36. `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
 37. `Ctrl + Shift + M` to open the problems tab
-
+38. Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
 
 
 

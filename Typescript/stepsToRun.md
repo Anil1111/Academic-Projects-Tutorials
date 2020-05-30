@@ -42,3 +42,18 @@ Uncomment the js files in the script tag of `./index.html`
 ## LibrariesWithTS
 
 `npm start` to view the console window of the browser
+
+---
+
+## TSWithReact
+
+`npm start` to spin up the react dev server
+
+---
+
+## TSWithNode
+
+`tsc -w` to compile all TS into JS in the ./dist folder
+`npm start` to run nodemon on app.js from ./dist
+
+---

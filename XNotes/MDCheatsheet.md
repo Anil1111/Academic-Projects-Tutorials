@@ -33,6 +33,10 @@ _This text_ is Italic
 `` escape `abc` ``   
 \* file \*
 
+<!-- Comment block -->
+    // this is a comment block
+    Has text
+
 <!-- Blockquote -->
 
 > This is a quote

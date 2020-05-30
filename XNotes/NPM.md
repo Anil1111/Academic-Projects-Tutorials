@@ -9,7 +9,7 @@
 `npm outdated --save-dev` #to find the outdated packages in dev-dependencies  
 `npm config ls -l | grep config` #to find the location of the npmrc config files in the system  
 `npm remove <<package>>` removing specific packages
-
+`npm ls <<packageName>>` from the directory which contains node_modules will list the package and its version
 ---
 
 
@@ -22,12 +22,15 @@
     - `npm install -g holderjs` #Used for providing UI support for blank sized images
 4. **jquery**
 5. **Babel**: 
-    - `npm install -g babel-cli`, 
+    - `npm install -g babel-cli`, install babel cli
     - `npm install -g babel-preset-env`
 6. **Nodemon**: 
     - `npm install -g nodemon` #nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
 7. **React**
     - `npm install -g create-react-app` #to generate boiler plate version of react application
+    - `npx create-react-app <<app-name>> --template typescript` #boiler plate with Typescript   
+    Incase there is a webpack/webpack-dev-server installed with incompatible versions higher up the tree, you wont be able to `npm start`  
+    - `npm i react-router-dom` 
 8. **Surge**`
    - `npm install -g surge` #to deploy static websites
 9. **Express** 
@@ -62,6 +65,8 @@
     - `npm i class-validator` Package that allows us to set up validation rules on classes using decorators
     - `npm i axios` Promise based HTTP client for the browser and node.js
     - `npm i -D @types/googlemaps` type support for google maps
+    - `npm i -d @types/react-router-dom`
+    - `npm i -d @types/node @types/express` all type support for node and express project in Typescript   
 17. **Webpack**
     - `npm i -D webpack webpack-cli webpack-dev-server clean-webpack-plugin` #webpack set up in  #webpack and corresponding CLI, webpack development server and plugin to clean the output directory each time 
     - `npm i -D typescript ts-loader`  #TS specific loader

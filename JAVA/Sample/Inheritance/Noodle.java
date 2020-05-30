@@ -1,6 +1,5 @@
 package Sample.Inheritance;
 
-import java.util.ArrayList;
 
 public class Noodle {
   

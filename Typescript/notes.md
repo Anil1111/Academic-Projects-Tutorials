@@ -1845,11 +1845,43 @@ validate(newProd).then((errors) => {
 ```
 
 
+## Creating a React Project with TS
+
+.tsx - Files that use ts and xml
+
+### Syntaax
+```bash
+npx create-react-app name-of-app --template typescript
+```
+
+### Smaple App.tsx
+```tsx
+const App: React.FC = () => { //stands for FunctionalComponent which says that it returns a JSX and is a function
+  return (
+    <div className="App"></div>
+  );
+}
+```
 
 
+## Creating a Node & Express Project with TS
 
+### NPM Packages
+```bash
+npm i express body-parser
+npm i -d nodemon 
+npm i -d @types/node @types/express
+```
 
-
-
+### Changes to tsconfig.json
+```json
+  "compilerOptions": {
+    "target": "es2018", 
+    "module": "commonjs", 
+    "moduleResolution": "node", 
+    "outDir": "./dist",   
+    "rootDir": "./src", 
+  }
+```
 
 
