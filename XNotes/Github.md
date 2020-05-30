@@ -8,6 +8,7 @@
 `git add .` #To stage the files; ready for commit  
 `git commit -m "message"` #To commit  
 `git remote -v` #To view the URL of remote file  
+`git remote set-url origin https://github.com/USERNAME/REPOSITORY.git` change the Origin remote URL
 `git remote add origin <<url>>` #UsedTogether  
 `git push -u origin master` #UsedTogether and enter username and password  
 `git rm <filename>` #Removing filename  
