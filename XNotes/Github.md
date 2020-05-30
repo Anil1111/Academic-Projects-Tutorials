@@ -1,6 +1,6 @@
 ## GIT Commands
 
-`git init` #To initialize a GIT repo  
+`git init` # To initialize a GIT repo  
 `git config --global user.name = "<name>"`  
 `git config --global user.email = "<email>"`  
 `git clone remote_location clone_name` #Cloning a git repository from a remote location  
