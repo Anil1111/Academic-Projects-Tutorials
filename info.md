@@ -137,18 +137,6 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 
 ---
 
-
-## Angular
-
-1. `npm install -g @angular/cli@latest` #Install the latest ng client:
-2. `ng version; ng v` #check version of angular
-3. `ng generate; ng g` #generate new files for angular
-4. `ng serve` #run the angular application
-5. `ng build` #build the angular application
-6. `ng lint` #check code for coding standards
-
----
-
 ## Paste JSON as Code
 
 - Ensure the extension is installed
@@ -190,7 +178,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 
 ### CSS (CDN):
 
-`<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">`  
+`<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">`  
 
 SASS (import to scss file) 
 `@import "../node_modules/bootstrap/scss/bootstrap.scss";`
@@ -225,3 +213,6 @@ JS (add to script tag in html):
 ```
 
 ---
+## Windows Commands
+
+1. `Windows + Up Arrow` to maximize a window

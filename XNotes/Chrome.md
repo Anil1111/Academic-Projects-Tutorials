@@ -15,7 +15,7 @@
 13. `Ctrl + Shift + Tab` moves to the tabs on left
 14. `Ctrl + Shift + T` open the last closed window
 15. `Ctrl + F5` for hard reload which includes reloading forced
-
+16. `Ctrl + L` to focus on the URL bar
 
 ---
 
@@ -42,4 +42,10 @@ Below configuration needs to be made for Markdown to render properly in the brow
 4. _Firefox_ - Gecko
 
 ---
+
+## Developer Tools
+
+### Navigate to Session Storage in Google Chrome:   
+> Chrome --> Inspect --> Application --> Inside Storage Menu --> Session Storage
+
 

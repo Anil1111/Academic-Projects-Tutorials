@@ -65,7 +65,7 @@
 36. `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
 37. `Ctrl + Shift + M` to open the problems tab
 38. Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
-
+39. `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
 
 
 ## Shortcut from Integrated Terminal
@@ -104,8 +104,11 @@
 21. **Paste JSON As Code** - _quicktype_
 22. **Git Lens** - 
 23. **Bracket Pair Colorizer 2** - _CoeenradS_
-
-
+24. **Angular Snippets(Version 9)** - _John Papa_
+25. **Angular Language Service** - _Angular_
+26. **npm** - _egamma_
+27. **EditorConfig for VS Code** - _EditorConfig_
+28. **nx console** - _nrwl_
 ---
 ## VSCode settings
 

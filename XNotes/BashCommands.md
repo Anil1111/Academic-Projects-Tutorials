@@ -15,7 +15,7 @@
 `cp *name.txt destDir/` #* wildcard to select all files in the working directory to be copied & copy *name.txt  
 `mv sourceFile1 destDir/` #copy sourceFile into destDir/  
 `mv fileName1 fileName2` #renames fileName1 to fileName2  
-`rm filename / rm -r dirName` #to remove files or list of files recursively  
+`rm filename / rm -r dirName` or `rm -rf dirName` #to remove files or list of files recursively ;  
 `date` #print the timestamp
 `history` #prints the history of the commands executed
 `head <<filename>>` #command to print the first ten lines of filename
