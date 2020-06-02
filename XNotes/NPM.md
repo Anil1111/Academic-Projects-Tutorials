@@ -82,5 +82,10 @@
     - `npm i lodash` to install the lodash package
     - `npm i -D @types/lodash` to install the types package that support use of this JS library in TS
     - `npm i -D @types/jquery` type package for jquery
-19. **Angular**
+19. **Highcharts**
+    - `npm i highcharts` 
+20. **Angular**
     - `npm install -g @angular/cli@latest` #Install the latest angular CLI
+    - `ng add @angular/material` installing angular material
+    - `npm i highcharts-angular` installing highcharts for angular
+    - `npm i @angular/flex-layout @angular/cdk` for flex support

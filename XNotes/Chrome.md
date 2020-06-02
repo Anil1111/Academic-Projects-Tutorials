@@ -16,7 +16,7 @@
 14. `Ctrl + Shift + T` open the last closed window
 15. `Ctrl + F5` for hard reload which includes reloading forced
 16. `Ctrl + L` to focus on the URL bar
-
+17. `Ctrl + Shift + I` to open the dev tools
 ---
 
 ## Browser Extensions - Chrome

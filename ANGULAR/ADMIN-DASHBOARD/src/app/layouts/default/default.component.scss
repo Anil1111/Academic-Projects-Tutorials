@@ -1,0 +1,17 @@
+:host { // :host pseudo class selector to apply css styles on the root <app-default> template only and does not affect the elements inside
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer {
+  width: 350px;
+}
+
+mat-drawer-container {
+  height: 100%; // for occupying the entire height of the window in the left
+}
+
+mat-drawer-content {
+  padding: 20px;
+}

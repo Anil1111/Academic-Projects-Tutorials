@@ -1,0 +1,19 @@
+<!-- toggleSideBarForMe is an event emitted from the HeaderComponent which we bind to the method ofsideBarToggler in DefaultComponent -->
+<!-- The method alters the sideBarOpen property to toggle the sidebar -->
+<app-header (toggleSideBarForMe)="sideBarToggler()"></app-header>
+
+<mat-drawer-container>
+  <!-- For showing/hiding the sidebar based on user click by using the opened attribute-->
+  <mat-drawer mode="side" [opened]="sideBarOpen">
+    <app-sidebar></app-sidebar>
+  </mat-drawer>
+
+  <mat-drawer-content>
+    <!--<router-outlet> to extend routing capabilities within this container-->
+    <router-outlet></router-outlet>
+  </mat-drawer-content>
+  
+</mat-drawer-container>
+
+<app-footer></app-footer>
+

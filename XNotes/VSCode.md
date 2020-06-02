@@ -67,6 +67,11 @@
 38. Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
 39. `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
 
+### Shortcuts for Text Selection
+40. `Ctrl + K ;` Select all the contents inside a ` , ' , "
+41. `Ctrl + K [` Select all the contetns inside a square braket
+42. `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
+
 
 ## Shortcut from Integrated Terminal
 1. `code fileName.ext` opens the file in a new tab in VSCode 
@@ -109,6 +114,9 @@
 26. **npm** - _egamma_
 27. **EditorConfig for VS Code** - _EditorConfig_
 28. **nx console** - _nrwl_
+29. **Quick and Simple Text Selection** - _David Bankier_ #for providing some shortcuts for easy text selection
+
+
 ---
 ## VSCode settings
 
