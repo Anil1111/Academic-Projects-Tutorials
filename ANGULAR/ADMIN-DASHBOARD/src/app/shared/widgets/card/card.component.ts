@@ -14,6 +14,7 @@ export class CardComponent implements OnInit {
   @Input() label: string;
   @Input() total: string;
   @Input() percentage: string;
+  @Input() data = [];
 
   constructor() {}
 
@@ -69,7 +70,7 @@ export class CardComponent implements OnInit {
       },
       series: [
         {
-          data: [71, 78, 39, 66], // adding new series/data for graph
+          data: this.data, // adding new series/data for graph
         },
       ],
     };

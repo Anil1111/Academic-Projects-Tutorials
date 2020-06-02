@@ -15,6 +15,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule } from '@angular/material/card';
+import { DashboardService } from 'src/app/modules/dashboard.service';
 
 @NgModule({
   declarations: [DefaultComponent, DashboardComponent, PostsComponent],
@@ -27,5 +28,8 @@ import { MatCardModule } from '@angular/material/card';
     FlexLayoutModule,
     MatCardModule,
   ],
+  providers: [ // providers used to add services
+    DashboardService
+  ]
 })
 export class DefaultModule {}

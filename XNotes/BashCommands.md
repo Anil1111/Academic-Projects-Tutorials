@@ -59,4 +59,4 @@ To remove nano error: `dos2unix /usr/share/nano/git.nanorc` #execute the command
 use the `./bashScript.sh` to view  
  `~` #represents the home directory  
 `chmod +x <<script>>.sh` #provide execute privilege to script  
-`./<<scriptname.sh>>` #running a bash script
+`./<<scriptname.sh>>` #running a bash scr

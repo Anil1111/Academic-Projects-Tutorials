@@ -1,14 +1,22 @@
 ## VSCode Shortcuts
 
-1. `Ctrl + K + Ctrl + S` #opens keybindings
-1. `Ctrl + K Z` #Open Zen mode to concentrate on coding
+### Basic
+- `Ctrl + K + Ctrl + S` #opens keybindings page
+- `Ctrl + K Z` #Open Zen mode to concentrate on coding
     - Uncheck from settings `Zen Mode: Hide Line Numbers`
-1. `Ctrl + Space` #Code completion
-1. `Alt+Shift+F` Format CSS/SCSS code in VSCode
-2. `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
-2. `Shift + Alt + (drag mouse)` Column box selection
-3. `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
-4. `Shift + Ctrl + P` Open up the command pallet in VSCode
+
+### Syntax Support
+#### Generic
+- `Ctrl + Space` #Code completion
+- `Ctrl + .` Provide quick fix by intellisense
+#### CSS
+- `Alt+Shift+F` Format CSS/SCSS code in VSCode
+#### Angular
+
+- `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
+- `Shift + Alt + (drag mouse)` Column box selection
+- `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
+- `Shift + Ctrl + P` Open up the command pallet in VSCode
     - Remove the `>` symbol and you are at the _search files_ command pallette
     - type `@` keyword and you can list out all the entities in the file
 5. `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
@@ -54,10 +62,6 @@
 35. `CTrl + L` select the entire line
 26. `Ctrl + K V` to open preview mode of the MD file to the right
 27. `Double click new tab` to remove the file preview mode of all new unedited tabs
-28. `Ctrl + K Ctrl + 0` fold all code
-29. `Ctrl + K Ctl + J` unfold all code
-30. `Ctrl + Shift + [ or ] ` fold or unfload a block code
-31. `Ctrl + K Ctrl + ]` unfold recursively
 32. `Ctrl + SHift + ;` to toggle breadcrumbs and then use `arrow keys` to navigate and later `space / enter` to view the contents
 33. `Ctrl + Hover on Function` to view the function definition
 34. `Ctrl + Alt + Click` to view the definiton on the side pane
@@ -67,14 +71,20 @@
 38. Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
 39. `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
 
-### Shortcuts for Text Selection
-40. `Ctrl + K ;` Select all the contents inside a ` , ' , "
-41. `Ctrl + K [` Select all the contetns inside a square braket
-42. `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
+### Folding blocks
+- `Ctrl + K Ctrl + 0` fold all code
+- `Ctrl + K Ctl + J` unfold all code
+- `Ctrl + Shift + [ or ] ` fold or unfload a block code
+- `Ctrl + K Ctrl + ]` unfold recursively
+
+### Text Selection
+- `Ctrl + K ;` Select all the contents inside a ` , ' , "
+- `Ctrl + K [` Select all the contetns inside a square braket
+- `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
 
 
-## Shortcut from Integrated Terminal
-1. `code fileName.ext` opens the file in a new tab in VSCode 
+### Integrated Terminal
+- `code fileName.ext` opens the file in a new tab in VSCode 
 
 
 ---
