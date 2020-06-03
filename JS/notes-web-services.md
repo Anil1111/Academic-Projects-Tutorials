@@ -1,7 +1,15 @@
 # Web Services
+Software system designed to support interoperable machine-to-machine interaction over a network.
 
 ## What is HTTP?
 `HTTP` stands for `Hypertext Transfer Protocol` and is used to structure requests and responses over the internet. HTTP requires data to be transferred from one point to another over the network.
+The HTTp Request and Response consists of the Rrequest/Response header and body.   
+
+### Resources
+Something that you want to expose to the outside world as a web service.
+- It has a `URI`(Uniform Resource Indicator)   
+Eg: users/Richard/todos/1
+- They Can have different  representations like XML, JSON, HTML
 
 ## TCP
 The transfer of resources happens using `TCP (Transmission Control Protocol)`.TCP manages the channels between your browser and the server. TCP is used to manage many types of internet connections in which one computer or device wants to send something to another.
@@ -11,7 +19,9 @@ When you type an address such as www.google.com into your browser, you are comma
 Once the TCP connection is established, the client sends a HTTP GET request to the server to retrieve the webpage it should display. After the server has sent the response, it closes the TCP connection. If you open the website in your browser again, or if your browser automatically requests something from the server, a new connection is opened which follows the same process described above. GET requests are one kind of HTTP method a client can call.
 
 ## REST:
-REST, or `REpresentational State Transfer`, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other.REST-compliant systems, often called `RESTful systems`, are characterized by how they are stateless and separate the concerns of client and server. 
+REST, or `REpresentational State Transfer`, is an architectural style for providing standards between computer systems on the web, making it easier for systems to communicate with each other.REST-compliant systems, often called `RESTful systems`, are characterized by how they are stateless and separate the concerns of client and server.   
+`JSON` is the most popular data exchange format.
+`HTTP` is the only transport.
 
 ### SEPARATION OF CLIENT AND SERVER
 n the REST architectural style, the implementation of the client and the implementation of the server can be done independently without each knowing about the other. This means that the code on the client side can be changed at any time without affecting the operation of the server, and the code on the server side can be changed without affecting the operation of the client.
@@ -309,3 +319,29 @@ Host: www.codecademy.com
 
 
 
+
+
+## Interaction in Web Services
+A web service should be platform independent ie application built in different technologies should be able to consume the output/data from it.   
+`Request` is the method of communication where a client requests for a resource from the webservice.   
+`Response` is the method where the requested information is sent back.   
+`XML` (Extensible Markup language) and `JSON` are the popular languages used to perform this communication. 
+- The client is known as the `service consumer` whereas the web service is referred to as the `service provider`.
+
+
+### How does the client know how to interact with the Web Service
+
+#### Service Definition
+Is the contract between the service provider and service consumer
+1. Request/Response Format
+2. Request Structure
+3. Response Structure
+4. Endpoint - Refers to the URL where the services is exposed at
+
+
+### MQTT vs HTTP
+
+`MQTT` stands for Message Queing Telemetry Transport.   
+It is a lightweight, open source and easy to implement messaging protocol mainly used by IOT devices due to its operability in low bandwidth and constrained Environment.
+The clients are known as connected devices and the MQTT server is known as the MQTT Broker.   
+The client `Publish` the topics based on the data it wants to send and the MQTT server/ allied devices `subscribes`to it. 

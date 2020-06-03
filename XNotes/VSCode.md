@@ -1,91 +1,102 @@
 ## VSCode Shortcuts
 
-### Basic
+### VSCode Settings and Pages
 - `Ctrl + K + Ctrl + S` #opens keybindings page
 - `Ctrl + K Z` #Open Zen mode to concentrate on coding
     - Uncheck from settings `Zen Mode: Hide Line Numbers`
-
-### Syntax Support
-#### Generic
-- `Ctrl + Space` #Code completion
-- `Ctrl + .` Provide quick fix by intellisense
-#### CSS
-- `Alt+Shift+F` Format CSS/SCSS code in VSCode
-#### Angular
-
-- `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
-- `Shift + Alt + (drag mouse)` Column box selection
 - `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
 - `Shift + Ctrl + P` Open up the command pallet in VSCode
     - Remove the `>` symbol and you are at the _search files_ command pallette
     - type `@` keyword and you can list out all the entities in the file
-5. `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
-    - After doing `Ctrl + E`, select the file to opne, and press `Ctrl + Right` #split the file to the right
-5. `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
-6. `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
-7. `Ctrl +Alt + N` To run the JS code using inbuilt node and output in console; using the Code runner extension
-8. `CTrl + / + Shift` or `Ctrl + /` to clear the terminal; Command: `workbench.action.terminal.clear`;
-10. `Ctrl + Shift + B` #Run build task
-11. `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
-12. `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
-    - `Shift + Alt + Right` #for selecting the corresponding data
-    - `Shift + Alt + Left` #for shrinking the selected data
-12. `Ctrl + '+'` #To increase/decrease the font size of the VSCode
-13. `Ctrl + ,` #access settings
-14. ``Shift + Ctrl + `` #create new terminal
-15. `Ctrl + B` #toggle on/off sidebar
-16. `Shift + Ctrl + E` #focussing on sidebar
-16. `Shift + Ctrl + N` #new VSCode window
-17. `Ctrl + Tab` #**Change File Tabs**
-17. `Ctrl + K   Rt Arrow/Left Arrow` To toggle between the editor groups
-17. `Ctrl + Shift + Tab` to toggle between the editor groups
-18. `Alt + Left/ Alt + Right` #Move between files
-18. `Ctrl + W` #close files
-19. `Ctrl + \` #to toggle split screen
-20. `Ctrl + Home` #to go the start of file     
+- `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
+    - After doing `Ctrl + E`, select the file to open, and press `Ctrl + Right` #split the file to the right
+- `Ctrl + '+'` #To increase/decrease the font size of the VSCode
+- `Ctrl + ,` #access default settings of VSCode
+- `Ctrl + Shift + M` to open the problems tab
+
+### Syntax Support
+Generic
+- `Ctrl + Space` #Code completion
+- `Ctrl + .` Provide quick fix by intellisense
+- `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
+- `Shift + Alt + A` #to insert block comment
+- `Double click new tab` to remove the file preview mode of all new unedited tabs
+
+HTML
+- Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
+CSS
+- `Alt+Shift+F` Format CSS/SCSS code in VSCode
+Node
+- `Ctrl +Alt + N` To run the JS code using inbuilt node and output in console; using the Code runner extension
+- `Ctrl + Shift + B` #Run build task
+
+### Toggling Windows
+- `Ctrl + B` #toggle on/off sidebar
+- `Shift + Ctrl + E` #focussing on sidebar
+- `Shift + Ctrl + N` #new VSCode window
+- `Ctrl + Tab` #Change File Tabs
+- `Ctrl + W` #close active sheet/window
+- `Ctrl + K   Rt Arrow/Left Arrow` To toggle between the editor groups
+- `Ctrl + Shift + Tab` to toggle between the editor groups
+- `Alt + Left/ Alt + Right` #Move between files
+- `Ctrl + \` #to toggle split screen
+- `Ctrl + K V` to open preview mode of the MD file to the right
+
+### Text Selection
+- `Ctrl + K ;` Select all the contents inside a ` , ' , "
+- `Ctrl + K [` Select all the contetns inside a square braket
+- `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
+- `Ctrl + D` #select next match 
+- `Ctrl + U` #de-select match
+
+### Text Formatting
+- `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
+- `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
+  - `Shift + Alt + Right` #for selecting the corresponding data
+  - `Shift + Alt + Left` #for shrinking the selected data
+- `CTrl + L` select the entire line
+
+### Text Movement
+- `Ctrl + Home` #to go the start of file     
     `Ctrl + End` #to go to the end of file
-21. `Shift + Ctrl + K` #to remove line
-22. `Ctrl+ Enter` #to insert line from between the line   
+- `Shift + Ctrl + K` #to remove line
+- `Ctrl+ Enter` #to insert line from between the line   
     `Ctrl + Enter` #from a file in sidebar will toggle split screen
-24. `Shift + Alt + A` #to insert block comment
-24. `Shift + Ctrl + \` #shift to matching brackets
-25. `Ctrl + D` #select next match 
-26. `Ctrl + U` #de-select match
-27. `Alt + Click` #add cursor to select specific points
-28. `Ctrl + Right/left` #move along the line faster by moving by words
-29. `CTrl + Shift + o` #go to a function or entity withing the page
-30. `F2` on the element you wish to refactor #will refactor all intances within the file and across all files wherever it is referenced
-31. `Alt + /` **Custom** to go to next terminal
-32. `Alt + '` **Custom** to kill current terminal
-33. `Fn + Left Arrow / Rt Arrow` go to start/end of the line
-34. `Alt + #` where # is a number to select individual tabs in VSCode 
-35. `CTrl + L` select the entire line
-26. `Ctrl + K V` to open preview mode of the MD file to the right
-27. `Double click new tab` to remove the file preview mode of all new unedited tabs
-32. `Ctrl + SHift + ;` to toggle breadcrumbs and then use `arrow keys` to navigate and later `space / enter` to view the contents
-33. `Ctrl + Hover on Function` to view the function definition
-34. `Ctrl + Alt + Click` to view the definiton on the side pane
-35. ``Alt+ ` `` peek the definition inline
-36. `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
-37. `Ctrl + Shift + M` to open the problems tab
-38. Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
-39. `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
+- `Shift + Ctrl + \` #shift to matching brackets
+- `Fn + Left Arrow / Rt Arrow` go to start/end of the line
+- `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
+- `Shift + Alt + (drag mouse)` Column box selection
+- `Alt + Click` #add cursor to select specific points
+- `Ctrl + Right/left` #move along the line faster by moving by words
+
+### Navigation and Code Explanation
+- `Alt + #` where # is a number to select individual tabs in VSCode 
+- `Ctrl + SHift + ;` to toggle breadcrumbs and then use `arrow keys` to navigate and later `space / enter` to view the contents
+- `Ctrl + Hover on Function` to view the function definition
+- `CTrl + Shift + o` #go to a function or entity withing the page
+- `F2` on the element you wish to refactor #will refactor all intances within the file and across all files wherever it is referenced
+- `Ctrl + Alt + Click` to view the definiton on the side pane
+- ``Alt+ ` `` peek the definition inline
+- `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
+
 
 ### Folding blocks
 - `Ctrl + K Ctrl + 0` fold all code
 - `Ctrl + K Ctl + J` unfold all code
 - `Ctrl + Shift + [ or ] ` fold or unfload a block code
 - `Ctrl + K Ctrl + ]` unfold recursively
-
-### Text Selection
-- `Ctrl + K ;` Select all the contents inside a ` , ' , "
-- `Ctrl + K [` Select all the contetns inside a square braket
-- `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
+- `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
 
 
 ### Integrated Terminal
 - `code fileName.ext` opens the file in a new tab in VSCode 
+- `Alt + /` **Custom** to go to next terminal
+- `Alt + '` **Custom** to kill current terminal
+- `CTrl + / + Shift` or `Ctrl + /` to clear the terminal; Command: `workbench.action.terminal.clear`;
+- ``Shift + Ctrl + `` #create new terminal
 
+### Chrome DevTools
+- `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
 
 ---
 
@@ -112,6 +123,8 @@
     **Tomcat for Java** - _Wei Shen_  
     **Spring Initializr Java Support** - _Microsoft_  
     **Checkstyle for Java** - _ShengChen_  
+    **Java Decompiler** - _David Gileadi_
+    **XML** - _RedHat_
 17. **Auto-Open Markdown Preview** - _hnw_  
 18. **Path Intellisense** - _Christian Kohler_
 19. **TSLint** - _Microsoft_
