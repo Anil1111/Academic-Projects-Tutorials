@@ -90,15 +90,15 @@ Node
 
 ### Integrated Terminal
 - `code fileName.ext` opens the file in a new tab in VSCode 
-- `Alt + /` **Custom** to go to next terminal
-- `Alt + '` **Custom** to kill current terminal
+- `Alt + /` to go to next terminal
+- `Alt + '` to kill current terminal
 - `CTrl + / + Shift` or `Ctrl + /` to clear the terminal; Command: `workbench.action.terminal.clear`;
 - ``Shift + Ctrl + `` #create new terminal
 
 ### Chrome DevTools
 - `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
-
 ---
+
 
 ## VSCode Extensions
 
@@ -125,6 +125,7 @@ Node
     **Checkstyle for Java** - _ShengChen_  
     **Java Decompiler** - _David Gileadi_
     **XML** - _RedHat_
+    **Lombok Annotations Support for VS Code** - Gabriel Basilio
 17. **Auto-Open Markdown Preview** - _hnw_  
 18. **Path Intellisense** - _Christian Kohler_
 19. **TSLint** - _Microsoft_
@@ -146,6 +147,9 @@ Node
 1. **Set git-bash as default terminal**:   
 Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar, there add the path to the git-bash: `C:\Program Files\Git\bin\bashe.exe`
 2. `File --> AutoSave` set autosave on 
+3. Select the `file icon theme` from command pallette
+    - You can use this to change the file icon theme from VSCode to others like material
+4. Select the `Color Theme` from command pallette
 
 ---
 
@@ -195,6 +199,8 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
 ```
 
 ---
+
+
 ## VSCode TS tasks.json snippets
 
 ### Build and watch TS compilation 
@@ -228,5 +234,109 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
   ]
 ```
 
+---
+
+
+## User defined key bindings in `keybindings.json`
+
+```json
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "ctrl+p o",
+    "command": "editor.emmet.action.removeTag"
+  },
+  {
+    "key": "alt+q",
+    "command": "editor.emmet.action.wrapIndividualLinesWithAbbreviation"
+  },
+  {
+    "key": "escape",
+    "command": "-workbench.action.terminal.clearSelection",
+    "when": "terminalFocus && terminalTextSelected && !terminalFindWidgetVisible"
+  },
+  {
+    "key": "ctrl+/ shift+",
+    "command": "workbench.action.terminal.clear",
+    "when": "terminalFocus"
+  },
+  {
+    "key": "ctrl+shift+j",
+    "command": "-workbench.action.search.toggleQueryDetails",
+    "when": "inSearchEditor || searchViewletFocus"
+  },
+  {
+    "key": "alt+/",
+    "command": "workbench.action.terminal.focusNext"
+  },
+  {
+    "key": "alt+'",
+    "command": "workbench.action.terminal.kill"
+  },
+  {
+    "key": "ctrl+alt+insert",
+    "command": "workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "ctrl+alt+right",
+    "command": "-workbench.action.moveEditorToNextGroup"
+  },
+  {
+    "key": "ctrl+k right",
+    "command": "workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+right",
+    "command": "-workbench.action.focusRightGroup"
+  },
+  {
+    "key": "ctrl+k left",
+    "command": "workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+k ctrl+left",
+    "command": "-workbench.action.focusLeftGroup"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "-workbench.action.quickOpenLeastRecentlyUsedEditorInGroup"
+  },
+  {
+    "key": "ctrl+shift+tab",
+    "command": "workbench.action.quickOpenLeastRecentlyUsedEditor"
+  },
+  {
+    "key": "alt+`",
+    "command": "editor.action.peekDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  {
+    "key": "alt+f12",
+    "command": "-editor.action.peekDefinition",
+    "when": "editorHasDefinitionProvider && editorTextFocus && !inReferenceSearchEditor && !isInEmbeddedEditor"
+  },
+  {
+    "key": "ctrl+k ctrl+-",
+    "command": "workbench.files.action.collapseExplorerFolders"
+  },
+  {
+    "key": "ctrl+k shift+,",
+    "command": "extension.selectAngleBrackets",
+    "when": "editorFocus"
+  },
+  {
+    "key": "ctrl+k shift+,",
+    "command": "-extension.selectAngleBrackets",
+    "when": "editorFocus"
+  },
+  {
+    "key": "shift+alt+g", //g for generate
+    "command": "editor.action.codeAction",
+    "args": {
+      "kind": "source.generate", //or "source.generate.accessors" to narrow it down 
+    }
+  }
+]
+```
 
 ---

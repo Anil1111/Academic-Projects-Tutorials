@@ -7,5 +7,6 @@
     "**/.factorypath": true
   },
   "gitlens.menus": false,
-  "java.dependency.packagePresentation": "flat"
+  "java.dependency.packagePresentation": "flat",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
