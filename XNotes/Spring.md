@@ -35,7 +35,8 @@
         "java.saveActions.organizeImports": true,
         "java.referencesCodeLens.enabled": true,
         "java.implementationsCodeLens.enabled": true,
-        "java.trace.server": "messages"
+        "java.trace.server": "messages",
+         "terminal.integrated.scrollback": 2000,
    ```
 5. Add keybing to `keybindings.json` to support automatic generation of constructors, getters/setters, toString methods
    ```json
@@ -109,12 +110,13 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 - contains the dependencies mentioned for use in the project
 
 
-
 ---
 
-# Spring dependency in POM.xml
 
-## JPA
+
+## Spring dependencies in POM.xml
+
+### JPA
 ```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -122,7 +124,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 		</dependency>
 ```
 
-## Web
+### Web
 ```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -130,7 +132,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 		</dependency>
 ```
 
-## DevTools
+### DevTools
 ```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -140,7 +142,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 		</dependency>
 ```
 
-## Test
+### Test
 ```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -155,7 +157,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 		</dependency>
 ```
 
-## H2
+### H2
 ```xml
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -164,7 +166,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 		</dependency>
 ```
 
-## Lombok Annotations Support for VS Code
+### Lombok Annotations Support for VS Code
 ```xml
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -172,5 +174,14 @@ Navigate to the file that contains the main method and Run / Debug the applicati
             <version>1.18.2</version>
         <dependency>
 ```
+
+---
+
+
+## Sample application.properties
+
+- `server.port=8085` for setting the port of the application deployed on custom port
+- `logging.level.org.springframework = debug` for setting the execution of the application of type debug
+
 
 

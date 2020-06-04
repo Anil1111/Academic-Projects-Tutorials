@@ -97,8 +97,14 @@ Node
 
 ### Chrome DevTools
 - `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
----
 
+
+### Spring / Java Support
+- `Alt + Shift + G` to support automatic generation of constructors, getters/setters, toString methods
+
+
+
+---
 
 ## VSCode Extensions
 
@@ -150,6 +156,9 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
 3. Select the `file icon theme` from command pallette
     - You can use this to change the file icon theme from VSCode to others like material
 4. Select the `Color Theme` from command pallette
+5. `"terminal.integrated.scrollback": 2000` add this to `settings.json` to increase the buffer size of the integrated terminal log
+6. `"workbench. editor. enablePreview"` and set it to `false` to stop automatic preview of docs on open
+
 
 ---
 
@@ -340,3 +349,61 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
 ```
 
 ---
+
+
+## User Settings in `settings.json`
+
+```json
+{
+  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  "terminal.external.windowsExec": "C:\\Program Files\\Git\\git-bash.exe",
+  "editor.tabSize": 2,
+  "editor.wordWrap": "on",
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "files.autoSave": "afterDelay",
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "workbench.iconTheme": "vscode-icons",
+  "explorer.confirmDragAndDrop": false,
+  "java.semanticHighlighting.enabled": true,
+  "window.zoomLevel": 0,
+  "git.autofetch": true,
+  "gitlens.blame.dateFormat": "",
+  "[typescript]": {},
+  "zenMode.hideLineNumbers": false,
+  "gitlens.views.search.files.layout": "list",
+  "java.configuration.maven.userSettings": "C:\\Users\\triph\\apache-maven-3.6.3-bin\\apache-maven-3.6.3\\conf", //maven installation
+  "java.home": "C:\\Program Files\\Java\\jdk-14",
+  //provide different java configuration runtimes
+  "java.configuration.runtimes": [
+    {
+      "name": "JavaSE-1.8",
+      "path": "C:\\Program Files\\Java\\jdk1.8.0_251"
+    },
+    {
+      "name": "JavaSE-13",
+      "path": "C:\\Program Files\\Java\\jdk-13.0.1"
+    },
+    {
+      "name": "JavaSE-14",
+      "path": "C:\\Program Files\\Java\\jdk-14",
+      "sources": "C:\\Program Files\\Java\\jdk-14\\lib\\src.zip",
+      "javadoc": "https://docs.oracle.com/en/java/javase/14/docs/api",
+      "default": true
+    }
+  ],
+  "java.saveActions.organizeImports": true, //automatic import management
+  "java.referencesCodeLens.enabled": true,
+  "java.implementationsCodeLens.enabled": true,
+  "java.trace.server": "messages",
+  "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"c:\\Users\\triph\\.vscode\\extensions\\gabrielbb.vscode-lombok-1.0.1\\server\\lombok.jar\"",
+  "terminal.integrated.scrollback": 2000, //for changing default buffer size of the terminal
+}
+```

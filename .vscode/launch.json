@@ -6,6 +6,12 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - DemoApplication",
+      "request": "launch",
+      "mainClass": "com.richard.springboot.basics.springbook.DemoApplication"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - RestfulWebServicesApplication",
       "request": "launch",
       "mainClass": "com.richard.rest.webservices.restfulwebservices.RestfulWebServicesApplication",
