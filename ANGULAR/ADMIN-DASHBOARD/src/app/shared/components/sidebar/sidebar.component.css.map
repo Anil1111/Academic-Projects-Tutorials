@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACE,KADG,CACH,SAAS,CAAC;EACR,cAAc,EAAE,MAAM;EACtB,YAAY,EAAE,IAAI;CACnB;;AAJH,AAME,KANG,CAMH,aAAa,CAAC;EACZ,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,gBAAgB;CAO1B;;AAfH,AASI,KATC,CAMH,aAAa,CAGX,GAAG,CAAC;EACF,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,UAAU,EAAE,KAAK;EACjB,aAAa,EAAE,GAAG;CACnB",
-    "sources": [
-        "sidebar.component.scss"
-    ],
-    "names": [],
-    "file": "sidebar.component.css"
-}
