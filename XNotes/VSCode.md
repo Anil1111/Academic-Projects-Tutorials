@@ -363,9 +363,14 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
     "editor.defaultFormatter": "HookyQR.beautify"
   },
   "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 2000,
   "[javascript]": {
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
+  "[java]": {
+    "editor.defaultFormatter": "redhat.java",
+  },
+  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "editor.formatOnSave": true,
@@ -376,12 +381,10 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
   "window.zoomLevel": 0,
   "git.autofetch": true,
   "gitlens.blame.dateFormat": "",
-  "[typescript]": {},
   "zenMode.hideLineNumbers": false,
   "gitlens.views.search.files.layout": "list",
-  "java.configuration.maven.userSettings": "C:\\Users\\triph\\apache-maven-3.6.3-bin\\apache-maven-3.6.3\\conf", //maven installation
+  "java.configuration.maven.userSettings": "C:\\Users\\triph\\apache-maven-3.6.3-bin\\apache-maven-3.6.3\\conf",
   "java.home": "C:\\Program Files\\Java\\jdk-14",
-  //provide different java configuration runtimes
   "java.configuration.runtimes": [
     {
       "name": "JavaSE-1.8",
@@ -399,11 +402,12 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
       "default": true
     }
   ],
-  "java.saveActions.organizeImports": true, //automatic import management
+  "java.saveActions.organizeImports": true,
   "java.referencesCodeLens.enabled": true,
   "java.implementationsCodeLens.enabled": true,
   "java.trace.server": "messages",
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"c:\\Users\\triph\\.vscode\\extensions\\gabrielbb.vscode-lombok-1.0.1\\server\\lombok.jar\"",
-  "terminal.integrated.scrollback": 2000, //for changing default buffer size of the terminal
+  "terminal.integrated.scrollback": 2000,
 }
+
 ```

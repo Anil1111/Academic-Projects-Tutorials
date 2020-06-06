@@ -30,6 +30,16 @@
       "name": "Debug in Chrome",
       "url": "http://localhost:3000/",
       "webRoot": "${workspaceFolder}/BUILD_TOOLS/WEBPACK/Sample/Demo"
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-SpringBookApplication<spring-book>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.richard.springboot.basics.springbook.SpringBookApplication",
+      "projectName": "spring-book",
+      "args": ""
     }
   ]
 }

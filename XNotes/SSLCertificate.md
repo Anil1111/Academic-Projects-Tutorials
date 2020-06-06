@@ -1,8 +1,12 @@
 ## SSL Certificate Generation
 
-Keytool run from bin of JDK/JRE Path  
-Assuming keystore has been created and password is set
+`Keytool` run from bin of JDK/JRE Path  or JAVA_HOME. Assuming keystore has been created and password is set. The default location of the keystore is the `C:\User\UserName\.keystore`.
 
+
+
+### Checking Keystore
+`keytool --list` to list all the keys stored in the keytool
+`keytool --delete --alias <<aliadName>>`
 
 
 ### Command to convert jks format keystore to pkcs12  
@@ -17,13 +21,33 @@ Assuming keystore has been created and password is set
 - Proompt for keystore password
 
 
-
 ### Command to set parameters for CSR:
-   **Format**: `keytool -genkey -alias <<aliasName>> -keyalg RSA -keysize 2048 -validity <<ValidDays>>`   
-   **Command**: `keytool -genkey -alias app2020 -keyalg RSA -keysize 2048 -validity 720`   
+   **Format**: JAVA Home/`keytool -genkey -alias <<aliasName>> -keyalg RSA -keysize 2048 -validity <<ValidDays>>`   
+   **Command**: `keytool -genkey -alias alias2020 -keyalg RSA -keysize 2048 -validity 720`   
    -- Prompt for keystore password
+
 
 ### Generate the CSR
    **Format**: JAVA Home/`keytool –certreq –keyalg RSA –alias <<aliasCreatedAbove>> –file <<AbsolutePathToOutputFile>> –keystore <<AbsolutePathToKeystore>> -ext SAN=dns:<<cn name>>`   
-   **Command**: `keytool –certreq –keyalg RSA –alias app2020 –file C:/Users/Username/intvmaip02.txt –keystore C:/Users/Username/.keystore –ext SAN=dns:mywebsiteName`   
+   **Command**: `keytool –certreq –keyalg RSA –alias app2020 –file C:/Users/Username/name.txt –keystore C:/Users/Username/.keystore –ext SAN=dns:mywebsiteName`   
   -- Proompt for keystore password
+
+### Importing Chain of Certificates on the server
+
+>**Prerequisite:** Must have a digital certificate issued by a certificate authority having .cer, .crt, .p7b extension.
+
+1. Use `mmc.exe` on windows to open the Certificate Manager.
+
+#### Convert the certificate into .p7b format
+2. Rt. Click the certificate --> Click Open --> In the details tab --> Click copy to file.
+3.  Choose Export File Format: `Cryptographic Message Syntax Standard: PKCS #7 Certificate (.p7b)` and check `Include all certification in the certification path` option
+4. Provide path to save the `.p7b` file
+
+#### Import the certificate as a trusted root certificate
+4. JAVA Home/`keytool -import -trustcerts -file <<pathTop7bCert>> -alias <<aliasName>>`
+5. Enter `Yes` to install the certificate
+6. Restart your Web server/App server hosting the application
+6. Manual Method if the:
+    - Start --> `certmgr.msc` --> Open trusted root certificate --> Import manually
+
+    

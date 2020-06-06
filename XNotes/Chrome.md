@@ -1,5 +1,5 @@
 ## GoogleChrome Shortcuts
-
+1. `Ctrl + K` to search in google from the same window
 1. `F11` displays screen in full screen mode
 2. `Ctrl + +/-` zoom into the window
 3. `Ctrl + #` where # is a number, and corresponds to the tab you wish to open
@@ -8,15 +8,21 @@
 6. `Ctrl + Shift + O` open the bookmark manager
 7. `Ctrl + H` open browser historyin a new tab
 8. `Ctrl + N` Open a new browser window
+8. `CTrl + SHift + N` Open a new window in incognito
 9. `Ctrl + T` opens a new Tab
 10. `Ctrl + U` open the page's source code
 11. `Ctrl + W` closes current tab
 12. `Ctrl + Tab` moves to the tabs on right
 13. `Ctrl + Shift + Tab` moves to the tabs on left
 14. `Ctrl + Shift + T` open the last closed window
-15. `Ctrl + F5` for hard reload which includes reloading forced
-16. `Ctrl + L` to focus on the URL bar
-17. `Ctrl + Shift + I` to open the dev tools
+15. `Ctrl + F5` / `Shift + F5 `for hard reload which includes reloading forced
+16. `Ctrl + L` or `Alt + D` to focus on the URL bar
+17. `Ctrl + Shift + I` or `F12` to open/close the dev tools
+18. `Shift + F6`  to focus from dev tools to the chromes window
+19. `F6` to focus on the dev tools pane from a chrome window
+20. `Ctrl + Click` opens a link in a new window
+21. `Ctrl + Shift + Click` opens a link and jumps into it
+22. `Ctrl + O` open a file in chrome
 ---
 
 ## Browser Extensions - Chrome

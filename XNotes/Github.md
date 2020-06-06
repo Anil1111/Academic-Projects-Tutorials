@@ -10,6 +10,8 @@
 `git remote -v` #To view the URL of remote file  
 `git remote set-url origin https://github.com/USERNAME/REPOSITORY.git` change the Origin remote URL
 `git remote add origin <<url>>` #UsedTogether  
+`git remote remove origin` #remove current origin link
+`git push --set-upstream origin master` #adding upstream to point at origin from master branch
 `git push -u origin master` #UsedTogether and enter username and password  
 `git rm <filename>` #Removing filename  
 `touch <filename>` #Creates new file  
@@ -76,5 +78,25 @@
 2. `git commit`
    - it will open up the vim editor where you can enter multiline commit messages
    - use `esc` + `:wq` to save the commit file and press `enter`
+
+## Create a local GIT Repository in your local file system
+1. From the directory where you want to host your remote repoistory location
+1. `git init --bare repoName.git`  creates a repo called as repoName.git that can be used as a remote along with all required files inside
+2. From the directory where you can want to hook up to the remote repository, having the project code
+3. `git remote add origin "/path/to/my/repoName.git"` add the path to the above create remote repository  
+4. `git remote -v` to check the remote localtion path is correct
+5. `git push --set-upstream origin master` to push the code and set the upsteam as the branch master
+6. `git push origin` all later push syntax 
+
+### To clone this repository in a new directory
+1. From the new directory
+2. `git clone "path/to/my/repoName.git" newDirName` clones the repository into a new Directory
+
+### Connecting to a GIT repository on a remote server
+1. _OPTIONAL:_ In the server, go to _Control Panel > Network And Sharing Center > Change advanced sharing settings_
+   - Tick turn on network discovery
+2. Then go to folder where you have set up server and share it with users that you want to give permission for accessing it.
+3. Send network path to clients 
+4. On the client machine, perform `git clone //DESKTOP-ID/path/to/file/repoName.git`
 
 ---

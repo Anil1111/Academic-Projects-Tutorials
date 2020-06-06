@@ -109,10 +109,16 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 4. `pom.xml`
 - contains the dependencies mentioned for use in the project
 
-
+5. `application.properties`
+- contains all the external settings/configuration for the application on different environments
 ---
 
 
+
+## Using Spring Security
+
+#### To Login into the default login page:   
+The default username is: user and the default password will be printed in the console at the time when your Spring Boot project is starting.
 
 ## Spring dependencies in POM.xml
 
@@ -125,6 +131,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 ```
 
 ### Web
+Used for building Web and RESTful applications
 ```xml
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -158,6 +165,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 ```
 
 ### H2
+In memory database
 ```xml
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -175,13 +183,63 @@ Navigate to the file that contains the main method and Run / Debug the applicati
         <dependency>
 ```
 
+### Spring Security
+Authentication and Authorization using spring
+```xml
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+```
+
+### JDBC
+
+### HATEOS
+
+### JPA
+Spring data JPA with Hibernate
+```xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+	   </dependency>
+```
+
+### Cache
+Enable spring frameworks caching support
+
+### Data-Rest
+Expose simple REST services using Spring Data REST
+
+### Actuator
+Monitoring and tracing to the application
+```xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+      </dependency>
+      
+      <!-- It is dependent on the hal-browser-->
+ 		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-rest-hal-browser</artifactId>
+      </dependency>     
+```
+
+>To view the actuator logs: `http://localhost:8080/actuator`. Will open it in the HAL Browser
+
+
+*Additional properties to be set in application.properties* `management.endpoints.web.exposure.include=*`
+This activates various kinds of actuator and will cause a performance degradation
+
 ---
 
 
 ## Sample application.properties
 
 - `server.port=8085` for setting the port of the application deployed on custom port
-- `logging.level.org.springframework = debug` for setting the execution of the application of type debug
+  for setting the execution of the application of type debug; checking the output of the spring boot auto configuration
 
 
 

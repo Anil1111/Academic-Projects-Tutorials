@@ -9,10 +9,54 @@
 - Provides production ready features like 
     - `Metrics and Health Check` can create metrics to find the number of times a service has been called or failed
     - `externalized configuration` configuration for Production and Development can be configured using `application.properties` 
+- Feature of Spring Framework
+    - **Dependency Injection** or **Inversion of Control(IOC)** Spring takes control of all the beans and its dependencies
+    - Reduces the amount of boilerplate code required for Spring JDBC, MVC etc
+    - Good integration with frameworks like JUnit, Mockito and Hibernate
+- Feature of Spring MVC
+    - Used for developing web applications  or Rest services
+    - Using Separation of Concern (SOC), it uses DispatcherServlet, ModelAndView, ViewResolver
+
+### Object relational impedence mismatch
+The inherent problem that an OOPS programming language data needs to be stored in a incompatible relation database model.
+
+#### Solution using JDBC, Spring JDBC and myBatis
+They all used queries and translated results from queries to objects. This involved two steps:
+- Setting parameters to the query
+- The results of the query is mapped to the beans
+
+`JDBC` used methods like ResultStatement, PreparedStatement to set parameters and execute queries which involved writing long lines of code. `Spring JDBC` utilises a layer on top of JDBC known as the JDBC Template which simplifies mapping parameters and managing resultsets to beans. `myBatis` provides a simple XML or annotation based configuration to map Java POJO's yo java objects. But for complex queries, maintaing such queries became a challenge.
+
+#### Solution using JPA
+JPA povides mappings between the classes and tables using `entities` and `Relationships`. The Entity Manager can manage this mapping.
+We can use `Criteria API` or `JPQL` to create queries and coniditions.
 
 
 
-## Dispatcher Servlets
+## Working of Spring
+
+### Spring Boot Auto Configuration
+- `SpringApplicaiton.run` is used to run a spring context which is typically the main java class
+```java
+@SpringBootApplication
+public class SpringBookApplication {
+
+	public static void main(String[] args) {
+        // SpringApplication.run returns a context
+		ApplicationContext applicationContext = SpringApplication.run(SpringBookApplication.class, args);
+		for (String name : applicationContext.getBeanDefinitionNames()) {
+			System.out.println("#####---------##########" + name ); // prints the names of all the beans
+		}
+	}
+}
+```
+
+- It then finds `Spring web MVC` in its classpath, and goes on to configure the Dispatcher servlet
+- `logging.level.org.springframework = debug` can be used to see the logs of it
+- All spring starter projects have dependencies mentioned in their respective pom.xml. Eg: `spring-boot-starter-web` which is the main dependency 
+
+
+### Dispatcher Servlets
 It handles all the requests received by the application and knows the different URI mappings present and the HTTP method mappings. It finds the right controller to execute the method and lastly handles the response that is sent.
 It is also known as the `front controller` for Spring Web MVC Framework.
 
@@ -32,6 +76,11 @@ Running the application with `logging.level.org.springframework = debug` allows 
 
 
 ## Spring Decorators
+1. `@SpringBootApplication`
+    - Indicates that it is a spring context file
+    - It enables auto configuration
+    - Enables component scan (checks all the classes in the package for any beans)
+
 1. `@RestController`
     - To define a controller that can handle get request
     - `import org.springframework.web.bind.annotation.RestController;`
