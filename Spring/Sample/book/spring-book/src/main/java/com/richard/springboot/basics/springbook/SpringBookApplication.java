@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 			ApplicationContext applicationContext = SpringApplication.run(SpringBookApplication.class, args);
 
 			for (String name : applicationContext.getBeanDefinitionNames()) {
-				System.out.println("#####---------##########" + name );
+				System.out.println("#####---------#########" + name );
 			}
 		}
 

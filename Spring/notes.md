@@ -1,9 +1,10 @@
 # Spring Boot
+
+
+## Features
 - To build production ready applications quicly
 - Provides great support to embedded servers(Tomcat, jetty) but it itself is neither an application server nor a web server
 - used to build restful API using JAVA as the language. Can be also used to build microservices.
-
-## Features
 - Enables building quick starter project with Auto Configuration like Web and JPA
 - Has embedded servers in Tomcat or Jetty
 - Provides production ready features like 
@@ -28,10 +29,12 @@ They all used queries and translated results from queries to objects. This invol
 `JDBC` used methods like ResultStatement, PreparedStatement to set parameters and execute queries which involved writing long lines of code. `Spring JDBC` utilises a layer on top of JDBC known as the JDBC Template which simplifies mapping parameters and managing resultsets to beans. `myBatis` provides a simple XML or annotation based configuration to map Java POJO's yo java objects. But for complex queries, maintaing such queries became a challenge.
 
 #### Solution using JPA
-JPA povides mappings between the classes and tables using `entities` and `Relationships`. The Entity Manager can manage this mapping.
+- JPA povides mappings between the classes and tables using `entities` and `Relationships`. The Entity Manager can manage this mapping.
 We can use `Criteria API` or `JPQL` to create queries and coniditions.
+- JPA defines the specifications which outline how we define and manage entities, map attributes, relationships
+- `Hibernate` is one of the popular implementation of Hibernate
 
-
+---
 
 ## Working of Spring
 
@@ -65,6 +68,8 @@ It is also known as the `front controller` for Spring Web MVC Framework.
 Running the application with `logging.level.org.springframework = debug` allows for observing additional debug logging   
 > The Auto Configuration Report / Conitions Evaliation Report provides the logging report
 
+
+
 ### How Spring applications Start working ?
 1. Spring Boot uses the `Spring Boot Autoconfiguration` that loads all the JARs in the classpath, it tries to autoconfigure everything (including dispatcher servlet)
 1. The main `SpringBootApplication` has a dependency on the `Spring WEB MVC`, which has a dependency on the Dispatcher servlet
@@ -72,26 +77,4 @@ Running the application with `logging.level.org.springframework = debug` allows 
 3. `ErrorMvcAutoConfiguration matched:` configures the error page. The error when provided incorrect URL is provided by `ErrorMvcAutoConfiguration.WhitelabelErrorViewConfiguration matched:`
 4. `HttpMessageConvertersAutoConfiguration` are responsible for converting beens into JSON using Jackson  (`Jackson2ObjectMapper`)
 
-
-
-
-## Spring Decorators
-1. `@SpringBootApplication`
-    - Indicates that it is a spring context file
-    - It enables auto configuration
-    - Enables component scan (checks all the classes in the package for any beans)
-
-1. `@RestController`
-    - To define a controller that can handle get request
-    - `import org.springframework.web.bind.annotation.RestController;`
-
-2. `@RequestMapping`
-    -  To define the request mapping for any HTTP method
-    -   `@RequestMapping(method = RequestMethod.GET, path = "/hello-world")`
-    - `import org.springframework.web.bind.annotation.RequestMapping;`
-- `import org.springframework.web.bind.annotation.RequestMethod;`
-
-3. `@GetMapping`
-    - To define a GET method request mapping
-    - `import org.springframework.web.bind.annotation.GetMapping;`
 

@@ -165,7 +165,11 @@ Used for building Web and RESTful applications
 ```
 
 ### H2
-In memory database
+In memory database which can be observed by trying `http://localhost:<<portNo>>/h2-console`   
+Use either the `JDBC URL` as  the explicit one if defined in application.properties(`spring.datasource.url=jdbc:h2:mem:testdb`) or append the one from the console   
+Better than traditional databases as prior configuration is required whereas H2 is created during runtime and removed from memory on application end.   
+Only drawback is that the data does not persist between restarts.
+
 ```xml
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -186,6 +190,10 @@ In memory database
 ### Spring Security
 Authentication and Authorization using spring
 ```xml
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-security</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
@@ -238,8 +246,56 @@ This activates various kinds of actuator and will cause a performance degradatio
 
 ## Sample application.properties
 
+### Generic
 - `server.port=8085` for setting the port of the application deployed on custom port
-  for setting the execution of the application of type debug; checking the output of the spring boot auto configuration
+- `logging.level.org.springframework = debug` for setting the execution of the application of type debug; checking the output of the spring boot auto configuration
+### H2 Database
+- `spring.datasource.url=jdbc:h2:mem:testdb` to make the url of the H2 inmemory database as a constant otherwise needs to be copied from debug console everytime
+-  for setting the default values to the spring security
+   ```properties
+   spring.security.user.name=<<userName>>
+   spring.security.user.password=<<userPassword>>
+   spring.security.user.roles=<<userRole>>
+   ```
+- `spring.h2.console.enabled=true` show the h2 console
+- `spring.jpa.show-sql=true` for outputting the generated queries
+
+## Spring Decorators
+
+### Spring Boot Application
+- `@SpringBootApplication`
+    - Indicates that it is a spring context file
+    - It enables auto configuration
+    - Enables component scan (checks all the classes in the package for any beans)
 
 
+### Spring REST
+- `@RestController`
+    - To define a controller that can handle get request
+    - `import org.springframework.web.bind.annotation.RestController;`
 
+- `@RequestMapping` To define the request mapping for any HTTP method
+    - `import org.springframework.web.bind.annotation.RequestMapping;`
+-   `@RequestMapping(method = RequestMethod.GET, path = "/hello-world")` another form
+- `import org.springframework.web.bind.annotation.RequestMethod;`
+
+- `@GetMapping` To define a GET method request mapping
+    - `import org.springframework.web.bind.annotation.GetMapping;`
+
+### Spring JPA
+-`@Entity` To define that a class is an Entity for JPA configuration
+    - `import javax.persistence.Entity;`
+- `@id` to declare the property as the primary key
+    - `import javax.persistence.id;`
+- `@GeneratedValue` generate the value for the primary key
+    - `import javax.persistence.GeneratedValue;`
+- `@Repository` indicates something that interacts with the DB
+    - `import org.springframework.stereotype.Repository;`
+- `@Transactional` declared on method/classes that define that each method consist of a transaction
+    - `import javax.transaction.Transactional;`
+- `@PersistenceContext` for ensuring EntityManager context persists
+    - `import javax.persistence.PersistenceContext;`
+- `@Component` 
+   - `import org.springframework.stereotype.Component;`
+- `@Autowired`
+   - `import org.springframework.beans.factory.annotation.Autowired;` 

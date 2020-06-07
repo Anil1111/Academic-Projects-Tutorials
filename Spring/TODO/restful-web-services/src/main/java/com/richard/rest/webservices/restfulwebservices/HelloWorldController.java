@@ -17,7 +17,7 @@ public class HelloWorldController {
   //returning a bean which converts automatically into json
   @GetMapping(path = "/hello-world-bean") //path correspods to the URI link
   public HelloWorldBean helloWorldBean(){
-    return new HelloWorldBean("Hello World!"); // output is JSON- { message: "Hello World!" }
+    return new HelloWorldBean("Hello World!"); // output is JSON- message: "Hello World!" 
   }
 
   //using a path variable `{ var}`
@@ -25,7 +25,6 @@ public class HelloWorldController {
   public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
     // %s is a placeholder for name path variable
     return new HelloWorldBean(String.format("Hello World, %s", name)); 
-    // return new HelloWorldBean("Hello World" + name); 
   }
 
   

@@ -13,6 +13,7 @@
 - `Ctrl + '+'` #To increase/decrease the font size of the VSCode
 - `Ctrl + ,` #access default settings of VSCode
 - `Ctrl + Shift + M` to open the problems tab
+- `Ctrl + Shift + X` to open the eXtensions window
 
 ### Syntax Support
 Generic
@@ -145,13 +146,14 @@ Node
 27. **EditorConfig for VS Code** - _EditorConfig_
 28. **nx console** - _nrwl_
 29. **Quick and Simple Text Selection** - _David Bankier_ #for providing some shortcuts for easy text selection
-
-
+30. **Sonar Lint** - _SonarSource_ for detecting and fixing quality issues in code;
+    - Install the vsix `SonarSource.sonarlint-vscode-1.15.0.vsix` and install it either automatically or by by downloading it manually 
+31. **Rest Client** - _Huachao Mao_
 ---
+
 ## VSCode settings
 
-1. **Set git-bash as default terminal**:   
-Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar, there add the path to the git-bash: `C:\Program Files\Git\bin\bashe.exe`
+1. **Set git-bash as default terminal**: Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar, there add the path to the git-bash: `C:\Program Files\Git\bin\bashe.exe`
 2. `File --> AutoSave` set autosave on 
 3. Select the `file icon theme` from command pallette
     - You can use this to change the file icon theme from VSCode to others like material
@@ -159,6 +161,30 @@ Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar
 5. `"terminal.integrated.scrollback": 2000` add this to `settings.json` to increase the buffer size of the integrated terminal log
 6. `"workbench. editor. enablePreview"` and set it to `false` to stop automatic preview of docs on open
 
+## VSCode Extension Settings
+
+### Rest-Client
+- Create either a `.txt` or `.http` file and append any HTTP Method.
+-  Click on the `Send Request` option to view the output of the request / Right click --> Send Request
+- Use `Ctrl + Alt + R` to execute the HTTP Reques
+- Use the setting `rest-client.previewResponseInUntitledDocument` to open an Untitled Document for all responses
+
+```http
+GET https://reqres.in/api/users?page=2 HTTP/1.1
+
+###
+
+POST https://reqres.in/api/users HTTP/1.1
+content-type: application/json
+
+{
+    "name": "morpheus",
+    "job": "leader"
+}
+```
+
+## Commands in Extension Window
+- Search using `@installed` to list all the extensions already installed
 
 ---
 
