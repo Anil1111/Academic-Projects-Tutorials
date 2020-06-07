@@ -389,3 +389,93 @@ export class RouteGuardService implements CanActivate{
 ```
 
 
+
+
+## Connecting to Spring Boot Backend
+
+### USing HttpClient
+
+app.module.ts
+```typescript
+import { HttpClientModule } from '@angular/common/http';
+
+@NgModule({
+  declarations: [...],
+  imports: [
+    HttpClientModule,
+    ...
+  ]
+```
+
+welcome-data.service.ts
+```typescript
+import { HttpClient } from '@angular/common/http';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class WelcomeDataService {
+
+  constructor(
+    private http:HttpClient
+  ) { }
+}
+```
+
+
+
+
+### Understanding Observables
+- To handle HTTP Requests asynchronously as otherwise the browser will hand in synchronize mode.
+- `Observables` is an approach to implement asynchronous communication
+- An observable does not automatically get invoked as it needs to be subscribed
+
+welcome-data.service.ts
+```typescript
+  executeHelloWorldBeanService() {
+    // returns an observable to frontend
+    return this.http.get('http://localhost:8085/hello-world-bean'); // URL to the backend server which provides RESTful web service
+  }
+```
+
+welcome.component.ts
+```typescript
+  getWelcomeMessage() {
+    console.log(this.welcomeDataService.executeHelloWorldBeanService()); // the Observable does not get automatically invoked and requires to be subscribed to
+
+    this.welcomeDataService
+      .executeHelloWorldBeanService()
+      .subscribe((response) => this.handleSuccessfulResponse(response));  // subscribed to the observable which returns a response
+  }
+
+  handleSuccessfulResponse(response) {
+    console.log(response);
+    this.welcomeMessageFromService = response.message;
+  }
+```
+
+**To prevent Cross origin error**
+HelloWorldController.java
+```java
+@CrossOrigin(origins = "http://localhost:4200")
+@RestController // controller that can handle REST Request
+public class HelloWorldController { ...
+}
+```
+
+### Handling error from HTTP response
+
+welcome.component.ts
+```typescript
+  getWelcomeMessage() {
+    console.log(this.welcomeDataService.executeHelloWorldBeanService());
+    this.welcomeDataService.executeHelloWorldBeanService().subscribe(
+      (response) => this.handleSuccessfulResponse(response),
+      (error) => this.handleErrorResponse(error)
+    );
+  }
+
+  handleErrorResponse(error){
+    this.welcomeMessageFromService = error.error.message;
+  }
+```

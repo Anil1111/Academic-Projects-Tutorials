@@ -36,7 +36,7 @@ We can use `Criteria API` or `JPQL` to create queries and coniditions.
 
 ---
 
-## Working of Spring
+## Basics of Spring
 
 ### Spring Boot Auto Configuration
 - `SpringApplicaiton.run` is used to run a spring context which is typically the main java class
@@ -78,3 +78,157 @@ Running the application with `logging.level.org.springframework = debug` allows 
 4. `HttpMessageConvertersAutoConfiguration` are responsible for converting beens into JSON using Jackson  (`Jackson2ObjectMapper`)
 
 
+---
+
+## Spring Working
+
+### To create a REST Controller
+
+Simple getter method implementation
+```java
+@RestController  //controller that can handle REST Request
+public class HelloWorldController {
+
+  // @RequestMapping(method = RequestMethod.GET, path = "/hello-world")
+  @GetMapping(path = "/hello-world") //path correspods to the URI link
+  public String helloWorld(){
+    return "Hello World";
+  }
+```
+
+Getter method implementation with parameter
+```java
+  //using a path variable `{ var}`
+  @GetMapping(path = "/hello-world-path-variable/{name}")
+  public HelloWorldBean helloWorldPathVariable(@PathVariable String name) {
+    // %s is a placeholder for name path variable
+    return new HelloWorldBean(String.format("Hello World, %s", name)); 
+  }
+```
+
+### Creating a bean
+
+```java
+package com.richard.rest.webservices.restfulwebservices;
+
+public class HelloWorldBean {
+  private String message; // property
+
+  public HelloWorldBean(String message) { // default constructor
+    this.message = message;
+  }
+
+  public String getMessage() { //default getters and setters
+    return message;
+  }
+    
+  public void setMessage(String message) {
+    this.message = message;
+  }
+
+  @Override
+  public String toString() { // default toString
+  	return "HelloWorldBean [message=" + message + "]";
+  }
+
+
+}
+```
+
+### Creating an Entity for Spring JPA
+
+Each table in the database is mapped to an entity defined
+```java
+// Table - User
+@Entity // To define that a class is an Entity for JPA configuration
+public class Book {
+	@Id // to declare the property as the primary key
+	@GeneratedValue // generate the value for the primary key
+	private long id;
+	private String name;
+	private String author;
+
+	// JPA requires a default constructor
+	protected Book(){}
+
+	public Book(String name, String author) {
+		this.name = name;
+		this.author = author;
+    }
+    ...
+}
+```
+
+### Creating a DAO Service
+
+```java
+@Repository // indicates something that interacts with the DB
+@Transactional //declared on method/classes that define that each method consist of a transaction
+public class BookDAOService {
+  // EntityManager is an interface to the persistence context
+  @PersistenceContext
+  private EntityManager entityManager;
+
+  // Used to store book into the database
+  public long insert(Book book){
+    entityManager.persist(book); // book gets stored in the inmemory DB H2
+    return book.getId();
+  } 
+}
+```
+
+Running this service by creating a CommandLineRunner that gets executed by `SpringAutoConfiguration` during startup
+
+```java
+@Component
+public class BookDaoServiceCommandLineRunner implements CommandLineRunner{ 
+  // Class to call the BookDAOService.java
+  // CommandLineRunner gets activated when the spring context launches / applicatiion gets started
+
+  @Autowired
+  private BookDAOService bookDAOService;
+
+  private static final Logger log = LoggerFactory.getLogger(BookDaoServiceCommandLineRunner.class);
+
+  @Override
+  public void run(String... args) throws Exception {
+    Book book = new Book("New beginning", "MG Gandhi");    
+    bookDAOService.insert(book);
+    log.info("New user: " + book);
+    // r.s.b.s.BookDaoServiceCommandLineRunner : New user: Book [author=MG Gandhi, id=1, name=New beginning]
+  }
+}
+```
+
+### Creating a JPA Repository Interface to define ServiceDAO
+
+```java
+// To avoid lots of methods(merge, persist,remove) for each entity, we just need to create an interface and spring will take care by providing imeplementation using spring data JPA
+public interface BookRepository  extends JpaRepository<Book, Long>{
+  // JpaResository<Entity, PrimaryKeyType>
+}
+
+```
+
+Calling the JPA Repository to define a ServiceDAO
+
+```java
+@Component
+public class BookRepositoryCommandLineRunner implements CommandLineRunner {
+  @Autowired
+  private BookRepository bookRepository;
+
+  private static final Logger log = LoggerFactory.getLogger(BookRepositoryCommandLineRunner.class);
+
+  @Override
+  public void run(String... args) throws Exception {
+    Optional<Book> bookWithIdOne = bookRepository.findById(1L);
+    log.info("User is retrieved: " + bookWithIdOne);
+    // .r.s.b.s.BookRepositoryCommandLineRunner : User is retrieved: Optional[Book [author=MG Gandhi, id=1, name=New beginning]]
+
+    List<Book> books = bookRepository.findAll();
+    log.info("All users : {}", books);
+    // .r.s.b.s.BookRepositoryCommandLineRunner : All users: [Book [author=MG Gandhi, id=1, name=New beginning], Book [author=Japanese Auth, id=2, name=hakikagu]]  
+  }
+}
+```
