@@ -202,8 +202,8 @@ Only drawback is that the data does not persist between restarts.
 ```
 
 ### Spring Security
-
-Authentication and Authorization using spring
+- Implementing security in web applications and Restful services
+- Authentication and Authorization using spring
 
 ```xml
 		<dependency>

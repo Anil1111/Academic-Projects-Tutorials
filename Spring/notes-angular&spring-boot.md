@@ -501,6 +501,7 @@ Equivalent to
 
 ### Form validation
 
+
 ```html
 <div class="container">
   <!-- todoForm.dirty will be true only when the form has been edited once so that it does not appear on initial load-->
@@ -527,4 +528,37 @@ Equivalent to
   </form>
 
 </div>
+```
+
+
+## Basic Authentication and JWT
+
+### Using Form based authentication
+If you try to access any backend URLs over the browser with Spring Security enabled, you will get a `Form based authentication`.
+- The default username is `user`
+- The default password is present in the console
+On successful login, a session is set on the server whereas a cookie is set on the client which is sent along with each request. This cookie identifies the session on the server and it will be used as the authentication.
+
+### Using Basic Authentication using Basic Authorization header
+This does not require session being set on the server.
+
+```http
+GET http://localhost:8085/users/richard/todos HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Basic dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y= 
+
+// generated from the Restlet Client by supplying the `username` and `password` same as above
+// sending the encoded form of the password as `dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y=`
+// this is known as the `basic authorization header`
+```
+
+### Creating the Authorization header in welcome-data.service.ts
+```typescript
+  createBasicAuthenticationHttpHeader(){
+    const username = 'richard';
+    const password = 'dummy';
+    // encode the string into base64 string using `window.btoa`
+    const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthHeaderString;
+  }
 ```

@@ -1,26 +1,41 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-export class HellowWorldBean { // provide type support to the response object
-  constructor(public message: string){}
+export class HellowWorldBean {
+  // provide type support to the response object
+  constructor(public message: string) {}
 }
 
-
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WelcomeDataService {
-
-  constructor(
-    private http: HttpClient
-  ) { }
+  constructor(private http: HttpClient) {}
 
   executeHelloWorldBeanService() {
-    return this.http.get<HellowWorldBean>('http://localhost:8085/hello-world-bean');
+    return this.http.get<HellowWorldBean>(
+      'http://localhost:8085/hello-world-bean'
+    );
   }
 
   executeHelloWorldBeanServiceWithPathVariable(name) {
-    return this.http.get<HellowWorldBean>(`http://localhost:8085/hello-world-path-variable/${name}`);
+    const basicAuthHeaderString = this.createBasicAuthorizationHttpHeader();
+
+    const headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString,
+    });
+    return this.http.get<HellowWorldBean>(
+      `http://localhost:8085/hello-world-path-variable/${name}`,
+      { headers}
+    );
   }
 
+  createBasicAuthorizationHttpHeader() {
+    const username = 'richard';
+    const password = 'dummy';
+    // encode the string into base64 string using `window.btoa`
+    const basicAuthHeaderString =
+      'Basic ' + window.btoa(username + ':' + password);
+    return basicAuthHeaderString;
+  }
 }

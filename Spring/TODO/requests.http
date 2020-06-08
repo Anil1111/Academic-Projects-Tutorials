@@ -1,0 +1,38 @@
+GET http://localhost:8085/users/richard/todos HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Basic cmljaGFyZDpkdW1teQ==
+###
+
+GET http://localhost:8085/users/richard/todos/1 HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Basic cmljaGFyZDpkdW1teQ==
+###
+
+POST http://localhost:8085/users/richard/todos HTTP/1.1
+content-type: application/json
+Origin: http://localhost:4200
+Authorization: Basic cmljaGFyZDpkdW1teQ==
+
+{
+"description": "learn to mojito",
+"done": false,
+"targetDate": "2020-06-08T10:14:54.970+00:00",
+"username": "richard"
+}
+
+###
+
+DELETE http://localhost:8085/users/richard/todos/1 HTTP/1.1
+
+###
+
+PUT http://localhost:8085/users/richard/todos/2 HTTP/1.1
+Origin: http://localhost:4200
+Content-Type: application/json
+{
+"id": 2,
+"description": "learn to mellow",
+"done": false,
+"targetDate": "2020-06-08T10:14:54.970+00:00",
+"username": "richard"
+}
