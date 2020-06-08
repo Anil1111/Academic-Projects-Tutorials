@@ -306,10 +306,13 @@ This activates various kinds of actuator and will cause a performance degradatio
   - `import org.springframework.web.bind.annotation.RequestMapping;`
 - `@RequestMapping(method = RequestMethod.GET, path = "/hello-world")` another form
   - `import org.springframework.web.bind.annotation.RequestMethod;`
-- `@GetMapping` To define a GET method request mapping
+- `@GetMapping / @PostMapping / @PutMapping / @DeleteMapping` To define a HTTP methods request mapping
   - `import org.springframework.web.bind.annotation.GetMapping;`
 - `@PathVariable` defining the path variable that we get from the URI
+- `@RequestBody` defining the request body that comprises of the object we pass
+  - `import org.springframework.web.bind.annotation.RequestBody;`
 
+  
 ### Spring JPA
 
 -`@Entity` To define that a class is an Entity for JPA configuration - `import javax.persistence.Entity;`

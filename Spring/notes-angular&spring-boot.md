@@ -479,3 +479,52 @@ welcome.component.ts
     this.welcomeMessageFromService = error.error.message;
   }
 ```
+
+### [(ngModel)] breakup
+
+Original
+```typescript
+      <input class="form-control" type="date" name="targetDate" id="description" [(ngModel)]="todo.targetDate" required>
+```
+
+Equivalent to
+```typescript
+      <input class="form-control" 
+        type="date" 
+        name="targetDate" 
+        id="description" 
+        [ngModel]="todo.targetDate"  // Nomral property binding to the value of todo.targetDate
+        (ngModelChange)="todo.targetDate = $event" // event binding that sets the updated date into the todo.targetDate 
+        required>
+```
+
+
+### Form validation
+
+```html
+<div class="container">
+  <!-- todoForm.dirty will be true only when the form has been edited once so that it does not appear on initial load-->
+  <!-- todoForm.invalid will be true when the validations rules are not followed-->
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter Valid values!</div>
+  <div class="alert alert-warning" *ngIf="descriptionValid.dirty && descriptionValid.invalid">Enter Valid description!</div>
+
+  <!-- #todoForm is a template variable and !todoForm ensures that user is not able to submit an invalid form -->
+  <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+    <div class="form-group">
+      <label for="description">Description</label>
+      <input class="form-control" type="text" name="description" id="description" [(ngModel)]="todo.description" required #descriptionValid="ngModel">
+      <!-- #descriptionValid="ngModel" can be used to define a template variable for the description input tag-->
+    </div>
+
+    <div class="form-group">
+      <label for="description">Target Date</label>
+      <input class="form-control" type="date" name="targetDate" id="description" [ngModel]="todo.targetDate | date: 'yyyy-MM-dd'" (ngModelChange)="todo.targetDate = $event" required>
+    </div>
+
+    <!-- <button class="btn btn-success" (click)="saveTodo()">Save</button> -->
+    <!-- click event can be replaced by ngSubmit on the form in order to ensure that clicking on enter sends the request-->
+    <button type="submit" class="btn btn-success">Save</button>
+  </form>
+
+</div>
+```

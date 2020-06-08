@@ -232,3 +232,7 @@ public class BookRepositoryCommandLineRunner implements CommandLineRunner {
   }
 }
 ```
+
+## Using RESTlet Client from Chrome
+In the headers option, set onr of the headers to `Origin`: `http://localhost:4200/` to avoid the CORS error that will be generated when requests are sent from the RESTlet client using its own domain to the backend server
+
