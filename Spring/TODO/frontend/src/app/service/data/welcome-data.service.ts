@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { API_URL } from 'src/app/app.constants';
 
 export class HellowWorldBean {
   // provide type support to the response object
@@ -14,28 +15,37 @@ export class WelcomeDataService {
 
   executeHelloWorldBeanService() {
     return this.http.get<HellowWorldBean>(
-      'http://localhost:8085/hello-world-bean'
+      `${API_URL}/hello-world-bean`,
     );
   }
 
   executeHelloWorldBeanServiceWithPathVariable(name) {
-    const basicAuthHeaderString = this.createBasicAuthorizationHttpHeader();
+    // const headers = this.createBasicAuthorizationHttpHeader();
+    // return this.http.get<HellowWorldBean>(
+    //   `http://localhost:8085/hello-world-path-variable/${name}`,
+    //   { headers}
+    // );
 
-    const headers = new HttpHeaders({
-      Authorization: basicAuthHeaderString,
-    });
+    // commented the above code as we have configured the HttpInterceptor to add the Authorization header on every request generated
     return this.http.get<HellowWorldBean>(
-      `http://localhost:8085/hello-world-path-variable/${name}`,
-      { headers}
+      `${API_URL}/hello-world-path-variable/${name}`
     );
   }
 
-  createBasicAuthorizationHttpHeader() {
-    const username = 'richard';
-    const password = 'dummy';
-    // encode the string into base64 string using `window.btoa`
-    const basicAuthHeaderString =
-      'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthHeaderString;
-  }
+  // commenting as HttpInterceptor takes care of adding the authorization headers; below code is for hardcoded authentication
+  // createBasicAuthorizationHttpHeader() {
+  //   const username = 'richard';
+  //   const password = 'dummy';
+  //   // encode the string into base64 string using `window.btoa`
+  //   const basicAuthHeaderString =
+  //     'Basic ' + window.btoa(username + ':' + password);
+
+  //   const headers = new HttpHeaders({
+  //     Authorization: basicAuthHeaderString,
+  //   });
+
+  //   return headers;
+  // }
+
+
 }

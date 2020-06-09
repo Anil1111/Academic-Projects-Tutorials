@@ -1,6 +1,12 @@
 ## Authentication
 Authentication is the process used by applications to determine and confirm identities of users. It ensures that the correct content is shown to users. More importantly, it ensures that incorrect content is secured and unavailable to unauthorized users.
 
+## Basic Form Authentication
+
+### Cookie based Authntication / Session based Authentication
+Once the user logs in using their username and password, the server creates a session and sends the session id to the client machine. This `session id` is stored as a cookie on the client and future requests to the server include this cookie, that is used to identify the session of the user. If the session is still valid then the client is not asked for re-authentication, however if the session has been removed from the server due to inactivity, the user is asked to re-login.
+
+
 ## Password Authentication
 - The most common implementation of authentication requires a user to input their username or email and a password. 
 - The application’s server then checks the supplied credentials to determine if the user exists and if the supplied password is correct. 

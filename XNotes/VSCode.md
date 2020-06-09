@@ -5,9 +5,10 @@
 - `Ctrl + K Z` #Open Zen mode to concentrate on coding
     - Uncheck from settings `Zen Mode: Hide Line Numbers`
 - `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
-- `Shift + Ctrl + P` Open up the command pallet in VSCode
+- **`Shift + Ctrl + P`** Open up the command pallet in VSCode
     - Remove the `>` symbol and you are at the _search files_ command pallette
-    - type `@` keyword and you can list out all the entities in the file
+    - type `@` keyword and you can list out all the entities/functions/parts in the open file
+    - type `#` keyword to find any symbols
 - `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
     - After doing `Ctrl + E`, select the file to open, and press `Ctrl + Right` #split the file to the right
 - `Ctrl + '+'` #To increase/decrease the font size of the VSCode
@@ -102,6 +103,7 @@ Node
 
 ### Spring / Java Support
 - `Alt + Shift + G` to support automatic generation of constructors, getters/setters, toString methods
+- `Ctrl + T` to open the command pallete to search for symbols/ maven class from the spring project
 
 
 

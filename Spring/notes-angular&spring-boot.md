@@ -388,7 +388,8 @@ export class RouteGuardService implements CanActivate{
 }
 ```
 
-
+## Using RESTlet Client from Chrome
+In the headers option, set onr of the headers to `Origin`: `http://localhost:4200/` to avoid the CORS error that will be generated when requests are sent from the RESTlet client using its own domain to the backend server
 
 
 ## Connecting to Spring Boot Backend
@@ -553,12 +554,200 @@ Authorization: Basic dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y=
 ```
 
 ### Creating the Authorization header in welcome-data.service.ts
+
+#### Error without setting the Authorization HTTP Header
+```
+Access to XMLHttpRequest at 'http://localhost:8085/hello-world-path-variable/richard' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+
+#### Setting the Authorization Header
 ```typescript
-  createBasicAuthenticationHttpHeader(){
+export class WelcomeDataService {
+  constructor(private http: HttpClient) {}
+
+  executeHelloWorldBeanServiceWithPathVariable(name) {
+    const headers = this.createBasicAuthorizationHttpHeader();
+    return this.http.get<HellowWorldBean>(
+      `http://localhost:8085/hello-world-path-variable/${name}`,
+      { headers}
+    );
+  }
+
+  createBasicAuthorizationHttpHeader() {
     const username = 'richard';
     const password = 'dummy';
     // encode the string into base64 string using `window.btoa`
-    const basicAuthHeaderString = 'Basic ' + window.btoa(username + ':' + password);
-    return basicAuthHeaderString;
+    const basicAuthHeaderString =
+      'Basic ' + window.btoa(username + ':' + password);
+
+    const headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString,
+    });
+
+    return headers;
+  }
+
+
+}
+```
+
+### Resolving denial of OPTIONS pre-flight Requests by configuring CSRF
+After basic authentication, an HTTP `OPTIONS` method is fired by the client before every GET, POST request to ascertain whether the client is valid.   
+CSRF - Cross site request forgery
+
+```
+Access to XMLHttpRequest at 'http://localhost:8085/hello-world-path-variable/richard' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
+```
+
+`CSRF Cross-Site Request Forgery (CSRF)` is an attack that forces an end user to execute unwanted actions on a web application in which they're currently authenticated. CSRF attacks specifically target state-changing requests, not theft of data, since the attacker has no way to see the response to the forged request.
+
+Adding a new class `SpringSecurityConfigurationBasicAuth.java` and overriding the `configure(HttpSecurity http)` method from `SpringSecurityConfigurationBasicAuth`
+
+```java
+@Configuration // enables spring configuration
+@EnableWebSecurity // enables web security
+public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerAdapter{
+	
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http
+			.csrf().disable() // disabled CSRF; needed to run from Restlet Client
+			.authorizeRequests()
+			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // // permit all OPTIONS methods; to remove pre-flight CORS error from frontend; error for any URL `/**` without authentication
+				.anyRequest().authenticated()
+				.and()
+			// .formLogin().and()  // disable form login
+			.httpBasic();
+	}
+  
+}
+```
+
+
+### Using HttpInterceptor to add Authorization headers
+Enables to add a specific header to every request rather than adding it manually as above.
+
+app.module.ts
+```typescript
+  providers: [
+    { // for providing the HttpInterceptor to the module to add header to every request
+      provide: HTTP_INTERCEPTORS,
+      useClass: HttpInterceptorBasicAuthService,
+      multi: true
+    },
+  ],
+```
+
+
+http-interceptor-basic-auth-service.ts
+```typescript
+export class HttpInterceptorBasicAuthService implements HttpInterceptor {
+  // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request
+
+  constructor() {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const username = 'richard';
+    const password = 'dummy';
+
+    const basicAuthHeaderString =
+      'Basic ' + window.btoa(username + ':' + password);
+
+    req = req.clone({ // cloning the request as we cannot modify the original request
+      setHeaders: {
+        Authorization: basicAuthHeaderString,
+      },
+    });
+
+    return next.handle(req); // sending the modified request
+  }
+}
+```
+
+
+### Connecting login page to basic authentication
+
+basic-authentication.service.ts
+```typescript
+  executeAuthenticationService(username: string, password: string) {
+    const basicAuthHeaderString =
+      'Basic ' + window.btoa(username + ':' + password);
+
+    const headers = new HttpHeaders({
+      Authorization: basicAuthHeaderString,
+    });
+
+    return this.http
+      .get<AuthenticationBean>(`http://localhost:8085/basicauth`, { headers })
+      .pipe(
+        // we use the pipe operator to define an action that we need to perform if the request is successful
+        map((data) => {
+          sessionStorage.setItem('authenticatedUser', username);
+          sessionStorage.setItem('token', basicAuthHeaderString);
+          return data; // data is returned to whoever is using this service
+        })
+      );
+  }
+
+  getAuthenticatedUser() {
+    return sessionStorage.getItem('authenticatedUser');
+  }
+  getAuthenticatedToken() {
+    if (this.getAuthenticatedUser) {
+      return sessionStorage.getItem('token');
+    }
+  }
+
+  isUserLoggedIn() {
+    const user = sessionStorage.getItem('authenticatedUser');
+    return user != null; // returns true
+  }
+
+  logout() {
+    sessionStorage.removeItem('authenticatedUser');
+  }
+```
+
+```typescript
+export class HttpInterceptorBasicAuthService implements HttpInterceptor {
+  // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request
+
+  constructor(private basicAuthenticationService: BasicAuthenticationService) {}
+
+  intercept(req: HttpRequest<any>, next: HttpHandler) {
+    const basicAuthHeaderString = this.basicAuthenticationService.getAuthenticatedToken();
+    const username = this.basicAuthenticationService.getAuthenticatedUser();
+
+    if (basicAuthHeaderString && username) {
+      // checking if token and username is stored in the session, if true only then add authorization to the header else do nothing
+      req = req.clone({
+        // cloning the request as we cannot modify the original request
+        setHeaders: {
+          Authorization: basicAuthHeaderString,
+        },
+      });
+    }
+
+    return next.handle(req); // sending the modified request
+  }
+}
+```
+
+### Creating an app.constants.ts file on /app/ to store constants
+
+app.constants.ts
+```typescript
+export const API_URL = 'http://localhost:8085';
+```
+
+other ts files
+```typescript
+import { API_URL } from 'src/app/app.constants';
+
+  deleteTodo(username, id) {
+    return this.http.delete(
+      `${API_URL}/users/${username}/todos/${id}`
+    );
   }
 ```

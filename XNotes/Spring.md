@@ -331,3 +331,9 @@ This activates various kinds of actuator and will cause a performance degradatio
 
 - `@CrossOrigin(origins="http://url:port/")`
   - `import org.springframework.web.bind.annotation.CrossOrigin;`
+
+### Spring Security
+- `@Configuration` enables spring configuration
+  - `import org.springframework.context.annotation.Configuration;`
+- `@EnableWebSecurity` enables web security
+  - `import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;`

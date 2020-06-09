@@ -8,6 +8,11 @@ Origin: http://localhost:4200
 Authorization: Basic cmljaGFyZDpkdW1teQ==
 ###
 
+GET http://localhost:8085/hello-world-path-variable/richard HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Basic cmljaGFyZDpkdW1teQ==
+###
+
 POST http://localhost:8085/users/richard/todos HTTP/1.1
 content-type: application/json
 Origin: http://localhost:4200

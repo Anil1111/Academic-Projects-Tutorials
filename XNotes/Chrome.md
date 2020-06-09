@@ -38,7 +38,7 @@ Below configuration needs to be made for Markdown to render properly in the brow
 5. **Width and Height Display**
 6. **Wizdler**
 7. **Talend API Tester - Free Edition** Rest Client
-    - use the `Headers` section to add the origin property to avoid CORS error
+    - use the `Headers` section to add the origin/Authorization property to add header properties
 ---
 
 ## Template Engines
