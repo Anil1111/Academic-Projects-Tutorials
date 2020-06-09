@@ -640,7 +640,7 @@ app.module.ts
 ```
 
 
-http-interceptor-basic-auth-service.ts
+http-interceptor-basic-auth-service.ts with hardcoded authorization
 ```typescript
 export class HttpInterceptorBasicAuthService implements HttpInterceptor {
   // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request
@@ -709,6 +709,7 @@ basic-authentication.service.ts
   }
 ```
 
+http-interceptor-basic-auth-service.ts with Updated basic authorization
 ```typescript
 export class HttpInterceptorBasicAuthService implements HttpInterceptor {
   // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request

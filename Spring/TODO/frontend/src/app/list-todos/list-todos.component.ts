@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TodoDataService } from '../service/data/todo-data.service';
 import { Router } from '@angular/router';
+import { BasicAuthenticationService } from '../service/basic-authentication.service';
 
 export class Todo {
   constructor(
@@ -28,7 +29,8 @@ export class ListTodosComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private todoDataService: TodoDataService
+    private todoDataService: TodoDataService,
+    private basicAuthenticationService: BasicAuthenticationService
   ) {}
 
   ngOnInit(): void {
@@ -36,7 +38,7 @@ export class ListTodosComponent implements OnInit {
   }
 
   refreshTodos() {
-    this.todoDataService.retrieveAllTodos('richard').subscribe(
+    this.todoDataService.retrieveAllTodos(this.basicAuthenticationService.getAuthenticatedUser()).subscribe(
       (response) => {
         this.todos = response;
         console.log(response);
@@ -48,7 +50,7 @@ export class ListTodosComponent implements OnInit {
   deleteTodo(id: number) {
     console.log(`delete ${id}`);
 
-    this.todoDataService.deleteTodo('richard', id).subscribe(
+    this.todoDataService.deleteTodo(this.basicAuthenticationService.getAuthenticatedUser(), id).subscribe(
       (response) => {
         console.log(response);
         this.message = `Delete oof todo ${id} successful`;
