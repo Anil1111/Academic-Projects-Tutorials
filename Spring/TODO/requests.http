@@ -1,3 +1,5 @@
+### restful-web-services
+
 GET http://localhost:8085/users/richard/todos HTTP/1.1
 Origin: http://localhost:4200
 Authorization: Basic cmljaGFyZDpkdW1teQ==
@@ -41,3 +43,48 @@ Content-Type: application/json
 "targetDate": "2020-06-08T10:14:54.970+00:00",
 "username": "richard"
 }
+
+
+### restful-web-services-jwt
+
+POST http://localhost:8085/authenticate HTTP/1.1
+content-type: application/json
+Origin: http://localhost:4200
+
+{
+  "username": "richard",
+   "password": "dummy"
+}
+
+###
+
+POST http://localhost:8085/authenticate HTTP/1.1
+content-type: application/json
+Origin: http://localhost:4200
+
+{
+  "username": "ross",
+   "password": "password@123!"
+}
+
+### user richard
+
+GET http://localhost:8085/users/richard/todos HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyaWNoYXJkIiwiZXhwIjoxNTkyMzk5ODExLCJpYXQiOjE1OTE3OTUwMTF9.iWdHYlYDfFhgfSPoOB20UgXoI5xEqPChwvWCaIztR_W2iC4Eis77zMnNZdFIVauw51Ht17UxlzW2QtRU9tODJw
+
+### user ross
+
+
+GET http://localhost:8085/users/richard/todos HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyb3NzIiwiZXhwIjoxNTkyNDA2NDk4LCJpYXQiOjE1OTE4MDE2OTh9.kXoqhiAkLwrHhvBTkaS-zSbLSPgtPgmq6i1W9OWUjLuUJxBZw-YUp3ttUBM7L7mUvlxgSBB1dGAN9VntevMkZg
+
+###
+
+GET http://localhost:8085/refresh HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyaWNoYXJkIiwiZXhwIjoxNTkyMzk5ODExLCJpYXQiOjE1OTE3OTUwMTF9.iWdHYlYDfFhgfSPoOB20UgXoI5xEqPChwvWCaIztR_W2iC4Eis77zMnNZdFIVauw51Ht17UxlzW2QtRU9tODJw
+
+###
+

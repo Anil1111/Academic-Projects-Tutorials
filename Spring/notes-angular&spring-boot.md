@@ -532,7 +532,7 @@ Equivalent to
 ```
 
 
-## Basic Authentication and JWT
+## Basic Authentication
 
 ### Using Form based authentication
 If you try to access any backend URLs over the browser with Spring Security enabled, you will get a `Form based authentication`.
@@ -752,3 +752,123 @@ import { API_URL } from 'src/app/app.constants';
     );
   }
 ```
+
+
+## JWT
+JSON Web Tokens are an open standard for representing claims between two parties.
+
+### Cons of Basic Authentication
+- No expiration time for Authorization Token
+- Token does not have any authorization details on it
+
+### Features of JWT
+- Contains User details and Authorizations
+
+### Constituents of Decoded JWT
+
+#### Header
+```json
+{
+  "alg":"HS512", // algorithm used for encoding
+  "typ":"JWT"
+}
+```
+
+#### Payload
+```json
+{
+  "sub": "1234", // who are we talking about
+  "name": "John Does", // name of the person
+  "admin": true, // whether admin? 
+  "iat": 123123 // creation time of token
+  //.. can add custom values
+}
+```
+
+#### Verify Signature
+```json
+{
+  // contains base 64 encoded header + payload + your 512 bit secret
+}
+```
+
+
+### JWT requests syntax
+
+```http
+// POST request sent to `/authenticate` with credentials and we get back the `Token`
+POST http://localhost:8085/authenticate HTTP/1.1
+content-type: application/json
+Origin: http://localhost:4200
+
+{
+  "username": "in28minutes",
+   "password": "dummy"
+}
+
+
+###
+// Adding the Token that we received to future requests
+// Header - Authorization: "Bearer JWT_TOKEN"
+
+GET http://localhost:8085/users/richard/todos HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU5MjM5MTcwNywiaWF0IjoxNTkxNzg2OTA3fQ.0NB9sSBWU1v_pKfHiPzvZFwKEAO-Jep3EICcrzM63tObRx-sZSF4Oj4ciQ4oWQgPQ1HDuxcYt2j3kLopDBm-Aw
+
+###
+
+// Sending request for a refresh token
+GET http://localhost:8085/refresh HTTP/1.1
+Origin: http://localhost:4200
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6MTU5MjM4OTgwNiwiaWF0IjoxNTkxNzg1MDA2fQ.2XjiaqlpHwst2Jj9TyKF_EJte2i2VJ2uDW4_bntdfPepKHVdfdR2U55FhqR7K78M6WMyEkX0WNBMuTkiQboNJA
+
+###
+
+```
+
+
+
+### JWT project folder structure
+
+
+1. `JwtTokenRequest` object representing the valid request type for token generation
+2. `JwtTokenResponse` object representing the valid response type for sending generated token
+3. `JwtAuthenticationRestController` used for managing the HTTP request for `/authentication` and `/refresh`
+4. `AuthenticationException` exception thrown from the JwtAuthenticationRestController during runtime
+
+5. `JwtUserDetails` object representing the user details (id, username, password, role) type from DB
+6. `JwtInMemoryUserDetailsService` mimics the DB by providing the list of users as type JwtUserDetails and loads the required user details; we just need to provide the user details by implementing the `UserDetailsService` and spring will take care of the rest including validation of the password; 
+
+7. `JwtTokenUtil` used for processing and managing tokens including creating tokens, calculating expiration dates and getting details out of the token
+
+8. `JwtTokenAuthorizationOncePerRequestFilter` represents the filter that is applied on all the subsequent requests post authentication for accessing data from the system
+9. `JwtUnAuthorizedResponseAuthenticationEntryPoint` retuns the error of providing jwt if
+
+9. `JWTWebSecurityConfig` extends the WebSecurityConfigurerAdapter and configures the below
+- UserDetailsService with BCryptPassword encoder
+- statelessness by not creating a session on the server
+- authentication entry point to handle unauthenticated users by sending JWT required error response from `JwtUnAuthorizedResponseAuthenticationEntryPoint`
+- configuring the JwtTokenAuthorizationOncePerRequestFilter to run 
+- enabling the /h2-console to be accessed without headers
+
+
+### Create a new user in JWT with encoded password
+
+BcryptEncoderTest will be able to generate 10 different encoded variations of the password that can be then used in the main system
+```java
+public class BcryptEncoderTest {
+  public static void main(String[] args) {
+    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    for (int i=1; i<10; i++){
+      String encodedString = encoder.encode("password@123!");
+      System.out.println(encodedString);
+    }
+  }
+  
+}
+```
+
+
+### Changing front end to enable JWT based authentication
+

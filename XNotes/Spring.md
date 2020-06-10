@@ -262,6 +262,24 @@ Monitoring and tracing to the application
 _Additional properties to be set in application.properties_ `management.endpoints.web.exposure.include=*`
 This activates various kinds of actuator and will cause a performance degradation
 
+
+### JWT
+
+```xml
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.9.1</version>
+		</dependency>
+```
+
+_Additional properties to be set in application.properties_ 
+>jwt.signing.key.secret=mySecret
+jwt.get.token.uri=/authenticate
+jwt.refresh.token.uri=/refresh
+jwt.http.request.header=Authorization
+jwt.token.expiration.in.seconds=604800
+
 ---
 
 ## Sample application.properties

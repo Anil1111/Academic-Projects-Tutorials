@@ -15,6 +15,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
 import { TodoComponent } from './todo/todo.component';
 import { HttpInterceptorBasicAuthService } from './service/http/http-interceptor-basic-auth.service';
+import { HttpInterceptorJwtAuthService } from './service/http/http-interceptor-jwt-auth.service';
 
 @NgModule({
   declarations: [
@@ -30,9 +31,14 @@ import { HttpInterceptorBasicAuthService } from './service/http/http-interceptor
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [
-    { // for providing the HttpInterceptor to the module to add header to every request
+    // { // for providing the HttpInterceptor to the module to add header to every request
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: HttpInterceptorBasicAuthService,
+    //   multi: true
+    // },
+    { // for providing the HttpInterceptor specific to JWT authentication
       provide: HTTP_INTERCEPTORS,
-      useClass: HttpInterceptorBasicAuthService,
+      useClass: HttpInterceptorJwtAuthService,
       multi: true
     },
   ],

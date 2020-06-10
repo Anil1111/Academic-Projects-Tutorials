@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { API_URL } from 'src/app/app.constants';
 import { BasicAuthenticationService } from '../basic-authentication.service';
+import { JwtAuthenticationService } from '../jwt-authentication.service';
 
 export class HellowWorldBean {
   // provide type support to the response object
@@ -12,12 +13,14 @@ export class HellowWorldBean {
   providedIn: 'root',
 })
 export class WelcomeDataService {
-  constructor(private http: HttpClient, private basicAuthenticationService: BasicAuthenticationService) {}
+  constructor(
+    private http: HttpClient,
+    private basicAuthenticationService: BasicAuthenticationService,
+    private jwtAuthenticationService: JwtAuthenticationService
+  ) {}
 
   executeHelloWorldBeanService() {
-    return this.http.get<HellowWorldBean>(
-      `${API_URL}/hello-world-bean`,
-    );
+    return this.http.get<HellowWorldBean>(`${API_URL}/hello-world-bean`);
   }
 
   executeHelloWorldBeanServiceWithPathVariable(name) {
@@ -29,7 +32,8 @@ export class WelcomeDataService {
 
     // commented the above code as we have configured the HttpInterceptor to add the Authorization header on every request generated
     return this.http.get<HellowWorldBean>(
-      `${API_URL}/hello-world-path-variable/${this.basicAuthenticationService.getAuthenticatedUser()}`
+      // `${API_URL}/hello-world-path-variable/${this.basicAuthenticationService.getAuthenticatedUser()}`
+      `${API_URL}/hello-world-path-variable/${this.jwtAuthenticationService.getAuthenticatedUser()}`
     );
   }
 
@@ -47,6 +51,4 @@ export class WelcomeDataService {
 
   //   return headers;
   // }
-
-
 }

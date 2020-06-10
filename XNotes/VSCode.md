@@ -383,7 +383,7 @@ content-type: application/json
 
 ```json
 {
-   // "http.proxy": "http://<<domain>>\<<userid>>:<<password>>@<<ip>>:<<port>>/",
+   // "http.proxy": "http://<<domain>>\\<<userid>>:<<password>>@<<ip>>:<<port>>/",
    //  "http.proxyStrictSSL": false,
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "terminal.external.windowsExec": "C:\\Program Files\\Git\\git-bash.exe",
@@ -438,6 +438,25 @@ content-type: application/json
   "java.trace.server": "messages",
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"c:\\Users\\triph\\.vscode\\extensions\\gabrielbb.vscode-lombok-1.0.1\\server\\lombok.jar\"",
   "terminal.integrated.scrollback": 2000,
+}
+
+```
+
+
+## Workspace Settings in 'settings.json'
+
+```json
+{
+  "editor.formatOnSave": true,
+  "files.exclude": {
+    "**/.classpath": true,
+    "**/.project": true,
+    "**/.settings": true,
+    "**/.factorypath": true
+  },
+  "java.dependency.packagePresentation": "flat",
+  "java.configuration.updateBuildConfiguration": "interactive",
+  "java.format.settings.url": "eclipse-formatter.xml"
 }
 
 ```

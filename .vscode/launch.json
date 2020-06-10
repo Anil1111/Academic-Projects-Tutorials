@@ -6,6 +6,13 @@
   "configurations": [
     {
       "type": "java",
+      "name": "CodeLens (Launch) - BcryptEncoderTest",
+      "request": "launch",
+      "mainClass": "com.richard.rest.webservices.restfulwebservicesjwt.BcryptEncoderTest",
+      "projectName": "restful-web-services-jwt"
+    },
+    {
+      "type": "java",
       "name": "CodeLens (Launch) - DemoApplication",
       "request": "launch",
       "mainClass": "com.richard.springboot.basics.springbook.DemoApplication"
@@ -39,6 +46,16 @@
       "console": "internalConsole",
       "mainClass": "com.richard.springboot.basics.springbook.SpringBookApplication",
       "projectName": "spring-book",
+      "args": ""
+    },
+    {
+      "type": "java",
+      "name": "Spring Boot-RestfulWebServicesApplication<restful-web-services-jwt>",
+      "request": "launch",
+      "cwd": "${workspaceFolder}",
+      "console": "internalConsole",
+      "mainClass": "com.richard.rest.webservices.restfulwebservicesjwt.RestfulWebServicesApplication",
+      "projectName": "restful-web-services-jwt",
       "args": ""
     }
   ]
