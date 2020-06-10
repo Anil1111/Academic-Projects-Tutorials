@@ -383,6 +383,8 @@ content-type: application/json
 
 ```json
 {
+   // "http.proxy": "http://<<domain>>\<<userid>>:<<password>>@<<ip>>:<<port>>/",
+   //  "http.proxyStrictSSL": false,
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "terminal.external.windowsExec": "C:\\Program Files\\Git\\git-bash.exe",
   "editor.tabSize": 2,
