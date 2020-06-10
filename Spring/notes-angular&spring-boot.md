@@ -3,14 +3,15 @@
 ## Angular
 
 ### Syntax for creating files
-**Always use camelCase for creating a component/service/directive**
-All files in angular are of type `my-name.*.ext`.    
-These are created by the command `ng g <<x>> myName`. **Note** myName will be in capital letters but the output file will be `my-name` 
 
+**Always use camelCase for creating a component/service/directive**
+All files in angular are of type `my-name.*.ext`.
+These are created by the command `ng g <<x>> myName`. **Note** myName will be in capital letters but the output file will be `my-name` 
 
 ### Bootstaping Angular Application
 
 When an angular application is loaded:
+
 1. The `main.ts` file loads the JS(after compilation) into the DOM
 2. It bootstraps the `App.Module`
 3. It then bootstraps the `App.Component`
@@ -20,6 +21,7 @@ When an angular application is loaded:
 
 
 ### Components
+
 The view is constructed using several components which uses the view(HTML), styling(CSS) and interactivity(JS).
 Template: `component.html`
 Style `component.css`
@@ -38,6 +40,7 @@ export class AppComponent {
 ```
 
 We can add the template directly
+
 ```typescript
 @Component({ 
   //...
@@ -52,8 +55,8 @@ The newly generated Component can be appended by using its selector
 <app-welcome></app-welcome>
 ```
 
-
 ### Module
+
 Every angular component(@Component) has to be associated to an Angular Module(@ngModule)   
 An angular application is a group of angular modules.
 
@@ -869,6 +872,13 @@ public class BcryptEncoderTest {
 }
 ```
 
+## JPA
 
-### Changing front end to enable JWT based authentication
+`data.sql` file on the `resources/` directory will append the data to the H2 database during runtime
 
+```sql
+insert into todo(id, description, done, target_date, username)
+values (1001, 'richard', true, sysdate(), 'learn jpa');
+insert into todo(id, description, done, target_date, username)
+values (1002, 'richard', false, sysdate(), 'learn cloud');
+```

@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Todo {
   @Id
   @GeneratedValue
-  private long id;
+  private Long id;
   private String description;
   private boolean done;
   private Date targetDate;
@@ -19,19 +19,19 @@ public class Todo {
   protected Todo() {
   }
 
-  public Todo(long id, String description, boolean done, Date targetDate, String username) {
-    this.id  = id;
+  public Todo(Long id, String description, boolean done, Date targetDate, String username) {
+    this.id = id;
     this.description = description;
     this.done = done;
     this.targetDate = targetDate;
     this.username = username;
   }
 
-  public long getId() {
+  public Long getId() {
     return id;
   }
 
-  public void setId(long id) {
+  public void setId(Long id) {
     this.id = id;
   }
 
@@ -59,7 +59,6 @@ public class Todo {
     this.targetDate = targetDate;
   }
 
-  
   public String getUsername() {
     return username;
   }
@@ -67,7 +66,7 @@ public class Todo {
   public void setUsername(String username) {
     this.username = username;
   }
-  
+
   @Override
   public String toString() {
     return "Todo [description=" + description + ", done=" + done + ", id=" + id + ", targetDate=" + targetDate + "]";
@@ -90,13 +89,9 @@ public class Todo {
     if (getClass() != obj.getClass())
       return false;
     Todo other = (Todo) obj;
-    if (id != other.id) 
+    if (id != other.id)
       return false;
     return true;
   }
 
-  
-
-
-  
 }

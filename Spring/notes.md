@@ -11,7 +11,7 @@
     - `Metrics and Health Check` can create metrics to find the number of times a service has been called or failed
     - `externalized configuration` configuration for Production and Development can be configured using `application.properties` 
 - Feature of Spring Framework
-    - **Dependency Injection** or **Inversion of Control(IOC)** Spring takes control of all the beans and its dependencies
+s    - **Dependency Injection** or **Inversion of Control(IOC)** Spring takes control of all the beans and its dependencies
     - Reduces the amount of boilerplate code required for Spring JDBC, MVC etc
     - Good integration with frameworks like JUnit, Mockito and Hibernate
 - Feature of Spring MVC
@@ -144,7 +144,7 @@ Each table in the database is mapped to an entity defined
 public class Book {
 	@Id // to declare the property as the primary key
 	@GeneratedValue // generate the value for the primary key
-	private long id;
+	private Long id; // should not be a primitive type but a wrapper class
 	private String name;
 	private String author;
 

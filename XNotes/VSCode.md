@@ -1,23 +1,28 @@
+# VSCode
+
 ## VSCode Shortcuts
 
 ### VSCode Settings and Pages
+
 - `Ctrl + K + Ctrl + S` #opens keybindings page
 - `Ctrl + K Z` #Open Zen mode to concentrate on coding
-    - Uncheck from settings `Zen Mode: Hide Line Numbers`
+  - Uncheck from settings `Zen Mode: Hide Line Numbers`
 - `Alt + Q` Manual keybinding to the command pallet - Emmet: Wrap individual lines with abbreviation
 - **`Shift + Ctrl + P`** Open up the command pallet in VSCode
-    - Remove the `>` symbol and you are at the _search files_ command pallette
+  - Remove the `>` symbol and you are at the _search files_ command pallette
     - type `@` keyword and you can list out all the entities/functions/parts in the open file
-    - type `#` keyword to find any symbols
+  - type `#` keyword to find any symbols
 - `Ctrl + P / Ctrl + E` #To open file from the VScode workbench
-    - After doing `Ctrl + E`, select the file to open, and press `Ctrl + Right` #split the file to the right
+  - After doing `Ctrl + E`, select the file to open, and press `Ctrl + Right` #split the file to the right
 - `Ctrl + '+'` #To increase/decrease the font size of the VSCode
 - `Ctrl + ,` #access default settings of VSCode
 - `Ctrl + Shift + M` to open the problems tab
 - `Ctrl + Shift + X` to open the eXtensions window
 
 ### Syntax Support
+
 Generic
+
 - `Ctrl + Space` #Code completion
 - `Ctrl + .` Provide quick fix by intellisense
 - `Alt + Shift + F` Use formatter to format the page (User settings can be found in settings.JSON)
@@ -25,33 +30,37 @@ Generic
 - `Double click new tab` to remove the file preview mode of all new unedited tabs
 
 HTML
+
 - Select the lines you wish to enclose with HTML then`Ctrl + Shift + P` and type `wrap` and then enter the `html tag`
-CSS
+  CSS
 - `Alt+Shift+F` Format CSS/SCSS code in VSCode
-Node
+  Node
 - `Ctrl +Alt + N` To run the JS code using inbuilt node and output in console; using the Code runner extension
 - `Ctrl + Shift + B` #Run build task
 
 ### Toggling Windows
+
 - `Ctrl + B` #toggle on/off sidebar
 - `Shift + Ctrl + E` #focussing on sidebar
 - `Shift + Ctrl + N` #new VSCode window
 - `Ctrl + Tab` #Change File Tabs
 - `Ctrl + W` #close active sheet/window
-- `Ctrl + K   Rt Arrow/Left Arrow` To toggle between the editor groups
+- `Ctrl + K Rt Arrow/Left Arrow` To toggle between the editor groups
 - `Ctrl + Shift + Tab` to toggle between the editor groups
 - `Alt + Left/ Alt + Right` #Move between files
 - `Ctrl + \` #to toggle split screen
 - `Ctrl + K V` to open preview mode of the MD file to the right
 
 ### Text Selection
+
 - `Ctrl + K ;` Select all the contents inside a ` , ' , "
 - `Ctrl + K [` Select all the contetns inside a square braket
-- `Ctrl + K Shift + '(' / '<' /  '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
-- `Ctrl + D` #select next match 
+- `Ctrl + K Shift + '(' / '<' / '{'` Select all the contetns inside a parenthesis, angle brackets and curly brackets
+- `Ctrl + D` #select next match
 - `Ctrl + U` #de-select match
 
 ### Text Formatting
+
 - `Alt + UpArrow / Alt + DownArrow` #For moving a line in VSCode
 - `Shift + Alt + UpArrow / Shift + Alt + DownArrow` #For copying a line either up or down
   - `Shift + Alt + Right` #for selecting the corresponding data
@@ -59,11 +68,12 @@ Node
 - `CTrl + L` select the entire line
 
 ### Text Movement
-- `Ctrl + Home` #to go the start of file     
-    `Ctrl + End` #to go to the end of file
+
+- `Ctrl + Home` #to go the start of file
+  `Ctrl + End` #to go to the end of file
 - `Shift + Ctrl + K` #to remove line
-- `Ctrl+ Enter` #to insert line from between the line   
-    `Ctrl + Enter` #from a file in sidebar will toggle split screen
+- `Ctrl+ Enter` #to insert line from between the line
+  `Ctrl + Enter` #from a file in sidebar will toggle split screen
 - `Shift + Ctrl + \` #shift to matching brackets
 - `Fn + Left Arrow / Rt Arrow` go to start/end of the line
 - `Ctrl+F2` / `Alt + Select lines Randomly` Select Multilines in VSCode
@@ -72,40 +82,40 @@ Node
 - `Ctrl + Right/left` #move along the line faster by moving by words
 
 ### Navigation and Code Explanation
-- `Alt + #` where # is a number to select individual tabs in VSCode 
+
+- `Alt + #` where # is a number to select individual tabs in VSCode
 - `Ctrl + SHift + ;` to toggle breadcrumbs and then use `arrow keys` to navigate and later `space / enter` to view the contents
 - `Ctrl + Hover on Function` to view the function definition
 - `CTrl + Shift + o` #go to a function or entity withing the page
 - `F2` on the element you wish to refactor #will refactor all intances within the file and across all files wherever it is referenced
 - `Ctrl + Alt + Click` to view the definiton on the side pane
-- ``Alt+ ` `` peek the definition inline
+- `` Alt+ ` `` peek the definition inline
 - `Select keyword + F2` to rename the function; press `enter` / `Shift + Enter` to priview the chages before accepting the change; do it twice for entering the update
 
-
 ### Folding blocks
+
 - `Ctrl + K Ctrl + 0` fold all code
 - `Ctrl + K Ctl + J` unfold all code
-- `Ctrl + Shift + [ or ] ` fold or unfload a block code
+- `Ctrl + Shift + [ or ]` fold or unfload a block code
 - `Ctrl + K Ctrl + ]` unfold recursively
-- `Ctrl + K  and Ctrl + -` Collapses all files on the Explorer window
-
+- `Ctrl + K and Ctrl + -` Collapses all files on the Explorer window
 
 ### Integrated Terminal
-- `code fileName.ext` opens the file in a new tab in VSCode 
+
+- `code fileName.ext` opens the file in a new tab in VSCode
 - `Alt + /` to go to next terminal
 - `Alt + '` to kill current terminal
 - `CTrl + / + Shift` or `Ctrl + /` to clear the terminal; Command: `workbench.action.terminal.clear`;
-- ``Shift + Ctrl + `` #create new terminal
+- `` Shift + Ctrl + ` `` #create new terminal
 
 ### Chrome DevTools
+
 - `Alt + Click on HTML` _tag to collapse all content in Chrome Developer tools \*\*Chrome Dev Tools_
 
-
 ### Spring / Java Support
+
 - `Alt + Shift + G` to support automatic generation of constructors, getters/setters, toString methods
 - `Ctrl + T` to open the command pallete to search for symbols/ maven class from the spring project
-
-
 
 ---
 
@@ -135,12 +145,12 @@ Node
     **Java Decompiler** - _David Gileadi_
     **XML** - _RedHat_
     **Lombok Annotations Support for VS Code** - Gabriel Basilio
-17. **Auto-Open Markdown Preview** - _hnw_  
+17. **Auto-Open Markdown Preview** - _hnw_
 18. **Path Intellisense** - _Christian Kohler_
 19. **TSLint** - _Microsoft_
 20. **Numbered Bookmarks** - _Alessandro Fragnani_
 21. **Paste JSON As Code** - _quicktype_
-22. **Git Lens** - 
+22. **Git Lens** - _Eric Amodio_
 23. **Bracket Pair Colorizer 2** - _CoeenradS_
 24. **Angular Snippets(Version 9)** - _John Papa_
 25. **Angular Language Service** - _Angular_
@@ -149,16 +159,18 @@ Node
 28. **nx console** - _nrwl_
 29. **Quick and Simple Text Selection** - _David Bankier_ #for providing some shortcuts for easy text selection
 30. **Sonar Lint** - _SonarSource_ for detecting and fixing quality issues in code;
-    - Install the vsix `SonarSource.sonarlint-vscode-1.15.0.vsix` and install it either automatically or by by downloading it manually 
+    - Install the vsix `SonarSource.sonarlint-vscode-1.15.0.vsix` and install it either automatically or by by downloading it manually
 31. **Rest Client** - _Huachao Mao_
+32. **SQLTools** - _Matheus Tiexiera_
+
 ---
 
 ## VSCode settings
 
 1. **Set git-bash as default terminal**: Press `Ctrl+Shift+P` and enter `terminal.integrated.shell.windows` in search bar, there add the path to the git-bash: `C:\Program Files\Git\bin\bashe.exe`
-2. `File --> AutoSave` set autosave on 
+2. `File --> AutoSave` set autosave on
 3. Select the `file icon theme` from command pallette
-    - You can use this to change the file icon theme from VSCode to others like material
+   - You can use this to change the file icon theme from VSCode to others like material
 4. Select the `Color Theme` from command pallette
 5. `"terminal.integrated.scrollback": 2000` add this to `settings.json` to increase the buffer size of the integrated terminal log
 6. `"workbench. editor. enablePreview"` and set it to `false` to stop automatic preview of docs on open
@@ -166,8 +178,9 @@ Node
 ## VSCode Extension Settings
 
 ### Rest-Client
+
 - Create either a `.txt` or `.http` file and append any HTTP Method.
--  Click on the `Send Request` option to view the output of the request / Right click --> Send Request
+- Click on the `Send Request` option to view the output of the request / Right click --> Send Request
 - Use `Ctrl + Alt + R` to execute the HTTP Reques
 - Use the setting `rest-client.previewResponseInUntitledDocument` to open an Untitled Document for all responses
 
@@ -185,7 +198,12 @@ content-type: application/json
 }
 ```
 
-## Commands in Extension Window
+### SQL Tools
+
+- `Ctrl + W Ctrl F` Format SQL documents
+
+### Commands in Extension Window
+
 - Search using `@installed` to list all the extensions already installed
 
 ---
@@ -208,6 +226,7 @@ content-type: application/json
 ```
 
 ### Launching of WebApp testing with webdriver IO
+
 ```json
   "version": "0.2.0",
   "configurations": [
@@ -221,26 +240,27 @@ content-type: application/json
       "program": "${workspaceRoot}/TESTING/CakeBar/node_modules/@wdio/cli/bin/wdio.js",
       "console": "integratedTerminal"
     }
-  ]  
+  ]
 ```
 
 ### Run java application
+
 ```json
-    {
-      "type": "java",
-      "name": "CodeLens (Launch) - Fortune",
-      "request": "launch",
-      "mainClass": "Sample.Fortune",
-      "projectName": "Frontend_Examples_4892d113"
-    }
+{
+  "type": "java",
+  "name": "CodeLens (Launch) - Fortune",
+  "request": "launch",
+  "mainClass": "Sample.Fortune",
+  "projectName": "Frontend_Examples_4892d113"
+}
 ```
 
 ---
 
-
 ## VSCode TS tasks.json snippets
 
-### Build and watch TS compilation 
+### Build and watch TS compilation
+
 ```json
   "tasks": [
     {
@@ -272,7 +292,6 @@ content-type: application/json
 ```
 
 ---
-
 
 ## User defined key bindings in `keybindings.json`
 
@@ -370,21 +389,98 @@ content-type: application/json
     "key": "shift+alt+g", //g for generate
     "command": "editor.action.codeAction",
     "args": {
-      "kind": "source.generate", //or "source.generate.accessors" to narrow it down 
+      "kind": "source.generate" //or "source.generate.accessors" to narrow it down
     }
+  },
+  {
+    "key": "ctrl+e w",
+    "command": "workbench.action.quickOpenNavigateNextInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
+    "when": "inFilesPicker && inQuickOpen"
+  },
+  {
+    "key": "ctrl+w ctrl+f",
+    "command": "sqltools.formatSql",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+e ctrl+b",
+    "command": "-sqltools.formatSql",
+    "when": "editorTextFocus && !editorReadonly"
+  },
+  {
+    "key": "ctrl+w ctrl+h",
+    "command": "sqltools.runFromHistory"
+  },
+  {
+    "key": "ctrl+e ctrl+h",
+    "command": "-sqltools.runFromHistory"
+  },
+  {
+    "key": "ctrl+w ctrl+s",
+    "command": "sqltools.showRecords"
+  },
+  {
+    "key": "ctrl+e ctrl+s",
+    "command": "-sqltools.showRecords"
+  },
+  {
+    "key": "ctrl+w ctrl+w",
+    "command": "sqltools.executeQuery",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+e ctrl+e",
+    "command": "-sqltools.executeQuery",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+w ctrl+d",
+    "command": "sqltools.describeTable"
+  },
+  {
+    "key": "ctrl+e ctrl+d",
+    "command": "-sqltools.describeTable"
+  },
+  {
+    "key": "ctrl+w ctrl+a",
+    "command": "sqltools.runFromBookmarks"
+  },
+  {
+    "key": "ctrl+e ctrl+a",
+    "command": "-sqltools.runFromBookmarks"
+  },
+  {
+    "key": "ctrl+w ctrl+r",
+    "command": "sqltools.deleteBookmark"
+  },
+  {
+    "key": "ctrl+e ctrl+r",
+    "command": "-sqltools.deleteBookmark"
+  },
+  {
+    "key": "ctrl+w ctrl+q",
+    "command": "sqltools.bookmarkSelection",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "ctrl+e ctrl+q",
+    "command": "-sqltools.bookmarkSelection",
+    "when": "editorTextFocus"
   }
 ]
 ```
 
 ---
 
-
 ## User Settings in `settings.json`
 
 ```json
 {
-   // "http.proxy": "http://<<domain>>\\<<userid>>:<<password>>@<<ip>>:<<port>>/",
-   //  "http.proxyStrictSSL": false,
   "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "terminal.external.windowsExec": "C:\\Program Files\\Git\\git-bash.exe",
   "editor.tabSize": 2,
@@ -398,9 +494,8 @@ content-type: application/json
     "editor.defaultFormatter": "vscode.typescript-language-features"
   },
   "[java]": {
-    "editor.defaultFormatter": "redhat.java",
+    "editor.defaultFormatter": "redhat.java"
   },
-  "java.format.settings.url": "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
   "editor.formatOnSave": true,
@@ -438,16 +533,9 @@ content-type: application/json
   "java.trace.server": "messages",
   "java.jdt.ls.vmargs": "-XX:+UseParallelGC -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Dsun.zip.disableMemoryMapping=true -Xmx1G -Xms100m -javaagent:\"c:\\Users\\triph\\.vscode\\extensions\\gabrielbb.vscode-lombok-1.0.1\\server\\lombok.jar\"",
   "terminal.integrated.scrollback": 2000,
-}
-
-```
-
-
-## Workspace Settings in 'settings.json'
-
-```json
-{
-  "editor.formatOnSave": true,
+  "liveSassCompile.settings.generateMap": false,
+  "java.dependency.showMembers": true,
+  "sonarlint.ls.javaHome": "C:\\Program Files\\Java\\jdk-14",
   "files.exclude": {
     "**/.classpath": true,
     "**/.project": true,
@@ -458,5 +546,12 @@ content-type: application/json
   "java.configuration.updateBuildConfiguration": "interactive",
   "java.format.settings.url": "eclipse-formatter.xml"
 }
+```
 
+## Workspace Settings in 'settings.json'
+
+```json
+{
+  
+}
 ```

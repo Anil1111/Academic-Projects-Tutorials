@@ -30,12 +30,12 @@ _This text_ is Italic
 ~~This text~~ is strike through
 
 <!-- escaping ` and *-->
-`` escape `abc` ``   
+`` escape `abc` ``
 \* file \*
 
 <!-- Comment block -->
-    // this is a comment block
-    Has text
+// this is a comment block
+Has text
 
 <!-- Blockquote -->
 
@@ -100,7 +100,6 @@ function add(num1, num2) {
 1. Hello
 2. To
 3. You
-
 
 <!-- Using URL in a paragraph to aid reading-->
 In a hole in the ground there lived a hobbit. Not a nasty, dirty, wet hole, filled with the ends

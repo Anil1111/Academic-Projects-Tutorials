@@ -138,6 +138,7 @@ The default username is: user and the default password will be printed in the co
 		</dependency>
 ```
 
+
 ### Web
 
 Used for building Web and RESTful applications
@@ -266,11 +267,11 @@ This activates various kinds of actuator and will cause a performance degradatio
 ### JWT
 
 ```xml
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.9.1</version>
-		</dependency>
+<dependency>
+  <groupId>io.jsonwebtoken</groupId>
+  <artifactId>jjwt</artifactId>
+  <version>0.9.1</version>
+</dependency>
 ```
 
 _Additional properties to be set in application.properties_ 
@@ -338,7 +339,7 @@ jwt.token.expiration.in.seconds=604800
   - `import javax.persistence.id;`
 - `@GeneratedValue` generate the value for the primary key
   - `import javax.persistence.GeneratedValue;`
-- `@Repository` indicates something that interacts with the DB
+- `@Repository` provides all the features to interact with the entity like add, save, delete etc
   - `import org.springframework.stereotype.Repository;`
 - `@Transactional` declared on method/classes that define that each method consist of a transaction
   - `import javax.transaction.Transactional;`

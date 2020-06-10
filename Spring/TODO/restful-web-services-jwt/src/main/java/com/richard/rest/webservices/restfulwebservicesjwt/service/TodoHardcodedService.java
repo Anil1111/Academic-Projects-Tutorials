@@ -12,12 +12,12 @@ import org.springframework.stereotype.Service;
 public class TodoHardcodedService{
 
   private static List<Todo> todos = new ArrayList<>();
-  private static int idCounter = 0;
+  private static long idCounter = 0;
 
   static {
-    todos.add(new Todo(++idCounter, "learn to dance", true, new Date(), "richard"));
-    todos.add(new Todo(++idCounter, "learn to code", true, new Date(), "richard"));
-    todos.add(new Todo(++idCounter, "learn to music", true, new Date(), "richard"));
+    todos.add(new Todo(++idCounter, "learn to dance - hardcoded", true, new Date(), "richard"));
+    todos.add(new Todo(++idCounter, "learn to code- hardcoded", true, new Date(), "richard"));
+    todos.add(new Todo(++idCounter, "learn to music- hardcoded", true, new Date(), "richard"));
   }
 
   public List<Todo> findAll(){

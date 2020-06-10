@@ -16,6 +16,10 @@
 ---
 
 ## Ruuning Project - TODO
+The restful-web-services contains the hardcoded and basic authentication enabled backend.   
+The restful-web-services-jwt contains the JWT authentication enabled backend.   
+
+
 
 ### Run Steps - Backend
 
@@ -28,6 +32,7 @@
 
 1. Run the requests present in the `requests.http` file to fire the REST API Calls
     - append the right `Authorization` value that you can generate from RESTlet Client
+
 2. Alternatively, You can run the requests using the Restlet Client which is a chrome extension.
     - You may construct the basic authorization on it using the `Add Authorization` option along with Origin
 3. By default, use the credential to log as Form authentication in the spring security login form: `Username`: richard and `Password`: dummy
