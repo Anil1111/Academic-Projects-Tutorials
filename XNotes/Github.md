@@ -82,7 +82,7 @@
 ## Create a local GIT Repository in your local file system
 1. From the directory where you want to host your remote repoistory location
 1. `git init --bare repoName.git`  creates a repo called as repoName.git that can be used as a remote along with all required files inside
-2. From the directory where you can want to hook up to the remote repository, having the project code
+2. From the directory where you can want to hook up to the remote repository, having the valid GIT enabled project code
 3. `git remote add origin "/path/to/my/repoName.git"` add the path to the above create remote repository  
 4. `git remote -v` to check the remote localtion path is correct
 5. `git push --set-upstream origin master` to push the code and set the upsteam as the branch master
