@@ -1,6 +1,8 @@
-## Webpack
+# Webpack
 
-### Why Webpack?
+## CONCEPTS
+
+### Why Webpack
 
 - Bundles our code/assets together and manages all dependencies
 - ES6 modules require modern browser support and create multiple HTTP Requests.
@@ -81,6 +83,7 @@ Automatically creates a default `./dist/` folder with the bundled default code `
 > `npm run build` / `yarn run build` from terminal
 
 ### Using webpack-dev-server by npm start
+
 It creates the output file in memory and does not generate output files to the dist, but uses the files generated from its memory.
 
 ```json
@@ -93,7 +96,7 @@ It creates the output file in memory and does not generate output files to the d
 }
 ```
 
-> `npm start` from terminal to spin up dev server at http://localhost:8080/
+> `npm start` from terminal to spin up dev server at `http://localhost:8080/`
 > `npm build` to generate the bundle in ./dist as per the development mode configuration in `webpack.config.dev.js`
 
 ### Sample `webpack.config.js` with development workflow
@@ -266,8 +269,6 @@ Changes to `package.json`
 }
 ```
 
-
-
 Finally, to run the above
 
 Edit the package.json
@@ -319,33 +320,30 @@ module.exports = {
 };
 ```
 
-
-
-
-
-
 ### Sample `webpack.config.js` with classification of Vendor Code and User Code
 
 ```javascript
-module.exports = { 
+module.exports = {
   entry: {
-    main: './src/index.js', //the name of the entry point for User code is marked as 'main' 
+    main: './src/index.js', //the name of the entry point for User code is marked as 'main'
     //all other configs including prod and dev should make use of [name] instead of explicitly mentioning the name of the produced file
     vendor: './src/vendor.js', //the name of the vendor code
   },
 ```
 
-1. Changes to be made in `webpack.config.prod.js`
+#### Changes to be made in `webpack.config.prod.js`
+
 ```javascript
 module.exports = merge(common ,{
   mode: "production",
   output: {
     filename: '[name].[contenthash].bundle.js',  //the [name] is used as against a specific name like main.[contenthash].bundle.js
-    path: path.resolve(__dirname, 'dist'), 
+    path: path.resolve(__dirname, 'dist'),
   }
 ```
 
-2. Changes to be made in `webpack.config.dev.js`
+#### Changes to be made in `webpack.config.dev.js`
+
 ```javascript
 module.exports = merge(common ,{
   mode: "development",
@@ -355,22 +353,20 @@ module.exports = merge(common ,{
   }
 ```
 
-
-
 ### Sample `webpack.config.prod.js` with Extarcting CSS
 
 Since style is injected later by the JS into the DOM, in production, we can see the unstyled HTML render for a split second initially.
 
-1. Code to affect `webpack.config.prod.js`
+#### Code to affect `webpack.config.prod.js`
+
 ```javascript
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-
 
 module.exports = merge(common ,{
   mode: "production",
   output: {
-    filename: '[name].[contenthash].bundle.js', 
-    path: path.resolve(__dirname, 'dist'), 
+    filename: '[name].[contenthash].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     // publicPath: 'dist'
   },
   module: {
@@ -379,12 +375,12 @@ module.exports = merge(common ,{
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader'], //MiniCssExtractPlugin.loader will replace the 'style-loader'
         //instead of injecting the css into DOM, MiniCssExtractPlugin will append the dynamic css into the html
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
         use: [MiniCssExtractPlugin.loader, 'css-loader','sass-loader'],
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       },
     ]
   },
@@ -397,11 +393,12 @@ module.exports = merge(common ,{
 });
 ```
 
-2. Changes to `webpack.config.js`
+#### Changes to `webpack.config.js`
+
 ```javascript
-module.exports = { 
+module.exports = {
   entry: {
-    main: './src/index.js', 
+    main: './src/index.js',
     vendor: './src/vendor.js',
   },
   module: {
@@ -412,30 +409,31 @@ module.exports = {
     ]
   },
   plugins: [ new HtmlWebpackPlugin({
-    template: "./src/template.html" 
+    template: "./src/template.html"
   })]
 };
 ```
 
-3. Changes to `webpack.config.dev.js`
+#### Changes to `webpack.config.dev.js`
+
 ```javascript
 module.exports = merge(common ,{
   mode: "development",
   output: {
-    filename: '[name].bundle.js', 
-    path: path.resolve(__dirname, 'dist'), 
+    filename: '[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
   },
   module: {
     rules: [
       {
         test: /\.css$/, //adding these
         use: ['style-loader', 'css-loader'],
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       },
       {
         test: /\.scss$/,
         use: ['style-loader', 'css-loader','sass-loader'],
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       },
     ]
   }
@@ -443,17 +441,16 @@ module.exports = merge(common ,{
 });
 ```
 
-
-
 ### Sample `webpack.config.prod.js` with Minifying CSS & JS & HTML
 
 By default, the CSS files do not get minimized, and thus we need to use an optimizer. But using this optimizer disables the default JS optimizer and causes JS files not to be minimized. So we need to explicitly handle that as well.
 
-1. Code to affect `webpack.config.prod.js`
+#### Code to affect `webpack.config.prod.js` II
+
 ```javascript
 const OptimizeCssAssetsWebpackPlugin = require('optimize-css-assets-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin'); //present by default by webpack
-const HtmlWebpackPlugin = require('html-webpack-plugin'); 
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = merge(common, {
   mode: "production",
@@ -487,13 +484,13 @@ module.exports = merge(common, {
 });
 ```
 
-2. Changes to `webpack.config.js`
+#### Changes to `webpack.config.js` II
 
 ```javascript
   //removed the plugin option for HtmlWebpackPlugin and moved into webpack.config.dev.js
 ```
 
-3. Changes to `webpack.config.dev.js`
+#### Changes to `webpack.config.dev.js` II
 
 ```javascript
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -511,15 +508,15 @@ module.exports = merge(common, {
 
 ### Sample config file setup of Common, Dev and Prod
 
-1. `webpack.config.js`
+#### `webpack.config.js`
 
 ```javascript
 const path = require('path');
 
 //common webpack config shared by both webpack.confog.dev and webpack.config.prod
-module.exports = { 
+module.exports = {
   entry: {
-    main: './src/index.js', 
+    main: './src/index.js',
     vendor: './src/vendor.js',
   },
   module: {
@@ -527,25 +524,25 @@ module.exports = {
       {
         test: /\.html$/,
         use: ['html-loader'],
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       },
       {
         test: /\.(svg|jpeg|gif|png)$/,
-        use: { 
+        use: {
           loader: 'file-loader',
           options: {
             name: "[name].[hash].[ext]",
             outputPath: "imgs"
           }
         },
-        exclude: /node_modules/, 
+        exclude: /node_modules/,
       }
     ]
   },
 };
 ```
 
-2. `webpack.config.dev.js`
+#### `webpack.config.dev.js`
 
 ```javascript
 const path = require('path');
@@ -583,7 +580,7 @@ module.exports = merge(common, {
 });
 ```
 
-3. `webpack.config.prod.js`
+#### `webpack.config.prod.js`
 
 ```javascript
 const CleanPlugin = require('clean-webpack-plugin');
@@ -669,8 +666,9 @@ npx webpack-cli init --auto
 }
 ```
 
-2. Adds the below files:
-   - index.html
-   - src/index.js
-   - .yo-rc.json
-   - README.md
+#### Adds the below files
+
+- index.html
+- src/index.js
+- .yo-rc.json
+- README.md

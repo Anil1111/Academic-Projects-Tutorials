@@ -1,10 +1,10 @@
 # YARN package manager
 
-## What is YARN?
+## What is YARN
+
 JS package Manager
 Faster and reliable alternative to NPM
 Works from packages from NPM repository
-
 
 ## Commands
 
@@ -18,22 +18,22 @@ Works from packages from NPM repository
 8. `yarn install` to install any/all packages explicitly mentioned in the package.json
 9. `yarn remove <<packageName>>` to remove a package from dependency
 10. `yarn add <<packageName>>@x.xx.x` to install a package having specific version of x.xx.x
-10. `yarn add <<packageName>>@x.xx.x -D` to install a package as a dev dependency
-11. `yarn outdated` find outdated versions of installed packages
-12. `yarn outdated <<packageNAme>>` find the outdated version of specific package
-13. `yarn upgrade <<packageName>>` upgrading a specific package
-14. `yarn global add <<packageName>>` globally install a package; **Must use global right after yarn**  
-15. `yarn global bin` points to location where the global packages are installed
-16. `yarn global remove <<packageName>>` remove a package globally
-17. `yarn list` lists out all the dependencies and its dependencies
-18. `yarn list --depth=0` lists the top level layer of dependencies
-19. `yarn list --pattern <<packageName>>` lists a particular package
-20. `yarn add <<packageName>> -D` or `--dev` to add a package as a development dependency
-21. `yarn check` to check if the yarn.lock file is in sync with node_modules
-22. `yarn import` to retrieve the yarn.lock file from the node_modules files
-23. `yarn licenses list` to retrive the list of licenses
-24. `yarn pack` to zip all packages into a .tgz files 
-25. `yarn cache list` lists the packages in cache
-26. `yarn cache list --pattern <<packageName>>`  packages in cache
-27. `yarn cache clean` cleans the cache
-28. `yarn start` or any other script can be run by replacing npm with yarn
+11. `yarn add <<packageName>>@x.xx.x -D` to install a package as a dev dependency
+12. `yarn outdated` find outdated versions of installed packages
+13. `yarn outdated <<packageNAme>>` find the outdated version of specific package
+14. `yarn upgrade <<packageName>>` upgrading a specific package
+15. `yarn global add <<packageName>>` globally install a package; **Must use global right after yarn**  
+16. `yarn global bin` points to location where the global packages are installed
+17. `yarn global remove <<packageName>>` remove a package globally
+18. `yarn list` lists out all the dependencies and its dependencies
+19. `yarn list --depth=0` lists the top level layer of dependencies
+20. `yarn list --pattern <<packageName>>` lists a particular package
+21. `yarn add <<packageName>> -D` or `--dev` to add a package as a development dependency
+22. `yarn check` to check if the yarn.lock file is in sync with node_modules
+23. `yarn import` to retrieve the yarn.lock file from the node_modules files
+24. `yarn licenses list` to retrive the list of licenses
+25. `yarn pack` to zip all packages into a .tgz files 
+26. `yarn cache list` lists the packages in cache
+27. `yarn cache list --pattern <<packageName>>`  packages in cache
+28. `yarn cache clean` cleans the cache
+29. `yarn start` or any other script can be run by replacing npm with yarn

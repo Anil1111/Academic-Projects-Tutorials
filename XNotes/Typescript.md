@@ -1,17 +1,18 @@
-## Typescript
+# Typescript
 
-### Crete tsconfig.json
+## TSCONFIG.JSON
+
+### Create tsconfig.json
+
 Used to get configuration option for generating JS from TS.
+
 1. `npm i --save-dev typescript` install typescript
 2. `tsc --init` in project folder
-
----
-
-1. `tsc <<typescriptFile>>` #Complile typescript file
-2. `tsc --init` #create a tsconfig.js file
-3. `tsc -b` #to build the ts file
-4. `tsc -w` / `tsc --watch` #to watch for ts compilation
-5. `"start": "lite-server"` in package.json scripts key for running on a live server
+3. `tsc <<typescriptFile>>` #Complile typescript file
+4. `tsc --init` #create a tsconfig.js file
+5. `tsc -b` #to build the ts file
+6. `tsc -w` / `tsc --watch` #to watch for ts compilation
+7. `"start": "lite-server"` in package.json scripts key for running on a live server
 
 ### Properties added to tsconfig.json
 
@@ -76,17 +77,17 @@ Used to get configuration option for generating JS from TS.
 ```
 
 Providing support to decorators
+
 ```json
-    "experimentalDecorators": true /* Enables experimental support for ES7 
+    "experimentalDecorators": true /* Enables experimental support for ES7
 ```
 
 Providing support to namespace and bundling of all js files
+
 ```json
     "module": "amd",    /* only `amd` and `system` support outfile*/
     "outFile": "./dist/bundle.js",  /* Concatenate and emit output to single file. */
 ```
-
-
 
 ### Sample tsconfig.json
 
@@ -108,7 +109,7 @@ Providing support to namespace and bundling of all js files
     "sourceMap": true /* Generates corresponding '.map' file. */,
     "outFile": "./dist/bundle.js",  /* Concatenate and emit output to single file. */
     "outDir": "./dist" /* Redirect output structure to the directory. */,
-    "rootDir": "./src" /* Specify the root directory of input files. Use to 
+    "rootDir": "./src" /* Specify the root directory of input files. Use to
     "removeComments": true /* Do not emit comments to output. */,
 
     /* Strict Type-Checking Options */
@@ -137,7 +138,6 @@ Providing support to namespace and bundling of all js files
 
 ```
 
-
 ### Sample tsconfig.json with webpack
 
 ```json
@@ -146,22 +146,22 @@ Providing support to namespace and bundling of all js files
     "target": "es6",  //atleast es6
     "module": "es2015", //supporting es6 module notation or Use "commonjs"
     "lib": [ //providing support for interacting with DOM
-      "dom", 
+      "dom",
       "es6",
       "dom.iterable",
       "scripthost"
     ],  
     "sourceMap": true,
     "outDir": "./dist",   //determined where the output files get saved
-    "removeComments": true, 
-    "strict": true, 
-    "noUnusedLocals": true,   
-    "noUnusedParameters": true,   
-    "noImplicitReturns": true,        
-    "esModuleInterop": true, 
-    "experimentalDecorators": true, 
+    "removeComments": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true 
+    "forceConsistentCasingInFileNames": true
   },
   "exclude": [
     "node_modules"
@@ -173,17 +173,18 @@ Providing support to namespace and bundling of all js files
 
 ```
 
-
 ### TS change for using JS libraries
+
 Install Type packages. Eg: from [here](https://github.com/DefinitelyTyped/DefinitelyTyped/tree/master/types)
 
 ### Sample tsconfig.json with Node Project
+
 ```json
   "compilerOptions": {
-    "target": "es2018", 
-    "module": "commonjs", 
-    "moduleResolution": "node", 
-    "outDir": "./dist",   
-    "rootDir": "./src", 
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
   }
 ```

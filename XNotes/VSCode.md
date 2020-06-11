@@ -18,6 +18,9 @@
 - `Ctrl + ,` #access default settings of VSCode
 - `Ctrl + Shift + M` to open the problems tab
 - `Ctrl + Shift + X` to open the eXtensions window
+- `Ctrl + Shift + P --> Choose Toggle Output` to open all the output windows
+- `Ctrl + Shift + P --> Choose Show Log` to open log files
+- `Ctrl + SHift + I` to toggle developer tools
 
 ### Syntax Support
 
