@@ -1,3 +1,5 @@
+# Terminal
+
 ## Terminal Commands
 
 `ls / ls -alt` #to list all subdirectories  
@@ -12,7 +14,7 @@
 `cp sourceFile1 sourceFile2 destDir/` #copy multiple files into the destDir/  
 `cp -r ../HTTP1/GET ./`  
 `cp * destDir/`  
-`cp *name.txt destDir/` #* wildcard to select all files in the working directory to be copied & copy *name.txt  
+`cp *name.txt destDir/` #`*` wildcard to select all files in the working directory to be copied & copy *name.txt  
 `mv sourceFile1 destDir/` #copy sourceFile into destDir/  
 `mv fileName1 fileName2` #renames fileName1 to fileName2  
 `rm filename / rm -r dirName` or `rm -rf dirName` #to remove files or list of files recursively ;  

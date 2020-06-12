@@ -1,6 +1,6 @@
 # Remote Server
 
-- `Secure Shell` (SSH) for Linux-based machines   
+- `Secure Shell` (SSH) for Linux-based machines  
 - `Remote Desktop Protocol`(RDP) for Windows-based machines
 
 ## SSH Vs RDP

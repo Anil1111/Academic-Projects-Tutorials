@@ -32,7 +32,7 @@ Works from packages from NPM repository
 22. `yarn check` to check if the yarn.lock file is in sync with node_modules
 23. `yarn import` to retrieve the yarn.lock file from the node_modules files
 24. `yarn licenses list` to retrive the list of licenses
-25. `yarn pack` to zip all packages into a .tgz files 
+25. `yarn pack` to zip all packages into a .tgz files
 26. `yarn cache list` lists the packages in cache
 27. `yarn cache list --pattern <<packageName>>`  packages in cache
 28. `yarn cache clean` cleans the cache

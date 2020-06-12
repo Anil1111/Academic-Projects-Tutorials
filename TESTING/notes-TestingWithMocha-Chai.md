@@ -1,36 +1,44 @@
 # Unit Testing with Mocha and Chai
 
-## Why write tests for code?
+## Why write tests for code
+
 Tests are common in software engineering because they help to document the core functionality of the code and make sure that new features do not introduce breaking changes.
 In the software industry, code is generally written, maintained, and refactored by many different software engineers over many years. Having comprehensive tests enables engineers to confidently change or add to existing code knowing that their changes haven’t broken other features or had unintended side effects elsewhere in the app.
 
-## What is Unit Testing?
+## What is Unit Testing
+
 Unit testing means testing the behavior of code in small, independent units. Units are typically designed to be the smallest meaningful chunk of independently testable code. This is in comparison of integration testing, in which a set of modules are tested as a group.
 
 ## Mocha and Chai, Test Suites and Test Cases
+
 `Mocha` and `Chai` are two JavaScript frameworks commonly used together for unit testing.
 
 ### Mocha 
+
 Is a testing framework that provides functions that are executed according in a specific order, and that logs their results to the terminal window.
-When you read tests written in Mocha, you’ll see regular use of the keywords `describe` and `it`. These keywords, provided by Mocha, provide structure to the tests by batching them into test suites and test cases.   
-A `test suite` is a collection of tests all relating to a single functionality or behavior. A `test case` or a `unit test` is a single description about the desired behavior of the code that either passes or fails. Test suites are batched underneath the describe keyword, and test cases are batched under the it keyword.   
+When you read tests written in Mocha, you’ll see regular use of the keywords `describe` and `it`. These keywords, provided by Mocha, provide structure to the tests by batching them into test suites and test cases.  
+A `test suite` is a collection of tests all relating to a single functionality or behavior. A `test case` or a `unit test` is a single description about the desired behavior of the code that either passes or fails. Test suites are batched underneath the describe keyword, and test cases are batched under the it keyword.  
 Additionally, `Mocha` provides tools for cleaning the state of the software being tested in order to insure that test cases are being run independently of each other. You might end up using other tools, to stub or mock the desired behaviors of other units that a given unit of code might interact with. The independence of test cases is a key principle of unit testing, as it allows the cause of errors to be pinpointed more specifically if a test case fails, thereby speeding up the debugging process.
 
 ### Assertions
+
 The base component of test cases are `assertions`. Assertions are tied to particular values (whereas test cases are descriptions of behavior) and they will fail if the expected value does not match the actual value.
 Every assertion in a test case must be met in order for the test case to pass.
 
 ### Chai
+
 Chai is an assertion library that is often used alongside Mocha. It provides functions and methods that help you compare the output of a certain test with its expected value. Chai provides clean syntax that almost reads like English!
-Example of a Chai assertion: 
+Example of a Chai assertion:
+
 ```javascript
 expect(exampleArray).to.have.lengthOf(3);
 ```
+
 This code will check whether that the variable exampleArray has a length of three or not.
 
 ### Failing and Passing Tests
-Robust tests are accurate for both failing and passing conditions! When writing tests, you need to make sure that the test fails if the feature that it is testing was not implemented properly, as well as making sure that the test passes if it is. Tests that will erroneously pass can be enormously misleading, and might lead to broken code getting merged and deployed.
 
+Robust tests are accurate for both failing and passing conditions! When writing tests, you need to make sure that the test fails if the feature that it is testing was not implemented properly, as well as making sure that the test passes if it is. Tests that will erroneously pass can be enormously misleading, and might lead to broken code getting merged and deployed.
 
 ## Reading Tests with Mocha and Chai
 
@@ -51,15 +59,16 @@ describe('setPlayerMoves() - Main Functionality', function() { // this is a `des
 })
 ```
 
-### Running Tests and Interpreting Output with Mocha and Chai
-### How do I run tests?
-- To run tests for your projects, first open the root project directory in your terminal. 
-- If you haven’t already, run npm install to install all necessary testing dependencies. 
+### How do I run tests
+
+- To run tests for your projects, first open the root project directory in your terminal.
+- If you haven’t already, run npm install to install all necessary testing dependencies.
 - Finally, run `npm test` in your terminal. This command will run the code in your test script in the package json for your project.
 
 ### Test Suites
+
 Tests for one feature are grouped together in describe blocks. This group of tests, called a test suite, describes the “Main Functionality” of the setPlayerMoves function. `Describe` takes a string and a callback function: the string describes the feature or behavior being tested, and the callback function contains all of the code for the different tests being run.
-You’ll see that inside the describe block, the `afterEach` function is called. This is called a `hook`, or _a function that is called at certain points in the lifecycle of the process that it is running in_. The afterEach function gets called right after each it block is run, and customizing this function allows us to reset things that we want to reset between different tests.   
+You’ll see that inside the describe block, the `afterEach` function is called. This is called a `hook`, or _a function that is called at certain points in the lifecycle of the process that it is running in_. The afterEach function gets called right after each it block is run, and customizing this function allows us to reset things that we want to reset between different tests.  
 Here we call the function clearMoves which is a helper function that sets all of the moves back to undefined. It is written outside of any of the blocks, but used as a hook in many of them.
 
 ```javascript
@@ -70,54 +79,62 @@ function clearMoves() {
   playerTwoMoveOneValue = undefined;
 }
 ```
+
 _It’s important for tests to generally start from a clean slate and for each test to be independent of the others, because we want the errors that we get from our tests to give us a specific diagnosis_ of what is wrong with our code.
 
 ### Test cases
-Each `it` block describes more particular behavior to test. In the first `it` block, we test that setPlayerMovesactually exists and that it is a function so that it can correctly be used in the next block.   
+
+Each `it` block describes more particular behavior to test. In the first `it` block, we test that setPlayerMovesactually exists and that it is a function so that it can correctly be used in the next block.  
 In the second `it` block, we call the function setPlayerMoves, which is a function from the code that we are testing from our Rock, Paper, Scissors game. After setPlayerMoves is called with the arguments, the variable playerOneMoveOneType should be equal to the string ‘rock’ and playerOneMoveOneValue should be equal to the number 11.
 
-### Assertions
+### Assertion
+
 Any individual assertion where we are comparing the actual and expected values can be called an assertion. The words should, expect, and assert in the tests indicate that an assertion is being made.
 Each it block test includes multiple assertions, because there are multiple scenarios and edge cases that we want to test for. The error messages that you get from failed tests will most likely point to one of these assertions.
 
+Try appending `.only()` or `.skip()` to your describe or it blocks in order to only run certain tests or skip other certain tests. See the mocha documentation for more details.
 
-Try appending `.only() `or `.skip()` to your describe or it blocks in order to only run certain tests or skip other certain tests. See the mocha documentation for more details.
+#### What happens when my code itself throws an error
 
-#### What happens when my code itself throws an error?
 If executing your code causes an error to be thrown, mocha will log that error in the place of an assertion error. 
 
-#### What happens when a test case fails?
+#### What happens when a test case fails
+
 Only the first failing assertion should will be displayed within each it block.
 
 ### Edge Cases
+
 Tests are often written for various edge cases. This is common, because poor handling of edge cases is responsible for a lot of bugs!
 An example of a common edge case is: how does a function handle weird input? What happens if a function that expects to get a number is passed a string, or is passed no argument at all? Do we want to throw an error? Return undefined? Regardless, we want the decision to be consistent and well-documented.
 Planning and testing for these edge cases is a common use of tests, and it can make the difference between code that will work 80% of the time, and code that will work 100% of the time.
 
-
 ### Manual Testing
+
 Software testing is the process of assessing the completeness and quality of computer software. Usually this is done by running a part of a system (like a web application) and comparing the actual behavior to the expected behavior.
 
 One way to perform software testing is manual testing. Manual testing is a form of testing done by a human interacting with a system. With web apps, this might be clicking, dragging, and typing through a webpage. A list of actions and expected behaviors would be given. If the observed behavior doesn’t match the expected behavior, the application has an error.
 
-
 ### Automated Testing
+
 Automated testing is the use of software to control the execution of tests and the comparison of actual behavior to expected behavior. All the testing you just did (and more) could be performed by a computer program.
 
-
 ### The Test Suite
+
 You can refer to the code defining your app as implementation code, and the code defining your tests as test code.
 A collection of tests for a web application is called a test suite. In the last exercise, you ran a test suite with npm test. In that case the test suite contained all tests for the application.
 For example, if implementation code is written in index.js then the corresponding test code may be written in index-test.js.
 
 ### Regression
+
 When adding a new feature to your product, it’s possible that something will break. If that break occurs within a feature developed earlier, it is called regression. When functionality previously developed and tested stops working, you may say the functionality regressed.
 
-### Mocha
+### Mocha Library
+
 Instead of testing every function manually, developers automate their tests with a test framework.
 Developers use test frameworks to organize and automate tests that provide useful feedback when errors occur. In this lesson we will use the Mocha test framework to write tests against JavaScript methods.
 
 ### describe and it blocks
+
 In Mocha we group tests using the describe function and define tests using the it function. These two functions can be used to make your test suite complete, maintainable, and expressive in the following ways:
 Structure your test suite: you can organize tests into nested groups that reflect the structure of your implementation code.
 Provide informative messages: you can define your tests using human-readable strings.
@@ -148,20 +165,22 @@ In this case a === 3 evaluates to true, so no error is thrown.
 If an argument passed to assert.ok() evaluates to false, an AssertionError is thrown. The error communicates to Mocha that a test has failed, and Mocha logs the error message to the console.
 
 ### Setup, Exercise, and Verify
+
 This distinct and well-defined separation of steps makes your test more reliable, maintainable, and expressive.
 
 The phases are defined as follows:
-- `Setup` - create objects, variables, and set conditions that your test depends on   
+
+- `Setup` - create objects, variables, and set conditions that your test depends on  
 - `Exercise` - execute the functionality you are testing
-Verify - check your expectations against the result of the exercise phase. You can use the assert library here   
-- `Teardown` - 
+Verify - check your expectations against the result of the exercise phase. You can use the assert library here  
+- `Teardown` -
 `const assert = require('assert');`
 
 ```javascript
 // Naive approach
 describe('.pop', () => {
   it('returns the last element in the array [naive]', () => {
-    assert.ok(pop(['padawan', 'knight']) === 'knight'); 
+    assert.ok(pop(['padawan', 'knight']) === 'knight');
   });
 });
 
@@ -193,7 +212,7 @@ describe('appendFileSync', () => {
     // Setup
     const path = './message.txt';
     const str = 'Hello Node.js';
-    
+
     // Exercise: write to file
     fs.appendFileSync(path, str);
 
@@ -207,13 +226,16 @@ describe('appendFileSync', () => {
 });
 ```
 
-Hooks
+## Hooks
+
 Using teardown in the it block made your test isolated, but not reliable.
 If the system encounters an error before it reaches the teardown, it will not execute that phase. In the previous example, an error may occur after the file is created but before it is deleted. The file would persist and may cause false negatives in future test runs.
 
-Mocha provides hooks to solve that problem.
+### Mocha provides hooks to solve that problem
+
 A hook is a piece of code that is executed when a certain event happens. Hooks can be used to set and reset conditions like the setup and teardown phases do. In Mocha, a hook is written within a describe block.
 
+```javascript
 describe('example', () => {
 
   afterEach(() => {
@@ -224,23 +246,27 @@ describe('example', () => {
     // test goes here
   });
 });
+```
 
-The other hooks in the Mocha library are 
-1.before() - Executed once before all tests
-2.beforeEach() - executed before each test 
-3. after() - Executed once after all tests
+The other hooks in the Mocha library are:  
 
+1. `before()` - Executed once before all tests
+2. `beforeEach()` - executed before each test =
+3. `after()` - Executed once after all tests
 
-WRITE EXPRESSIVE TESTS
+## WRITE EXPRESSIVE TESTS
+
 A good test framework is fast, complete, reliable, isolated, maintainable, and expressive. In this lesson you will learn how to use Node’s assert library to write more expressive tests.
 An expressive test is easy to read and descriptive, making it useful as a form of documentation for your implementation code. One way to make a test more expressive is clarifying its verify phase — the step where expected outcome is compared to actual outcome.
 Node.js provides a library called assert with methods that help you write more expressive verification code. You can use the methods in this library in place of conditional statements to write less code and use human-readable language.
 
 
-assert.ok
-As a Node module, assert can be imported at the top of your files with
-const assert = require('assert');
+### assert.ok
 
+As a Node module, assert can be imported at the top of your files with
+`const assert = require('assert');`
+
+```javascript
 describe('-', () => {
   it('returns the difference of two values', () => {
     const bigNum = 100;
@@ -253,48 +279,61 @@ describe('-', () => {
     assert.ok(result, expected);
   });
 });
+```
 
+### assert.equal
 
-assert.equal
 The second line is more expressive: instead of parsing the entire statement, a reader only needs to read the first two words to know the test is verifying equality!
 
+```javascript
 assert.ok(landAnimals[2] == waterAnimals[2]);
 assert.equal(landAnimals[2], waterAnimals[2]);
+```
 
+### assert.strictEqual
 
-assert.strictEqual
+```javascript
 const a = 3;
 const b = '3';
 assert.ok(a == b);
 assert.ok(a === b);
+```
+
 The first assertion will not throw an error because it uses loose (==) equality. It performs a type conversion when comparing two things.
 The second will throw an error because it uses strict (===) equality. It returns false if the types differ.
 
+```javascript
 assert.strictEqual().
 assert.equal() performs a == comparison
 assert.strictEqual() performs a === comparison
+```
 
+### assert.deepEqual I
 
-assert.deepEqual I
 Both assertions will throw an error because distinct objects are not considered equal when using either loose or strict equality in JavaScript.
+
+```javascript
 const a = {relation: 'twin', age: '17'};
 const b = {relation: 'twin', age: '17'};
 assert.equal(a, b);
 assert.strictEqual(a, b);
-
+```
 
 If you need to compare the values within two objects, you can use assert.deepEqual(). This method compares the values of each object using loose (==) equality.
 
-The following code will not throw an error…
-assert.deepEqual(a, b);
-…and you can confirm by manually comparing the relation and age properties of each object.
-a.relation == b.relation;
-a.age == b.age;
+The following code will not throw an error
+`assert.deepEqual(a, b);`
+and you can confirm by manually comparing the relation and age properties of each object.
+
+`a.relation == b.relation;`  
+`a.age == b.age;`
 
 
+### assert.deepEqual II
 
-assert.deepEqual II
 In the last exercise you used deepEqual() to compare the values of two objects with loose equality. Arrays are also objects, so deepEqual() also compares their values with loose equality.
+
+```javascript
 const arr1 = [1, 2, 3];
 const arr2 = [1, 2, 3];
 const arr3 = [1, 2, '3'];
@@ -309,30 +348,33 @@ describe('Numbers', () => {
     assert.notEqual(1, 2);
   });
 });
+```
 
+## TDD WITH MOCHA
 
+### Introduction
 
- TDD WITH MOCHA
- Introduction
-Test-driven development (TDD) is a programming technique where you write test code before implementation code. Test code is written to define the desired behavior of your program. The test output provides descriptive error messages that inform the implementation of your program.
+`Test-driven development (TDD)` is a programming technique where you write test code before implementation code. Test code is written to define the desired behavior of your program. The test output provides descriptive error messages that inform the implementation of your program.
 
-The Red-Green-Refactor Cycle
+### The Red-Green-Refactor Cycle
+
 One of the driving forces of TDD is the red-green-refactor cycle. “Red” and “green” correspond to the color of the text that our test framework produces in the terminal while running the tests in our suite. Red signifies failing tests and green corresponds to passing tests.
 
-Red — Write tests that describe the intended behavior of implementation code, and then compare developer expectations with the actual results of implementation code. The tests should always fail at first because the implementation code for the desired behavior will be written in response to the failing test.
-Green — Write just enough implementation code to make the test pass. The tests return green because the implementation code executes the intended behavior described by the test in the red phase.
+- `Red` — Write tests that describe the intended behavior of implementation code, and then compare developer expectations with the actual results of implementation code. The tests should always fail at first because the implementation code for the desired behavior will be written in response to the failing test.  
+- `Green` — Write just enough implementation code to make the test pass. The tests return green because the implementation code executes the intended behavior described by the test in the red phase.  
+- `Refactor` — Clean up and optimize code following the characteristics of a good test. Refactoring involves actively considering test and implementation code and making revisions to the code base.
 
-Refactor — Clean up and optimize code following the characteristics of a good test. Refactoring involves actively considering test and implementation code and making revisions to the code base.
 
+### Getting Into The Red I
 
-Getting Into The Red I
+#### Step 1: Write The Test
 
-Step 1: Write The Test
 The first step to writing a test with Mocha is to use describe and it blocks to describe the desired behavior of your code. It’s very important for tests to thoroughly describe the desired behavior with natural language. This will create the most helpful error messages and make it easy for you to understand the behavior that your test failed in executing.
 Before running our test, we would use an assert statement to compare the desired result of our method with the actual result.
 
 The first step in developing this method would be writing a test that could look like this:
 
+```javascript
 describe('Phrase', () => {
   describe('.initials', () => {
     it('returns the first letter of each word in a phrase.', () => {
@@ -340,29 +382,35 @@ describe('Phrase', () => {
     })
   })
 })
+```
 
-Step 2: Run the test
+#### Step 2: Run the test
+
 If we ran this test we would get the following error message in the terminal:
 
-Step 3: The test fails (yea!)
+#### Step 3: The test fails (yea!)
+
 The error message tells us that the error is related to the Phrase.initials code block. The ReferenceError tells us that the error is thrown because we don’t have a Phrase object. In the next exercise, we’ll show you the minimum possible code required to get this test to pass.
 
-Red To Green I
+#### Red To Green I
+
 The red error messages describe the failures of our implementation code, so we can specifically address each issue that is preventing our test from passing.
 Following TDD, the next step would be writing the minimum possible implementation code to make our test pass. In this example, that would involve adding a line of implementation code so that .initials() returns our expected result, which is NM.
 The minimum possible implementation code to make the test pass:
 
+```javascript
 const Phrase = {
   initials(phr) {
     return 'NM';
   }
 }
-
+```
 
 Congrats you’re in the green!
 When refactoring, it’s critical to test early and often — if our tests turn red, then we know that something went wrong while we were refactoring, and we can undo those changes.
 Let’s consider the test for our Phrase.initials method. We could rewrite the test with setup, exercise, and verification stages to make it more expressive and maintainable.
 
+```javascript
 describe('Phrase', () => {
   describe('.initials', () => {
     it('returns the first letter of each word in a phrase.', () => {
@@ -376,12 +424,14 @@ describe('Phrase', () => {
     });
   });
 });
+```
 
+#### Getting into the Red II
 
-Getting into the Red II
 The next step is to repeat this cycle to build a more complete implementation of the .initials method.
 Here is what a second test for .initials() would look like:
 
+```javascript
 describe('Phrase', () => {
   describe('.initials', () => {
 
@@ -397,10 +447,13 @@ describe('Phrase', () => {
     });
   });
 });
+```
 
-Red to Green II
+#### Red to Green II
+
 Now that we have tests that cover more than one condition, it is time to program the actual behavior that we want our .initials method to execute.
 
+```javascript
 const Phrase = {
   initials(inputName) {
     // Create an empty array for initials
@@ -415,41 +468,48 @@ const Phrase = {
     return initials.join("");
   }
 }
+```
 
-Edge Case
+## Edge Case
+
 An edge case is a problem or situation that occurs only at an extreme (maximum or minimum) operating parameter — you can think of these as special cases that you need to account for.
 
 The test for throwing an error when a number is passed to Phrase.initials() would look like this:
 
+```javascript
 it('raises an error if the parameter passed in is not a string', () => {
   // Setup
-  const nameInput = 14;   
+  const nameInput = 14;
   // Exercise
   const exercise = () => { Phrase.initials(nameInput) };
   // Verification
-  assert.throws(exercise, /only use string/);        
+  assert.throws(exercise, /only use string/);
 })
+```
 
 After getting our intended error message we would write just enough implementation code to pass the test. Which in this case would be adding the following to Phrase.initials():
 
+```javascript
 if (typeof inputName !== "string") {
   throw new Error("ERROR: only use string");
 }
+```
 
-
-The Testing Pyramid
+## The Testing Pyramid
 
 Most full-stack web applications include the following layers:
-A view that appears in a user’s web browser
-A server that handles HTTP requests
-A database that stores information about user interactions
 
-Unit tests are isolated and fast tests that check one small behavior within your web application.
-For example, we want to test whether our database can save a comment. 
+- A view that appears in a user’s web browser  
+- A server that handles HTTP requests  
+- A database that stores information about user interactions  
 
-System tests 
-System tests are a group of fully integrated tests that exercise your entire web application.
-For example, we want to test whether our blog renders with the correct post and comments.
+Unit tests are isolated and fast tests that check one small behavior within your web application.  
+For example, we want to test whether our database can save a comment.
+
+### System tests
+
+System tests are a group of fully integrated tests that exercise your entire web application.  
+For example, we want to test whether our blog renders with the correct post and comments.  
 This test exercises every layer of the web application:
 
 The database stores the blog post.
@@ -457,19 +517,22 @@ The server sends the HTML to the browser.
 The browser renders the view.
 A test like this is slow and less descriptive but provides you with confidence that a large slice of your system is working as intended. 
 
-Integration tests 
+## Integration tests
+
 Integration tests include everything between unit tests and system tests. They exercise multiple parts of the web application, often in different layers.
 For example, an integration test may check whether your web application can save a server-generated comment to the database. This test integrates two layers of your web application:
 The server receives the comment and sends it to the database.
 The database stores your comment.
 
-Shape of a testing suite
+## Shape of a testing suite
+
 The goal of a full-stack web application’s testing suite is to provide you with confidence that your application works as expected while executing in a timely fashion.
 You could write few integration tests that provide you with confidence, and more unit tests that execute quickly and provide you with specific feedback.
 The number and types of unit and integration tests that you write can be mapped onto the testing pyramid.
 
 
-The Testing Pyramid
+## The Testing Pyramid
+
 The testing pyramid is an approach to structuring your test suite.
 
 Browser-level integration tests sit on the top of the pyramid. This layer is the narrowest because it should have the fewest number of tests — the slow nature of browser-level tests make them more expensive than server-level tests.

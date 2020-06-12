@@ -1,12 +1,17 @@
+# Steps to Run
+
 ## DRAG-DROP (All except DRAG_DROP-WEBPACK)
+
 1. `yarn start` at ./ to run the project in browser
 2. `tsc -w` at ./ to compile the `src/*.ts` files into `dist/*.js`
 
 ## DRAG_DROP-WEBPACK
+
 1. `yarn run build` build the bundle.js
 2. `yarn start` spin up the webpack-dev-server at 8080
 
 ### Setting up Typescript Project with Webpack
+
 1. `npm init -y` to initiate a node project with package.json
 2. `npm i --save-dev typescript` install typescript
 3. `tsc --init` in project folder to create tsconfig.json
@@ -27,9 +32,11 @@
     "webpack-dev-server": "^3.11.0"
   }
 ```
+
 ---
 
 ## Sample
+
 Uncomment the js files in the script tag of `./index.html`
 
 1. `npm start` at ./ to run the project
@@ -37,7 +44,6 @@ Uncomment the js files in the script tag of `./index.html`
 3. `nodemon file.js` from `dist/*.js` file
 
 ---
-
 
 ## LibrariesWithTS
 

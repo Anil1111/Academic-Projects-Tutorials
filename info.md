@@ -1,3 +1,5 @@
+# General
+
 ## Softwares Used
 
 1. **VSCode** - Text Editor or IDE
@@ -19,20 +21,22 @@
 
 ## Naming convention
 
-1. **CAPITALLETTERS** All top level directories constitute a framework/Language/Programming Tool. 
+1. **CAPITALLETTERS** All top level directories constitute a framework/Language/Programming Tool.
 2. **CAPITAL-LETTERS** All project names
 3. **small-letters** All sample project names
 4. **file-names** All file names
 
 ---
+
 ## Project layout
 
 1. **notes.txt**
-    - Represents notes with respect to the language/framework talked about    
+    - Represents notes with respect to the language/framework talked about  
 2. **stepsToRun.md**
    - Represents the file that can be used to run the projects enclosed
 3. **XNotes/**
    - Represents the directory that comprises of all the Generic notes
+
 ---
 
 ## Node.JS
@@ -76,9 +80,7 @@ Used to transpile ES6 to ES5 syntax
 
 1. `npm install -g surge` ; `npm install --save-dev surge` #to install surge globally
 2. `npm run build` #to production build your app in build/ folder
-
-- `cd` into your build folder
-
+   - `cd` into your build folder
 3. `surge --domain jammWithRichard.surge.sh` #deploy your app into a customdomain.surge.sh
 4. `echo jammWithRichard.surge.sh > CNAME` #creating a CNAME file with your customdomain.surge.sh
 5. `surge` #to deploy and later browse in public
@@ -100,7 +102,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 1. mongod #to start mongodb deamon
 2. mongo #to start mongo client
 3. show dbs #to list all the dbs in the mongodb; will work only after inserting data
-4. use <<dbname>> #to create a new dbname
+4. use `<<dbname>>` #to create a new dbname
 5. db.books.insert({ JSON Object}) #inserting value into a new collection books
 6. show collections #show collections inside the DB
 7. db.books.find() #list all documents inside the collection
@@ -121,6 +123,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
    `$ mkdir .\test\specs`  
    `$ touch ./test/specs/basic.js`
 6. Async mode: (in basic.js)
+
    ```javascript
    describe("webdriver.io page", () => {
      it("should have the right title", async () => {
@@ -129,6 +132,7 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
      });
    });
    ```
+
 7. Start the Testrunner
    `$ npx wdio wdio.conf.js`
 
@@ -143,7 +147,8 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 
 ## Paste JSON as Code
 
-- Ensure the extension is installed
+Ensure the extension is installed
+
 1. Create the _myFile_.json with the JSON text
 2. Create the corresponding empty _myFile_.ts file
 3. CLick `Ctrl + Shift + P` and type `Paste JSON as Code`
@@ -154,11 +159,12 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 
 ## Numbered Bookmarks
 
-- Ensure extension is installed
+Ensure extension is installed
+
 1. Navigate to the line where you wish to add the bookmark
 2. Click on `Ctrl + Shift + <<anyNum>>` to add the bookmark there
 3. To go to the bookmark, open the command pallette
-4. Enter the number of the bookmark you wish to dive 
+4. Enter the number of the bookmark you wish to dive
 
 ---
 
@@ -226,6 +232,7 @@ JS (add to script tag in html):
 ```
 
 ---
+
 ## Windows Commands
 
 1. `Windows + Up Arrow` to maximize a window

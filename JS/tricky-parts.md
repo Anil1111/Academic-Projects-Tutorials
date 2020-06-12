@@ -1,39 +1,41 @@
+# Tricky Parts
+
 ## Difference between == and ===
 
-`=` is used for assigning values to a variable in JavaScript.   
-`==` is used for comparison between two variables irrespective of the datatype of variable.   
-`===` is used for comparision between two variables but this will check strict type, which means it will check datatype and compare two values.   
+`=` is used for assigning values to a variable in JavaScript.  
+`==` is used for comparison between two variables irrespective of the datatype of variable.  
+`===` is used for comparision between two variables but this will check strict type, which means it will check datatype and compare two values.  
 
-` 100==100` means both are int values and the other condition, `100 == "100"` means int comparison with "100" string type of variable still returns true. It means == is not doing a strict type check.
+`100==100` means both are int values and the other condition, `100 == "100"` means int comparison with "100" string type of variable still returns true. It means == is not doing a strict type check.
 
-  It returns true for 100 === 100 and it returns false for 100 === "100". It means === does a strict check for comparison. It checks datatype also and does a comparison based on it.
+It returns true for 100 === 100 and it returns false for 100 === "100". It means === does a strict check for comparison. It checks datatype also and does a comparison based on it.
 
-  ---
+---
 
-  ## This in JS
+## This in JS
 
-  this refers to the object that is executing the current function
+this refers to the object that is executing the current function
 
-  1. If `this` is called from a method on an object, refers to the object.
+### If `this` is called from a method on an object, refers to the object
 
-  ```javascript
-  const video = {
-    title: 'a',
-    play() {
-      console.log(this); // this refers to the video object
-    }
-  };
-
-  video.play();
-  
-  video.stop = function(){
-    console.log(this); //refers to video object as stop is method in video object
+```javascript
+const video = {
+  title: 'a',
+  play() {
+    console.log(this); // this refers to the video object
   }
-  
-  video.stop();
-  ```
+};
 
-  2. If `this` is called on a regular function(not part of an object ), refers to the global object (window - browsers; global - node)
+video.play();
+
+video.stop = function(){
+  console.log(this); //refers to video object as stop is method in video object
+}
+
+video.stop();
+```
+
+### If `this` is called on a regular function(not part of an object ), refers to the global object (window - browsers; global - node)
 
 ```javascript
   function playVideo(){
@@ -43,7 +45,7 @@
   playVideo();
 ```
 
-- Constructor functions
+Constructor functions
 
 ```javascript
   function Video(title){
@@ -54,7 +56,8 @@
   const v = new Video(); //this will refer to a new {} empty object of Video
 ```
 
-- Inner function
+Inner function
+
 ```javascript
   const video = {
     title: 'a',
@@ -89,7 +92,7 @@ To solve above problem
 
 ## The mystery of this
 
-`this` is the current execution context of a function.   
+`this` is the current execution context of a function.  
 The language has 4 function invocation types:
 
 - function invocation: `alert('Hello World!')`
@@ -99,22 +102,24 @@ The language has 4 function invocation types:
 
 Detailed explanation about it: [Mystery of this](https://dmitripavlutin.com/gentle-explanation-of-this-in-javascript/).
 
-
-## Symbol in JS:
+## Symbol in JS
 
 For normal primitive types:
+
 1. Number(3) or 3
 2. String('abc') or 'abc'
 3. Boolean(true) or true
 
 For Symbol primitive data type, we need to use the notation `Symbol(description)`
+
 ```javascript
 const s1 = Symbol();
 const s2 = Symbol(123);
 const s3 = Symbol('Rich');
 ```
-All `Symbol()` generates guaranteed unique values   
-_You can think of each of them having extremely large unique numbers_   
+
+All `Symbol()` generates guaranteed unique values  
+_You can think of each of them having extremely large unique numbers_  
 **It is used as a unique identifiers in object properties**
 Will always create a new Symbol
 
@@ -133,16 +138,15 @@ console.log(`${symb3 == symb4}`); //returns false
 ```javascript
 //gives a global symbol but isnt unique to a description
 const sym1 = Symbol.for('cat');  //checks whether 'cat' symbol exists in registry and if exists returns it or else creates it
-const sym2 = Symbol.for('cat'); 
+const sym2 = Symbol.for('cat');
 console.log(sym1 === sym2); //returns true for == and ===
 
 //provides the key/desciption for the symbol
 console.log(Symbol.keyFor(sym2)); //cat
 ```
 
-
-
 ### Using Symbols in Objects
+
 ```javascript
 let user ={
   id: 9876,
@@ -164,15 +168,12 @@ obj[MY_KEY] = 123;
 console.log(obj[MY_KEY]); //123
 ```
 
-
-
 ### Symbols are hidden
 
 ```javascript
 console.log(Object.getOwnPropertyNames(user2)); //prints [ 'id', 'name' ]
 console.log(Object.getOwnPropertySymbols(user2)); //[ Symbol(id) ]
 ```
-
 
 ### Use Cases
 
@@ -195,5 +196,3 @@ function getThreatLevel2(color) {
 console.log('\n' + getThreatLevel2(BLUE2)); //high
 console.log(getThreatLevel2(cat2)); //returns undefined as cat2 is a string 'blue' whereas BLUE2 is a unique symbol
 ```
-
-

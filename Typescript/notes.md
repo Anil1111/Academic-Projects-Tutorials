@@ -1,13 +1,13 @@
 # Typescript
 
-Note: To run the associated code:   
->`tsc -w` for compiling the TS files incase tsconfig.json is present   
-`npm run start` to start the lite server and render index.html in browser and see console   
-`nodemon ./dist/<<filename.js>>` for viewing console logs in integrated terninal   
-
+Note: To run the associated code:  
+>`tsc -w` for compiling the TS files incase tsconfig.json is present  
+`npm run start` to start the lite server and render index.html in browser and see console  
+`nodemon ./dist/<<filename.js>>` for viewing console logs in integrated terninal  
 >`npm run dev` custom script to compile and run nodemon on app.js
- 
+
 ## Features
+
 - Is an object oriented programming language
 - Additional to features including Static typing, classes and generics  on from JS
 - Provides meta-programming features like Decorators
@@ -15,30 +15,32 @@ Note: To run the associated code:
 - Writing valid JS is a valid Typescript but not vice versa
 - Cannot run directly in browser
 - extension is .ts
-- Why Typescript ? 
+- Why Typescript ?
   - With the advent of Server side programs in JS, it became complex and required OOPS implementation
   - Has a powerful compiler that compiles TS into cleaner JS Code.
   - The compiled JS is also compatible with older browsers as TS handles that automatically
 - Rich configuration options
 
-
 ## Advantages over JS
+
 - Highlights errors at compilation time whereas JS is an interpreted language
 - Static Typing or Strongly Typed as compared to dynamic types (types resolved during runtime)
 - supports intellisense
 
 ## Disadvantages
+
 - Longer compilation time as additional step of compiling into JS required by TS as cannot be directly run on browser
 - Not supports abstract classes
 - TS support is not available during runtime as it is compiled into JS
 
 ## Data Types in TS
+
 1. **number**  #no distinction between floats, integers and negative integers
 2. **string**
 3. **boolean**
 4. **object**
 5. **Array** #can be flexible or  strict
-- below ones are not available in JS
+    - below ones are not available in JS
 6. **tuple** #fixed length array with fixed types
 7. **enum** #global constants numbers for which you apply labels
 8. **any** #takes any type  
@@ -49,11 +51,13 @@ disables all TS internal type checking
 12. **never** #implicit return type when errors are thrown as they are never returned
 
 ## Forms of other types in TS
+
 1. **Union Types** #combination of different core data types
 2. **Literal Types** #specific version of your core types
 3. **Type aliases**  
 
 ---
+
 ## TS Code
 
 ### Configuration
@@ -69,8 +73,8 @@ disables all TS internal type checking
 }
 ```
 
-
 ### Issues in JS
+
 ```javascript
 function(num1, num2) {
   return num1+num2;
@@ -79,10 +83,12 @@ console.log('2'+'3'); //Output is 23 in JS which is a logical error; such errors
 ```
 
 ### Using data types of number, string and boolean
+
 ```typescript
 var input1 = document.getElementById("num1")! as HTMLInputElement;
 ```
-> `!` here tells TS this element will always be an element   
+
+> `!` here tells TS this element will always be an element  
 `as HTMLInputElement` tells TS explicitly that it is an HTMLInput element
 
 ```typescript
@@ -92,9 +98,9 @@ const number3: number;
 let printResult = true;
 let printResult = 'abc' //will throw error as printResult - Boolean type
 ```
+
 > Typescript uses type inference to determine the type of the variable  
 We can alternatively explicitly mention the type in TS but is not recommended. However, if the value is not explicitly mention then it is recommended to add the type
-
 
 ### Typescript representation of objects
 
@@ -108,7 +114,7 @@ const person2: {
 };
 ```
 
-### Typescript representation for nested objects.
+### Typescript representation for nested objects
 
 Let's say you have this JavaScript object:
 
@@ -148,11 +154,12 @@ const u1: User = { name: 'Max', age: 30 }; // this works!
 ```
 
 You will be able to simplify code like below:
+
 ```typescript
 function greet(user: { name: string; age: number }) {
   console.log('Hi, I am ' + user.name);
 }
- 
+
 function isOlder(user: { name: string; age: number }, checkAge: number) {
   return checkAge > user.age;
 }
@@ -162,7 +169,7 @@ function isOlder(user: { name: string; age: number }, checkAge: number) {
 function greet(user: User) {
   console.log('Hi, I am ' + user.name);
 }
- 
+
 function isOlder(user: User, checkAge: number) {
   return checkAge > user.age;
 }
@@ -171,7 +178,6 @@ function isOlder(user: User, checkAge: number) {
 ---
 
 ## Function In depth
-
 
 `enum Role {ADMIN, READ_ONLY, AUTHOR};` Enum declaration
 
@@ -189,8 +195,8 @@ function sendRequest(data: string, cb: (response: any) => void) {
   // ... sending a request with "data"
   return cb({data: 'Hi there!'});
 }
- 
-sendRequest('Send this!', (response) => { 
+
+sendRequest('Send this!', (response) => {
   console.log(response);
   return true;
  });
@@ -201,11 +207,12 @@ sendRequest('Send this!', (response) => {
 ## Next gen JS and TS
 
 ### Const and Let
-- Both `const` and `let` are used to define variables that are block scoped   
+
+- Both `const` and `let` are used to define variables that are block scoped  
 
 `const` Used to define variables whose values do not change  
-`let` Used to define block scope variables   
-`var` Can either be of global scope or function scoped; thus prone to errors   
+`let` Used to define block scope variables  
+`var` Can either be of global scope or function scoped; thus prone to errors  
 
 ```javascript
 var age = 29;
@@ -228,13 +235,12 @@ const add = (n1: number, n2: number) => {
 }
 ```
 
-
 ```typescript
 const printOutput: (a: number | string) => void = output => console.log(output);
 ```
 
-
 ### Default Functions
+
 Where we assign default values to function parameters
 
 ```typescript
@@ -246,7 +252,6 @@ console.log(add(5)); //prints 8
 const add = (n1: number = 1, n2: number) => n1 + n2;
 console.log(add(5)); //throws error as TS maps 5 to n1 and does not automatically find that n2 is the one to be assigned
 ```
-
 
 ### Spread Operator
 
@@ -285,6 +290,7 @@ console.log(newHuman); //{ name: 'Max', age: 28 }
 ```
 
 ### Array and Object Destructuring
+
 Refers to the breaking down of elements in Arrays and Objects into individual elements
 
 ```typescript
@@ -308,18 +314,19 @@ console.log(newName, newAge, human2); //Max 28 { name: 'Max', age: 28 }
 
 ## Classes
 
-### Classes
+### Classes Working
 
-**Objects**   
-- Actual things you work in the code.   
+#### Objects
+
+- Actual things you work in the code.  
 - are instances of classes
 - class based creation is an alternative to object literals
 
-**Class**
+#### Class
+
 - Blueprints for Objects
 - defines the methods and properties of the object
 - allows creation of multiple objects easier
-
 
 ### Class Syntax
 
@@ -340,12 +347,13 @@ const accounting = new Department('Accounting');
 ```
 
 ### Private and Public Access Modifiers
+
 > Although typescript will highlight the below error during compilation but ignores it totally during runtime as JS does not support access modifiers
 
 ```typescript
 class Department3 {
   public name: string; //if public not written by default it is public
-  private employees: string[] = []; 
+  private employees: string[] = [];
 
   constructor(n: string) {
     this.name = n;
@@ -377,7 +385,8 @@ class Department5 {
   }
 }
 ```
-is equivalent to 
+
+is equivalent to
 
 ```typescript
 class Department5 {
@@ -410,9 +419,9 @@ class Department6 {
 
 ### Inheritance
 
-We use the `extend` keyword to inherit from a parent class.   
-The subclass has access to the constructor of the parent class   
->`super()`   
+We use the `extend` keyword to inherit from a parent class.  
+The subclass has access to the constructor of the parent class  
+>`super()`  
 is used inside the constructor to call the constructor of the parents class with the modified params
 needs to be called first inside the constructor
 > We can inherit from only one class
@@ -428,7 +437,6 @@ class ITDepartment2 extends Department6 {
 
 const it = new ITDepartment2('id3', ['Max','Rich']);
 ```
-
 
 ### Overriding Properties & Protected Access Modifiers
 
@@ -523,9 +531,9 @@ console.log(employee1, Department8.fiscalyear);
 
 ### Abstract Classes
 
-- Any class that has an abstract method must be an abstract class   
+- Any class that has an abstract method must be an abstract class  
 - Absstract methods are used when you want each subclass to have that specific method but have different implementation of it. Thus all subclasses inheriting an abstract method must have concrete implementation
-- **asbtract methods must contain no implementation**   
+- **asbtract methods must contain no implementation**  
 - Their can also be abstract properties.
 - **abstract classes cannot be instantiated but only inhertited**
 - abstract methods cannot be private
@@ -549,7 +557,6 @@ class ITDepartment9 extends Department9 {
 }
 
 ```
-
 
 ### Singletons and Private Constructors
 
@@ -582,15 +589,16 @@ console.log(accDep5, accDep6); // both will be same as only singleton pattern ca
 
 ## Interface
 
-### Why required ?
-To ensure that each class that implements the interface will have a specific functionality (implement the methods and have the properties defined)   
+### Why required
+
+To ensure that each class that implements the interface will have a specific functionality (implement the methods and have the properties defined)  
 _Vanilla JS does not support interfaces as it is only a TS feature and therefore compiled JS will convert it into functions and classes_
 
-
 ### Syntax
+
 - Describes how the strcuture of an object
 - Can be used to typecheck objects that should have a specific structure
- - Will have no assignements on properties and no implememntation on methods 
+  - Will have no assignements on properties and no implememntation on methods
 - A class can implement multiple interfaces using the `implements` keyword
 - Doesnt allow public, private, static and so on except `readonly`
 - Interfaces cant be instantiated
@@ -599,7 +607,7 @@ _Vanilla JS does not support interfaces as it is only a TS feature and therefore
 interface Person { //no implementation at all
   name: string;
   age: number;
-  greet(phrase: string): void; 
+  greet(phrase: string): void;
 }
 
 let user: Person; //using interface to create an object
@@ -622,12 +630,12 @@ Can be used interchangeably with custom types. However, interfaces are specific 
 type Person {
   name: string;
   age: number;
-  greet(phrase: string): void; 
+  greet(phrase: string): void;
 }
 ```
 
-
 ### Interface with classes
+
 - it can be used as a contract that is implemented by the class
 - all properties and methods of the interface needs to be implemented by the class that implements the interface
 
@@ -652,12 +660,14 @@ console.log(greetUser);
 ```
 
 ### Difference with Abstract Classes
+
 - Abstract classes may contain methods with implementation along with abstract classes, whereas Interface does not have any implementation at all throughout.
 
 ### Extending Interface - Inheritance
+
 - an interface can extend multiple interfaces, but classes can only extend one class
 
-1. It is possible to implement several interfaces
+It is possible to implement several interfaces
 
 ```typescript
 interface Named3 {
@@ -676,7 +686,7 @@ class NewPerson3 implements Greetable3, Named3 {
 }
 ```
 
-2. It is possible to extend an interface into one and then implement the combined interface
+It is possible to extend an interface into one and then implement the combined interface
 
 ```typescript
 interface Named4 {
@@ -695,7 +705,7 @@ class NewPerson4 implements Greetable4 {
 }
 ```
 
-3. It is possible to extend several interfaces
+It is possible to extend several interfaces
 
 ```typescript
 interface Named4 {
@@ -715,6 +725,7 @@ interface Greetable4 extends Named4, AnotherInterface, YetAnotherInterface{
 ```
 
 ### Interface as Function Types
+
 - Can be used instead of custom types in the form of function types
 
 ```typescript
@@ -731,6 +742,7 @@ console.log(add6(8,8)); //return 16
 ```
 
 ### Optional Properties and Methods
+
 - using the operator `?` we can make a property or method optional
 - optional paramters should always be last in a constructor/method
 
@@ -749,10 +761,9 @@ interface Greetable5 extends Named5 {
 
 ## Super Advanced Types
 
-
 ### Intersection Types
 
-1. Intersection types on objects is the combination of the properties
+Intersection types on objects is the combination of the properties
 
 ```typescript
 type Admin = {
@@ -771,7 +782,7 @@ const emp1: ElevatedEmployee = {
 };
 ```
 
-2. Intersection types on union types is the intersection of those types
+Intersection types on union types is the intersection of those types
 
 ```typescript
 type Combinable2 = string | number;
@@ -779,13 +790,13 @@ type Numeric = number | boolean;
 type Universal = Combinable2 & Numeric; //intersection of the two union types - type number (the only intersecting type)
 ```
 
-
 ### Type Guards
+
 - helps with the union types
 - presents the approach required to check if a property or method exists before using them
 
+For normal Union types
 
-1. For normal Union types
 - Use the `typeof` method
 
 ```typescript
@@ -800,7 +811,8 @@ function add8(a: Combinable3, b: Combinable3) {
 
 ```
 
-2. For objects
+For objects
+
 - use the `property in object`
 
 ```typescript
@@ -817,14 +829,14 @@ function printEmployeeInformation(emp: UnknownEmployee) {
   if ('privileges' in emp) { //JS code to check if property privileges exists on the object emp; type guards
     console.log('Privilege ' + emp.privileges);
   }
-  if ('startDate' in emp) { 
+  if ('startDate' in emp) {
     console.log('StartDate ' + emp.startDate);
   }
 }
-
 ```
 
-3. For classes
+For classes
+
 - uses either the `property in object` or `instanceof` method
 
 ```typescript
@@ -865,6 +877,7 @@ function useVehicle2(vehicle: Vehicle){
 ```
 
 ### Discriminated Union
+
 Requires the interfaces/classes to have one common property that describes the object uniquely, and we use this property in our check:
 
 ```typescript
@@ -874,7 +887,7 @@ interface Bird2{
 }
 interface Horse2{
   type: 'horse'
-  runningSpeed: number; 
+  runningSpeed: number;
 }
 
 type Animal2 = Bird2 | Horse2;
@@ -893,9 +906,10 @@ function moveAnimal2(animal: Animal2){
 ```
 
 ### Typecasting
+
 Escpecially dont to ensure proper DOM manipulations
 
-1. Without typecasting
+#### Without typecasting
 
 ```typescript
 const para = document.querySelector('p'); //type is HTMLParagraphElement or Null
@@ -907,53 +921,55 @@ userInputElement.value = 'Hi-there'; //value property will give an error as the 
 
 ```
 
-2. With Typecasting
+#### With Typecasting
 
 - Method 1
+
 ```typescript
 const userInputElement2 = <HTMLInputElement> document.getElementById('user-input'); //typecasting with HTMLInputElement
 userInputElement2.value = 'Hi-there'; //no error
 ```
 
 - Method 2
+
 ```typescript
 const userInputElement3 = document.getElementById('user-input') as HTMLInputElement; //typecasting with HTMLInputElement
-userInputElement3.value = 'Hi-there'! //no error 
+userInputElement3.value = 'Hi-there'! //no error
 ```
 
 - Method 3 with no need of `!`
+
 ```typescript
-const userInputElement4 = document.getElementById('user-input'); 
+const userInputElement4 = document.getElementById('user-input');
 
 if(userInputElement4){ //use if as a replacement to '!'
-  (userInputElement4 as HTMLInputElement).value = 'Hi-there'! 
-} 
+  (userInputElement4 as HTMLInputElement).value = 'Hi-there'!
+}
 ```
 
 ### Index Properties
 
-> **Index Types**   
-Are types that are declared using the `[]` symbol, and are used to declare objects for which we do not know the number of properties nor the name of the properties it will hold.   
-We only know the type that the key will be and the type of the value   
+> **Index Types**  
+Are types that are declared using the `[]` symbol, and are used to declare objects for which we do not know the number of properties nor the name of the properties it will hold.  
+We only know the type that the key will be and the type of the value  
 The prop can only be string, number or symbols but not anyhting else
 
 ```typescript
 interface ErrorContainer {
   // id: string; //can have pre-defined properties but cannot be of type number as prop below is declared to be of type string
   //syntax: [nameOfProp: typeOfPropName]: typeOfPropValueReturned
-  [prop: string]: string; 
+  [prop: string]: string;
 }
 
-//below object can hold n number of errors 
+//below object can hold n number of errors
 const errorBag: ErrorContainer = {
   // email: 1 //will not accept nos
   // 1: 'not valid email' //will be valid as 1 can be interpreted as string but not vice versa
   email: 'not a valid email!',
   username: 'must start with capital char!'
-}; 
+};
 
 ```
-
 
 ### Function overloads
 
@@ -977,7 +993,6 @@ const result12 = add10(5,6);
 result12.split(''); //error as TS now knows that it will return number
 ```
 
-
 ### Optional Chaining
 
 ```typescript
@@ -991,25 +1006,27 @@ const fetchedUserData2 = {
 
 What if the job property is the result of an API Call, then TS is not sure whether we will get the job property, then we use optional chaining cause if data is not present then TS will show error
 
+#### JS way of handling optional chaining
 
-1. JS way of handling optional chaining
 ```javascript
 console.log(fetchedUserData2.job.title); //will give error as we are not sure job property will  be ther ein JSON response
-console.log(fetchedUserData2.job && fetchedUserData2.job.title); //will work as JS uses chaining to handle this 
+console.log(fetchedUserData2.job && fetchedUserData2.job.title); //will work as JS uses chaining to handle this
 
 ```
 
-2. TS way of handling optional chaining
+#### TS way of handling optional chaining
+
 ```typescript
 //the below syntax ensure that job is checked only if fetchedUserData3 exists; title is checked only if job exists
 console.log(fetchedUserData2.job?.title);
 ```
 
 ### Nullish Coalescing
-To work with data that you are not sure whether it is null, undefined or valid   
+
+To work with data that you are not sure whether it is null, undefined or valid  
 We use the Nullish Coalescing operator `??`
 
->If input is `null` or `undefined` then below example is set to 'DEFAULT'   
+>If input is `null` or `undefined` then below example is set to 'DEFAULT'  
 If input is valid or `''` empty, then it is of value ''
 
 ```typescript
@@ -1021,29 +1038,30 @@ console.log(storedData5); //for empty val, it incorrectly makes its type 'DEFAUL
 ---
 
 ## Generics
+
 Gives us fleibility combined with type safety
 
 Examples of generic usage:
-1. Array<string> or string[]
-2. Promise<string>
+
+1. `Array<string>` or `string[]`
+2. `Promise<string>`
 
 **Generic Type**
 is a type which is connected with another type and is flexible regarding which type the other type is
 Eg: Array type does not care what type of data is inside it, but just requires some information on the type
 
-
 ### Generic Function
 
 Issue without using generic function
+
 ```typescript
 function merge(objA: Object, objB: Object) {
   return Object.assign(objA, objB);
-} 
+}
 
 const mergedObj = merge({name: 'Rich'}, {age: 20} );
 mergedObj.name; //error as TS only knows merge returns an object
 ```
-
 
 One way to solve the error is by typecasting the mergedObj or telling TS that both objects will return different types using Generic Function and the result will be an intersection of those types
 
@@ -1052,30 +1070,32 @@ function merge2<T, U>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 const mergedObj2 = merge2({name: 'Rich'}, {age: 20} );
-console.log(mergedObj2.name); //name is now available 
+console.log(mergedObj2.name); //name is now available
 ```
 
 Types are set dynamically and we can reuse merge2 as it takes any 2 objects as argument
+
 ```typescript
 function merge3<T, U>(objA: T, objB: U) {
   return Object.assign(objA, objB);
 }
 const mergedObj3 = merge2({name: 'Rich', hobbies: ['Sports'] }, {age: 20} );
 
-//not necessary to provide the return type as TS automatically infers 
+//not necessary to provide the return type as TS automatically infers
 const mergedObj4 = merge2<{name: string, hobbies: string[]}, {age: number}>({name: 'Rich', hobbies: ['Sports'] }, {age: 20} );
 ```
-
 
 ### Constraints in Generic Functions
 
 Issue
+
 ```typescript
 const mergedObj5 = merge2({name: 'Rich', hobbies: ['Sports'] }, 30 );
 console.log(mergedObj5); //does not show 30 as it is not an object
 ```
 
 Constrained using extends keyword
+
 ```typescript
 function merge4<T extends object, U extends object>(objA: T, objB: U) {
   return Object.assign(objA, objB);
@@ -1099,7 +1119,7 @@ function countAndPrint<T extends Lengthy>(element: T){
     descriptionText = 'Got 1 element';
   } else if (element.length > 1) {
     descriptionText = `Got ${element.length} element`;
-  } 
+  }
   return [element, descriptionText];
 };
 
@@ -1109,12 +1129,12 @@ console.log( countAndPrint([]));
 console.log( countAndPrint(10)); //error as type number
 ```
 
-
 ### keyOf Constraint
 
 Using `keyof` property to find use the key of an object
 
 Issue
+
 ```typescript
 function extractAndConvert(obj: Object, key: string){
      return 'Value of' + obj[key];  //error as TS does not infer that key of the object will return a value or not
@@ -1123,15 +1143,15 @@ console.log(extractAndConvert({}, 'name')); //Value of undefined
 ```
 
 Solution
+
 ```typescript
 function extractAndConvert2<T extends object, U extends keyof T>(obj: T, key: U){
    return 'Value of ' + obj[key];  //no error
 }
-console.log(extractAndConvert2({name: 'Rich'}, 'name')); //Value of Rich 
+console.log(extractAndConvert2({name: 'Rich'}, 'name')); //Value of Rich
  ```
 
-
- ### Generic Classes
+### Generic Classes
 
 ```typescript
 //adding constraint: extends string and number to provide typesafety and flexibility at the same time
@@ -1158,14 +1178,14 @@ const numbStorage = new DataStorage<number>();
 
 ```
 
-
 ### Generic Utility Types
 
 Available only for typescript [Typescript Utilities](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 These types are only present in TS, and provides higher type safety
 
-1. Partial Type
-Partial is a type that is also of object type but wraps itself on CourseGoal and makes its properties optional and therefore can be assigned {} and will ultimately return type of courseGoal   
+#### Partial Type
+
+Partial is a type that is also of object type but wraps itself on CourseGoal and makes its properties optional and therefore can be assigned {} and will ultimately return type of courseGoal  
 Partial can be used in cases where you want to temporarily make all the properties of an interface optional
 
 ```typescript
@@ -1184,7 +1204,8 @@ function createCourseGoal(title: string, description: string, date: Date): Cours
 }
 ```
 
-2. Readonly Type
+#### Readonly Type
+
 can be used on an object too
 
 ```typescript
@@ -1192,7 +1213,6 @@ const names: Readonly<string[]> = ['Rich', 'Anna'];
 names.push('Manu'); //notallowed
 names.pop(); //not allowed
 ```
-
 
 ### Generic Types vs Union Types
 
@@ -1204,15 +1224,16 @@ Generics are used to lock the types used in methods whereas union types provide 
 
 ## Decorators
 
-Used for Meta-Programming   
+Used for Meta-Programming  
 Exposes tools to other developers which uses ut for writing better utilities code by developers but has little impact on end users ie decorators needs to added on classes explicitly
 
-
 ### Sample Decorator
-Decorators are denoted by: `@pointAtAFunction` 
+
+Decorators are denoted by: `@pointAtAFunction`
 _Logger gets executed when the class is defined itself right at start not when it is instantiated_
 
-Decorator Function: When a decorator is placed on a class, it takes the constructor as its argument 
+Decorator Function: When a decorator is placed on a class, it takes the constructor as its argument
+
 ```typescript
 function Logger(constructor: Function) {
   console.log('Loggin.....');
@@ -1233,8 +1254,8 @@ const pers = new Pers();
 console.log(pers); //Pers2 { name: 'Rich' }
 ```
 
-
 ### Decorator Factory
+
 By creating functions
 Allows us to pass params to the Decorator that return an inner functions
 
@@ -1285,10 +1306,11 @@ console.log(Pers4);
 ```
 
 ### Multiple Decorators
+
 When multiple decorators are present, they get executed bottom up but the decorator factory is executed sequentially
 
 ```typescript
-//Although Logger3 is called before WithTemplate3, WithTemplate3 return function is executed first as it is bottom up 
+//Although Logger3 is called before WithTemplate3, WithTemplate3 return function is executed first as it is bottom up
 @Logger3('LGGGING - MULTIPLE DECO')
 @WithTemplate3('<h1>Multiple Decorators</h1>', 'app3') //renders on browser
 class Pers5 {
@@ -1301,7 +1323,6 @@ class Pers5 {
 }
 ```
 
-
 ### Property Decorators
 
 ```typescript
@@ -1311,7 +1332,7 @@ class Pers5 {
 //but we use 'any' as we are not sure
 function Log(target: any, propertyName: string | Symbol) {
   console.log('Property Decorator');
-  console.log(target, propertyName);//prototype constructor, "title" 
+  console.log(target, propertyName);//prototype constructor, "title"
   //executes when class is defined
 }
 
@@ -1326,7 +1347,7 @@ class Product {
 
   set price(val: number){
     if (val > 0){
-      this._price;      
+      this._price;
     } else {
       throw new Error('Invalid pirce - should be positive!');
     }
@@ -1339,7 +1360,9 @@ class Product {
 ```
 
 ### Accessor and Parameter Decorators
+
 Example showing the below 4 types of decorators:
+
 1. **Property Decorator** - On an object Property
 2. **Accessor Decorator** - On the getter/setter function of an object
 3. **Method Decorator** - On a method of an Object
@@ -1349,7 +1372,7 @@ Example showing the below 4 types of decorators:
 function Log(target: any, propertyName: string | Symbol) {
   console.log('Property Decorator');
   console.log(target);//prototype constructor
-  console.log(propertyName);//"title" 
+  console.log(propertyName);//"title"
   //executes when class is defined
 }
 
@@ -1388,14 +1411,14 @@ class Product2 {
   @Log2 //is an accessor decorator
   set price(val: number){
     if (val > 0){
-      this._price;      
+      this._price;
     } else {
       throw new Error('Invalid pirce - should be positive!');
     }
   }
 
   @Log3 //is a method decorator
-  getPriceWithTax(@Log4 tax: number) { 
+  getPriceWithTax(@Log4 tax: number) {
     //@Log4 is a parameter decorator
     return this._price * (1 + tax);
   }
@@ -1403,22 +1426,21 @@ class Product2 {
 ```
 
 ### Order of Decorator Execution
-All decorators above are running without actually instantiating of the class _but executed when the class is defined itself_   
-It is just used to execute the function when the class/method is defined, and to do some behind the scene work.
 
+All decorators above are running without actually instantiating of the class _but executed when the class is defined itself_  
+It is just used to execute the function when the class/method is defined, and to do some behind the scene work.
 
 ### Returning or Changing a class in a class decorator
 
 In the below example, we do the following:
+
 - We are returning a new class
 - providing a class name is not mandatory
 - we extend the originalConstructor to have all the props and params passed
 - this will ensure that the template will be rendered to DOM only when the object of the class is instantiated
-- The below decorator will now work only when the class is instanitated as the new class is returned that replaces the original class or constructor function 
-
+- The below decorator will now work only when the class is instanitated as the new class is returned that replaces the original class or constructor function
 
 ```typescript
-
 //special type for assigning type of constructor: {new(...args: any[]): {} }
 // function that can be called with new keyword: { new(): {} }
 function WithTemplate4(template: string, hookId: string) {
@@ -1454,9 +1476,9 @@ console.log(pers6);
 
 ### Other decorator return types
 
-Similar to class decorators, other decorators that can return are: _Method and Access Decorators_ 
+Similar to class decorators, other decorators that can return are: _Method and Access Decorators_
 
-What can be returned for the above two?   
+What can be returned for the above two?  
 A brand new property descriptor
 
 #### Sample property descriptor for Accessor Descriptor
@@ -1464,7 +1486,7 @@ A brand new property descriptor
 ```javascript
   {get: undefined, enumerable: false, configurable: true, set: ƒ}
   configurable: true //
-  enumerable: false // 
+  enumerable: false //
   get: undefined //as get is not defined for the Object
   set: ƒ price(val) //returns the accessor function
   __proto__: Object
@@ -1481,11 +1503,9 @@ A brand new property descriptor
   __proto__: Object
 ```
 
-
 ### Changing the return of Method decorator by creating Autobind Decorator
 
 The below code shows how to overwrite the method descriptor using the Method Decorator
-
 
 ```typescript
 function Autobind(_target: any, _methodName: string, descriptor: PropertyDescriptor){
@@ -1530,9 +1550,9 @@ interface ValidatorConfig { //to store all the validators of Course2
 }
 
 const registeredValidators: ValidatorConfig = {}; //initialy null value
- 
+
 //below decorators can be part of an external library
-//use the @Required and @PositiveNumber decorators to register/store the validator function and decorator 
+//use the @Required and @PositiveNumber decorators to register/store the validator function and decorator
 function Required(target: any, propName: string) {
   console.log("Executing Requried decorator " + propName);
   //target.constructor.name gives the class name as the constructor function represents the class
@@ -1554,7 +1574,7 @@ function validate(obj: any){
   const objValidatorConfig = registeredValidators[obj.constructor.name]; //class name
   if (!objValidatorConfig) {
     return true; //as no validators registered, thus nothing to do and is Valid
-  } 
+  }
 
   //loop through properties for which validators registered ie title (Required) and price (PositiveNumber)
   for (const prop in objValidatorConfig){ //iterate the object properties in class
@@ -1572,6 +1592,7 @@ function validate(obj: any){
 ```
 
 The class and actual calling of the Validators
+
 ```typescript
 class Course2 {
   @Required
@@ -1605,25 +1626,25 @@ courseForm2.addEventListener("submit", (event) => {
 });
 ```
 
-
-
-
 ## Module
 
 ### Splitting Code into Multiple Files
+
 1. Namespaces and File bundling
 2. ES6 Imports/Exports
 
 ### Namespace
+
 We can use namespaces to enclose TS code. It is a TS only feature and has no JS equivalent.
-**All code and dependent code need to be entered inside the same namespace but can exist on different files**   
+**All code and dependent code need to be entered inside the same namespace but can exist on different files**  
 
 Two ways of using namespaces:
+
 1. Enter all references together in app.ts/main file
 2. Enter all imports/references into individual files inlcuding app.ts/main file
 
-
 >Prerequisite in tsconfig.json:
+
 ```json
 {
   "compilerOptions": {
@@ -1654,22 +1675,24 @@ namespace App {
 
 ### ES6 Modules
 
-Better approach as compared to Namespace as we explicitly mention the dependency in each file and do not depend on one file to assimilate all the imports.   
-Modern browser supports ES6 modules natively which is a feature in JS.   
-Need to add the `.js` extension to all js files imported to render in browser unless using webpack.   
+Better approach as compared to Namespace as we explicitly mention the dependency in each file and do not depend on one file to assimilate all the imports.  
+Modern browser supports ES6 modules natively which is a feature in JS.  
+Need to add the `.js` extension to all js files imported to render in browser unless using webpack.  
 Each import will occur only once even though it is called in multiple files.
 
 Prerequisite in tsconfig.json:
+
 ```json
 {
   "compilerOptions": {
-    "target": "es6", 
+    "target": "es6",
     "module": "es2015", //atleast es6
     // "outFile": "./dist/bundle.js",  //comment this as it is not supported by ES6
 }
 ```
 
 Changes in index.html
+
 ```html
   <!-- Removed defer and added type="module"-->
   <!-- Depends on Modern browser to import modules -->
@@ -1677,15 +1700,12 @@ Changes in index.html
 ```
 
 Syntax
+
 ```typescript
-import { NameOfObject } from '../pathtoFile/file.js'; //remember to add .js extension 
+import { NameOfObject } from '../pathtoFile/file.js'; //remember to add .js extension
 
 export fileName; //in respective files
 ```
-
-
-
-
 
 ### Different kinds of import and export
 
@@ -1701,7 +1721,8 @@ import { OldName as NewName} from '../pathToFile.js'
 
 #### Using default export
 
-**Only default export is allowed per file**
+>Only default export is allowed per file
+
 ```typescript
 //other named exports will be allowed but no other default export
 
@@ -1727,7 +1748,9 @@ import _ from 'lodash';
 
 console.log(_.shuffle([1,2,3]));
 ```
-1. Temporary Solution - We can change `noEmitOnError` property in `tsconfig.json`
+
+#### Temporary Solution - We can change `noEmitOnError` property in `tsconfig.json`
+
 ```json
   "compilerOptions": {
     //other options
@@ -1736,7 +1759,7 @@ console.log(_.shuffle([1,2,3]));
   }
 ```
 
-2. Use type packages `*.d.ts` that provide logic to TS to use the JS libraries
+#### Use type packages `*.d.ts` that provide logic to TS to use the JS libraries
 
 ```bash
 npm i -D @types/lodash
@@ -1744,7 +1767,7 @@ npm i -D @types/jquery
 
 ```
 
-3. Usage of 'declare' to let TS know that variables exist globally
+#### Usage of 'declare' to let TS know that variables exist globally
 
 ```html
 <body>
@@ -1755,12 +1778,12 @@ npm i -D @types/jquery
 ```
 
 ```typescript
-declare var GLOBAL: any; //declare TS variables explicitly that you as a developer know will exist 
+declare var GLOBAL: any; //declare TS variables explicitly that you as a developer know will exist
 console.log(GLOBAL); //without declaration, will give error as TS does not know it has been defined in the index.html
 ```
 
-
 ### Class Transformer
+
 used to map your plain javascript objects to the instances of classes you have. It works with TS and JS
 
 ```bash
@@ -1795,17 +1818,21 @@ for (const prod of loadedProducts) {
 ```
 
 ### Class Validator
+
 Package that allows us to set up validation rules on classes using decorators.
 
 ```bash
 npm i class-validator
 ```
+
 Changes to `tsconfig.json`
+
 ```json
     "experimentalDecorators": true,  //set the property
 ```
 
 Code for the model
+
 ```typescript
 //importing all the decorators to be used for validation
 import { IsNotEmpty, IsNumber, IsPositive} from 'class-validator';
@@ -1824,10 +1851,11 @@ export class Product {
   getInformation(){
     return [this.title, `$${this.price}`]
   }
-} 
+}
 ```
 
 Code in app.ts
+
 ```typescript
 import { validate } from "class-validator";
 
@@ -1844,17 +1872,18 @@ validate(newProd).then((errors) => {
 });
 ```
 
-
 ## Creating a React Project with TS
 
 .tsx - Files that use ts and xml
 
 ### Syntaax
+
 ```bash
 npx create-react-app name-of-app --template typescript
 ```
 
 ### Smaple App.tsx
+
 ```tsx
 const App: React.FC = () => { //stands for FunctionalComponent which says that it returns a JSX and is a function
   return (
@@ -1863,25 +1892,24 @@ const App: React.FC = () => { //stands for FunctionalComponent which says that i
 }
 ```
 
-
 ## Creating a Node & Express Project with TS
 
 ### NPM Packages
+
 ```bash
 npm i express body-parser
-npm i -d nodemon 
+npm i -d nodemon
 npm i -d @types/node @types/express
 ```
 
 ### Changes to tsconfig.json
+
 ```json
   "compilerOptions": {
-    "target": "es2018", 
-    "module": "commonjs", 
-    "moduleResolution": "node", 
-    "outDir": "./dist",   
-    "rootDir": "./src", 
+    "target": "es2018",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "rootDir": "./src",
   }
 ```
-
-

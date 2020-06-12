@@ -126,7 +126,7 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 
 ## Using Spring Security
 
-### To Login into the default login page:
+### To Login into the default login page
 
 The default username is: user and the default password will be printed in the console at the time when your Spring Boot project is starting.
 

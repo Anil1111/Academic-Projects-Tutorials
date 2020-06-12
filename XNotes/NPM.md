@@ -4,7 +4,7 @@
 
 - `npm i <<package>> --save-dev` or `-D` #Use --save-dev to download and install into local repository as dev dependency
 - `npm i <<package>> -g` #to install globally;  
-- `npm i <<package>> -d` #to install as a local dependency or can omit the `-d` altogether 
+- `npm i <<package>> -d` #to install as a local dependency or can omit the `-d` altogether
 - `npm i -g npm@latest` #to update npm client to latest  
 - `npm init -y` #to start a npm project with -y as yes to all default params  
 - `npm outdated --save` #to find the outdated packages in dependencies  
