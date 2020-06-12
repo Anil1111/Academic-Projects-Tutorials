@@ -7,18 +7,22 @@
 5. **MongoDB** & **MongoDBCommunity**- NoSQL DB
 6. **SQLite** & **DBBrowser** - SQL DB
 7. **POSTMAN** - RestAPI Testing
+
 ---
 
 ## Package Manager Used
+
 1. npm
 2. yarn
 
 ---
 
 ## Naming convention
+
 1. **CAPITALLETTERS** All top level directories constitute a framework/Language/Programming Tool. 
 2. **CAPITAL-LETTERS** All project names
-3. **file-names** All file names
+3. **small-letters** All sample project names
+4. **file-names** All file names
 
 ---
 ## Project layout
@@ -167,24 +171,33 @@ Open Console/Command line --> Go to your Jenkins installation directory. Execute
 ## Windows Shortcuts
 
 1. `Windows + Down Arrow` Minimize the active window
+
 ---
 
 ## Integrated Terminal Shortcuts
 
 1. `code fileName` opens the file in a new tab on the active workspace
+
 ---
 
 ## Bootstrap requirements
 
-### CSS (CDN):
+### [CSS (CDN)](<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">)
 
-`<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">`  
-
-SASS (import to scss file) 
+SASS (import to scss file) / CSS (import to css file)
 `@import "../node_modules/bootstrap/scss/bootstrap.scss";`
-`@import "~//bootstrap/scss/bootstrap"`
+`@import "~bootstrap/scss/bootstrap"`
 
-### JS (CDN):
+Adding bootstrap to Angular by modifying the `angular.json`
+
+```json
+   "styles": [
+      "node_modules/bootstrap/dist/css/bootstrap.min.css",
+      "src/styles.css"
+   ],
+```
+
+### JS (CDN)
 
 ```html
 <script

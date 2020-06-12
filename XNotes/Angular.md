@@ -1,6 +1,7 @@
-# Angular
+  # Angular
 
-## Angular CLI commands:
+## Angular CLI commands
+
 1. `ng new <<AppName>>` create an angular application
 2. `ng version; ng v` #check version of angular
 3. `ng generate; ng g` #generate new files for angular
@@ -12,76 +13,76 @@
 9. `ng e2e` runs the end to end integration test using protractor on top of selenium automation testing tool
 
 ## Angular CLI for Interacting with Project
+
 1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component
     - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
 2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
 3. `ng g m <<moduleName>>` generates a module
 
-
 ## ng add
+
 `ng add` makes adding new capabilities to your project easy. ng add will use your package manager to download new dependencies and invoke an installation script (implemented as a schematic) which can update your project with configuration changes, add additional dependencies (e.g. polyfills), or scaffold package-specific initialization code.
 
-1. `ng add @angular/material` 
-
+1. `ng add @angular/material`
 
 ## NPM Commands
+
 1. `npm install -g @angular/cli@latest` #Install the latest ng client:
 
-
 ## Angular files
+
 1. `src/app` all the angular code is present here
 2. `src/assets` all resources including images are stored
 3. `environments` configuration for supporting different environments
 4. `tsconfig.json` configuration file for TS support
 5. `src/polyfills.ts` to ensure browser compatibility
 6. `src/styles.css` global css style
-7. `src/test.ts` starting point for running the unit test   
+7. `src/test.ts` starting point for running the unit test
 8. `angular.json` all the angular cli commands are defined
 
-
 ## Installing Angular highcharts
+
 More information [here](https://github.com/highcharts/highcharts-angular)
 
 1. `npm install highcharts-angular`
 2. In your app.module.ts add the HighchartsChartModule:
-```typescript
-import { HighchartsChartModule } from 'highcharts-angular';
 
-@NgModule({
-  imports: [
-    ...
-    HighchartsChartModule
-```
+    ```typescript
+    import { HighchartsChartModule } from 'highcharts-angular';
 
+    @NgModule({
+      imports: [
+        ...
+        HighchartsChartModule
+    ```
 
 3. In a component that will be building your Highcharts charts you will need to import Highcharts first
 `npm install highcharts --save`
 
 4. Next, in the app.component.ts, in top lines where other imports are add another one for Highcharts:
-
 `import * as Highcharts from 'highcharts';`
 
 5. In the same file (app.component.ts) add to the template Highcharts-angular component selector highcharts-chart:
 
-```html
-<highcharts-chart 
-  [Highcharts]="Highcharts"
+    ```html
+    <highcharts-chart
+      [Highcharts]="Highcharts"
 
-  [constructorType]="chartConstructor"
-  [options]="chartOptions"
-  [callbackFunction]="chartCallback"
+      [constructorType]="chartConstructor"
+      [options]="chartOptions"
+      [callbackFunction]="chartCallback"
 
-  [(update)]="updateFlag"
-  [oneToOne]="oneToOneFlag"
-  [runOutsideAngular]="runOutsideAngularFlag"
+      [(update)]="updateFlag"
+      [oneToOne]="oneToOneFlag"
+      [runOutsideAngular]="runOutsideAngularFlag"
 
-  style="width: 100%; height: 400px; display: block;"
-></highcharts-chart>
-```
+      style="width: 100%; height: 400px; display: block;"
+    ></highcharts-chart>
+    ```
 
 6. Exporting option
 
-```typescript
-import HC_exporting from 'highcharts/modules/exporting';
-HC_exporting(Highcharts);
-```
+    ```typescript
+    import HC_exporting from 'highcharts/modules/exporting';
+    HC_exporting(Highcharts);
+    ```

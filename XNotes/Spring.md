@@ -12,6 +12,7 @@
    - In case you are behind a proxy, configure settings at `C:\Users\UserName\apache-maven-3.6.3-bin\apache-maven-3.6.3\conf\settings.xml`
 3. All Java extensions installed mentioned [here]("./VSCode.md")
 4. VSCode User settings in settings.json
+
    ```json
        "java.configuration.maven.userSettings": "C:\\Users\\UserName\\apache-maven-3.6.3-bin\\apache-maven-3.6.3\\conf",
        "java.home": "C:\\Program Files\\Java\\jdk-14",
@@ -38,7 +39,9 @@
         "java.trace.server": "messages",
          "terminal.integrated.scrollback": 2000,
    ```
+
 5. Add keybing to `keybindings.json` to support automatic generation of constructors, getters/setters, toString methods
+
    ```json
    {
      "key": "shift+alt+g", //g for generate
@@ -102,28 +105,28 @@ Navigate to the file that contains the main method and Run / Debug the applicati
 
 1. `src/main/java`
 
-- contains all the java source files
+    - contains all the java source files
 
 2. `src/main/resources`
 
-- contains all the resources including the properties file for spring boot
+    - contains all the resources including the properties file for spring boot
 
 3. `src/test/java`
 
 4. `pom.xml`
 
-- contains the dependencies mentioned for use in the project
+    - contains the dependencies mentioned for use in the project
 
 5. `application.properties`
 
-- contains all the external settings/configuration for the application on different environments
-- is the main configuration file in Spring Boot.
+    - contains all the external settings/configuration for the application on different environments
+    - is the main configuration file in Spring Boot.
 
 ---
 
 ## Using Spring Security
 
-#### To Login into the default login page:
+### To Login into the default login page:
 
 The default username is: user and the default password will be printed in the console at the time when your Spring Boot project is starting.
 
@@ -132,49 +135,48 @@ The default username is: user and the default password will be printed in the co
 ### JPA
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>
 ```
-
 
 ### Web
 
 Used for building Web and RESTful applications
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+  </dependency>
 ```
 
 ### DevTools
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-devtools</artifactId>
-			<scope>runtime</scope>
-			<optional>true</optional>
-		</dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-devtools</artifactId>
+    <scope>runtime</scope>
+    <optional>true</optional>
+  </dependency>
 ```
 
 ### Test
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+    <exclusions>
+      <exclusion>
+        <groupId>org.junit.vintage</groupId>
+        <artifactId>junit-vintage-engine</artifactId>
+      </exclusion>
+    </exclusions>
+  </dependency>
 ```
 
 ### H2
@@ -185,11 +187,11 @@ Better than traditional databases as prior configuration is required whereas H2 
 Only drawback is that the data does not persist between restarts.
 
 ```xml
-		<dependency>
-			<groupId>com.h2database</groupId>
-			<artifactId>h2</artifactId>
-			<scope>runtime</scope>
-		</dependency>
+  <dependency>
+    <groupId>com.h2database</groupId>
+    <artifactId>h2</artifactId>
+    <scope>runtime</scope>
+  </dependency>
 ```
 
 ### Lombok Annotations Support for VS Code
@@ -203,34 +205,35 @@ Only drawback is that the data does not persist between restarts.
 ```
 
 ### Spring Security
+
 - Implementing security in web applications and Restful services
 - Authentication and Authorization using spring
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-test</artifactId>
-			<scope>test</scope>
-		</dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-security</artifactId>
+  </dependency>
+  <dependency>
+    <groupId>org.springframework.security</groupId>
+    <artifactId>spring-security-test</artifactId>
+    <scope>test</scope>
+  </dependency>
 ```
 
 ### JDBC
 
 ### HATEOS
 
-### JPA
+### Spring JPA
 
 Spring data JPA with Hibernate
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-	   </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-data-jpa</artifactId>
+  </dependency>
 ```
 
 ### Cache
@@ -246,23 +249,22 @@ Expose simple REST services using Spring Data REST
 Monitoring and tracing to the application
 
 ```xml
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
-      </dependency>
+  <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-actuator</artifactId>
+  </dependency>
 
-      <!-- It is dependent on the hal-browser-->
- 		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-rest-hal-browser</artifactId>
-      </dependency>
+    <!-- It is dependent on the hal-browser-->
+  <dependency>
+    <groupId>org.springframework.data</groupId>
+    <artifactId>spring-data-rest-hal-browser</artifactId>
+  </dependency>
 ```
 
 > To view the actuator logs: `http://localhost:8080/actuator`. Will open it in the HAL Browser
 
 _Additional properties to be set in application.properties_ `management.endpoints.web.exposure.include=*`
 This activates various kinds of actuator and will cause a performance degradation
-
 
 ### JWT
 
@@ -274,12 +276,13 @@ This activates various kinds of actuator and will cause a performance degradatio
 </dependency>
 ```
 
-_Additional properties to be set in application.properties_ 
->jwt.signing.key.secret=mySecret
-jwt.get.token.uri=/authenticate
-jwt.refresh.token.uri=/refresh
-jwt.http.request.header=Authorization
-jwt.token.expiration.in.seconds=604800
+Additional properties to be set in application.properties
+
+>jwt.signing.key.secret=mySecret  
+jwt.get.token.uri=/authenticate  
+jwt.refresh.token.uri=/refresh  
+jwt.http.request.header=Authorization  
+jwt.token.expiration.in.seconds=604800  
 
 ---
 
@@ -294,11 +297,13 @@ jwt.token.expiration.in.seconds=604800
 
 - `spring.datasource.url=jdbc:h2:mem:testdb` to make the url of the H2 inmemory database as a constant otherwise needs to be copied from debug console everytime
 - for setting the default values to the spring security
-  ```properties
-  spring.security.user.name=<<userName>>
-  spring.security.user.password=<<userPassword>>
-  spring.security.user.roles=<<userRole>>
-  ```
+
+    ```properties
+      spring.security.user.name=<<userName>>
+      spring.security.user.password=<<userPassword>>
+      spring.security.user.roles=<<userRole>>
+    ```
+
 - `spring.h2.console.enabled=true` show the h2 console
 - `spring.jpa.show-sql=true` for outputting the generated queries
 
@@ -331,27 +336,27 @@ jwt.token.expiration.in.seconds=604800
 - `@RequestBody` defining the request body that comprises of the object we pass
   - `import org.springframework.web.bind.annotation.RequestBody;`
 
-  
-### Spring JPA
+### Spring JPA Decorators
 
 -`@Entity` To define that a class is an Entity for JPA configuration - `import javax.persistence.Entity;`
-- `@id` to declare the property as the primary key
-  - `import javax.persistence.id;`
-- `@GeneratedValue` generate the value for the primary key
-  - `import javax.persistence.GeneratedValue;`
-- `@Repository` provides all the features to interact with the entity like add, save, delete etc
-  - `import org.springframework.stereotype.Repository;`
-- `@Transactional` declared on method/classes that define that each method consist of a transaction
-  - `import javax.transaction.Transactional;`
-- `@PersistenceContext` for ensuring EntityManager context persists
-  - `import javax.persistence.PersistenceContext;`
+-`@id` to declare the property as the primary key
+    - `import javax.persistence.id;`
+-`@GeneratedValue` generate the value for the primary key
+    - `import javax.persistence.GeneratedValue;`
+-`@Repository` provides all the features to interact with the entity like add, save, delete etc
+    - `import org.springframework.stereotype.Repository;`
+-`@Transactional` declared on method/classes that define that each method consist of a transaction
+    - `import javax.transaction.Transactional;`
+-`@PersistenceContext` for ensuring EntityManager context persists
+    - `import javax.persistence.PersistenceContext;`
 
 ### CORS
 
 - `@CrossOrigin(origins="http://url:port/")`
   - `import org.springframework.web.bind.annotation.CrossOrigin;`
 
-### Spring Security
+### Spring Security Decorators
+
 - `@Configuration` enables spring configuration
   - `import org.springframework.context.annotation.Configuration;`
 - `@EnableWebSecurity` enables web security

@@ -6,7 +6,7 @@
 
 **Always use camelCase for creating a component/service/directive**
 All files in angular are of type `my-name.*.ext`.
-These are created by the command `ng g <<x>> myName`. **Note** myName will be in capital letters but the output file will be `my-name` 
+These are created by the command `ng g <<x>> myName`. **Note** myName will be in capital letters but the output file will be `my-name`
 
 ### Bootstaping Angular Application
 
@@ -16,9 +16,8 @@ When an angular application is loaded:
 2. It bootstraps the `App.Module`
 3. It then bootstraps the `App.Component`
 4. It activates the `<app-root>` templateSelector in index.html
-5. The `<router-outlet>` present in the App.Component is responsible for routing/navigation. 
+5. The `<router-outlet>` present in the App.Component is responsible for routing/navigation.
 6. The 'app-routing.module' is responsible for representing navigation paths.
-
 
 ### Components
 
@@ -42,7 +41,7 @@ export class AppComponent {
 We can add the template directly
 
 ```typescript
-@Component({ 
+@Component({
   //...
   template: '<h1>{{title}}</h1>',
 })
@@ -57,7 +56,8 @@ The newly generated Component can be appended by using its selector
 
 ### Module
 
-Every angular component(@Component) has to be associated to an Angular Module(@ngModule)   
+Every angular component(@Component) has to be associated to an Angular Module(@ngModule)
+
 An angular application is a group of angular modules.
 
 ```typescript
@@ -80,6 +80,7 @@ export class AppModule { }
 ### Data Interpolation
 
 *.component.html
+
 ```html
     <div>
       <label for="username">{{username}}</label>
@@ -87,6 +88,7 @@ export class AppModule { }
 ```
 
 *.component.ts
+
 ```typescript
   username = 'richard';
 ```
@@ -94,6 +96,7 @@ export class AppModule { }
 ### Event binding
 
 *.component.html
+
 ```html
     <div>
       <button (click)=handleLogin()>Login</button>
@@ -101,6 +104,7 @@ export class AppModule { }
 ```
 
 *.component.ts
+
 ```typescript
   handleLogin(){
     console.log(this.username);
@@ -110,6 +114,7 @@ export class AppModule { }
 ### 2 way databinding
 
 *.module.ts
+
 ```typescript
 import {FormsModule} from '@angular/forms';
 @NgModule({
@@ -124,11 +129,13 @@ import {FormsModule} from '@angular/forms';
 ```
 
 *.component.html
+
 ```html
       <input type="text" id="username" name="username" [(ngModel)]="username">
 ```
 
 *.component.ts
+
 ```typescript
   username = 'richard';
   handleLogin(){
@@ -136,12 +143,10 @@ import {FormsModule} from '@angular/forms';
   }
 ```
 
-
-
 ### Routing
 
-
 app-routing.module.ts
+
 ```typescript
 const routes: Routes = [
   {path: '', component: LoginComponent}, //default page that loads at 'localhost:4200/'
@@ -153,6 +158,7 @@ const routes: Routes = [
 ```
 
 app.component.html
+
 ```html
 <router-outlet></router-outlet> //tag that enables routing
 ```
@@ -160,6 +166,7 @@ app.component.html
 ### Routing from a component
 
 *.component.ts
+
 ```typescript
 import { Router } from '@angular/router';
 
@@ -171,13 +178,14 @@ import { Router } from '@angular/router';
       // Redirect to welcome page
       this.router.navigate(['welcome']); // navigate methods accepts an array
       this.invalidLogin = false;
-    } 
+    }
   }
 ```
 
 ### Routing paramters
 
 app-routing.component.ts
+
 ```typescript
 const routes: Routes = [
   {path: 'welcome/:name', component: WelcomeComponent}, // routing parameter of name
@@ -185,6 +193,7 @@ const routes: Routes = [
 ```
 
 welcome.component.ts
+
 ```typescript
 export class WelcomeComponent implements OnInit {
   name = '';
@@ -200,17 +209,18 @@ export class WelcomeComponent implements OnInit {
 
 ```
 
-
 ### Directives
 
 #### *nfIf directive
 
 *.component.html
+
 ```html
       <small *ngIf="invalidLogin">{{errorMessage}}</small>
 ```
 
 *.component.ts
+
 ```typescript
   handleLogin(){
     if (this.username === 'richard' && this.password === 'dummy'){
@@ -224,6 +234,7 @@ export class WelcomeComponent implements OnInit {
 #### *ngFor directive
 
 *.component.html
+
 ```html
   <tbody>
     <!-- for (Todo todo: todos) -->
@@ -235,6 +246,7 @@ export class WelcomeComponent implements OnInit {
 ```
 
 *.component.ts
+
 ```typescript
   todos = [
     { id: 1, description: 'learn to dance'},
@@ -246,6 +258,7 @@ export class WelcomeComponent implements OnInit {
 #### Routing directive
 
 *.component.html
+
 ```html
 <div>
   <!-- Do not use href for anchor tags as it causes reloading of the entire page whereas routerLink changes that particular DOM-->
@@ -254,9 +267,11 @@ export class WelcomeComponent implements OnInit {
 ```
 
 ### Pipe
+
 Is used to convert a field format.
 
 *.component.html
+
 ```html
     <tr *ngFor="let todo of todos">
       <td>{{todo.description}}</td>
@@ -265,25 +280,18 @@ Is used to convert a field format.
     </tr>
 ```
 
-
-
-
-
-
-
-
 ### Adding Bootstrap
 
 Add a CDN to the styles.css
+
 ```css
 @import url("https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css");
 ```
 
-
-
 ### Services
 
 *.service.ts
+
 ```typescript
 import { Injectable } from '@angular/core';
 
@@ -308,6 +316,7 @@ export class HardcodedAuthenticationService {
 ```
 
 *.component.ts
+
 ```typescript
 export class LoginComponent implements OnInit {
   // dependency Injection where angular injects the depency into the component
@@ -316,7 +325,7 @@ export class LoginComponent implements OnInit {
   handleLogin(){
     if (this.hardcodedAuthenticationService.authenticate(this.username, this.password)) {
       // authentication successful
-    } 
+    }
   }
 
 }
@@ -325,14 +334,15 @@ export class LoginComponent implements OnInit {
 ### Using services for Session Storage to store authentication token
 
 To check the session storage from browser:
-- Session Storage represents the temporary storage where key value pairs can be stored during the browser session. If browser is restarted the keys are lost.   
+
+- Session Storage represents the temporary storage where key value pairs can be stored during the browser session. If browser is restarted the keys are lost.
 - Incase of Local Storage, the keys remain even on browser restart but are less secure and thus, not recommended.
 
+#### Navigate to Session Storage in Google Chrome
 
-#### Navigate to Session Storage in Google Chrome:   
-> Chrome --> Inspect --> Application --> Inside Storage Menu --> Session Storage   
+> Chrome --> Inspect --> Application --> Inside Storage Menu --> Session Storage
+>
 > **To clear**, just `Rt. Click` on the entry inside session storage and click on `clear`.
-
 
 ```typescript
 export class HardcodedAuthenticationService {
@@ -362,6 +372,7 @@ export class HardcodedAuthenticationService {
 ### Securing Components using Route Guards
 
 app-routing.module.ts
+
 ```typescript
 const routes: Routes = [
   {path: '', component: LoginComponent},
@@ -375,6 +386,7 @@ const routes: Routes = [
 ```
 
 route-guard.service.ts
+
 ```typescript
 export class RouteGuardService implements CanActivate{
 
@@ -392,14 +404,15 @@ export class RouteGuardService implements CanActivate{
 ```
 
 ## Using RESTlet Client from Chrome
-In the headers option, set onr of the headers to `Origin`: `http://localhost:4200/` to avoid the CORS error that will be generated when requests are sent from the RESTlet client using its own domain to the backend server
 
+In the headers option, set onr of the headers to `Origin`: `http://localhost:4200/` to avoid the CORS error that will be generated when requests are sent from the RESTlet client using its own domain to the backend server
 
 ## Connecting to Spring Boot Backend
 
 ### USing HttpClient
 
 app.module.ts
+
 ```typescript
 import { HttpClientModule } from '@angular/common/http';
 
@@ -412,6 +425,7 @@ import { HttpClientModule } from '@angular/common/http';
 ```
 
 welcome-data.service.ts
+
 ```typescript
 import { HttpClient } from '@angular/common/http';
 
@@ -426,15 +440,14 @@ export class WelcomeDataService {
 }
 ```
 
-
-
-
 ### Understanding Observables
+
 - To handle HTTP Requests asynchronously as otherwise the browser will hand in synchronize mode.
 - `Observables` is an approach to implement asynchronous communication
 - An observable does not automatically get invoked as it needs to be subscribed
 
 welcome-data.service.ts
+
 ```typescript
   executeHelloWorldBeanService() {
     // returns an observable to frontend
@@ -443,6 +456,7 @@ welcome-data.service.ts
 ```
 
 welcome.component.ts
+
 ```typescript
   getWelcomeMessage() {
     console.log(this.welcomeDataService.executeHelloWorldBeanService()); // the Observable does not get automatically invoked and requires to be subscribed to
@@ -460,6 +474,7 @@ welcome.component.ts
 
 **To prevent Cross origin error**
 HelloWorldController.java
+
 ```java
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController // controller that can handle REST Request
@@ -470,6 +485,7 @@ public class HelloWorldController { ...
 ### Handling error from HTTP response
 
 welcome.component.ts
+
 ```typescript
   getWelcomeMessage() {
     console.log(this.welcomeDataService.executeHelloWorldBeanService());
@@ -487,24 +503,24 @@ welcome.component.ts
 ### [(ngModel)] breakup
 
 Original
+
 ```typescript
       <input class="form-control" type="date" name="targetDate" id="description" [(ngModel)]="todo.targetDate" required>
 ```
 
 Equivalent to
+
 ```typescript
-      <input class="form-control" 
-        type="date" 
-        name="targetDate" 
-        id="description" 
+      <input class="form-control"
+        type="date"
+        name="targetDate"
+        id="description"
         [ngModel]="todo.targetDate"  // Nomral property binding to the value of todo.targetDate
-        (ngModelChange)="todo.targetDate = $event" // event binding that sets the updated date into the todo.targetDate 
+        (ngModelChange)="todo.targetDate = $event" // event binding that sets the updated date into the todo.targetDate
         required>
 ```
 
-
 ### Form validation
-
 
 ```html
 <div class="container">
@@ -534,22 +550,23 @@ Equivalent to
 </div>
 ```
 
-
 ## Basic Authentication
 
 ### Using Form based authentication
+
 If you try to access any backend URLs over the browser with Spring Security enabled, you will get a `Form based authentication`.
-- The default username is `user`
-- The default password is present in the console
+    - The default username is `user`
+    - The default password is present in the console
 On successful login, a session is set on the server whereas a cookie is set on the client which is sent along with each request. This cookie identifies the session on the server and it will be used as the authentication.
 
 ### Using Basic Authentication using Basic Authorization header
+
 This does not require session being set on the server.
 
 ```http
 GET http://localhost:8085/users/richard/todos HTTP/1.1
 Origin: http://localhost:4200
-Authorization: Basic dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y= 
+Authorization: Basic dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y=
 
 // generated from the Restlet Client by supplying the `username` and `password` same as above
 // sending the encoded form of the password as `dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y=`
@@ -559,12 +576,13 @@ Authorization: Basic dXNlcjpjNDgwY2EzNC03MjM5LTRmZTEtYjJhMy04ZjhhNWRlY2MwN2Y=
 ### Creating the Authorization header in welcome-data.service.ts
 
 #### Error without setting the Authorization HTTP Header
-```
+
+```console
 Access to XMLHttpRequest at 'http://localhost:8085/hello-world-path-variable/richard' from origin 'http://localhost:4200' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
 ```
 
-
 #### Setting the Authorization Header
+
 ```typescript
 export class WelcomeDataService {
   constructor(private http: HttpClient) {}
@@ -596,10 +614,11 @@ export class WelcomeDataService {
 ```
 
 ### Resolving denial of OPTIONS pre-flight Requests by configuring CSRF
-After basic authentication, an HTTP `OPTIONS` method is fired by the client before every GET, POST request to ascertain whether the client is valid.   
-CSRF - Cross site request forgery
 
-```
+After basic authentication, an HTTP `OPTIONS` method is fired by the client before every GET, POST request to ascertain whether the client is valid.
+>CSRF - Cross site request forgery
+
+```Console
 Access to XMLHttpRequest at 'http://localhost:8085/hello-world-path-variable/richard' from origin 'http://localhost:4200' has been blocked by CORS policy: Response to preflight request doesn't pass access control check: It does not have HTTP ok status.
 ```
 
@@ -611,27 +630,28 @@ Adding a new class `SpringSecurityConfigurationBasicAuth.java` and overriding th
 @Configuration // enables spring configuration
 @EnableWebSecurity // enables web security
 public class SpringSecurityConfigurationBasicAuth extends WebSecurityConfigurerAdapter{
-	
-	@Override
-	protected void configure(HttpSecurity http) throws Exception {
-		http
-			.csrf().disable() // disabled CSRF; needed to run from Restlet Client
-			.authorizeRequests()
-			.antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // // permit all OPTIONS methods; to remove pre-flight CORS error from frontend; error for any URL `/**` without authentication
-				.anyRequest().authenticated()
-				.and()
-			// .formLogin().and()  // disable form login
-			.httpBasic();
-	}
+  
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    http
+      .csrf().disable() // disabled CSRF; needed to run from Restlet Client
+      .authorizeRequests()
+      .antMatchers(HttpMethod.OPTIONS, "/**").permitAll() // // permit all OPTIONS methods; to remove pre-flight CORS error from frontend; error for any URL `/**` without authentication
+        .anyRequest().authenticated()
+        .and()
+      // .formLogin().and()  // disable form login
+      .httpBasic();
+  }
   
 }
 ```
 
-
 ### Using HttpInterceptor to add Authorization headers
+
 Enables to add a specific header to every request rather than adding it manually as above.
 
 app.module.ts
+
 ```typescript
   providers: [
     { // for providing the HttpInterceptor to the module to add header to every request
@@ -642,8 +662,8 @@ app.module.ts
   ],
 ```
 
-
 http-interceptor-basic-auth-service.ts with hardcoded authorization
+
 ```typescript
 export class HttpInterceptorBasicAuthService implements HttpInterceptor {
   // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request
@@ -668,10 +688,10 @@ export class HttpInterceptorBasicAuthService implements HttpInterceptor {
 }
 ```
 
-
 ### Connecting login page to basic authentication
 
 basic-authentication.service.ts
+
 ```typescript
   executeAuthenticationService(username: string, password: string) {
     const basicAuthHeaderString =
@@ -713,6 +733,7 @@ basic-authentication.service.ts
 ```
 
 http-interceptor-basic-auth-service.ts with Updated basic authorization
+
 ```typescript
 export class HttpInterceptorBasicAuthService implements HttpInterceptor {
   // HttpInterceptor acts like a filter to add authorization header to the request and then forwarding the modified request
@@ -741,11 +762,13 @@ export class HttpInterceptorBasicAuthService implements HttpInterceptor {
 ### Creating an app.constants.ts file on /app/ to store constants
 
 app.constants.ts
+
 ```typescript
 export const API_URL = 'http://localhost:8085';
 ```
 
 other ts files
+
 ```typescript
 import { API_URL } from 'src/app/app.constants';
 
@@ -756,20 +779,23 @@ import { API_URL } from 'src/app/app.constants';
   }
 ```
 
-
 ## JWT
+
 JSON Web Tokens are an open standard for representing claims between two parties.
 
 ### Cons of Basic Authentication
+
 - No expiration time for Authorization Token
 - Token does not have any authorization details on it
 
 ### Features of JWT
+
 - Contains User details and Authorizations
 
 ### Constituents of Decoded JWT
 
 #### Header
+
 ```json
 {
   "alg":"HS512", // algorithm used for encoding
@@ -778,23 +804,24 @@ JSON Web Tokens are an open standard for representing claims between two parties
 ```
 
 #### Payload
+
 ```json
 {
   "sub": "1234", // who are we talking about
   "name": "John Does", // name of the person
-  "admin": true, // whether admin? 
+  "admin": true, // whether admin?
   "iat": 123123 // creation time of token
   //.. can add custom values
 }
 ```
 
 #### Verify Signature
+
 ```json
 {
   // contains base 64 encoded header + payload + your 512 bit secret
 }
 ```
-
 
 ### JWT requests syntax
 
@@ -829,10 +856,7 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6M
 
 ```
 
-
-
 ### JWT project folder structure
-
 
 1. `JwtTokenRequest` object representing the valid request type for token generation
 2. `JwtTokenResponse` object representing the valid response type for sending generated token
@@ -840,24 +864,24 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJpbjI4bWludXRlcyIsImV4cCI6M
 4. `AuthenticationException` exception thrown from the JwtAuthenticationRestController during runtime
 
 5. `JwtUserDetails` object representing the user details (id, username, password, role) type from DB
-6. `JwtInMemoryUserDetailsService` mimics the DB by providing the list of users as type JwtUserDetails and loads the required user details; we just need to provide the user details by implementing the `UserDetailsService` and spring will take care of the rest including validation of the password; 
+6. `JwtInMemoryUserDetailsService` mimics the DB by providing the list of users as type JwtUserDetails and loads the required user details; we just need to provide the user details by implementing the `UserDetailsService` and spring will take care of the rest including validation of the password;
 
 7. `JwtTokenUtil` used for processing and managing tokens including creating tokens, calculating expiration dates and getting details out of the token
 
 8. `JwtTokenAuthorizationOncePerRequestFilter` represents the filter that is applied on all the subsequent requests post authentication for accessing data from the system
 9. `JwtUnAuthorizedResponseAuthenticationEntryPoint` retuns the error of providing jwt if
 
-9. `JWTWebSecurityConfig` extends the WebSecurityConfigurerAdapter and configures the below
-- UserDetailsService with BCryptPassword encoder
-- statelessness by not creating a session on the server
-- authentication entry point to handle unauthenticated users by sending JWT required error response from `JwtUnAuthorizedResponseAuthenticationEntryPoint`
-- configuring the JwtTokenAuthorizationOncePerRequestFilter to run 
-- enabling the /h2-console to be accessed without headers
-
+10. `JWTWebSecurityConfig` extends the WebSecurityConfigurerAdapter and configures the below
+    - UserDetailsService with BCryptPassword encoder
+    - statelessness by not creating a session on the server
+    - authentication entry point to handle unauthenticated users by sending JWT required error response from `JwtUnAuthorizedResponseAuthenticationEntryPoint`
+    - configuring the JwtTokenAuthorizationOncePerRequestFilter to run
+    - enabling the /h2-console to be accessed without headers
 
 ### Create a new user in JWT with encoded password
 
 BcryptEncoderTest will be able to generate 10 different encoded variations of the password that can be then used in the main system
+
 ```java
 public class BcryptEncoderTest {
   public static void main(String[] args) {
