@@ -509,6 +509,7 @@ content-type: application/json
   "window.zoomLevel": 0,
   "git.autofetch": true,
   "gitlens.blame.dateFormat": "",
+  "gitlens.menus": false,
   "zenMode.hideLineNumbers": false,
   "gitlens.views.search.files.layout": "list",
   "java.configuration.maven.userSettings": "C:\\Users\\triph\\apache-maven-3.6.3-bin\\apache-maven-3.6.3\\conf",
@@ -547,7 +548,9 @@ content-type: application/json
   },
   "java.dependency.packagePresentation": "flat",
   "java.configuration.updateBuildConfiguration": "interactive",
-  "java.format.settings.url": "eclipse-formatter.xml"
+  "java.format.settings.url": "eclipse-formatter.xml",
+  "[sql]": {},
+
 }
 ```
 
