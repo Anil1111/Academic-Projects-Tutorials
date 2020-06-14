@@ -165,6 +165,8 @@ HTML
     - Install the vsix `SonarSource.sonarlint-vscode-1.15.0.vsix` and install it either automatically or by by downloading it manually
 31. **Rest Client** - _Huachao Mao_
 32. **SQLTools** - _Matheus Tiexiera_
+33. **Auto Rename Tag** - Jun Han
+34. **IntelliSense for CSS class names in HTML** - Zignd
 
 ---
 
@@ -177,6 +179,14 @@ HTML
 4. Select the `Color Theme` from command pallette
 5. `"terminal.integrated.scrollback": 2000` add this to `settings.json` to increase the buffer size of the integrated terminal log
 6. `"workbench. editor. enablePreview"` and set it to `false` to stop automatic preview of docs on open
+
+### Wrap a tag with another tag in VSCode
+
+1. Select text (optional)
+2. Open command palette (usually Ctrl + Shift + P )
+3. Execute `Emmet: Wrap with Abbreviation.`
+4. Enter a tag `div` (or an abbreviation . `wrapper>p` )
+5. Hit Enter.
 
 ## VSCode Extension Settings
 
@@ -396,43 +406,35 @@ content-type: application/json
     }
   },
   {
-    "key": "ctrl+e w",
-    "command": "workbench.action.quickOpenNavigateNextInFilePicker",
-    "when": "inFilesPicker && inQuickOpen"
-  },
-  {
     "key": "ctrl+e",
     "command": "-workbench.action.quickOpenNavigateNextInFilePicker",
     "when": "inFilesPicker && inQuickOpen"
   },
   {
-    "key": "ctrl+w ctrl+f",
+    "key": "ctrl+t ctrl+b",
     "command": "sqltools.formatSql",
     "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+e ctrl+b",
-    "command": "-sqltools.formatSql",
-    "when": "editorTextFocus && !editorReadonly"
+    "key": "ctrl+t ctrl+q",
+    "command": "sqltools.bookmarkSelection",
+    "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+w ctrl+h",
-    "command": "sqltools.runFromHistory"
+    "key": "ctrl+e ctrl+q",
+    "command": "-sqltools.bookmarkSelection",
+    "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+e ctrl+h",
-    "command": "-sqltools.runFromHistory"
+    "key": "ctrl+t ctrl+a",
+    "command": "sqltools.runFromBookmarks"
   },
   {
-    "key": "ctrl+w ctrl+s",
-    "command": "sqltools.showRecords"
+    "key": "ctrl+e ctrl+a",
+    "command": "-sqltools.runFromBookmarks"
   },
   {
-    "key": "ctrl+e ctrl+s",
-    "command": "-sqltools.showRecords"
-  },
-  {
-    "key": "ctrl+w ctrl+w",
+    "key": "ctrl+t ctrl+t",
     "command": "sqltools.executeQuery",
     "when": "editorTextFocus"
   },
@@ -442,7 +444,7 @@ content-type: application/json
     "when": "editorTextFocus"
   },
   {
-    "key": "ctrl+w ctrl+d",
+    "key": "ctrl+t ctrl+d",
     "command": "sqltools.describeTable"
   },
   {
@@ -450,15 +452,7 @@ content-type: application/json
     "command": "-sqltools.describeTable"
   },
   {
-    "key": "ctrl+w ctrl+a",
-    "command": "sqltools.runFromBookmarks"
-  },
-  {
-    "key": "ctrl+e ctrl+a",
-    "command": "-sqltools.runFromBookmarks"
-  },
-  {
-    "key": "ctrl+w ctrl+r",
+    "key": "ctrl+t ctrl+r",
     "command": "sqltools.deleteBookmark"
   },
   {
@@ -466,16 +460,28 @@ content-type: application/json
     "command": "-sqltools.deleteBookmark"
   },
   {
-    "key": "ctrl+w ctrl+q",
-    "command": "sqltools.bookmarkSelection",
-    "when": "editorTextFocus"
+    "key": "ctrl+e ctrl+b",
+    "command": "-sqltools.formatSql",
+    "when": "editorTextFocus && !editorReadonly"
   },
   {
-    "key": "ctrl+e ctrl+q",
-    "command": "-sqltools.bookmarkSelection",
-    "when": "editorTextFocus"
+    "key": "ctrl+t ctrl+h",
+    "command": "sqltools.runFromHistory"
+  },
+  {
+    "key": "ctrl+e ctrl+h",
+    "command": "-sqltools.runFromHistory"
+  },
+  {
+    "key": "ctrl+t ctrl+s",
+    "command": "sqltools.showRecords"
+  },
+  {
+    "key": "ctrl+e ctrl+s",
+    "command": "-sqltools.showRecords"
   }
 ]
+
 ```
 
 ---

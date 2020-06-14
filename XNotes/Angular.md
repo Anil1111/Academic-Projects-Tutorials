@@ -12,19 +12,6 @@
 8. `ng test` runs the test runner karma which uses the jasmine framework that uses spec.ts(specification) files
 9. `ng e2e` runs the end to end integration test using protractor on top of selenium automation testing tool
 
-## Angular CLI for Interacting with Project
-
-1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component
-    - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
-2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
-3. `ng g m <<moduleName>>` generates a module
-
-## ng add
-
-`ng add` makes adding new capabilities to your project easy. ng add will use your package manager to download new dependencies and invoke an installation script (implemented as a schematic) which can update your project with configuration changes, add additional dependencies (e.g. polyfills), or scaffold package-specific initialization code.
-
-1. `ng add @angular/material`
-
 ## NPM Commands
 
 1. `npm install -g @angular/cli@latest` #Install the latest ng client:
@@ -39,6 +26,55 @@
 6. `src/styles.css` global css style
 7. `src/test.ts` starting point for running the unit test
 8. `angular.json` all the angular cli commands are defined
+
+## NG Commands
+
+### ng add
+
+`ng add` makes adding new capabilities to your project easy. ng add will use your package manager to download new dependencies and invoke an installation script (implemented as a schematic) which can update your project with configuration changes, add additional dependencies (e.g. polyfills), or scaffold package-specific initialization code.  
+`ng add @angular/material`
+
+### ng generate
+
+1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component
+    - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
+2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
+3. `ng g m <<moduleName>>` generates a module
+
+#### Skipping .spec testing files
+
+1. `ng generate component component-name --skipTests=true`
+2. `ng generate component component-name -s=true`
+3. `ng generate component --spec=false component-name`
+4. `Modify your angular.json file with the below`
+
+```json
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {.
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+```
+
+#### Dry runs
+
+`ng g c component-name -d=true`  
+`ng g c component-name --dryRun=true`  
+
+
 
 ## Installing Angular highcharts
 
