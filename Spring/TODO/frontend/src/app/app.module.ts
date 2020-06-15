@@ -36,10 +36,11 @@ import { HttpInterceptorJwtAuthService } from './service/http/http-interceptor-j
     //   useClass: HttpInterceptorBasicAuthService,
     //   multi: true
     // },
-    { // for providing the HttpInterceptor specific to JWT authentication
+    {
+      // for providing the HttpInterceptor specific to JWT authentication
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorJwtAuthService,
-      multi: true
+      multi: true,
     },
   ],
   bootstrap: [AppComponent],

@@ -273,3 +273,56 @@ export class ServersComponent implements OnInit {
     return {'white-text': (counterIndex >= 4) };
   }
 ```
+
+## Databinding - Communication between components
+
+### Binding to custom properties
+
+For pushing a data from the parent component to its child componenet.  
+All properties of a component are only accessible within the component and cannot be binded from outside. In order to make it accessbile, we need to add `@Input` decorator
+
+databinding.component.ts
+
+```typescript
+    <div class="col-12">
+      <app-server-element *ngFor="let serverElement of serverElements" [element]="serverElement"></app-server-element>
+    </div>
+```
+
+server-element.component.ts
+
+```typescript
+export class ServerElementComponent implements OnInit {
+  @Input() element: {
+    type: string;
+    name: string;
+    content: string;
+  };
+```
+
+#### Assigning an alias to custom properties
+
+databinding.component.ts
+
+```typescript
+    <div class="col-12">
+      <app-server-element *ngFor="let serverElement of serverElements" [srvElement]="serverElement"></app-server-element>
+    </div>
+```
+
+server-element.component.ts
+
+```typescript
+export class ServerElementComponent implements OnInit {
+  @Input('srvElement') element: { // alias is srvElement that needs to be used from outside 
+    type: string;
+    name: string;
+    content: string;
+  };
+```
+
+### Binding to custom events
+
+Pushing data from the child component into the parent component.  
+
+

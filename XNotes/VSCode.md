@@ -156,17 +156,18 @@ HTML
 22. **Git Lens** - _Eric Amodio_
 23. **Bracket Pair Colorizer 2** - _CoeenradS_
 24. **Angular Snippets(Version 9)** - _John Papa_
-25. **Angular Language Service** - _Angular_
-26. **npm** - _egamma_
-27. **EditorConfig for VS Code** - _EditorConfig_
-28. **nx console** - _nrwl_
-29. **Quick and Simple Text Selection** - _David Bankier_ #for providing some shortcuts for easy text selection
-30. **Sonar Lint** - _SonarSource_ for detecting and fixing quality issues in code;
+    **Angular Language Service** - _Angular_
+    **Auto Rename Tag** - Jun Han
+    **IntelliSense for CSS class names in HTML** - Zignd
+    **vscode-angular-html** - _Guilherme Haschel_ #syntax highlighting for angular HTML template files
+    **nx console** - _nrwl_
+25. **npm** - _egamma_
+26. **EditorConfig for VS Code** - _EditorConfig_
+27. **Quick and Simple Text Selection** - _David Bankier_ #for providing some shortcuts for easy text selection
+28. **Sonar Lint** - _SonarSource_ for detecting and fixing quality issues in code;
     - Install the vsix `SonarSource.sonarlint-vscode-1.15.0.vsix` and install it either automatically or by by downloading it manually
-31. **Rest Client** - _Huachao Mao_
-32. **SQLTools** - _Matheus Tiexiera_
-33. **Auto Rename Tag** - Jun Han
-34. **IntelliSense for CSS class names in HTML** - Zignd
+29. **Rest Client** - _Huachao Mao_
+30. **SQLTools** - _Matheus Tiexiera_
 
 ---
 

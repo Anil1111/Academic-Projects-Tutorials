@@ -3,24 +3,21 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ServerComponent } from './server/server.component';
-import { ServersComponent } from './servers/servers.component';
-import { WarningAlertComponent } from './warning-alert/warning-alert.component';
-import { SuccessAlertComponent } from './success-alert/success-alert.component';
-import { FormsModule } from '@angular/forms';
+
+import { ErrorComponent } from './error/error.component';
+import { BasicModule } from './basic/basic.module';
+import { DatabindingModule } from './databinding/databinding.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ServerComponent,
-    ServersComponent,
-    WarningAlertComponent,
-    SuccessAlertComponent
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    BasicModule,
+    DatabindingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

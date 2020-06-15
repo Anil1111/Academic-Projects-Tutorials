@@ -41,12 +41,17 @@
 2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
 3. `ng g m <<moduleName>>` generates a module
 
+#### Generating components specific to a module
+
+`ng g m NewMoudle` to generate a module.  
+`ng g c new-module/new-component` to create NewComponent with the entry tagged to the new-module.
+`ng g c new-module/new-component --module=new-module.module` to explicitly mention
+
 #### Skipping .spec testing files
 
 1. `ng generate component component-name --skipTests=true`
 2. `ng generate component component-name -s=true`
-3. `ng generate component --spec=false component-name`
-4. `Modify your angular.json file with the below`
+3. `Modify your angular.json file with the below`
 
 ```json
       "schematics": {
@@ -73,8 +78,6 @@
 
 `ng g c component-name -d=true`  
 `ng g c component-name --dryRun=true`  
-
-
 
 ## Installing Angular highcharts
 

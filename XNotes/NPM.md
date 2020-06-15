@@ -12,6 +12,7 @@
 - `npm config ls -l | grep config` #to find the location of the npmrc config files in the system  
 - `npm remove <<package>>` removing specific packages
 - `npm ls <<packageName>>` from the directory which contains node_modules will list the package and its version
+- `npm cache clean --force` to forcefully delete data from your cache
 
 ---
 
