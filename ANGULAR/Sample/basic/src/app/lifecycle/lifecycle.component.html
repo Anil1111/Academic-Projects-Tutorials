@@ -1,0 +1,71 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <h3>I am in Lifecycle Component</h3>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <app-cockpit2 (serverCreated)="onServerAdded($event)" (blueprintCreated)="onBlueprintAdded($event)"></app-cockpit2>
+  <hr>
+  <div class="row">
+    <div class="col-12">
+      <!-- added the below button to showcase `ngOnChanges` that occurs in app-server-element2. Its click event causes onChangeFirst to run that changes the name property of serverElements[0] element. -->
+      <!-- Since the serverElements[0] element alters the name property, it causes a change to occur on the property binding of  `[name]="serverElement.name"` in app-server-element2-->
+      <button class="btn btn-primary mx-2" (click)="onChangeFirst()">Change First Element</button>
+      <button class="btn btn-danger mx-2" (click)="onDestroyFirst()">Destroy Element</button>
+
+
+      <app-server-element2
+        *ngFor="let serverElement of serverElements"
+        [name]="serverElement.name"
+      >
+        <div class="card-body">
+          <!-- example to show @ContentChild as the below reference is part of the ng-content and not the view-->
+          <p class="card-text" #contentPara>
+            <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+            <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+          </p>
+        </div>
+      </app-server-element2>
+    </div>
+  </div>
+  <hr>
+
+  <div class="container assignment mb-5">
+    <div class="row">
+      <div class="col-xs-12">
+        <h3>Bind it!</h3>
+        <ol>
+          <li>Create three new components: GameControl, Odd and Even</li>
+          <li>The GameControl Component should have buttons to start and stop the game</li>
+          <li>When starting the game, an event (holding a incrementing number) should get emitted each second (ref = setInterval())</li>
+          <li>The event should be listenable from outside the component</li>
+          <li>When stopping the game, no more events should get emitted (clearInterval(ref))</li>
+          <li>A new Odd component should get created for every odd number emitted, the same should happen for the Even Component (on even numbers)</li>
+          <li>Simply output Odd - NUMBER or Even - NUMBER in the two components</li>
+          <li>Style the element (e.g. paragraph) holding your output text differently in both components</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mb-5">
+    <div class="row">
+      <div class="col">
+        <app-game-control (numberEmitter)="onNumberEmitted($event)"></app-game-control>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col">
+        <app-odd></app-odd>
+        <app-even></app-even>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

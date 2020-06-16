@@ -6,12 +6,26 @@
   </div>
 </div>
 
+<!-- Here the serverCreated and blueprintCreated are events emitted from <app-cockpit> as an Output() which is captured by the databinding parent component-->
 <div class="container">
   <app-cockpit (serverCreated)="onServerAdded($event)" (blueprintCreated)="onBlueprintAdded($event)"></app-cockpit>
   <hr>
   <div class="row">
     <div class="col-12">
-      <app-server-element *ngFor="let serverElement of serverElements" [element]="serverElement"></app-server-element>
+      <!-- Here element is the Input() element that gets data from Databinding into the <app-server-element> child component-->
+      <app-server-element
+        *ngFor="let serverElement of serverElements"
+        [element]="serverElement"
+      >
+      <!-- Using `ng-content`to project the below data which could have been placed directly in the <app-servlet-element>
+        but was taken out and placed here-->
+        <div class="card-body">
+          <p class="card-text">
+            <strong *ngIf="serverElement.type === 'server'" style="color: red">{{ serverElement.content }}</strong>
+            <em *ngIf="serverElement.type === 'blueprint'">{{ serverElement.content }}</em>
+          </p>
+        </div>
+      </app-server-element>
     </div>
   </div>
 

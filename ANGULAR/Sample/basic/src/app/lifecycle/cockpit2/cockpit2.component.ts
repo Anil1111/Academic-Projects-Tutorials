@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 
 @Component({
-  selector: 'app-cockpit',
-  templateUrl: './cockpit.component.html',
-  styleUrls: ['./cockpit.component.css'],
+  selector: 'app-cockpit2',
+  templateUrl: './cockpit2.component.html',
+  styleUrls: ['./cockpit2.component.css']
 })
-export class CockpitComponent implements OnInit {
+export class Cockpit2Component implements OnInit {
   @Output() serverCreated = new EventEmitter<{
     serverName: string;
     serverContent: string;

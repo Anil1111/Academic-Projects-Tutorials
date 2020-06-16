@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { ErrorComponent } from './error/error.component';
 import { BasicModule } from './basic/basic.module';
 import { DatabindingModule } from './databinding/databinding.module';
+import { LifecycleModule } from './lifecycle/lifecycle.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { DatabindingModule } from './databinding/databinding.module';
     BrowserModule,
     AppRoutingModule,
     BasicModule,
-    DatabindingModule
+    DatabindingModule,
+    LifecycleModule
   ],
   providers: [],
   bootstrap: [AppComponent]

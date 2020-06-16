@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-databinding',
-  templateUrl: './databinding.component.html',
-  styleUrls: ['./databinding.component.css'],
+  selector: 'app-lifecycle',
+  templateUrl: './lifecycle.component.html',
+  styleUrls: ['./lifecycle.component.css'],
 })
-export class DatabindingComponent implements OnInit {
+export class LifecycleComponent implements OnInit {
   serverElements = [
     { type: 'server', name: 'Test server', content: 'Just a test!' },
   ];
@@ -28,4 +28,15 @@ export class DatabindingComponent implements OnInit {
     });
   }
 
+  onChangeFirst() {
+    this.serverElements[0].name = 'chnaged';
+  }
+
+  onDestroyFirst() {
+    this.serverElements.splice(0, 1); // removing the first element
+  }
+
+  onNumberEmitted(counter: number) {
+    console.log(counter);
+  }
 }

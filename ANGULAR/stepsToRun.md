@@ -16,3 +16,6 @@
 
 - http://localhost:4200/
 - http://localhost:4200/databinding
+- http://localhost:4200/lifecycle
+
+
