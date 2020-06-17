@@ -3,8 +3,13 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'RECIPE';
+  loadedFeature = 'recipe';
+
+  onNavigate(feature: string) {
+    console.log('checking header ii ' + feature);
+    this.loadedFeature = feature;
+  }
 }

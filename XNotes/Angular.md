@@ -45,6 +45,7 @@
 
 `ng g m NewMoudle` to generate a module.  
 `ng g c new-module/new-component` to create NewComponent with the entry tagged to the new-module.
+`ng g c new-module` to create component with the same name as the module.
 `ng g c new-module/new-component --module=new-module.module` to explicitly mention
 
 #### Skipping .spec testing files
