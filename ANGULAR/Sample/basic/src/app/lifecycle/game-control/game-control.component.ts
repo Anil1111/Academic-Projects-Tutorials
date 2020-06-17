@@ -8,24 +8,24 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class GameControlComponent implements OnInit {
   counter = 0;
-  counterGenerator = setInterval(this.generateNumbers, 1000);
+  counterGenerator;
   @Output() numberEmitter = new EventEmitter<number>();
 
   constructor() { }
 
   ngOnInit(): void {
   }
-  startGame() {
-    this.counterGenerator;
+  onStartGame() {
+    this.counterGenerator = setInterval(() => {
+      this.counter++;
+      this.numberEmitter.emit(this.counter);
+    }, 1000);
   }
 
-  stopGame() {
+  onStopGame() {
     clearInterval(this.counterGenerator);
   }
 
-  generateNumbers() {
-    this.counter++;
-    this.numberEmitter.emit(this.counter);
-  }
+
 
 }

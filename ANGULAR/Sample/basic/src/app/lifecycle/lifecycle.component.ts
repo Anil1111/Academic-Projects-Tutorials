@@ -9,6 +9,8 @@ export class LifecycleComponent implements OnInit {
   serverElements = [
     { type: 'server', name: 'Test server', content: 'Just a test!' },
   ];
+  oddNumbers: number[] = [];
+  evenNumbers: number[] = [];
 
   ngOnInit(): void {}
 
@@ -38,5 +40,17 @@ export class LifecycleComponent implements OnInit {
 
   onNumberEmitted(counter: number) {
     console.log(counter);
+    if (counter % 2 === 0) {
+      this.evenNumbers.push(counter);
+      return;
+    }
+    this.oddNumbers.push(counter);
+  }
+
+  getColorOrClass(counter: number) {
+    if (counter % 2 === 0) {
+      return true;
+    }
+    return 'blue';
   }
 }

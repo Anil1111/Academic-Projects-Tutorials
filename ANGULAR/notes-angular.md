@@ -228,6 +228,24 @@ export class ServersComponent implements OnInit {
 </div>
 ```
 
+```html
+    <p *ngFor="let counter of paraClickCounter; let counterIndex =index"
+      [ngStyle]="assignColor(counterIndex)"
+      [ngClass]="assignClass(counterIndex)">
+      {{counter}}
+    </p>
+```
+
+Corresponding TS file
+
+```typescript
+  assignColor(counterIndex: number){
+    return {
+      backgroundColor: counterIndex >= 4 ? 'blue' : 'transparent'
+    }
+  }
+```
+
 ### Attribute directives - ngClass
 
 - It allows us to change the css classes dynamically by attaching/removinf a class based on an expression
@@ -235,13 +253,28 @@ export class ServersComponent implements OnInit {
 
 ```html
 <div class="container">
-  <p [ngStyle]="{ backgroundColor: getColor() }"
-     [ngClass]="{online: serverStatus === 'online'}">
+  <p [ngClass]="{online: serverStatus === 'online'}">
       <!-- = { 'online-some-text': serverStatus === 'online'} -->
         Server with {{'ID'}}
     {{serverId}} is {{getServerStatus()}}
   </p>
 </div>
+```
+
+```html
+    <p *ngFor="let counter of paraClickCounter; let counterIndex =index"
+      [ngStyle]="assignColor(counterIndex)"
+      [ngClass]="assignClass(counterIndex)">
+      {{counter}}
+    </p>
+```
+
+Corresponding TS file
+
+```typescript
+  assignClass(counterIndex: number){
+    return {'white-text': (counterIndex >= 4) };
+  }
 ```
 
 ### Combined example
