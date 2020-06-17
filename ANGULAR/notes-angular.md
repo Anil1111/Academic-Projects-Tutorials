@@ -178,6 +178,16 @@ import { FormsModule } from '@angular/forms';
 - They are instructions in the DOM. Components are such instructions which requires angular to add content.
 - There are couple of built in directives like:
 
+```html
+  <div *ngIf="onlyOdd">
+    <li class="list-group-item"
+      *ngFor="let oddNumber of oddNumbers"
+      [ngClass]="{'odd': oddNumber%2 !== 0}"
+      [ngStyle]="{backgroundColor: oddNumber%2 !== 0? 'yellow': 'trnaasparent'}"
+    >{{oddNumber}}</li>
+  </div>
+```
+
 ### Structural Directive - *ngIf
 
 It either adds the HTML element into the DOM or does not.
@@ -306,6 +316,9 @@ Corresponding TS file
     return {'white-text': (counterIndex >= 4) };
   }
 ```
+
+### Custom Directives
+
 
 ## Databinding - Communication between components
 

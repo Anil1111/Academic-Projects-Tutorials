@@ -40,6 +40,7 @@
     - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
 2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
 3. `ng g m <<moduleName>>` generates a module
+4. `ng g d <<directiveName>>` generates a directive
 
 #### Generating components specific to a module
 
