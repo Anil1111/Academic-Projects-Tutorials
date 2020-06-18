@@ -27,6 +27,8 @@
 7. `src/test.ts` starting point for running the unit test
 8. `angular.json` all the angular cli commands are defined
 
+## [Boostrap configuraiton in Angular](./Bootstrap.md)
+
 ## NG Commands
 
 ### ng add
@@ -44,10 +46,11 @@
 
 #### Generating components specific to a module
 
-`ng g m NewMoudle` to generate a module.  
-`ng g c new-module/new-component` to create NewComponent with the entry tagged to the new-module.
-`ng g c new-module` to create component with the same name as the module.
-`ng g c new-module/new-component --module=new-module.module` to explicitly mention
+- `ng g m NewMoudle` to generate a module.  
+- `ng g c new-module/new-component` to create NewComponent with the entry tagged to the new-module.
+- `ng g c new-module` to create component with the same name as the module.
+- `ng g c new-module/new-component --module=new-module.module` to explicitly mention
+- `ng g d directiveName/directive-name` to crate a new folder and add the directive to it
 
 #### Skipping .spec testing files
 

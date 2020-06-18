@@ -175,6 +175,8 @@ import { FormsModule } from '@angular/forms';
 
 ## Directives
 
+### Basic Syntax
+
 - They are instructions in the DOM. Components are such instructions which requires angular to add content.
 - There are couple of built in directives like:
 
@@ -188,7 +190,7 @@ import { FormsModule } from '@angular/forms';
   </div>
 ```
 
-### Structural Directive - *ngIf
+### Structural Directive - `*ngIf`
 
 It either adds the HTML element into the DOM or does not.
 
@@ -208,7 +210,7 @@ It either adds the HTML element into the DOM or does not.
     </div>
 ```
 
-### Structural Directive - *ngFor
+### Structural Directive - `*ngFor`
 
 ```html
 <app-server *ngFor="let server of servers"></app-server>
@@ -223,6 +225,17 @@ export class ServersComponent implements OnInit {
     this.servers.push(this.serverName);
   }
 
+```
+
+#### Suing `[ngSwitch]` structural directive
+
+```html
+    <div [ngSwitch]="counter">
+      <h6 *ngSwitchCase="5" class="text-info">Value is 5</h6>
+      <h6 *ngSwitchCase="10" class="text-info">Value is 10</h6>
+      <h6 *ngSwitchCase="15" class="text-info">Value is 15</h6>
+      <h6 *ngSwitchDefault class="text-info">Value is not mentioned</h6>
+    </div>
 ```
 
 ### Attribute directives - ngStyle
@@ -319,6 +332,206 @@ Corresponding TS file
 
 ### Custom Directives
 
+#### Basic Directive
+
+The below is `not` recommended as we are directly changing the DOM and might end up in error and therefore `render` needs to be used.
+
+- basic-highlight.directive.ts
+
+```typescript
+@Directive({
+  selector: '[appBasicHighlight]'
+  // [] tells angular to select the directive as an attribute
+})
+export class BasicHighlightDirective implements OnInit{
+
+  // getting access to the element on which the directive sits on
+  constructor(private elementRef: ElementRef) { }
+
+  ngOnInit() {
+    this.elementRef.nativeElement.style.backgroundColor = 'green';
+    // not the best practise
+  }
+}
+```
+
+- directives.component.html
+
+```html
+    <div class="col">
+      <!-- We do not use [], as we use it like an attribute -->
+      <p appBasicHighlight>Style me with basic directive</p>
+    </div>
+```
+
+- directives.module.ts
+
+```typescript
+@NgModule({
+  declarations: [
+    DirectivesComponent,
+    BasicHighlightDirective // declaring the directive added
+  ],
+```
+
+#### Using render in a directive
+
+Better approach of updating the DOM as there are several environments in angular including service workers where DOM is not available and thus render works everywhere.
+
+- better-highlight.directive.ts
+
+```typescript
+export class BetterHighlightDirective implements OnInit{
+  constructor(private elRef: ElementRef, private renderer: Renderer2) { }
+
+  ngOnInit() {
+    // setStyle method allows us to change the style of the DOM
+    // setStyle(elementReference, propertyToChange, value, anyFlags)
+    this.renderer.setStyle(this.elRef.nativeElement, 'backgroundColor', 'blue');
+  }
+
+}
+```
+
+```html
+      <p appBetterHighlight>Style me with a better directive</p>
+```
+
+#### Using HostListener to listen to host events
+
+```html
+    <p appBetterHighlight>Style me with a better directive</p>
+```
+
+```typescript
+  // mouseenter is the event supported by the DOM element
+  @HostListener('mouseenter') mouseenter(eventData: Event) {
+    this.renderer.setStyle(this.elRef.nativeElement, 'backgroundColor', 'blue');
+  }
+  @HostListener('mouseleave') mouseleave(eventData: Event) {
+    this.renderer.setStyle(this.elRef.nativeElement, 'backgroundColor', 'transparent');
+  }
+```
+
+#### Using HostBinding to bind to Host Properties
+
+Can bind to any property on the element the directive is attached to
+
+```typescript
+  // '' defines to which prooperty of hosting element we want to bind
+  // setting initial value to transparent
+  @HostBinding('style.backgroundColor') backgroundColor = 'transparent';
+
+
+  @HostListener('mouseenter') mouseenter(eventData: Event) {
+    // no need to use the renderer as we already have the `style.backgoroundColor` property binded to `backgroundColor`
+    this.backgroundColor = 'blue';
+  }
+  @HostListener('mouseleave') mouseleave(eventData: Event) {
+    this.backgroundColor = 'transparent';
+  }
+```
+
+#### Binding properties to directives
+
+If the directive itself must have a number of properties to which you want to bind some values using property binding.
+
+```html
+    <!-- Binding the properties from Directives using property binding  -->
+    <!-- The angular itself figures whether the property binding belongs to our own directrives or the template-->
+    <p appPropertyBindingHighlight
+      [defaultColor]="'pink'"
+      [highlightColor]="'orange'"
+    >Custom binding</p>
+```
+
+```typescript
+export class PropertyBindingHighlightDirective implements OnInit{
+  // directive that allows binding values to its custom properties
+  @Input() defaultColor = 'pink';
+  @Input() highlightColor = 'orange';
+
+  @HostBinding('style.backgroundColor') backgroundColor = this.defaultColor;
+  @HostBinding('style.color') color = 'white';
+
+  // mouseenter is the event supported by the DOM element
+  @HostListener('mouseenter') mouseenter(eventData: Event) {
+    this.backgroundColor = this.highlightColor;
+    this.color = 'black';
+  }
+  @HostListener('mouseleave') mouseleave(eventData: Event) {
+    this.backgroundColor = this.defaultColor;
+  }
+
+}
+```
+
+- Another variety with binding directly on the directive
+
+```html
+    <!-- If you provide an alias to any of the above properties as the name of the directive then you can omit and bind directly to the directive -->
+    <!-- can also use appPropertyBindingHighlight="orange" by removing the [] and ''-->
+    <p [appPropertyBindingHighlight]="'orange'"
+    [defaultColor]="'pink'"
+  >Custom binding</p>
+```
+
+```typescript
+  @Input('appPropertyBindingHighlight') highlightColor = 'orange';
+```
+
+#### What is * used on structural directives
+
+```html
+    <div *ngIf="onlyOdd">
+      <h6 class="text-info">Example of structural directive without *</h6>
+    </div>
+```
+
+- Is internally transformed into:
+
+```html
+    <!-- The below is an example of ngIf without * as angular internally does this conversion for us-->
+    <ng-template [ngIf]="onlyOdd">
+      <h6 class="text-info">Example of structural directive without *</h6>
+    </ng-template>
+```
+
+#### Creating custom structural directive
+
+Example of `*appUnless` as an alternative to `*ngIf`
+
+```typescript
+@Directive({
+  selector: '[appUnless]'
+})
+export class UnlessDirective {
+  // set converts appUnless into a setter method that gets executed whenever unless changes from outside
+  // must share the same name as the directive name as we are property binding on [appUnless] (which is derived from *appUnless) externally
+  @Input() set appUnless(condition: boolean) {
+    if (!condition) {
+      this.vcRef.createEmbeddedView(this.templateRef);
+      return;
+    }
+    this.vcRef.clear();
+  }
+
+  // since structural directives get converted into ng-template behind the scenes, we need access to the templateRef
+  // unlike element ref for access to only the element
+  // constructor takes the WHAT - TemplateRef, WHERE - ViewContainer
+  constructor(
+    private templateRef: TemplateRef<any>,
+    private vcRef: ViewContainerRef
+  ) { }
+
+}
+```
+
+```html
+    <div *appUnless="!onlyOdd">
+      <h6 class="text-warning">Example of custom structural directive</h6>
+    </div>
+```
 
 ## Databinding - Communication between components
 

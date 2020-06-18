@@ -22,10 +22,51 @@
           >{{evenNumber}}</li>
           </div>
         </ul>
+        <!-- The below is an example of ngIf without * as angular internally does this conversion for us-->
         <ng-template [ngIf]="onlyOdd">
-          <p>Only odd</p>
+          <h6 class="text-info">Example of structural directive without *
+          </h6>
         </ng-template>
+
+        <div *appUnless="!onlyOdd">
+          <h6 class="text-warning">Example of custom structural directive</h6>
+        </div>
+
+        <div [ngSwitch]="counter">
+          <h6 *ngSwitchCase="5" class="text-info">Value is 5</h6>
+          <h6 *ngSwitchCase="10" class="text-info">Value is 10</h6>
+          <h6 *ngSwitchCase="15" class="text-info">Value is 15</h6>
+          <h6 *ngSwitchDefault class="text-info">Value is not mentioned</h6>
+        </div>
+        
       </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <!-- We do not use [], as we use it like an attribute -->
+      <p appBasicHighlight>Style me with a basic directive</p>
+
+      <!-- Using the hostlistener and renderer, it appears `blue` when hovered over it and becomes `transparent` on leaving -->
+      <p appBetterHighlight>Style me with a better directive</p>
+
+      <!-- Using the hostlistener and hostbinding -->
+      <p appHostBindingHighlight>Style me with a hostbinding  directive</p>
+
+      <!-- Binding the properties from Directives using property binding  -->
+      <!-- The angular itself figures whether the property binding belongs to our own directrives or the template-->
+      <p appPropertyBindingHighlight
+        [defaultColor]="'pink'"
+        [highlightColor]="'orange'"
+      >Custom binding</p>
+
+      <!-- If you provide an alias to any of the above properties as the name of the directive then you can omit and bind directly to the directive -->
+      <!-- <p [appPropertyBindingHighlight]="'orange'"
+      [defaultColor]="'pink'"
+      >Custom binding</p> -->
+
+
+
     </div>
   </div>
 </div>
