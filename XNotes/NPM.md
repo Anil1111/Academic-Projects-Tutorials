@@ -93,3 +93,5 @@
     - `ng add @angular/material` installing angular material
     - `npm i highcharts-angular` installing highcharts for angular
     - `npm i @angular/flex-layout @angular/cdk` for flex support
+21. **General**
+    - `npm i g npx` installing npx

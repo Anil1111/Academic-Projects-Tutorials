@@ -874,3 +874,72 @@ export class ServerElement2Component
 
 - Executed whenever the component is destroyed (eg- `*ngIf`)
 - Place to do clean up work before the object is removed
+
+## Services
+
+Should never be used by simple instantiation of the respective class. Can be used for the following circumstances:
+
+- Logging
+- Data Storage
+- Component communication
+
+### What is Hierarchical Injector / Dependency Injector
+
+It injects an instance of the service class to a component which is dependent on the functionality provided by the instance.
+
+#### Without @Injectable decorator
+
+logging.service.ts
+
+```typescript
+export class LoggingService {
+
+  logStatusChange(status: string) {
+    console.log('A server status changed, new status: ' + status);
+  }
+}
+```
+
+Component on which you will inject the logging service
+
+```typescript
+@Component({
+  selector: 'app-new-account',
+  templateUrl: './new-account.component.html',
+  styleUrls: ['./new-account.component.css'],
+  providers: [LoggingService] // we tell angular how to create the loggingService
+})
+export class NewAccountComponent {
+  @Output() accountAdded = new EventEmitter<{name: string, status: string}>();
+
+  // we append the service into the constructor to instantiate it and let the angular know how to handle loggingService
+  constructor(private loggingService: LoggingService) {};
+
+  onCreateAccount(accountName: string, accountStatus: string) {
+    this.accountAdded.emit({
+      name: accountName,
+      status: accountStatus
+    });
+    // console.log('A server status changed, new status: ' + accountStatus);
+    this.loggingService.logStatusChange(accountStatus);
+  }
+}
+```
+
+#### With @Injectable decorator
+
+logging.service.ts
+
+```typescript
+
+```
+
+Component on which you will inject the logging service
+
+```typescript
+```
+
+Changes to services.module.ts
+
+```typescript
+```

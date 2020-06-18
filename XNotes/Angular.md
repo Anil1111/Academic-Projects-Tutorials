@@ -38,11 +38,11 @@
 
 ### ng generate
 
-1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component
+1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component in existing folder
     - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
-2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service
-3. `ng g m <<moduleName>>` generates a module
-4. `ng g d <<directiveName>>` generates a directive
+2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service in existing folder
+3. `ng g m <<moduleName>>` generates a module in a new folder
+4. `ng g d <<directiveName>>` generates a directive in existing folder
 
 #### Generating components specific to a module
 

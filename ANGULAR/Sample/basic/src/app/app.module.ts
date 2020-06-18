@@ -9,6 +9,7 @@ import { BasicModule } from './basic/basic.module';
 import { DatabindingModule } from './databinding/databinding.module';
 import { LifecycleModule } from './lifecycle/lifecycle.module';
 import { DirectivesModule } from './directives/directives.module';
+import { ServicesModule } from './services/services.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { DirectivesModule } from './directives/directives.module';
     BasicModule,
     DatabindingModule,
     LifecycleModule,
-    DirectivesModule
+    DirectivesModule,
+    ServicesModule
   ],
   providers: [],
   bootstrap: [AppComponent]

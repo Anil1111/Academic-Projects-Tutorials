@@ -1,5 +1,9 @@
 # NPX
 
+## Installing NPX globally
+
+`npm i -g npx`
+
 ## Why NPX
 
 - npx is a tool for running npm packages that live inside of a _local_ `node_modules` folder or are not installed globally.

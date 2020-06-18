@@ -5,6 +5,7 @@ import { BasicComponent } from './basic/basic.component';
 import { DatabindingComponent } from './databinding/databinding.component';
 import { LifecycleComponent } from './lifecycle/lifecycle.component';
 import { DirectivesComponent } from './directives/directives.component';
+import { ServicesComponent } from './services/services.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'databinding', component: DatabindingComponent},
   {path: 'lifecycle', component: LifecycleComponent},
   {path: 'directives', component: DirectivesComponent},
+  {path: 'services', component: ServicesComponent},
   {path: '**', component: ErrorComponent}
 ];
 
