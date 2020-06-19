@@ -892,6 +892,7 @@ Services can be injected at different hierarchies including:
 Therefore, we need to be careful about adding the services to the `providers` array as it creates a new instance wherever mentioned. Thus, if you are dealing with the same dataset and making multiple changes to it from different components, it is advisable to have it provided in the top most compinent. But instantiating the service in constructor is still required.
 
 >By providing the service on the root/custom root module allows us to use services on other services. For such cases it is mandatory to provide the `@Injectable` decorator on top for services where other services need to be injected. Others it is optional but recommended.
+**No need to append the declared services on the providers array of the module**
 
 ### What is Hierarchical Injector / Dependency Injector
 
@@ -1001,6 +1002,7 @@ export class ServicesComponent implements OnInit{
   }
 }
 ```
+
 Changes to services.module.ts
 
 ```typescript
@@ -1047,7 +1049,9 @@ export class NewAccountComponent {
   constructor(
     private loggingService: LoggingService,
     private accountsService: AccountsService
-  ) {
+  ) {  }
+
+  ngOnInit() {
     // subscribing to the event emitted by the service
     this.accountsService.statusUpdated.subscribe((status: string) => {
       console.log('New Status:' + status);
@@ -1056,3 +1060,213 @@ export class NewAccountComponent {
 
 }
 ```
+
+#### Example where you wish to NOT send the reference to the object in services
+
+```typescript
+export class RecipeService {
+  private recipes: Recipe[] = [
+    new Recipe('A test recipe', 'Simply a test', '../../../assets/images/recipe1.jpg'),
+    new Recipe('Another recipe', 'Simply another test', '../../../assets/images/recipe2.jpg'),
+  ];
+
+  getRecipes() {
+    // returning this.recipes will send the reference to the recipes list defined here
+    // therefore any modification will be reflected on this main list
+    // we use the slice() method to return a new recipes array
+    return this.recipes.slice();
+  }
+}
+```
+
+## Routing
+
+Provides navigation support to an angular project
+
+### Syntax of `app-routing.module.ts`
+
+```typescript
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [
+  {path: '', component: BasicComponent}, // initial component that will be loaded at http://localhost:portNo/; BasicComponent will replace the contents of <router-outlet> in app.component.html;
+  // <router-outlet> reuires importing the RouterModule in app.module.ts if routers need to be enabled in non root directory
+  {path: 'databinding', component: DatabindingComponent}, // path http://localhost:portNo/databinding will get mapped
+  ...
+  {path: '**', component: ErrorComponent} // path ** corresponds to any BAD URL that cannot be taken care by angular as no existing routes matches;
+  // it must come last in this array
+];
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)], // denotes that routes provides routing in root of the app
+  exports: [RouterModule]
+})
+export class AppRoutingModule { }
+```
+
+Corresponding `app.module.ts`
+
+```typescript
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { AppRoutingModule } from './app-routing.module';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    ErrorComponent
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule, // makes the exported routing available throughout the app
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+```
+
+Corresponding `app-sub-directory.module.ts`
+
+```typescript
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [];
+
+@NgModule({
+  imports: [RouterModule.forChild(routes)], // routermodule is now imported for the children
+  exports: [RouterModule]
+})
+export class RoutingRoutingModule { }
+```
+
+### Using Routerlinks
+
+Router links enables routing without reloading of the page, preventing the default behavior of links and checks the route configuraiton(`app-routing.module.ts`) to determine the matched route.
+
+```html
+  <ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link active" routerLink="/routing">Home</a></li>
+    <!-- is same as -->
+    <!-- <li class="nav-item"><a class="nav-link active" routerLink="./">Home</a></li> -->
+
+    <li class="nav-item"><a class="nav-link" routerLink="/routing/servers">Servers</a></li>
+    <!-- is same as -->
+    <!-- <li class="nav-item"><a class="nav-link" routerLink="./servers">Servers</a></li> -->
+    <!-- <li class="nav-item"><a class="nav-link" routerLink="servers">Servers</a></li> -->
+
+    <!-- If we use the porperty binding notation, then we need to use strings inside it -->
+    <!-- [] allows us to provide complex paths -->
+    <li class="nav-item"><a class="nav-link" [routerLink]="['/routing/users']">Users</a></li>
+    <!-- is same as -->
+    <!-- <li class="nav-item"><a class="nav-link" [routerLink]="['/routing/users']">Users</a></li> -->
+  </ul>
+```
+
+### Navigation Paths
+
+#### Absolute Path
+
+Where the routerLink starts with `/`, it denotes from the root URL. Since it is an absolute path, the working component from which it is called has no effect.  
+**The routerLink gets added to `/`**
+
+- Mentioning `/` corresponds to `http://localhost:4200/`  
+- Mentioning `/routing` corresponds to `http://localhost:4200/routing`  
+
+```html
+<li class="nav-item"><a class="nav-link active" routerLink="/routing">Home</a></li>
+```
+
+#### Relative Path
+
+Where the router link starts with `./` or `NO /`, it does NOT denote the root URL. Since it is a relative path, the working component has an effect on the final router link. Assuming we are on `http://localhost:4200/routes`  
+**The routerLink gets appended to existing path**
+
+- Mentioning `./` corresponds to `http://localhost:4200/routes` itself
+- Mentioning `./routing` corresponds to `http://localhost:4200/routes/routing` itself
+- Mentioning `routing` corresponds to `http://localhost:4200/routes/routing`
+
+#### Using `../` relative path
+
+Where the router link starts with `../`, it does NOT denote the root URL. Since it is a relative path, the working component has an effect on the final router link. Assuming we are on `http://localhost:4200/routes`. Assuming we are on `http://localhost:4200/routes`  
+**The routerLink gets moved on level up from existing component**
+
+- Mentioning `../routing` corresponds to `http://localhost:4200/routing` itself
+- If existing component is `/routing/1` then Mentioning `../routing` corresponds to `http://localhost:4200/routing` as `/routing/1` is the same component
+
+### Using Active router link
+
+The `routerLinkActive` option automatically checks the route URL to identify which routes are activated currently and uses it to assign the given class to the html class.
+
+- `routerLinkActive="active"` where active can be any class of choice which will dynamically get appended to the element on which it is defined.
+
+Since the `root` component or likewise cases can be used to form other routes, they will always be identified as active. So we should add the additional attribute of `routerLinkActiveOptions`  
+
+- `[routerLinkActiveOptions]="{exact: true}"` tells angular to check for exact matches of route.  
+- For `http://localhost:4200/routes` has two active router links namely `/` and `/routes`. So as to avoid `/` from being the active we should use `routerLinkActiveOptions`  
+
+```html
+  <ul class="nav nav-tabs">
+    <li class="nav-item">
+      <a class="nav-link"
+        routerLink="./"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact: true}"
+      >Home</a></li>
+    <li class="nav-item"><a class="nav-link" routerLink="./servers" routerLinkActive="active">Servers</a></li>
+    <li class="nav-item"><a class="nav-link" [routerLink]="['./users']" routerLinkActive="active">Users</a></li>
+  </ul>
+```
+
+### Navigating programmatically
+
+Enables Navigation from the TS Code
+
+#### Absolute Routing promgrammatically
+
+```html
+<button class="btn btn-primary" (click)="onLoadServers()">Load Server</button>
+```
+
+```typescript
+export class HomeComponent implements OnInit {
+  constructor(private router: Router) { } // instantiate the router
+  onLoadServers() {
+    // performing complex calculation in TS
+
+    //navigating using the absolute path
+    // relative path is not supported in the below syntax variant
+    this.router.navigate(['/routing/servers']);
+  }
+}
+```
+
+#### Relative Routing promgrammatically
+
+```typescript
+export class ServersComponent implements OnInit {
+  constructor(
+    private serversService: ServersService,
+    private router: Router,
+    private route: ActivatedRoute // provides information regarding the current route as router isnt aware of it
+  ) {}
+
+  onReload() {
+    // the below now supports relative paths as we provide the options { relativeTo: this.route }
+    this.router.navigate(['./servers'], { relativeTo: this.route });
+  }
+}
+
+```
+
+### Passing parameters to Routes
+
+`app-routing.component.ts`
+
+```typescript
+  {path: 'user/:id', component: UserComponent},
+```
+
+### Fetching route parameters

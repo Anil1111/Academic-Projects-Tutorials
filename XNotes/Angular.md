@@ -38,11 +38,15 @@
 
 ### ng generate
 
-1. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component in existing folder
+1. `ng g m <<moduleName>>` generates a module in a new folder with the name of the module
+    - if you now generate a component with the same name as the module, the component gets added to the folder(`<<moduleName>>`) created by the module
+    - `ng g m <<moduleName>> --routing` for creating a module with specific routing files configured with the module.ts file; it will be auto imported in the module.ts
+    - All non root modules need to be imported into the `import` array of the `app.module.ts`
+2. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component in existing folder if existing or creates a new folder(`<<componentName>>`); the component gets added directly into the `declaration` array of the module.ts file
     - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
-2. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service in existing folder
-3. `ng g m <<moduleName>>` generates a module in a new folder
-4. `ng g d <<directiveName>>` generates a directive in existing folder
+3. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service in existing folder; the service doesnt get appended into the module.ts file
+
+4. `ng g d <<directiveName>>` generates a directive in existing folder; the directive gets added to the `declaration` array of the module
 
 #### Generating components specific to a module
 
@@ -51,6 +55,10 @@
 - `ng g c new-module` to create component with the same name as the module.
 - `ng g c new-module/new-component --module=new-module.module` to explicitly mention
 - `ng g d directiveName/directive-name` to crate a new folder and add the directive to it
+
+#### Generating module with routing files
+
+- `ng g m <<moduleName>> --routing` for creating a module with specific routing files configured with the module.ts file; it will be auto imported in the module.ts
 
 #### Skipping .spec testing files
 

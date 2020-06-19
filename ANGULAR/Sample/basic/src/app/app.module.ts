@@ -10,6 +10,7 @@ import { DatabindingModule } from './databinding/databinding.module';
 import { LifecycleModule } from './lifecycle/lifecycle.module';
 import { DirectivesModule } from './directives/directives.module';
 import { ServicesModule } from './services/services.module';
+import { RoutingModule } from './routing/routing.module';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { ServicesModule } from './services/services.module';
     DatabindingModule,
     LifecycleModule,
     DirectivesModule,
-    ServicesModule
+    ServicesModule,
+    RoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,20 @@
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <ul class="nav nav-tabs">
+        <li class="nav-item"><a class="nav-link" routerLink="./" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+        <li class="nav-item"><a class="nav-link" routerLink="./servers" routerLinkActive="active">Servers</a></li>
+        <!-- If we use the porperty binding notation, then we need to use strings inside it -->
+        <li class="nav-item"><a class="nav-link" [routerLink]="['./users']" routerLinkActive="active">Users</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+</div>
