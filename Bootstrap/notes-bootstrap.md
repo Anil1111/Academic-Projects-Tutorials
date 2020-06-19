@@ -1,5 +1,19 @@
 # Bootstrap
 
+## Generic
+
+### Anchor Tags
+
+#### Remove underline
+
+`<a class="text-decoration-none" href="#">Link</a>`
+
+#### How to avoid click event on Anchor tag from firing and redirecting to # page
+
+```html
+<a class="text-decoration-none" href="javascript:void(0)" (click)="someEvent(i)">Set to Active</a>
+```
+
 ## Content
 
 ### Image
@@ -27,6 +41,7 @@
 
 - To remove the `underline` from Link  
 `<a href="#" class="text-decoration-none">Non-underlined link</a>`
+
 
 
 

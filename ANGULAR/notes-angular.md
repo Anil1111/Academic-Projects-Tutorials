@@ -883,6 +883,16 @@ Should never be used by simple instantiation of the respective class. Can be use
 - Data Storage
 - Component communication
 
+Services can be injected at different hierarchies including:
+
+- `AppModule` same instance of service is available application wide
+- `AppComponent` same instance of service is available for all components (all children components) but not other services
+- `Any Other component` same instance of service is available for all components and its children
+
+Therefore, we need to be careful about adding the services to the `providers` array as it creates a new instance wherever mentioned. Thus, if you are dealing with the same dataset and making multiple changes to it from different components, it is advisable to have it provided in the top most compinent. But instantiating the service in constructor is still required.
+
+>By providing the service on the root/custom root module allows us to use services on other services. For such cases it is mandatory to provide the `@Injectable` decorator on top for services where other services need to be injected. Others it is optional but recommended.
+
 ### What is Hierarchical Injector / Dependency Injector
 
 It injects an instance of the service class to a component which is dependent on the functionality provided by the instance.
@@ -907,7 +917,7 @@ Component on which you will inject the logging service
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
-  providers: [LoggingService] // we tell angular how to create the loggingService
+  providers: [LoggingService] // we tell angular how to create the loggingService; this creates a new instance of the Logging Service
 })
 export class NewAccountComponent {
   @Output() accountAdded = new EventEmitter<{name: string, status: string}>();
@@ -928,18 +938,121 @@ export class NewAccountComponent {
 
 #### With @Injectable decorator
 
-logging.service.ts
+accounts.service.ts
 
 ```typescript
+@Injectable({
+  providedIn: 'root'
+}) // adding @injectable directive to allow other services to be injected into this service
+export class AccountsService {
+  accounts: Account[] = [
+    new Account('Master Account', 'active'),
+    new Account('Test Account', 'inactive'),
+    new Account('Hidden Account', 'unknown'),
+  ];
 
+  constructor(private loggingService: LoggingService) { }
+
+  addAccount(account: Account) {
+    this.accounts.push(account);
+    this.loggingService.logStatusChange(account.status);
+  }
+
+  updateStatus(id: number, status: string) {
+    this.accounts[id].status = status;
+    this.loggingService.logStatusChange(status);
+  }
+}
 ```
-
-Component on which you will inject the logging service
 
 ```typescript
+@Injectable({
+  providedIn: 'root'
+}) // @Injectable decorator is optional as no services injected here
+export class LoggingService {
+
+  logStatusChange(status: string) {
+    console.log('A server status changed, new status: ' + status);
+  }
+}
 ```
 
+Component on which you will inject the accounts service
+
+```typescript
+@Component({
+  selector: 'app-account',
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.css'],
+})
+export class AccountComponent {
+  ...
+}
+```
+
+```typescript
+export class ServicesComponent implements OnInit{
+  accounts: Account[] = [];
+
+  constructor(private accountsService: AccountsService, private usersService: UsersService) {}
+
+  ngOnInit() {
+    this.accounts = this.accountsService.accounts; // always perform initialisation from the service data in ngOnInit and not the constructor
+  }
+}
+```
 Changes to services.module.ts
 
 ```typescript
+@NgModule({
+  declarations: [ServicesComponent, AccountComponent, NewAccountComponent],
+  imports: [CommonModule, FormsModule],
+  providers: [] // no changes required in case we place the @Injectable({ providedIn: 'root'})
+})
+export class ServicesModule {}
+```
+
+### Using services for cross component communication
+
+accounts.service.ts
+
+```typescript
+export class AccountsService {
+  statusUpdated = new EventEmitter<string>(); // defining the eventemitter to enable cross component communication
+  ...
+}
+```
+
+account.component.ts
+
+```typescript
+export class AccountComponent {
+  @Input() account: {name: string, status: string};
+  @Input() id: number;
+
+  constructor(private loggingService: LoggingService, private accountsService: AccountsService) {}
+
+  onSetTo(status: string) {
+    this.accountsService.updateStatus(this.id, status); // emitting the event from the service whenever the account component changes
+    this.accountsService.statusUpdated.emit(status);
+  }
+
+}
+```
+
+new-account.component.ts
+
+```typescript
+export class NewAccountComponent {
+  constructor(
+    private loggingService: LoggingService,
+    private accountsService: AccountsService
+  ) {
+    // subscribing to the event emitted by the service
+    this.accountsService.statusUpdated.subscribe((status: string) => {
+      console.log('New Status:' + status);
+    });
+  }
+
+}
 ```
