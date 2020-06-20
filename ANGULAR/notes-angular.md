@@ -1144,7 +1144,7 @@ export class RoutingRoutingModule { }
 
 ### Using Routerlinks
 
-Router links enables routing without reloading of the page, preventing the default behavior of links and checks the route configuraiton(`app-routing.module.ts`) to determine the matched route.
+Routerlink is a directive that enables routing without reloading of the page, preventing the default behavior of links and checks the route configuraiton(`app-routing.module.ts`) to determine the matched route.
 
 ```html
   <ul class="nav nav-tabs">
@@ -1195,6 +1195,10 @@ Where the router link starts with `../`, it does NOT denote the root URL. Since 
 
 - Mentioning `../routing` corresponds to `http://localhost:4200/routing` itself
 - If existing component is `/routing/1` then Mentioning `../routing` corresponds to `http://localhost:4200/routing` as `/routing/1` is the same component
+
+#### For [routerLink]="['/routing/users']"
+
+Here realative paths will only work if the routerLink is operating on the parent components URL, otherwise relative paths will not work but will just get appended.
 
 ### Using Active router link
 
@@ -1270,3 +1274,284 @@ export class ServersComponent implements OnInit {
 ```
 
 ### Fetching route parameters
+
+- **Route params are always of TYPE string and may need to be converted into desired type**
+
+```typescript
+  {path: 'user/:id/:name', component: UserComponent},
+```
+
+```typescript
+export class UserComponent implements OnInit {
+  user: {id: number, name: string};
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    // below method works to use the route params in URL to construct the view
+    // any reload of page with a different set of params matching the URL pattern will not update the view
+    this.user = {
+      id: this.route.snapshot.params['id'],
+      name: this.route.snapshot.params['name']
+    };
+  }
+}
+```
+
+```html
+  <p>User with ID {{user.id}} loaded.</p>
+  <p>User name is {{user.name}}</p>
+```
+
+### Fetching route parameters reactively
+
+Allows handling of any change in route params. Using subscribe to allow any reload of page with a different set of params matching the current URL pattern to update the view.
+
+```typescript
+export class UserComponent implements OnInit {
+  user: {id: number, name: string};
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const id = 'id';
+    const name = 'name';
+    this.user = {
+      id: this.route.snapshot.params[id],
+      name: this.route.snapshot.params[name]
+    };
+    // route.params return an observable
+    // subscribing to allow loading of the view with different/cahnged route params that will cause angular to detect any change in URL
+    // for making [routerLink]="['/routing/users', 10, 'Anna']" to work
+    this.route.params.subscribe((params: Params) => {
+      this.user.id = params[id];
+      this.user.name = params[name];
+    });
+  }
+}
+```
+
+```html
+<!-- providing absolute path ['/routing/users', 10, 'Anna'] is an alternative -->
+<!-- Below relative path requires going up 3 levels, each for user,id and name -->
+<a [routerLink]="['../../../users', 10, 'Anna']">Load Anna with ID 10</a>
+```
+
+#### Automatic Unsubscribing by Angular
+
+Anngular removes the subscription when the component is destroyed. We can simulate it manually using:
+
+```typescript
+import { Subscription } from 'rxjs';
+
+export class UserComponent implements OnInit, OnDestroy {
+  user: {id: number, name: string};
+  paramsSubscription: Subscription;
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    this.paramsSubscription = this.route.params.subscribe((params: Params) => {
+      this.user.id = params[id];
+      this.user.name = params[name];
+    });
+  }
+
+  ngOnDestroy() {
+    this.paramsSubscription.unsubscribe();
+  }
+}
+```
+
+### Passing Query Parameters and fragments
+
+#### Usage in HTML
+
+- `Query params` are of the format `http://localhost:4200/routes?mode=editing` where mode is a query param. Represented by a `#`.  
+- `Fragments params` are of the format `http://localhost:4200/routes?mode=editing#bottom` where bottom is a query fragment. Represented by a `#`.
+
+```html
+  <!-- [queryParams] is a bindable property on the routerLink directive that takes a key value pair to create URL?allowEdit=1 -->
+  <!-- [fragment] is a bindable property on the routerLink directive that takes only a single value to create URL?#loading -->
+
+<!-- we can also write fragment="loading" -->
+
+  <a
+    [routerLink]="['./',5, 'edit']"
+    [queryParams]="{allowEdit: 1}"
+    [fragment]="'loading'"
+    href="javascript:void(0)"
+    class="list-group-item list-group-item-action"
+    *ngFor="let server of servers">
+    {{ server.name }}
+  </a>
+```
+
+#### Usage programmatically
+
+```html
+<button class="btn btn-primary mx-2" (click)="onLoadServer(1)">Load Server ID:1</button>
+```
+
+```typescript
+  onLoadServer(id: number) {
+    this.router.navigate(['./servers', id, 'edit'], {
+      relativeTo: this.route,
+      queryParams: { allowEdit: 1 },
+      fragment: 'loading',
+    });
+  }
+}
+```
+
+#### Retrieve Query Parameters and fragments
+
+```typescript
+  ngOnInit() {
+    // constants to use in the subscribe mthod
+    const id = 'id';
+    const allowEdit = 'allowEdit';
+    // outputting the params value
+    console.log('Query params is ' + this.route.snapshot.queryParams[allowEdit]);
+    console.log('Fragment is ' + this.route.snapshot.fragment);
+
+    this.route.queryParams.subscribe((params: Params) => {
+      console.log(params[allowEdit]);
+    });
+    this.route.fragment.subscribe();
+  }
+```
+
+#### Handling Query Params by preserving or merging
+
+```typescript
+  onEdit() {
+    this.router.navigate(
+      ['./edit'],
+      {
+        relativeTo: this.route,
+        queryParamsHandling: 'preserve'
+        // use the 'preserve' id you wish to preserve the original query params
+        // use the 'merge' if you wish to merge by adding new queryparams to the existing ones otherwise it will be overwritten
+      }
+    );
+  }
+```
+
+### Child Routes
+
+*-routing.module.ts
+
+```typescript
+const routes: Routes = [
+  {
+    path: 'routing',
+    component: RoutingComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      { path: 'users',
+        component: UsersComponent,
+        children: [
+          { path: ':id/:name', component: UserComponent },
+        ]
+      },
+      { path: 'servers',
+        component: ServersComponent,
+        children: [
+          { path: ':id', component: ServerComponent },
+          { path: ':id/edit', component: EditServerComponent },
+        ]
+      },
+    ],
+  },
+  { path: '**', component: ErrorComponent },
+];
+```
+
+Corresponding components where children paths are defined: Eg: ServerComponent
+
+```html
+  <div class="col-12 col-sm-4">
+    <!-- This new hook will be used by all the child routes of the servers component -->
+    <!-- The below will only show the server.component as it has been defined in the respective routing module -->
+    <router-outlet></router-outlet>
+
+    <!-- <button class="btn btn-primary" (click)="onReload()">Reload Servers</button>
+    <app-edit-server></app-edit-server>
+    <hr>
+    <app-server></app-server> -->
+  </div>
+</div>
+```
+
+### Redirecting and Wildcard requests
+
+```typescript
+  // will redirect the requests from `http://localhost:4200/redirect` to `http://localhost:4200/error`
+  { path: 'redirect', redirectTo: '/error' },
+
+  // should be placed at the end always, so that any routes not mentioned explicity can be handled
+  { path: '**', component: ErrorComponent },
+```
+
+#### Redirection with full path matching
+
+By default, Angular matches paths by prefix. That means, that the following route `''` will match both `/recipes` and just `/`.  
+`{ path: '', redirectTo: '/somewhere-else' }`  
+Of course every path starts with ''To fix this behavior, you need to change the matching strategy to "full" :
+`{ path: '', redirectTo: '/somewhere-else', pathMatch: 'full'}`
+Now, you only get redirected, if the full path is `''`
+
+## Route Guards
+
+Used for running logic/functionality that decides whether the defined routes should be accessible to a user or not. Such features are referred to as `guards` by angular.
+
+### Protecting routes using canActivate
+
+fake-auth.service.ts
+
+```typescript
+export class FakeAuthService {
+  loggedIn = false;
+
+  constructor() { }
+
+  // faking authentication
+  login() {
+    this.loggedIn = true;
+  }
+  logout() {
+    this.loggedIn = false;
+  }
+
+  // simulating the time taken to authenticate a user
+  isAuthenticated() {
+    const promise = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        return resolve(this.loggedIn);
+      }, 1000);
+    });
+    return promise; // will return false after 1s always
+  }
+}
+```
+
+auth-guard.service.ts
+
+```typescript
+export class AuthGuardService implements CanActivate {
+
+  constructor(private fakeAuthService: FakeAuthService, private router: Router) { }
+
+  // canActivate can run both asynchronously(Observable and Promise) or Synchronously(boolean)
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.fakeAuthService.isAuthenticated()
+      .then((authenticated: boolean) => {
+        if (authenticated) {
+          return true;
+        }
+        this.router.navigate(['/routing/']); // navigate back to root if not authenticated
+        return false;
+      });
+  }
+}
+```

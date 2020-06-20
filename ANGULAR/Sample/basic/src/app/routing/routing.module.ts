@@ -10,13 +10,20 @@ import { EditServerComponent } from './servers/edit-server/edit-server.component
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-
 @NgModule({
-  declarations: [RoutingComponent, UsersComponent, ServersComponent, HomeComponent, UserComponent, ServerComponent, EditServerComponent],
+  declarations: [
+    RoutingComponent,
+    UsersComponent,
+    ServersComponent,
+    HomeComponent,
+    UserComponent,
+    ServerComponent,
+    EditServerComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
-    RouterModule // added router module to support <router-outlet> in routing.component.html
-  ]
+    RouterModule, // added router module to support <router-outlet> in routing.component.html
+  ],
 })
-export class RoutingModule { }
+export class RoutingModule {}

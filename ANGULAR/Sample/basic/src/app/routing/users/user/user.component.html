@@ -1,2 +1,6 @@
 <p>User with ID {{user.id}} loaded.</p>
 <p>User name is {{user.name}}</p>
+
+<hr>
+<!-- providing absolute path as relative path wont work as the currently loaded component path and URL pattern does not match -->
+<a [routerLink]="['/routing/users', 10, 'Anna']">ReLoad Users with Anna-10</a>

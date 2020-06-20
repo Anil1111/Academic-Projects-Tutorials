@@ -1,7 +1,15 @@
 <div class="row">
   <div class="col-12 col-sm-4">
     <div class="list-group">
-      <a href="javascript:void(0)"
+
+      <!-- [queryParams] is a bindable property on the routerLink directive that takes a key value pair to create URL?allowEdit=1 -->
+      <!-- [fragment] is a bindable property on the routerLink directive that takes only a single value to create URL?#loading -->
+
+      <a
+        [routerLink]="['/routing/servers',server.id]"
+        [queryParams]="{allowEdit: server.id === 3 ? '1' : '0'}"
+        [fragment]="'loading'"
+        href="javascript:void(0)"
         class="list-group-item list-group-item-action"
         *ngFor="let server of servers">
         {{ server.name }}
@@ -9,9 +17,13 @@
     </div>
   </div>
   <div class="col-12 col-sm-4">
-    <button class="btn btn-primary" (click)="onReload()">Reload</button>
+    <!-- This new hook will be used by all the child routes of the servers component -->
+    <!-- The below will only show the server.component as it has been defined int he respective routing module -->
+    <router-outlet></router-outlet>
+
+    <!-- <button class="btn btn-primary" (click)="onReload()">Reload Servers</button>
     <app-edit-server></app-edit-server>
     <hr>
-    <app-server></app-server>
+    <app-server></app-server> -->
   </div>
 </div>
