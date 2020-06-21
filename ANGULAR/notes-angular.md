@@ -1507,6 +1507,33 @@ Used for running logic/functionality that decides whether the defined routes sho
 
 ### Protecting routes using canActivate
 
+app-routing.module.ts
+
+```typescript
+  { path: 'services', component: ServicesComponent },
+  {
+    path: 'routing',
+    component: RoutingComponent,
+    children: [
+      { path: '', component: HomeComponent },
+      {
+        path: 'users',
+        component: UsersComponent,
+        children: [{ path: ':id/:name', component: UserComponent }],
+      },
+      {
+        path: 'servers',
+        component: ServersComponent,
+        canActivate: [AuthGuardService], // protects the route 'servers' but not its child routes
+        children: [
+          { path: ':id', component: ServerComponent },
+          { path: ':id/edit', component: EditServerComponent },
+        ],
+      },
+    ],
+  },
+```
+
 fake-auth.service.ts
 
 ```typescript
@@ -1554,4 +1581,243 @@ export class AuthGuardService implements CanActivate {
       });
   }
 }
+```
+
+### Protecting routes using CanActivateChild
+
+*-routing.module.ts
+
+```typescript
+  {
+    path: 'servers',
+    component: ServersComponent,
+    canActivate: [AuthGuardService],
+    canActivateChild: [AuthGuardService],  // canActivateChild protects all the child routes of 'servers'
+    children: [
+      { path: ':id', component: ServerComponent },
+      { path: ':id/edit', component: EditServerComponent },
+    ],
+  },
+```
+
+auth-guard.service.ts
+
+```typescript
+export class AuthGuardService implements CanActivate, CanActivateChild {
+  constructor(private fakeAuthService: FakeAuthService, private router: Router) { }
+
+  // to protect the route along with the child routes
+  canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    return this.canActivate(route, state);
+  }
+}
+```
+
+### Controlling navigation with canDeactivate
+
+Used to check whether the user is accidently navigating away when either some changes have been made to inputs or changes not saved.
+
+*-routing.module.ts
+
+```typescript
+      {
+        path: 'servers',
+        component: ServersComponent,
+        // this path will be activated only when the UAthGuard returns true
+        canActivate: [AuthGuardService],
+        // canActivateChild all the child routes of 'servers'
+        canActivateChild: [AuthGuardService],
+        children: [
+          { path: ':id', component: ServerComponent },
+          {
+            path: ':id/edit',
+            component: EditServerComponent,
+            // on trying to navigate to another route from edit-server, the CanDeactivateGuardService is called
+            canDeactivate: [CanDeactivateGuardService],
+          },
+        ],
+      },
+```
+
+can-deactivate-guard.service.ts
+
+```typescript
+import { Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import {  CanDeactivate, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+
+// to ensure that CanDeactivateGuardService and edit-server.component have the method canDeactivate
+export interface CanComponentDeactivate {
+  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+}
+
+@Injectable({
+  providedIn: 'root',
+})
+export class CanDeactivateGuardService
+  implements CanDeactivate<CanComponentDeactivate> {
+  // implements CanDeactivate provided by angular
+  // it is a generic type that wraps our interface CanComponentDeactivate
+
+  // Defines the canDeactivate method forced by the CanDeactivate angular interface
+  // Method that will automatically called when user leaves the component
+  // the component needs to be of type CanComponentDeactivate ie should implement its canDeactivate method
+
+  canDeactivate(
+    component: CanComponentDeactivate,
+    currentRoute: ActivatedRouteSnapshot,
+    currentState: RouterStateSnapshot,
+    nextState?: RouterStateSnapshot // optional
+  ): Observable<boolean> | Promise<boolean> | boolean {
+
+    return component.canDeactivate(); // calls the canDeactivate of the edit-server component
+    // provides the connection between the guard and the component
+  }
+}
+```
+
+edit-server.component.ts
+
+```typescript
+export class EditServerComponent implements OnInit, CanComponentDeactivate {
+  server: { id: number; name: string; status: string };
+  serverName = '';
+  serverStatus = '';
+  allowEdit = false;
+  changesSaved = false; // provides information whether the updateServer button was clicked or not for configuring canDeactivate guard
+
+  onUpdateServer() {
+    this.serversService.updateServer(this.server.id, {
+      name: this.serverName,
+      status: this.serverStatus,
+    });
+    this.changesSaved = true;
+    this.router.navigate(
+      ['../'],
+      { relativeTo: this.route}
+    );
+  }
+
+  canDeactivate(): Observable<boolean> | Promise<boolean> | boolean {
+    if (!this.allowEdit) {
+      return true;
+    }
+    if ((this.serverName !== this.server.name && this.serverStatus !== this.server.status) || !this.changesSaved) {
+      return confirm('Do you want to discard the changes?');
+    }
+    return true;
+  };
+```
+
+### Passing STATIC data to a route
+
+*-app.routing.module.ts
+
+```typescript
+  {
+    path: 'not-found',
+    component: ErrorPageComponent,
+    data: { message: 'Page not found!' }, // passing static data in the route to display in ErrorPageComponent
+  },
+```
+
+error-page.component.html
+
+```html
+<h4 class="text-danger">{{errorMessage}}</h4>
+```
+
+error-page.component.ts
+
+```typescript
+export class ErrorPageComponent implements OnInit {
+  errorMessage: string;
+
+  constructor(private route: ActivatedRoute) { }
+
+  ngOnInit(): void {
+    const messageData = 'message';
+    this.errorMessage = this.route.snapshot.data[messageData]; // passed from the *-routing.module.ts
+    this.route.data.subscribe((error: Data) => {
+      this.errorMessage = error[messageData];
+    });
+  }
+
+}
+```
+
+### Passing DYNAMIC data to a route with the Resolve guard
+
+*-app.routing.module.ts
+
+```typescript
+      {
+        path: 'servers',
+        component: ServersComponent,
+        canActivate: [AuthGuardService],
+        canActivateChild: [AuthGuardService],
+        children: [
+          {
+            path: ':id',
+            component: ServerComponent,
+            // resolve is used to load any asynchronous data before the component is rendered
+            // data resolved will be saved in 'server'
+            resolve: { server: ServerResolverService },
+          },
+          {
+            path: ':id/edit',
+            component: EditServerComponent,
+            canDeactivate: [CanDeactivateGuardService],
+          },
+        ],
+      },
+```
+
+server-resolver.service.ts
+
+```typescript
+export class ServerResolverService implements Resolve<Server>{
+
+  constructor(private serversService: ServersService) { }
+
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Server> | Promise<Server> | Server {
+    const idParam = 'id';
+    return this.serversService.getServer(+route.params[idParam]);
+    // will perform loading of data will be performed before actual loading of the component
+    // can be used to return an observable/promise from a http request
+  }
+}
+```
+
+server.component.ts
+
+```typescript
+  ngOnInit() {
+    // 'server' will contain the data loaded by the resolver form the *-routing.module.ts and must match the name mentioned there
+    const serverData = 'server';
+    this.route.data.subscribe((data: Data) => {
+      this.server = data[serverData];
+    });
+  }
+```
+
+### Understanding location stratergies ny using Hash Mode
+
+- Generally, any URLs used to work with angular in the browser **is ALWAYS parsed by the server(hosting the application) first**
+- If the route cannot be handled by your server, it should return the index.html file
+- By default, in development server has a special configuration that handles any 404(file not found) errors by loading the index.html file holding all the angular code
+- If this does not work, then use the hash mode by doing the following:
+
+app-routing.module.ts
+
+```typescript
+const routes: Routes = [ ..
+]
+@NgModule({
+  imports: [RouterModule.forRoot(routes, {useHash: true})], 
+  // will embed # before all the routes
+  // since the server only parses URL before the #, the angular can operate on the values after #
+  exports: [RouterModule],
+})
+export class AppRoutingModule {}
 ```

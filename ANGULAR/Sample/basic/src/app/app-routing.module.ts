@@ -15,6 +15,9 @@ import { EditServerComponent } from './routing/servers/edit-server/edit-server.c
 import { ServerComponent } from './routing/servers/server/server.component';
 import { FakeAuthService } from './routing/fake-auth.service';
 import { AuthGuardService } from './routing/auth-guard.service';
+import { CanDeactivateGuardService } from './routing/servers/edit-server/can-deactivate-guard.service';
+import { ErrorPageComponent } from './routing/error-page/error-page.component';
+import { ServerResolverService } from './routing/servers/server/server-resolver.service';
 
 const routes: Routes = [
   { path: '', component: BasicComponent },
@@ -40,10 +43,27 @@ const routes: Routes = [
         component: ServersComponent,
         // this path will be activated only when the UAthGuard returns true
         canActivate: [AuthGuardService],
+        // canActivateChild all the child routes of 'servers'
+        canActivateChild: [AuthGuardService],
         children: [
-          { path: ':id', component: ServerComponent },
-          { path: ':id/edit', component: EditServerComponent },
+          {
+            path: ':id',
+            component: ServerComponent,
+            // resolve is used to load any asynchronous data before the component is rendered
+            // data resolved will be saved in 'server'
+            resolve: { server: ServerResolverService },
+          },
+          {
+            path: ':id/edit',
+            component: EditServerComponent,
+            canDeactivate: [CanDeactivateGuardService],
+          },
         ],
+      },
+      {
+        path: 'not-found',
+        component: ErrorPageComponent,
+        data: { message: 'Page not found!' }, // passing static data in the route to display in ErrorPageComponent
       },
     ],
   },
@@ -52,6 +72,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
+  // imports: [RouterModule.forRoot(routes, {useHash: true})],
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })

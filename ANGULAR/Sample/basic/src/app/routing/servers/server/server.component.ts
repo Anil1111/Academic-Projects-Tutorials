@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServersService } from '../servers.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router, Data } from '@angular/router';
 
 @Component({
   selector: 'app-server',
@@ -17,12 +17,19 @@ export class ServerComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    const idParam = 'id';
-    const id = +this.route.snapshot.params[idParam];
-    this.server = this.serversService.getServer(id); // getting the server based on the id passed as route param
+    // commenting the below as we use the ServerResolverService in *-routing.module.ts to load asynchronously the server data
+    // const idParam = 'id';
+    // const id = +this.route.snapshot.params[idParam];
+    // this.server = this.serversService.getServer(id); // getting the server based on the id passed as route param
 
-    this.route.params.subscribe((params: Params) => {
-      this.server = this.serversService.getServer(+params[idParam]);
+    // this.route.params.subscribe((params: Params) => {
+    //   this.server = this.serversService.getServer(+params[idParam]);
+    // });
+
+    // 'server' will contain the data loaded by the resolver form the *-routing.module.ts and must match the name mentioned there
+    const serverData = 'server';
+    this.route.data.subscribe((data: Data) => {
+      this.server = data[serverData];
     });
   }
 
