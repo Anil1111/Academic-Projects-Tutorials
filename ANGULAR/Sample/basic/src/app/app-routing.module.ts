@@ -18,6 +18,9 @@ import { AuthGuardService } from './routing/auth-guard.service';
 import { CanDeactivateGuardService } from './routing/servers/edit-server/can-deactivate-guard.service';
 import { ErrorPageComponent } from './routing/error-page/error-page.component';
 import { ServerResolverService } from './routing/servers/server/server-resolver.service';
+import { ObservablesComponent } from './observables/observables.component';
+import { ObsUserComponent } from './observables/obs-user/obs-user.component';
+import { ObsHomeComponent } from './observables/obs-home/obs-home.component';
 
 const routes: Routes = [
   { path: '', component: BasicComponent },
@@ -67,6 +70,15 @@ const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'observables',
+    component: ObservablesComponent,
+    children: [
+      { path: '', component: ObsHomeComponent },
+      { path: 'user/:id', component: ObsUserComponent },
+    ],
+  },
+
   { path: 'redirect', redirectTo: '/error' },
   { path: '**', component: ErrorComponent },
 ];

@@ -11,6 +11,7 @@ import { LifecycleModule } from './lifecycle/lifecycle.module';
 import { DirectivesModule } from './directives/directives.module';
 import { ServicesModule } from './services/services.module';
 import { RoutingModule } from './routing/routing.module';
+import { ObservablesModule } from './observables/observables.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { RoutingModule } from './routing/routing.module';
     LifecycleModule,
     DirectivesModule,
     ServicesModule,
+    ObservablesModule,
     RoutingModule
   ],
   providers: [],

@@ -1809,7 +1809,7 @@ server.component.ts
 - By default, in development server has a special configuration that handles any 404(file not found) errors by loading the index.html file holding all the angular code
 - If this does not work, then use the hash mode by doing the following:
 
-app-routing.module.ts
+app-routing.module.tsonEditRecipe
 
 ```typescript
 const routes: Routes = [ ..
@@ -1821,4 +1821,173 @@ const routes: Routes = [ ..
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
+```
+
+## Observables
+
+- Can be thought to be a data source including User Events, Http Requests and similar asynchronous tasks.
+- Observables can be handled by writing code to either:
+  - Handle Data
+  - Handle Error
+  - Handle Completion
+- They are constructs to which you can subscribe to be informed of changes to data
+- Added to angular by a package `rxjs`
+
+- Observables are the ones who throw some values
+- Observers are the one who catch those thrown values
+
+The observable can emit the following event:
+
+- **next**: Event is used to emit the next value from the Observable.
+- **error**: Following an event is used to notify Observer about some error.
+- **complete**: Represents that Observable has completed emitting data.
+
+### Building Custom Observable by using inbuilt `interval()`
+
+Angular manages the subscription of all the observables provided by it
+
+```typescript
+export class ObsHomeComponent implements OnInit, OnDestroy {
+  private firstObsSubscription: Subscription;
+  constructor() { }
+
+  ngOnInit(): void {
+    // custom Observable
+    // built in function that gives an observable that fires an event every 1000ms
+    // can cause memory leaks if not unsubscribed, as a new subscription is fired every time the component is laoded
+    // the observable stop emitting event once we navigate away from the component
+    this.firstObsSubscription = interval(1000).subscribe(count => {
+      console.log(count);
+    });
+  }
+
+  ngOnDestroy() {
+    this.firstObsSubscription.unsubscribe();
+  }
+```
+
+### Building a custom Observable
+
+```typescript
+    // observer is interested about the data, errors and completion of the observable
+    const customIntervalObservable = new Observable(observer => {
+      let count = 0;
+      setInterval(() => {
+        // method used to emit the next value
+        observer.next(count);
+
+        // observer.complete(); // method used to tell observer that you are done
+        if (count === 2) {
+          observer.complete();
+        }
+
+        // observer.error(); // method used to throw an error
+        if (count > 3){
+          observer.error(new Error('Count is greater than 3'));
+          // observer throwing an error; observable will not throw any further events and will cease to exist; observable
+        }
+        count++;
+      }, 1000);
+    });
+
+    this.secondObsSubscription = customIntervalObservable.subscribe(data => {
+      console.log(data); // handling all events fired
+    }, error => {
+      console.log(error   ); // handling the error
+    }, () => {
+      console.log('Completed!'); // handling the completion of events
+    });
+```
+
+### Using Operators in observables with PIPES
+
+- `Pipes` support an unlimited number of functions/operators that can be used to change/transform the result of an observable before being ultimately subscribed by the target observer.
+
+```typescript
+import { map, filter } from 'rxjs/operators';
+
+  ...
+  this.secondObsSubscription = customIntervalObservable
+    .pipe(
+      filter(data => {
+        return data > 0; // return all data greater than 0
+      }),
+      map((data: number) => { // map outputs an observable by applying the function on each value
+        return 'Round: ' + (data + 1);
+      })
+    )
+    .subscribe(
+      (data) => {
+        console.log(data); // handling all events fired
+      },
+      (error) => {
+        console.log(error); // handling the error
+      },
+      () => {
+        console.log('Completed!'); // handling the completion of events
+      }
+    );
+```
+
+### USing Subjects instead of Event Emitters(Observables)
+
+- A recommended alternative to using EventEmitter for cross component communication using services which has better performance
+- Are observables that can be subscribed to but unlike traditional Observables, these can be accessed from outside using the `next()`
+- **Subjects must be unsubscribed onDestroy**
+- Does not work for `@Output()`
+
+user.service.ts
+
+```typescript
+import { Subject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class UserService {
+  constructor() { }
+
+  activatedEmitter = new Subject<boolean>(); // replaces the regular event emitter
+}
+```
+
+obs-user.component.html - Source of communication
+
+```html
+<button class="btn btn-primary" (click)="onActivate()">Activate</button>
+```
+
+obs-user.component.ts
+
+```typescript
+  onActivate() {
+    this.userService.activatedEmitter.next(true); // replaces the emit by the next operation of the observer
+  }
+```
+
+observable.component.html
+
+```html
+  <h3 clas="text-info" *ngIf="userActivated">Activated</h3>
+```
+
+observable.component.ts - Destination of communication
+
+```typescript
+export class ObservablesComponent implements OnInit, OnDestroy {
+  userActivated = false;
+  activateSub: Subscription;
+
+  constructor(private userService: UserService) { }
+
+  ngOnInit(): void {
+    this.activateSub = this.userService.activatedEmitter.subscribe((didActivate: boolean) => {
+      this.userActivated = didActivate;
+    });
+  }
+
+  ngOnDestroy() {
+    this.activateSub.unsubscribe(); // subscription due to sujects needs to be unsubscribed
+  }
+}
 ```
