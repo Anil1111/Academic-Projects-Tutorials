@@ -36,6 +36,13 @@ export class RecipeService {
     return this.recipes.slice();
   }
 
+  getRecipe(id: number): Recipe {
+    return this.getRecipes()[id];
+    // return this.getRecipes().find((recipe: Recipe) => {
+    //   return recipe.id === id;
+    // });
+  }
+
   addIngredientToShoppingList(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredientsList(ingredients);
   }

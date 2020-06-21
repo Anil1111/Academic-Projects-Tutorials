@@ -1209,7 +1209,8 @@ The `routerLinkActive` option automatically checks the route URL to identify whi
 Since the `root` component or likewise cases can be used to form other routes, they will always be identified as active. So we should add the additional attribute of `routerLinkActiveOptions`  
 
 - `[routerLinkActiveOptions]="{exact: true}"` tells angular to check for exact matches of route.  
-- For `http://localhost:4200/routes` has two active router links namely `/` and `/routes`. So as to avoid `/` from being the active we should use `routerLinkActiveOptions`  
+- For `http://localhost:4200/routes` has two active router links namely `/` and `/routes`. So as to avoid `/` from being the active we should use `routerLinkActiveOptions`
+- **`routerLinkActive` and and `[routerLinkActiveOptions]` should be placed on the line tag enclosing the anhcor tag in bootstrap**
 
 ```html
   <ul class="nav nav-tabs">
@@ -1814,7 +1815,7 @@ app-routing.module.ts
 const routes: Routes = [ ..
 ]
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})], 
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
   // will embed # before all the routes
   // since the server only parses URL before the #, the angular can operate on the values after #
   exports: [RouterModule],

@@ -11,6 +11,7 @@
 </div>
 <div class="row">
   <div class="col-12">
+    <!-- Populating custom classes by using custom directives -->
     <!-- adding 'appDropdown' class to the below div using custom directive appDropdown with Renderer and HostListener-->
     <!-- adding 'appDropdown2' class using custom directive appDropdown with Hostbinding and HostListener-->
     <div appDropdown appDropdown2 class="btn-group" role="group">
@@ -18,9 +19,9 @@
         Manage Recipe
       </button>
       <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-        <a class="dropdown-item" href="#" (click)="onAddToShoppingList()">Add To Shopping List</a>
-        <a class="dropdown-item" href="#">Edit Recipe</a>
-        <a class="dropdown-item" href="#">Delete Recipe</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onAddToShoppingList()">Add To Shopping List</a>
+        <a class="dropdown-item" href="javascript:void(0)" (click)="onEditRecipe()">Edit Recipe</a>
+        <a class="dropdown-item" href="javascript:void(0)">Delete Recipe</a>
       </div>
     </div>
   </div>

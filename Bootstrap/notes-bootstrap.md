@@ -14,6 +14,10 @@
 <a class="text-decoration-none" href="javascript:void(0)" (click)="someEvent(i)">Set to Active</a>
 ```
 
+#### Adding cursor:pointer / making clickable the tag enclosing anchor
+
+`<a class="stretched-link">`
+
 ## Content
 
 ### Image
@@ -32,7 +36,21 @@
 `<img src="..." class="rounded float-left" alt="...">`  
 `<img src="..." class="rounded float-right" alt="...">`
 
+## Components
 
+### List Group
+
+#### Example of a Div with several anchor tags
+
+```html
+<div class="list-group">
+    <a href="#" class="list-group-item list-group-item-action active">
+      Cras justo odio
+    </a>
+    <a href="#" class="list-group-item list-group-item-action">Dapibus ac facilisis in</a>
+    <a href="#" class="list-group-item list-group-item-action">Morbi leo risus</a>
+</div>
+```
 
 
 ## Utilities
@@ -42,10 +60,20 @@
 - To remove the `underline` from Link  
 `<a href="#" class="text-decoration-none">Non-underlined link</a>`
 
-
-
-
 ## Working with Angular using Bootstrap
 
 In case `[(ngModel)]` is being used in a `form` element in an angular HTML template, ensure to provide the `name` attribute.
 
+## Color
+
+- .text-primary
+- .text-secondary
+- .text-success
+- .text-danger
+- .text-warning
+- .text-info
+- .text-light
+- .text-dark
+- .text-body
+- .text-muted
+- .text-white

@@ -3,11 +3,7 @@
     <app-recipe-list></app-recipe-list>
   </div>
   <div class="col-md-7">
-    <app-recipe-detail *ngIf="selectedRecipe; else noRecipeSelectedText" [recipe]="selectedRecipe"></app-recipe-detail>
-
-    <!-- USing ng-template to show a heading on initial page load when no recipe is selected-->
-    <ng-template #noRecipeSelectedText>
-      <h3 class="text-info">Please select a Recipe!</h3>
-    </ng-template>
+    <router-outlet></router-outlet>
+    <!-- <app-recipe-detail *ngIf="selectedRecipe; else noRecipeSelectedText" [recipe]="selectedRecipe"></app-recipe-detail> -->
   </div>
 </div>
