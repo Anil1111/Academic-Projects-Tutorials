@@ -12,6 +12,7 @@ import { DirectivesModule } from './directives/directives.module';
 import { ServicesModule } from './services/services.module';
 import { RoutingModule } from './routing/routing.module';
 import { ObservablesModule } from './observables/observables.module';
+import { CustomFormsModule } from './forms/custom-forms.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ObservablesModule } from './observables/observables.module';
     DirectivesModule,
     ServicesModule,
     ObservablesModule,
+    CustomFormsModule,
     RoutingModule
   ],
   providers: [],

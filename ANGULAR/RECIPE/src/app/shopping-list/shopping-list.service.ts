@@ -1,11 +1,12 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Ingredient } from '../shared/ingredient.model';
+import { Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ShoppingListService {
-  ingredientChnaged = new EventEmitter<Ingredient[]>();
+  ingredientChnaged = new Subject<Ingredient[]>();
   private ingredients: Ingredient[] = [
     new Ingredient('Apples', 5),
     new Ingredient('Oranges', 15),
@@ -20,19 +21,19 @@ export class ShoppingListService {
 
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingredientChnaged.emit(this.getIngredients()); // on every change, emitting the updated ingredient[]
+    this.ingredientChnaged.next(this.getIngredients()); // on every change, emitting the updated ingredient[]
   }
   deleteIngredient() {
     this.ingredients.pop();
-    this.ingredientChnaged.emit(this.getIngredients());
+    this.ingredientChnaged.next(this.getIngredients());
   }
   clearIngredient() {
     this.ingredients = [];
-    this.ingredientChnaged.emit(this.getIngredients());
+    this.ingredientChnaged.next(this.getIngredients());
   }
   addIngredientsList(ingredients: Ingredient[]) {
     // for (let ingredient of ingredients) {..    }
     this.ingredients.push(...ingredients); // pushing all the ingredients in one go in order to avoid multiple event emissions
-    this.ingredientChnaged.emit(this.getIngredients());
+    this.ingredientChnaged.next(this.getIngredients());
   }
 }

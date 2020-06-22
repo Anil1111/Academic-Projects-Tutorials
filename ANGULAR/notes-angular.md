@@ -1961,7 +1961,7 @@ obs-user.component.ts
 
 ```typescript
   onActivate() {
-    this.userService.activatedEmitter.next(true); // replaces the emit by the next operation of the observer
+    this.userService.activatedEmitter.next(true); // replaces the emit by the next operation of the observer; uses the next() to emit/send a new value
   }
 ```
 
@@ -1991,3 +1991,318 @@ export class ObservablesComponent implements OnInit, OnDestroy {
   }
 }
 ```
+
+## Forms
+
+- Check whether the form is valid
+- Angular provides you a JS Object representation of the form that eases handling of forms
+
+### **Template Driven**: Angular infers the Form object from the DOM
+
+- All functionality changes are made in the template in the TD approach  
+- Requires the `FormsModule` to be imported in your respective module
+
+> This will also remove the default submit behaviour of the submit buttons
+
+```typescript
+import { FormsModule } from '@angular/forms';
+@NgModule({
+  declarations: [FormsComponent],
+  imports: [
+    CommonModule,
+    FormsModule // includes a lot of form related features and required for the TD approach
+  ]
+})
+export class CustomFormsModule { }
+```
+
+#### TD - Creating the form and registering the controls
+
+- We need to register all the form controls in our form to explicitly inform angular about them and allow it to construct the java script object representation of the form
+- We can use the `ngModel` directive to tell angular about the controls on forms, without the `[()]` as they mean different things
+- ngModel requires setting the 'name' attribute in respective elements `ngModel name="<<name_form_control>>"`
+
+```typescript
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" ngModel name="username">
+  </div>
+```
+
+#### Submitting and using the form
+
+- Using `(ngSubmit)` and usinng local reference at the form level
+
+```html
+  <form (ngSubmit)="onSubmit(form)" #form>
+  </form>
+```
+
+```typescript
+  onSubmit(form: HTMLFormElement) {
+    console.log(form); // can access the form element
+  }
+```
+
+- To get access to the form created by angular we use `ngForm`
+
+```html
+      <form (ngSubmit)="onSubmit(form)" #form="ngForm">
+  </form>
+```
+
+```typescript
+  onSubmit(form: NgForm) {
+    console.log(form); // we will get an ngForm(JS object) created by angular
+    // will contain a number of key value pairs providing the details of the controls submitted by the form with the name attribute
+    // value: {username: "asdwe", email: "wedwqe", secret: "pet"}
+  }
+```
+
+#### Understanding Form State
+
+- **dirty** - return true if any form input is changed; default false
+- **disabled** - if form is made disabled; default false
+- **invalid** - If the form validation is invalid; by default false
+- **valid** - If the form is valid(post validation) or not; default true
+- **touched** - If the form is clicked or not; default false
+- **touched** - If the form is clicked or not; default false
+
+#### Accessing form with @ViewChild - Alternate way
+
+- This way is useful when you need access to the form even before you submit the form
+
+```html
+      <form (ngSubmit)="onSubmit()" #form="ngForm">
+  </form>
+```
+
+```typescript
+export class FormsComponent {
+  @ViewChild('form') signupForm: NgForm;
+
+  onSubmit() {
+    console.log(this.signupForm);
+  }
+}
+```
+
+#### Adding validation to check user input
+
+- Enable HTML5 validation (by default, Angular disables it). You can do so by adding the `ngNativeValidate`  to a control in your template.
+- Tracks the validity of inputs both at the form as well as the control level
+- Using directives like:
+- `required` checks whether the form control is mandatory
+- `email` checks whether the email inputted is valid or not
+
+```html
+<div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" ngModel name="username" required>
+</div>
+<button class="btn btn-default" type="button">Suggest an Username</button>
+<div class="form-group">
+    <label for="email">Mail</label>
+    <input type="email" id="email" class="form-control" ngModel name="email" required email>
+  </div>
+</div>
+```
+
+#### Using the form state
+
+##### Using template states
+
+- `!form.valid` returns true when the form is invalid
+
+```html
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    ...
+    <button class="btn btn-primary" type="submit" [disabled]="!form.valid">Submit</button>
+  </form>
+```
+
+##### USing CSS Classes
+
+```css
+/* css class to select invalid elements of input, select which have been touched once */
+input.ng-invalid.ng-touched,
+select.ng-invalid.ng-touched {
+  border: 1px red solid;
+}
+
+```
+
+#### Outputting validation error messages
+
+- Use the `#<<local_ref>>="ngModel"` for referencing the form controls and use helper blocks to output validation error messages
+
+```html
+  <div class="form-group">
+    <label for="email">Mail</label>
+    <input type="email" id="email" class="form-control" ngModel   name="email" required email #email="ngModel">
+    <small id="emailHelp" class="form-text text-muted" *ngIf="!email.valid && email.touched">Please enter a validd email!.</small>
+  </div>
+```
+
+#### Set default values with `ngModel` one way property binding
+
+```typescript
+  defaultQuestion = 'pet';
+```
+
+```html
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" [ngModel]="'test Name'" name="username" required>
+  </div>
+<div class="form-group">
+  <label for="secret">Secret Questions</label>
+  <select id="secret" class="form-control" [ngModel]="defaultQuestion" name="secret">
+    <option value="pet">Your first Pet?</option>
+    <option value="teacher">Your first teacher?</option>
+  </select>
+</div>
+```
+
+#### Uusing ngMmoddel with two way data binding
+
+```html
+  <div class="form-group">
+    <label for="qa">QA</label>
+    <textarea class="form-control" id="qa" rows="3" name="qa" [(ngModel)]="answer"></textarea>
+    <p>Your reply: {{answer}}</p>
+  </div>
+```
+
+#### Grouping Form controls
+
+- If we wish to group a set of form controls logically into a group
+- We use `ngModelGroup="<<nameOfGroup>>" #<<nameOfGroup>>="ngModelGroup"`
+- We use the `*ngIf="!userData.invalid && userData.touched"` to output validation errors at the group level
+
+```html
+  <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" [ngModel]="'test Name'" name="username" required>
+    </div>
+    <button class="btn btn-default" type="button">Suggest an Username</button>
+    <div class="form-group">
+      <label for="email">Mail</label>
+      <input type="email" id="email" class="form-control" ngModel   name="email" required email #email="ngModel">
+      <small id="emailHelp" class="form-text text-muted" *ngIf="!email.valid && email.touched">Please enter a vlaid email!.</small>
+    </div>
+  </div>
+  <p class="text-info" *ngIf="!userData.invalid && userData.touched">User data is invalid!</p>
+
+```
+
+#### Handling radio buttons
+
+```html
+<!-- [ngModel]="'male'" to make male as checked by default -->
+
+  <div class="form-check" *ngFor="let gender of genders">
+    <input class="form-check-input" type="radio" name="gender" id="{{gender}}" [value]="gender" required ngModel>
+    <label class="form-check-label" for="{{gender}}">
+      {{gender}}
+    </label>
+  </div>
+```
+
+#### Setting and Patching Foorm Values
+
+```typescript
+  <button class="btn btn-secondary mx-2" type="button" (click)="setInitialValues()">Set Initial Value by setValue</button>
+  <button class="btn btn-secondary mx-2" type="button" (click)="setSelectValues()">Set Select Value by patchValue</button>
+  <div class="form-group">
+```
+
+```typescript
+export class FormsComponent {
+  @ViewChild('form') signupForm: NgForm;
+
+  setInitialValues() {
+    const suggestedName = 'Superuser';
+    // setValue method allows to set values of the whole form; it requires JS object representing the form
+    // setValue overwrites all the values of controls entered in the DOM
+    this.signupForm.setValue({
+      userData: {
+        username: suggestedName,
+        email: 'test@tcs.com'
+      },
+      secret: 'pet',
+      qa: 'sample qa',
+      gender: 'female'
+    });
+  }
+
+  setSelectValues() {
+    const suggestedName = 'Superuser';
+    // overwrite parts of the form
+    this.signupForm.form.patchValue({
+      userData: {
+        username: suggestedName
+      }
+    })
+  }
+```
+
+#### Submitting form data
+
+```typescript
+export class FormsComponent {
+  @ViewChild('form') signupForm: NgForm;
+  ...
+  user = { // the keys need not match to those on the form
+    username: '',
+    email: '',
+    secret: '',
+    answer: '',
+    gender: ''
+  };
+  submitted = false;
+
+onSubmit() {
+  console.log(this.signupForm);
+  this.submitted = true;
+
+  this.user.username = this.signupForm.value.userData.username;
+  this.user.email = this.signupForm.value.userData.email;
+  this.user.secret = this.signupForm.value.secret;
+  this.user.answer = this.signupForm.value.qa;
+  this.user.gender = this.signupForm.value.gender;
+}
+```
+
+- Final TD Form
+
+```html
+  <form (ngSubmit)="onSubmit()" #form="ngForm">
+    ...
+  </form>
+
+  <div class="row" *ngIf="submitted"> 
+    <div class="col-12">
+      <h3 class="text-dark">Your Data</h3>
+      <p class="text-info">Username: {{user.username  }}</p>
+      <p class="text-info">Mail: {{user.email  }}</p>
+      <p class="text-info">Secret Question: {{user.secret }}</p>
+      <p class="text-info">Answer: {{user.answer  }}</p>
+      <p class="text-info">Gender: {{user.gender  }}</p>
+    </div>
+  </div>
+</div>
+```
+
+#### Resetting Forms
+
+```typescript
+  onSubmit() {
+    this.signupForm.reset();
+  }
+```
+
+
+### **Reactive**: Form is created programmatically and synchronized with the DOM
+

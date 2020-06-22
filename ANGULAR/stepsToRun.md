@@ -21,3 +21,5 @@
 - `http://localhost:4200/directives`
 - `http://localhost:4200/services`
 - `http://localhost:4200/routing`
+- `http://localhost:4200/observables`
+- `http://localhost:4200/forms`

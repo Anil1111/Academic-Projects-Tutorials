@@ -21,6 +21,7 @@ import { ServerResolverService } from './routing/servers/server/server-resolver.
 import { ObservablesComponent } from './observables/observables.component';
 import { ObsUserComponent } from './observables/obs-user/obs-user.component';
 import { ObsHomeComponent } from './observables/obs-home/obs-home.component';
+import { FormsComponent } from './forms/forms.component';
 
 const routes: Routes = [
   { path: '', component: BasicComponent },
@@ -78,6 +79,7 @@ const routes: Routes = [
       { path: 'user/:id', component: ObsUserComponent },
     ],
   },
+  {path: 'forms', component: FormsComponent},
 
   { path: 'redirect', redirectTo: '/error' },
   { path: '**', component: ErrorComponent },
