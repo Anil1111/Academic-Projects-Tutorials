@@ -2094,6 +2094,7 @@ export class FormsComponent {
 - Using directives like:
 - `required` checks whether the form control is mandatory
 - `email` checks whether the email inputted is valid or not
+- `[pattern]="'^[1-9]+[0-9]*$'"` for ensuring that only positive numbers are added
 
 ```html
 <div class="form-group">
@@ -2305,6 +2306,8 @@ onSubmit() {
 
 #### Steps to make a TD Form - Example
 
+> Ensure `import { FormsModule } from '@angular/forms';` is imported in your module
+
 1. Add the desired HTML for Form
 2. Create the form element with reference `<form (ngSubmit)="onSubmit()" #form="ngForm">` in DOM
 3. Create the view child `@ViewChild('form') subscriptionForm: NgForm;` in TS
@@ -2320,7 +2323,7 @@ onSubmit() {
 12. Add the condition on each form level error block `*ngIf="!password.valid && password.touched"` in DOM
 13. Add the code to reset after submit `this.subscriptionForm.reset();` in th `onSubmit` in TS
 14. To retrive the data entered by the user, create an empty object representing the form, the keys can be named as per your choice and need not be similar to `name` attribute by `subscriptionData = { password: 'dummy'}`
-15. To retrieve the data entered by the user, use `this.subscriptionData.password = this.subscriptionForm.value.password;`
+15. To retrieve the data entered by the user, use `this.subscriptionData.password = this.subscriptionForm.value.password;` where `password` corresponds to the name attribute value
     1. If form grouping is done, `this.subscriptionData.password = this.subscriptionForm.value.userDetails.password;`
 16. To view all the values in the form `console.log(this.subscriptionForm.value)`
 
@@ -2458,6 +2461,86 @@ export class ReactiveFormsComponent implements OnInit {
   }
 ```
 
+```html
+<!-- use the `[formArrayName]="'hobbies'" ` to represent a form array that holds controls -->
+  <div [formArrayName]="'hobbies'">
+    <h4>Your hobbies</h4>
+    <button class="btn btn-secondary" type="button" (click)="onAddHobby()">Add Hobby</button>
+    <!-- looping through the controls -->
+    <div class="form-group"*ngFor="let hobbyControl of getControls(); let i = index">
+      <input type="text" class="form-control" [formControlName]="i">
+    </div>
+  </div>
+```
+
+##### Another example for Arrays of Form Controls in Form Group
+
+```html
+  <div class="row">
+    <div class="col" [formArrayName]="'ingredients'">
+      <!-- form-group row allows for having all 3 columns in a horizontal line -->
+      <div class="row" class="form-group row" *ngFor="let ingredientControl of getControls(); let i = index" [formGroupName]="i">
+        <div class="col-8">
+          <input type="text" class="form-control" [formControlName]="'name'">
+        </div>
+        <div class="col-2">
+          <input type="text" class="form-control" [formControlName]="'amount'">
+        </div>
+        <div class="col-2">
+          <button class="btn btn-danger">X</button>
+        </div>
+      </div>
+    </div>
+  </div>
+```
+
+```typescript
+  private initForm() {
+    let recipeName = '';
+    let recipeImagePath = '';
+    let recipeDescription = '';
+    const recipeIngredients = new FormArray([]);
+
+    if (this.editMode) {
+      const recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.name;
+      recipeImagePath = recipe.imagePath;
+      recipeDescription = recipe.description;
+      if(recipe['ingredients']) {
+        for (const ingredient of recipe.ingredients) {
+          recipeIngredients.push(new FormGroup({
+            name: new FormControl(ingredient.name, [Validators.required]),
+            amount: new FormControl(ingredient.amount, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+            })
+          )
+        }
+      }
+    }
+
+    this.recipeForm = new FormGroup({
+      name: new FormControl(recipeName, [Validators.required]),
+      imgPath: new FormControl(recipeImagePath, [Validators.required]),
+      description: new FormControl(recipeDescription, [Validators.required]),
+      ingredients: recipeIngredients
+    });
+  }
+  getControls() {
+    return (this.recipeForm.get('ingredients') as FormArray).controls;
+  }
+  onAddIngredient() {
+    (this.recipeForm.get('ingredients') as FormArray).push(
+      new FormGroup({
+        name: new FormControl(null, [Validators.required]),
+        amount: new FormControl(null, [Validators.required, Validators.pattern(/^[1-9]+[0-9]*$/)])
+      })
+    )
+  }
+  onDeleteIngredient(index: number) {
+    (this.recipeForm.get('ingredients') as FormArray).removeAt(index);
+    // (this.recipeForm.get('ingredients') as FormArray).clear(); to remove all the form array elements
+  }
+```
+
 #### Creating custom validators
 
 ```typescript
@@ -2481,17 +2564,7 @@ export class ReactiveFormsComponent implements OnInit {
   }
 ```
 
-```html
-<!-- use the `[formArrayName]="'hobbies'" ` to represent a form array that holds controls -->
-  <div [formArrayName]="'hobbies'">
-    <h4>Your hobbies</h4>
-    <button class="btn btn-secondary" type="button" (click)="onAddHobby()">Add Hobby</button>
-    <!-- looping through the controls -->
-    <div class="form-group"*ngFor="let hobbyControl of getControls(); let i = index">
-      <input type="text" class="form-control" [formControlName]="i">
-    </div>
-  </div>
-```
+
 
 #### Using error codes
 
@@ -2585,6 +2658,8 @@ export class ReactiveFormsComponent implements OnInit {
 ```
 
 #### Steps to make a Reactive Form - Example
+
+> Reuires the `ReactiveFormsModule` to be imported in your module file.
 
 1. Add the desired HTML for Form
 2. Create the FormGroup element with `projectStatusForm: FormGroup;` in TS
