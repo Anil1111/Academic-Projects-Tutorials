@@ -22,6 +22,10 @@ import { ObservablesComponent } from './observables/observables.component';
 import { ObsUserComponent } from './observables/obs-user/obs-user.component';
 import { ObsHomeComponent } from './observables/obs-home/obs-home.component';
 import { FormsComponent } from './forms/forms.component';
+import { TDFormsAssignmentComponent } from './forms/tdforms-assignment/tdforms-assignment.component';
+import { TemplateDrivenFormsComponent } from './forms/template-driven-forms/template-driven-forms.component';
+import { ReactiveFormsAssignmentComponent } from './forms/reactive-forms-assignment/reactive-forms-assignment.component';
+import { ReactiveFormsComponent } from './forms/reactive-forms/reactive-forms.component';
 
 const routes: Routes = [
   { path: '', component: BasicComponent },
@@ -79,7 +83,16 @@ const routes: Routes = [
       { path: 'user/:id', component: ObsUserComponent },
     ],
   },
-  {path: 'forms', component: FormsComponent},
+  {
+    path: 'forms',
+    component: FormsComponent,
+    children: [
+      { path: '', component: TemplateDrivenFormsComponent },
+      { path: 'ass1', component: TDFormsAssignmentComponent },
+      { path: 'reactive', component: ReactiveFormsComponent },
+      { path: 'ass2', component: ReactiveFormsAssignmentComponent },
+    ],
+  },
 
   { path: 'redirect', redirectTo: '/error' },
   { path: '**', component: ErrorComponent },

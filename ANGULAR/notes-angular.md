@@ -2303,6 +2303,283 @@ onSubmit() {
   }
 ```
 
+#### Steps to make a TD Form - Example
+
+1. Add the desired HTML for Form
+2. Create the form element with reference `<form (ngSubmit)="onSubmit()" #form="ngForm">` in DOM
+3. Create the view child `@ViewChild('form') subscriptionForm: NgForm;` in TS
+4. Add the name attribute and ngModel directive to each form control `name="email" ngModel` in DOM  
+   1. If you wish to use a form a grouping to logically group set of form controls, then on the wrapping div `ngModelGroup="userDetails" #userDetails="ngModelGroup"`
+5. Create the onSubmit to see if the form is generating `onSubmit() {  console.log(this.subscriptionForm);}` in TS
+6. Add the submitted flag `submitted = false` and change it to true in `onSubmit()`in TS
+7. Add the directives as per requirement like `required`, `email` against each element in DOM
+8. Add the disabled property to the submit button `[disabled]="!form.valid && form.touched"` in DOM
+9. Add the ngIf property to display form level warning `*ngIf="!form.valid && form.touched"` in DOM
+10. Peform one way property binding if default values need to be set `[ngModel]="defaultSubscription"` in DOM
+11. Add the local reference to  each form control for showing form level error blocks `#password="ngModel"` in DOM
+12. Add the condition on each form level error block `*ngIf="!password.valid && password.touched"` in DOM
+13. Add the code to reset after submit `this.subscriptionForm.reset();` in th `onSubmit` in TS
+14. To retrive the data entered by the user, create an empty object representing the form, the keys can be named as per your choice and need not be similar to `name` attribute by `subscriptionData = { password: 'dummy'}`
+15. To retrieve the data entered by the user, use `this.subscriptionData.password = this.subscriptionForm.value.password;`
+    1. If form grouping is done, `this.subscriptionData.password = this.subscriptionForm.value.userDetails.password;`
+16. To view all the values in the form `console.log(this.subscriptionForm.value)`
 
 ### **Reactive**: Form is created programmatically and synchronized with the DOM
 
+- Configuring changes are made in the TS file and later synchronizing with DOM
+- It requires the `ReactiveFormsModule` imported in angular
+
+```typescript
+@NgModule({
+  declarations: [
+  ],
+  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
+})
+export class CustomFormsModule {}
+```
+
+#### Creating Form in Code
+
+```typescript
+export class ReactiveFormsComponent implements OnInit {
+  genders = ['male', 'female'];
+  signupForm: FormGroup; // the form is of type FormGroup
+  constructor() { }
+
+  ngOnInit(): void {
+    // setting up a basic form
+    this.signupForm = new FormGroup({
+      // Arguments taken by FormControl includes initial state, single validator or array of validator and Async validator
+      username: new FormControl(null),
+      email: new FormControl(null),
+      gender: new FormControl('male'),
+    }
+
+    // it is recommended to use username as 'username'
+    // this.signupForm = new FormGroup({
+    //   'username': new FormControl(null, Validators.required),
+    // }
+```
+
+#### Syncing up HTML and Form
+
+```html
+  <!-- for connecting the form to take the value from TS -->
+  <form [formGroup]="signupForm"> 
+    <!-- for connecting the form control to a string representing the form control in TS -->
+    <input type="text" id="username" class="form-control" [formControlName]="'username'">
+    <!-- without property binding -->
+    <input type="text" id="username" class="form-control" formControlName="username"> 
+```
+
+#### Submitting the form
+
+```html
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+```
+
+#### Adding validation
+
+```typescript
+  ngOnInit(): void {
+    // setting up a basic form
+    this.signupForm = new FormGroup({
+      // Arguments taken by FormControl includes initial state, single validator or array of validator and Async validator
+      // Validators.required is just a reference that is executed by angular when the form control value changes
+      username: new FormControl(null, Validators.required),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      gender: new FormControl('male'),
+    });
+  }
+```
+
+#### Getting access to controls
+
+```html
+<!-- Error block appearing only if the form as a whole is invalid-->
+  <h6 id="emailHelp" class="form-text text-danger" *ngIf="!signupForm.valid && signupForm.touched">Please enter
+    valid details!</h6>
+
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" [formControlName]="'username'">
+    <!-- SpecificError block appearing only if the form control is invalid-->
+    <small id="usernameHelp" class="form-text text-danger"
+      *ngIf="!signupForm.get('username').valid && signupForm.get('username').touched">Please enter a
+      valid username</small>
+  </div>
+```
+
+#### Grouping controls
+
+```typescript
+  ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      userData: new FormGroup({
+        username: new FormControl(null, Validators.required),
+        email: new FormControl(null, [Validators.required, Validators.email]),
+      }),
+      gender: new FormControl('male'),
+    });
+```
+
+```html
+<!-- we add `[formGroupName]="'userData'"` -->
+<div [formGroupName]="'userData'">
+  <div class="form-group">
+    <label for="username">Username</label>
+    <input type="text" id="username" class="form-control" [formControlName]="'username'">
+    <!-- modify ('userData.username') -->
+    <small id="usernameHelp" class="form-text text-danger"
+      *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched">Please enter a
+      valid username</small>
+  </div>
+```
+
+#### Arrays of Form Control
+
+```typescript
+  ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      userData: new FormGroup({
+        username: new FormControl(null, Validators.required),
+        email: new FormControl(null, [Validators.required, Validators.email]),
+      }),
+      gender: new FormControl('male'),
+      hobbies: new FormArray([])
+    });
+  }
+  onAddHobby(){
+    const control = new FormControl(null, Validators.required);
+    (this.signupForm.get('hobbies') as FormArray).push(control);
+  }
+  getControls() {
+    return (this.signupForm.get('hobbies') as FormArray).controls;
+  }
+```
+
+#### Creating custom validators
+
+```typescript
+    this.signupForm = new FormGroup({
+      userData: new FormGroup({
+        // we need to bind it with `this` as angular executes it and does not occur from within this class
+        username: new FormControl(null, [Validators.required, this.forbiddenNames.bind(this)]),
+
+      }),
+    ...
+    })
+  // custom validator that gets executed by angular automatically when it checks the validity of the form control
+  // it should check a form control and have a return type of JS object {nameIsForbidden: true}
+  forbiddenNames(control: FormControl): {[s: string]: boolean} {
+    if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
+      return {nameIsForbidden: true};
+    }
+    return null; // if validation is successful you have to pass nothing or null
+    // should not pass false;
+    // passing null or nothing is how you tell that the form control is valid
+  }
+```
+
+```html
+<!-- use the `[formArrayName]="'hobbies'" ` to represent a form array that holds controls -->
+  <div [formArrayName]="'hobbies'">
+    <h4>Your hobbies</h4>
+    <button class="btn btn-secondary" type="button" (click)="onAddHobby()">Add Hobby</button>
+    <!-- looping through the controls -->
+    <div class="form-group"*ngFor="let hobbyControl of getControls(); let i = index">
+      <input type="text" class="form-control" [formControlName]="i">
+    </div>
+  </div>
+```
+
+#### Using error codes
+
+```typescript
+// Using `signupForm.get('userData.username').errors['nameIsForbidden']` to get access to the error object
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" id="username" class="form-control" [formControlName]="'username'">
+      <small id="usernameHelp" class="form-text text-danger"
+        *ngIf="!signupForm.get('userData.username').valid && signupForm.get('userData.username').touched">
+        <small class="form-text text-danger"
+          *ngIf="signupForm.get('userData.username').errors['nameIsForbidden']">This name is invalid!</small>
+        <small class="form-text text-danger"
+          *ngIf="signupForm.get('userData.username').errors['required']">This is required!</small>
+        Please enter a
+        valid username
+      </small>
+    </div>
+```
+
+#### Creating a custom Async Validator
+
+- Such validators which are able to wait for asynchronous response from the server
+
+```typescript
+  ngOnInit(): void {
+    this.signupForm = new FormGroup({
+      userData: new FormGroup({
+        email: new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmails.bind(this)),
+      }),
+    }
+
+  // asynchronous validators
+  // will put the element in the `ng-pending` state
+  forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
+    const promise = new Promise<any>((resolve, reject) => {
+      setTimeout(() => {
+        if (control.value === 'test@test.com') {
+          resolve( {emailIsForbidden: true});
+        }
+        resolve(null);
+      }, 1500);
+    });
+    return promise;
+  }
+```
+
+#### Reacting to status or value changes
+
+```typescript
+  ngOnInit(): void {
+    // logs all the changes per keystroke made on the signupForm
+    this.signupForm.valueChanges.subscribe(
+      value => console.log(value)
+    );
+    // logs all the status changes from INVALID --> PENDING --> VALID
+    this.signupForm.statusChanges.subscribe(
+      status => console.log(status)
+    );
+```
+
+#### Setting and Patching values
+
+```typescript
+  // set values of the form controls on the form
+  this.signupForm.setValue({
+    userData: {
+      username: 'Rich',
+      email: 'test@gtc.com'
+    },
+    gender: 'male',
+    hobbies: []
+  });
+
+  // patch specific values of one form control on the form
+  this.signupForm.patchValue({
+    userData: {
+      username: 'Samurai',
+    },
+  });
+```
+
+#### Reset
+
+```typescript
+  onSubmit() {
+    console.log(this.signupForm);
+    this.signupForm.reset();
+    // you can pass an object if you wish to reset to specific values
+  }
+```
