@@ -1,1 +1,56 @@
-<p>reactive-forms-assignment works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <!--
+          Create a Form with the following Controls and Validators
+          1) Project Name (should not be empty)
+          2) Mail (should not be a empty and a valid email)
+          3) Project Status Dropdown, with three values: 'Stable', 'Critical', 'Finished'
+          4) Submit Button
+
+          Add your own Validator which doesn't allow "Test" as a Project Name
+
+          Also implement that Validator as an async Validator (replace the other one)
+
+          Upon submitting the form, simply print the value to the console
+      -->
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+      <form [formGroup]="projectStatusForm" (ngSubmit)="onSubmit()">
+        <small id="formHelp" class="form-text text-danger" *ngIf="!projectStatusForm.valid && projectStatusForm.touched">Please enter all details for the form</small>
+
+        <div [formGroupName]="'projectDetails'">
+          <div class="form-group">
+            <label for="name">Project Name</label>
+            <input type="name" class="form-control" id="name" aria-describedby="emailHelp" [formControlName]="'name'">
+            <small id="nameHelp" class="form-text text-danger" *ngIf="!projectStatusForm.get('projectDetails.name').valid && projectStatusForm.get('projectDetails.name').touched">Please enter a valid name</small>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+              [formControlName]="'email'">
+            <small id="emailHelp" class="form-text text-danger" *ngIf="!projectStatusForm.get('projectDetails.email').valid && projectStatusForm.get('projectDetails.email').touched">Please enter a valid email</small>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect2">Project Status</label>
+          <select class="form-control" id="status" [formControlName]="'status'">
+            <option *ngFor="let status of statusList" value="{{status}}">{{status}}</option>
+          </select>
+          <small id="statusHelp" class="form-text text-danger" *ngIf="!projectStatusForm.get('status').valid && projectStatusForm.get('status').touched">Please choose one status</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary mx-2">Submit</button>
+        <button type="button" class="btn btn-secondary mx-2" (click)="onAddDummyData()">Add Dummy Data</button>
+        <button type="submit" class="btn btn-secondary mx-2" (click)="onAddName()">Add Name</button>
+
+      </form>
+
+    </div>
+  </div>
+</div>

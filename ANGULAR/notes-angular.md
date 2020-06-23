@@ -2282,7 +2282,7 @@ onSubmit() {
     ...
   </form>
 
-  <div class="row" *ngIf="submitted"> 
+  <div class="row" *ngIf="submitted">
     <div class="col-12">
       <h3 class="text-dark">Your Data</h3>
       <p class="text-info">Username: {{user.username  }}</p>
@@ -2365,11 +2365,11 @@ export class ReactiveFormsComponent implements OnInit {
 
 ```html
   <!-- for connecting the form to take the value from TS -->
-  <form [formGroup]="signupForm"> 
+  <form [formGroup]="signupForm">
     <!-- for connecting the form control to a string representing the form control in TS -->
     <input type="text" id="username" class="form-control" [formControlName]="'username'">
     <!-- without property binding -->
-    <input type="text" id="username" class="form-control" formControlName="username"> 
+    <input type="text" id="username" class="form-control" formControlName="username">
 ```
 
 #### Submitting the form
@@ -2583,3 +2583,55 @@ export class ReactiveFormsComponent implements OnInit {
     // you can pass an object if you wish to reset to specific values
   }
 ```
+
+#### Steps to make a Reactive Form - Example
+
+1. Add the desired HTML for Form
+2. Create the FormGroup element with `projectStatusForm: FormGroup;` in TS
+3. Assign the FormGroup to the form element with submit `<form [formGroup]="projectStatusForm" (ngSubmit)="onSubmit()">` in DOM
+4. Create the submit method with submitted property as true `onSubmit() {this.submitted = true;}`; Also you may `console.log(this.projectStatusForm);` to observe JSON properties on every submit
+5. Add the directive for form grouping `[formGroupName]="'projectDetails'"` in DOM
+6. Add the directive for form controls `[formControlName]="'name'"` in DOM
+7. Instantiate the projectStatusForm with initial values and validators in the ngOnInit() in TS
+
+    ```typescript
+        this.projectStatusForm = new FormGroup({
+          projectDetails: new FormGroup({
+            name: new FormControl(null, [Validators.required]),
+            email: new FormControl(null, [Validators.required, Validators.email]),
+          }),
+          status: new FormControl('Finished'),
+        });`
+    ```
+
+8. Add the css classes for highlighting the borders incase the formcontrol is invalid `select.ng-invalid.ng-touched {  border: 1px solid red;}` in CSS
+9. Add the ngIf statements for the helper blocks that throw the error like `*ngIf="!projectStatusForm.get('projectDetails.name').valid && projectStatusForm.get('projectDetails.name').touched"` at the control level and `*ngIf="!projectStatusForm.valid && projectStatusForm.touched"` at the form level in DOM
+10. Add custom validators by adding `this.forbiddenProjectNames` to the list of validators on the name property of `projectStatusForm` in ngOnInit in TS
+11. Add custom validator function that returns true if the formcontrol of `name` takes the value of `Test` in TS
+
+    ```typescript
+      forbiddenProjectNames(control: FormControl): {[s: string]: boolean} {
+        if (control.value === 'Test'){
+          return {forbiddenProjectNames: true};
+        }
+        return null;
+      }
+    ```
+
+12. Add custom asynchronous validator function that returns true if the formcontrol of `name` takes the value of `Test` in TS
+
+    ```typescript
+      forbiddenEmail(control: FormControl): Promise<any> | Observable<any> {
+      return new Promise<any>((resolve, reject) => {
+        setTimeout(() => {
+            if (control.value === 'test@gmail.com'){
+              resolve({forbiddenEmail: true});
+            }
+            resolve(null);
+        }, 1000);
+      });
+      }
+    ```
+
+13. Add the above validator as the third argument of the `email: new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmail.bind(this)),` in TS
+14. You can pass the reset function to OnSubmit as `this.projectStatusForm.reset();` and pass the object you want to reset the `projectStatusForm` to in TS
