@@ -2564,8 +2564,6 @@ export class ReactiveFormsComponent implements OnInit {
   }
 ```
 
-
-
 #### Using error codes
 
 ```typescript
@@ -2710,3 +2708,184 @@ export class ReactiveFormsComponent implements OnInit {
 
 13. Add the above validator as the third argument of the `email: new FormControl(null, [Validators.required, Validators.email], this.forbiddenEmail.bind(this)),` in TS
 14. You can pass the reset function to OnSubmit as `this.projectStatusForm.reset();` and pass the object you want to reset the `projectStatusForm` to in TS
+
+## Pipes
+
+- Transforms output in the Template
+- Format `{{ exp | myPipe }}`
+
+```html
+  <!-- server.instanceType made to CAPITAL using uppercase -->
+  <!-- server.started made to format mmm d, yyyy using date -->
+    <span><strong>{{ server.name }}</strong> | {{ server.instanceType | uppercase}} | {{ server.started | date}}</span>
+```
+
+### Parametrizing pipes
+
+```html
+  {{ server.started | date: 'fullDate'}}
+```
+
+### Built in [Pipes](https://angular.io/api/common) and chaining
+
+- When chaining multiple pipes, the order is from left to right
+- The order is important while chaining
+
+```html
+{{ server.started | date: 'fullDate' | uppercase}} //will work
+{{ server.started | uppercase | date: 'fullDate'}} //will NOT work as uppercase cannot operate on date as its not a string
+```
+
+### Pipe Syntax
+
+```typescript
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'shorten' // we use this name in the template
+})
+export class ShortenPipe implements PipeTransform {
+  transform(value: unknown, ...args: unknown[]): unknown {
+    return null;
+  }
+}
+```
+
+```typescript
+@NgModule({
+  declarations: [ShortenPipe], // added as a declaration
+  imports: [  ]
+})
+```
+
+### Creating a custom pipe
+
+`{{ server.name | shorten }}`
+
+```typescript
+export class ShortenPipe implements PipeTransform {
+
+  transform(value: string): string {
+    if (value.length > 10) {
+      return value.substr(0, 10) + ' ...';
+    }
+    return value;
+  }
+}
+```
+
+### Parametrizing cutom pipes
+
+`{ server.name | shorten:5 }}`
+
+```typescript
+export class ShortenPipe implements PipeTransform {
+
+  transform(value: string, limit: number): string {
+    if (value.length > 10) {
+      return value.substr(0, limit) + ' ...';
+    }
+    return value;
+  }
+}
+```
+
+#### Multiple parameters
+
+`{ server.name | shorten:5:10 }}` DOM
+
+`transform(value: string, limit: number, anotherArg: type): string {` TS
+
+### Creating a filter pipe
+
+```html
+<!-- filter pipe operates on servers and returns the new output array values of servers that is then used to generate li -->
+  <li class="list-group-item d-flex justify-content-between"
+    *ngFor="let server of servers | filter: filteredStatus: 'status'" [ngClass]="getStatusClasses(server)">
+    <span><strong>{{ server.name | shorten:5 }}</strong> | {{ server.instanceType | uppercase}} |
+      {{ server.started | date: 'fullDate' | uppercase}}</span>
+    <span class="badge badge-pill badge-dark">{{server.status }}</span>
+  </li>
+```
+
+```typescript
+export class FilterPipe implements PipeTransform {
+
+  transform(value: any, filterString: string, propName: string): any {
+    if (value.length === 0 || filterString === '') {
+      return value;
+    }
+    const resultArray = [];
+    for (const item of value){
+      if (item[propName] === filterString) {
+        resultArray.push(item);
+      }
+    }
+    return resultArray;
+  }
+}
+```
+
+### Pure and impure pipes
+
+- Updating the underlying Arrays and Object doesnt trigger re-running of the pipes, however if the input changes it will be re-run
+- To force angular to re-run the pipes whenever data changes results in impure pipes; we can do this by adding `pure: false` to the pipe.ts
+- Such kinds of impure pipes causes performance issues
+
+```typescript
+@Pipe({
+  name: 'filter',
+  pure: false
+})
+export class FilterPipe implements PipeTransform { ...}
+```
+
+### Async Pipe
+
+```html
+<h4 class="text-dark">App Status: {{ appStatus | async}}</h4>
+```
+
+```typescript
+  // works with promises and observables
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable');
+    }, 2000);
+  });
+```
+
+### Custom Sort Pipe
+
+```html
+  <li class="list-group-item d-flex justify-content-between"
+    *ngFor="let server of servers | filter:filteredStatus:'status' | sort:'name'"
+      [ngClass]="getStatusClasses(server)">
+```
+
+```typescript
+export class SortPipe implements PipeTransform {
+
+  transform(value: any, propName: string): any {
+    if (value.length === 0) {
+      return value;
+    }
+    value.sort((a , b) => {
+      if(a[propName] > b[propName]) {
+        return 1;
+      } else {
+        return -1;
+      }
+    });
+    return value;
+  }
+
+}
+```
+
+### Anatomy of a HTTP Request
+
+1. HTTP Verb
+2. URL(API Endpoint)
+3. Headers
+4. Body

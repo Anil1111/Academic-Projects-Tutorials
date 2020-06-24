@@ -38,7 +38,23 @@
 
 ## Components
 
+### Badge
+
+```html
+<h1>Example heading <span class="badge badge-secondary">New</span></h1>
+<span class="badge badge-pill badge-primary">Primary</span>
+```
+
 ### List Group
+
+#### Example Normal
+
+```html
+<ul class="list-group">
+  <li class="list-group-item active">Cras justo odio</li>
+  <li class="list-group-item">Dapibus ac facilisis in</li>
+</ul>
+```
 
 #### Example of a Div with several anchor tags
 

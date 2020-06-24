@@ -45,8 +45,8 @@
 2. `ng g c <<compName>>` / `ng generate component <<componentName>>` generates a new component in existing folder if existing or creates a new folder(`<<componentName>>`); the component gets added directly into the `declaration` array of the module.ts file
     - the component that gets generated will have the class name of `compNameComponent` in `compName.component.(html|css|spec.ts|ts)`
 3. `ng g s <<serviceName>>` / `ng generate service <<serviceName>>` generates a new service in existing folder; the service doesnt get appended into the module.ts file
-
 4. `ng g d <<directiveName>>` generates a directive in existing folder; the directive gets added to the `declaration` array of the module
+5. `ng g p <<pipeName>>` / `ng g pipe <<pipeName>>` generates a new pipe in existing folder; it gets appended into `declaration` array of module.ts
 
 #### Generating components specific to a module
 
@@ -54,7 +54,8 @@
 - `ng g c new-module/new-component` to create NewComponent with the entry tagged to the new-module.
 - `ng g c new-module` to create component with the same name as the module.
 - `ng g c new-module/new-component --module=new-module.module` to explicitly mention
-- `ng g d directiveName/directive-name` to crate a new folder and add the directive to it
+- `ng g d  new-module/directive-name` to create a new directive to existing folder
+- `ng g p  new-module/pipe-name` to create a new pipe to existing folder
 
 #### Generating module with routing files
 

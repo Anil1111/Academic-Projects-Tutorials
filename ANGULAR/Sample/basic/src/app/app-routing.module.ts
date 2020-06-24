@@ -26,6 +26,7 @@ import { TDFormsAssignmentComponent } from './forms/tdforms-assignment/tdforms-a
 import { TemplateDrivenFormsComponent } from './forms/template-driven-forms/template-driven-forms.component';
 import { ReactiveFormsAssignmentComponent } from './forms/reactive-forms-assignment/reactive-forms-assignment.component';
 import { ReactiveFormsComponent } from './forms/reactive-forms/reactive-forms.component';
+import { PipesComponent } from './pipes/pipes.component';
 
 const routes: Routes = [
   { path: '', component: BasicComponent },
@@ -93,7 +94,7 @@ const routes: Routes = [
       { path: 'ass2', component: ReactiveFormsAssignmentComponent },
     ],
   },
-
+  { path: 'pipes', component: PipesComponent },
   { path: 'redirect', redirectTo: '/error' },
   { path: '**', component: ErrorComponent },
 ];
